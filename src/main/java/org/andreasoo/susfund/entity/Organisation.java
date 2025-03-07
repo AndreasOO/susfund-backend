@@ -7,6 +7,9 @@ public class Organisation {
     private OrganizationType organizationType;
 
 
+    public Organisation() {
+    }
+
     public Organisation(int id, String name, String organizationNumber, OrganizationType organizationType) {
         this.id = id;
         this.name = name;
