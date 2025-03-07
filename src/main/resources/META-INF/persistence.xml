@@ -7,23 +7,9 @@
     <persistence-unit name="myUnit" transaction-type="JTA">
         <jta-data-source>jdbc/MySQLDataSource</jta-data-source>
         <properties>
-<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>-->
-<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
             <property name="hibernate.show_sql" value="true"/>
-            <property name="jakarta.persistence.jdbc.user"   value="root" />
-            <property name="jakarta.persistence.jdbc.password" value="HEJhej2222**" />
+            <property name="jakarta.persistence.jdbc.user"   value="casemanager" />
+            <property name="jakarta.persistence.jdbc.password" value="test1234" />
         </properties>
     </persistence-unit>
-<!--    <persistence-unit name="jpa-hibernate-mysql">-->
-<!--        <properties>-->
-<!--            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />-->
-<!--            <property name="jakarta.persistence.jdbc.url"    value="jdbc:mysql://localhost:3306/susfund_db" />-->
-<!--            <property name="jakarta.persistence.jdbc.user"   value="root" />-->
-<!--            <property name="jakarta.persistence.jdbc.password" value="HEJhej2222**" />-->
-<!--            <property name="jakarta.persistence.schema-generation.database.action" value="create" />-->
-<!--            <property name="hibernate.dialect"    value="org.hibernate.dialect.MySQLDialect" />-->
-<!--            <property name="hibernate.show_sql"   value="true" />-->
-<!--            <property name="hibernate.format_sql" value="true" />-->
-<!--        </properties>-->
-<!--    </persistence-unit>-->
 </persistence>
