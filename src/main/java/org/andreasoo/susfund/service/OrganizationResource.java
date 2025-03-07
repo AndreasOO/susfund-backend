@@ -1,20 +1,24 @@
 package org.andreasoo.susfund.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import org.andreasoo.susfund.entity.Organisation;
+import org.andreasoo.susfund.entity.Organization;
 import org.andreasoo.susfund.entity.OrganizationType;
 
 import java.util.List;
 
     @Path("/companies")
 public class OrganizationResource {
+        @PersistenceContext(unitName = "myUnit")
+
+        private EntityManager entityManager;
+
     @GET
     @Produces("application/json")
-    public List<Organisation> getAllOrganizations() {
-        return List.of(new Organisation(1, "org1", "55522353", OrganizationType.BRANCH),
-                       new Organisation(2, "org2", "55112235", OrganizationType.LIMITED_COMPANY),
-                       new Organisation(3, "org3", "55523321", OrganizationType.SOLE_TRADER));
+    public List<Organization> getAllOrganizations() {
+        return entityManager.createNamedQuery("Organization.findAll", Organization.class).getResultList();
     }
 }

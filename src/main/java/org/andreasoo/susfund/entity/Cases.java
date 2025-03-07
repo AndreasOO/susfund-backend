@@ -11,6 +11,7 @@ import java.io.Serializable;
                 query="select c from Cases c order by c.id"
         )
 })
+@Table(name="cases")
 public class Cases implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
