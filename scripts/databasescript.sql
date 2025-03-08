@@ -37,7 +37,6 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
 						 PRIMARY KEY (`id`)
 					  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;          
           
-   
 
 INSERT INTO `susfund_db`.`organizationType` (`name`) VALUES ("SOLE_TRADER");
 INSERT INTO `susfund_db`.`organizationType` (`name`) VALUES ("LIMITED_COMPANY"); 
@@ -52,16 +51,16 @@ INSERT INTO `susfund_db`.`organization` (`name`, `organizationType_id`) VALUES (
 INSERT INTO `susfund_db`.`organization` (`name`, `organizationType_id`) VALUES ("Making the change", 4); 
 
 -- change to casemanager 
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("Funding for future", 1);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("Going green", 2);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("No more gaslighting", 3); 
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("Making the change", 4);
+INSERT INTO `susfund_db`.`caseManager` (`name`) VALUES ("Andreas Ohlander");
+INSERT INTO `susfund_db`.`caseManager` (`name`) VALUES ("Josefin Törner");
+INSERT INTO `susfund_db`.`caseManager` (`name`) VALUES ("Linn Edvarsson"); 
+INSERT INTO `susfund_db`.`caseManager` (`name`) VALUES ("Lasse Maja");
 
 -- add caseManager_id in values
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("Funding for future", 1);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("Going green", 2);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("No more gaslighting", 3); 
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`) VALUES ("Making the change", 4);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `caseManager_id`) VALUES ("Funding for future", 1, 1);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `caseManager_id`) VALUES ("Going green", 2, 2);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `caseManager_id`) VALUES ("No more gaslighting", 3, 3); 
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `caseManager_id`) VALUES ("Making the change", 4, 4);
 
                       
-                             
+                         
