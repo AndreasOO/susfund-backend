@@ -2,6 +2,8 @@ package org.andreasoo.susfund.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @NamedQueries({
         @NamedQuery(
@@ -10,7 +12,7 @@ import jakarta.persistence.*;
         )
 })
 @Table(name="organization")
-public class Organization {
+public class Organization implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -2,9 +2,11 @@ package org.andreasoo.susfund.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="organizationType")
-public class OrganizationType {
+public class OrganizationType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

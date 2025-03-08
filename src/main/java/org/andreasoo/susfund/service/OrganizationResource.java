@@ -12,7 +12,7 @@ import java.util.List;
 
     @Path("/companies")
 public class OrganizationResource {
-        @PersistenceContext(unitName = "myUnit")
+        @PersistenceContext()
 
         private EntityManager entityManager;
 

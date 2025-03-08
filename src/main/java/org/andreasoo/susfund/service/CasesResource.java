@@ -13,7 +13,7 @@ import java.util.List;
 @Path("/cases")
 public class CasesResource {
 
-    @PersistenceContext(unitName = "myUnit")
+    @PersistenceContext()
     private EntityManager entityManager;
 
     @GET
