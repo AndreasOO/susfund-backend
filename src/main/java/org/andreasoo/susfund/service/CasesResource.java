@@ -19,6 +19,7 @@ public class CasesResource {
     @GET
     @Produces("application/json")
     public List<Cases> getAllCases() {
+        //test
         return entityManager.createNamedQuery("Cases.findAll", Cases.class).getResultList();
     }
 }
