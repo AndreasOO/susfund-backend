@@ -6,16 +6,12 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="caseManager")
+@Table(name="case_manager")
 public class CaseManager implements Serializable {
     @Id
     private int id;
 
     private String name;
-
-
-//    @OneToMany(mappedBy="caseManager", fetch=FetchType.EAGER)
-//    private List<Cases> cases;
 
     public CaseManager() {
     }
@@ -23,7 +19,6 @@ public class CaseManager implements Serializable {
     public CaseManager(int id, String name) {
         this.id = id;
         this.name = name;
-//        this.cases = casesManaged;
     }
 
 
@@ -43,11 +38,4 @@ public class CaseManager implements Serializable {
         this.name = name;
     }
 
-//    public List<Cases> getCases() {
-//        return cases;
-//    }
-//
-//    public void setCases(List<Cases> casesManaged) {
-//        this.cases = casesManaged;
-//    }
 }

@@ -17,7 +17,9 @@ public class Organization implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+
     @ManyToOne
+    @JoinColumn(name="organization_type_id")
     private OrganizationType organizationType;
 
 

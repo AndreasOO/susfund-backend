@@ -20,11 +20,27 @@ public class Cases implements Serializable {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name="organization_id")
     private Organization organization;
 
     @ManyToOne
-    @JoinColumn(name="caseManager_id")
+    @JoinColumn(name="case_manager_id")
     private CaseManager caseManager;
+
+//    @OneToOne
+//    private ApplicationInformation applicationInformation;
+//
+//    @OneToOne
+//    private Budget budget;
+//
+//    @OneToOne
+//    private Assessment assessment;
+//
+//    @OneToOne
+//    private Decision decision;
+//
+//    @OneToOne
+//    private Decision decision;
 
     public Cases() {
     }
