@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Cases implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     private String name;
 
@@ -26,6 +26,14 @@ public class Cases implements Serializable {
     @ManyToOne
     @JoinColumn(name="case_manager_id")
     private CaseManager caseManager;
+
+    @ManyToOne
+    @JoinColumn(name="case_status_id")
+    private CaseStatus caseStatus;
+
+    @ManyToOne
+    @JoinColumn(name="case_decision_type_id")
+    private CaseDecisionType caseDecisionType;
 
 //    @OneToOne
 //    private ApplicationInformation applicationInformation;
@@ -45,14 +53,14 @@ public class Cases implements Serializable {
     public Cases() {
     }
 
-    public Cases(Integer id, String name, Organization organization, CaseManager caseManager) {
+    public Cases(int id, String name, Organization organization, CaseManager caseManager) {
         this.id = id;
         this.name = name;
         this.organization = organization;
         this.caseManager = caseManager;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -65,7 +73,7 @@ public class Cases implements Serializable {
         this.name = name;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -83,6 +91,22 @@ public class Cases implements Serializable {
 
     public void setCaseManager(CaseManager caseManager) {
         this.caseManager = caseManager;
+    }
+
+    public CaseStatus getCaseStatus() {
+        return caseStatus;
+    }
+
+    public void setCaseStatus(CaseStatus caseStatus) {
+        this.caseStatus = caseStatus;
+    }
+
+    public CaseDecisionType getCaseDecisionType() {
+        return caseDecisionType;
+    }
+
+    public void setCaseDecisionType(CaseDecisionType caseDecisionType) {
+        this.caseDecisionType = caseDecisionType;
     }
 
     @Override
