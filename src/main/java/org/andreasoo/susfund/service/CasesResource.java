@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import org.andreasoo.susfund.entity.Cases;
 
@@ -19,7 +20,12 @@ public class CasesResource {
     @GET
     @Produces("application/json")
     public List<Cases> getAllCases() {
-        //test
         return entityManager.createNamedQuery("Cases.findAll", Cases.class).getResultList();
+    }
+    @Path("/{id}")
+    @GET()
+    @Produces("application/json")
+    public Cases getCaseById(@PathParam("id") String id) {
+        return entityManager.find(Cases.class, Integer.valueOf(id));
     }
 }
