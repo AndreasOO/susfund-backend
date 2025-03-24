@@ -35,6 +35,10 @@ public class Cases implements Serializable {
     @JoinColumn(name="case_decision_type_id")
     private CaseDecisionType caseDecisionType;
 
+    @ManyToOne
+    @JoinColumn(name="case_decision_id")
+    private CaseDecision decision;
+
 //    @OneToOne
 //    private ApplicationInformation applicationInformation;
 //
@@ -107,6 +111,14 @@ public class Cases implements Serializable {
 
     public void setCaseDecisionType(CaseDecisionType caseDecisionType) {
         this.caseDecisionType = caseDecisionType;
+    }
+
+    public CaseDecision getDecision() {
+        return decision;
+    }
+
+    public void setDecision(CaseDecision decision) {
+        this.decision = decision;
     }
 
     @Override
