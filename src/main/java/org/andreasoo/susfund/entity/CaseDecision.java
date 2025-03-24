@@ -12,7 +12,7 @@ public class CaseDecision {
 
     @OneToOne
     @JoinColumn (name="case_decision_result_id")
-    private CaseDecisionResult result;
+    private CaseDecisionResult caseDecisionResult;
 
     public CaseDecision() {
 
@@ -26,11 +26,11 @@ public class CaseDecision {
         this.id = id;
     }
 
-    public CaseDecisionResult getResult() {
-        return result;
+    public CaseDecisionResult getCaseDecisionResult() {
+        return caseDecisionResult;
     }
 
-    public void setResult(CaseDecisionResult result) {
-        this.result = result;
+    public void setCaseDecisionResult(CaseDecisionResult caseDecisionResult) {
+        this.caseDecisionResult = caseDecisionResult;
     }
 }
