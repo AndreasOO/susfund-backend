@@ -37,7 +37,7 @@ public class Cases implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="case_decision_id")
-    private CaseDecision decision;
+    private CaseDecision caseDecision;
 
 //    @OneToOne
 //    private ApplicationInformation applicationInformation;
@@ -113,12 +113,12 @@ public class Cases implements Serializable {
         this.caseDecisionType = caseDecisionType;
     }
 
-    public CaseDecision getDecision() {
-        return decision;
+    public CaseDecision getCaseDecision() {
+        return caseDecision;
     }
 
-    public void setDecision(CaseDecision decision) {
-        this.decision = decision;
+    public void setCaseDecision(CaseDecision caseDecision) {
+        this.caseDecision = caseDecision;
     }
 
     @Override
