@@ -26,11 +26,11 @@ public class CaseDecision {
         this.id = id;
     }
 
-    public CaseDecisionResult getType() {
+    public CaseDecisionResult getResult() {
         return result;
     }
 
-    public void setType(CaseDecisionResult result) {
+    public void setResult(CaseDecisionResult result) {
         this.result = result;
     }
 }
