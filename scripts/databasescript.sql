@@ -83,22 +83,11 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
 					  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
-
-DROP TABLE IF EXISTS `section_type`;
-CREATE TABLE `section_type` ( `id` INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `section`;
+CREATE TABLE `section` ( `id` INT NOT NULL AUTO_INCREMENT,
                          `name` VARCHAR(255) NOT NULL,
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-
-
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE `section` ( `id` INT NOT NULL AUTO_INCREMENT,
-                         `section_type_id` INT NOT NULL,
-                         CONSTRAINT `FK_section_type_id` FOREIGN KEY (`section_type_id`) REFERENCES `section_type` (`id`),
-                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
 
 
 DROP TABLE IF EXISTS `applications_sections`;
@@ -179,15 +168,10 @@ INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, 
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `application_id`) VALUES ("No more gaslighting", 3, 4,2,2, null, 6);
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `application_id`) VALUES ("Making the change", 4, 5,2,2, null, 7);
 
-INSERT INTO `susfund_db`.`section_type` (`name`) VALUES ("Economic feasibility");
-INSERT INTO `susfund_db`.`section_type` (`name`) VALUES ("Regional Growth");
-INSERT INTO `susfund_db`.`section_type` (`name`) VALUES ("Company");
-INSERT INTO `susfund_db`.`section_type` (`name`) VALUES ("Sustainability");
-
-INSERT INTO `susfund_db`.`section` (`section_type_id`) VALUES (1);
-INSERT INTO `susfund_db`.`section` (`section_type_id`) VALUES (2);
-INSERT INTO `susfund_db`.`section` (`section_type_id`) VALUES (3);
-INSERT INTO `susfund_db`.`section` (`section_type_id`) VALUES (4);
+INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Economic feasibility");
+INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Regional Growth");
+INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Company");
+INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Sustainability");
 
 
 INSERT INTO `susfund_db`.`applications_sections` (`application_id`, `section_id`) VALUES (2, 1);
