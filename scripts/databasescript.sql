@@ -171,10 +171,10 @@ INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Regional Growth");
 INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Company");
 INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Sustainability");
 
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Björn-Bessé Borg", "Han vill investera", "Men går det bra?", 1);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Investera hur då", "Är en pengafråga", "Jag försöker", 1);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Andreas hjälp", "Vågar inte ställa fler frågor", "Så det här får duga", 2);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Är ni hållbara?", "Hållbarhetsfråga", "Hmm vad kan stå här då", 4);
+INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 1);
+INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text",  1);
+INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 2);
+INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text",  4);
 
 
 INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (2, 1);
