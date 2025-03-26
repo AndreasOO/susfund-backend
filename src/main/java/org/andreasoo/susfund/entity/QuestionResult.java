@@ -19,9 +19,6 @@ public class QuestionResult implements Serializable {
     @JoinColumn(name="question_id")
     private Question question;
 
-    @ManyToOne
-    @JoinColumn(name="application_id")
-    private Application application;
 
     public QuestionResult() {
 
@@ -51,11 +48,4 @@ public class QuestionResult implements Serializable {
         this.question = question;
     }
 
-    public Application getApplication() {
-        return application;
-    }
-
-    public void setApplication(Application application) {
-        this.application = application;
-    }
 }

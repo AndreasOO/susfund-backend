@@ -191,6 +191,7 @@ INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `applicatio
 INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 2, 3);
 INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 3, 2);
 INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 4, 5);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 1, 5);
 
 -- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (2, 1);
 -- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (1, 1);
