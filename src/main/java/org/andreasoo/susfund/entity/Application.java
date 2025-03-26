@@ -2,22 +2,22 @@ package org.andreasoo.susfund.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="application")
 
-public class Application {
+public class Application implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date submission_date;
 
     // Hjälp
-    @ManyToMany
-    List<Section> sections = new ArrayList<>();
+    @ManyToMany ( fetch = FetchType.LAZY )
+    List<Question> questions;
 
     public Application() {
 
@@ -37,5 +37,13 @@ public class Application {
 
     public void setSubmission_date(Date submission_date) {
         this.submission_date = submission_date;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

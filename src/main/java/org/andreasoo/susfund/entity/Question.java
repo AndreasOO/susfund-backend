@@ -2,9 +2,12 @@ package org.andreasoo.susfund.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Table(name="question")
-public class Question {
+public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -14,6 +17,9 @@ public class Question {
 
     @ManyToOne
     private Section section;
+
+    @ManyToMany (mappedBy = "questions")
+    private List<Application> applications;
 
     public Question() {
 
@@ -57,5 +63,13 @@ public class Question {
 
     public void setSection(Section section) {
         this.section = section;
+    }
+
+    public List<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 }
