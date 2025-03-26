@@ -71,29 +71,28 @@ CREATE TABLE `assessment_item` ( `id` INT NOT NULL AUTO_INCREMENT,
                                 CONSTRAINT `FK_assessment_section_id` FOREIGN KEY  (`assessment_section_id`) REFERENCES  `assessment_section` (`id`),
                                 PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;                     
-                  
-DROP TABLE IF EXISTS `assessment_result`;
-CREATE TABLE `assessment_result` ( `id` INT NOT NULL AUTO_INCREMENT,
-								`assessment_item_id` INT NOT NULL,
-                                `score` INT NOT NULL,
-                                `justification` VARCHAR(4000) NOT NULL,
-                                CONSTRAINT `FK_assessment_item_id` FOREIGN KEY  (`assessment_item_id`) REFERENCES  `assessment_item` (`id`),
-                                PRIMARY KEY (`id`)
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;                     				
-                  
+    
 DROP TABLE IF EXISTS `case_assessment`;
 CREATE TABLE `case_assessment` ( `id` INT NOT NULL AUTO_INCREMENT,
 								`assessment_date` DATE,
                                 PRIMARY KEY (`id`)
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;   
-
-
-DROP TABLE IF EXISTS `case_assessment_assessment_item`;
-CREATE TABLE `case_assessment_assessment_item` ( 
-								 `assessment_item_id` INT NOT NULL, 
-                                 `case_assessment_id` INT NOT NULL, 
-								 UNIQUE `case_assessment_assessment_item_index`(`assessment_item_id`, `case_assessment_id`)
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;   
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; 
+    
+    
+DROP TABLE IF EXISTS `assessment_result`;
+CREATE TABLE `assessment_result` ( `id` INT NOT NULL AUTO_INCREMENT,
+								`case_assessment_id` INT NOT NULL,
+								`assessment_item_id` INT NOT NULL,
+                                `score` INT NOT NULL,
+                                `justification` VARCHAR(4000) NOT NULL,
+                                CONSTRAINT `FK1_case_assessment_id` FOREIGN KEY  (`case_assessment_id`) REFERENCES  `case_assessment` (`id`),
+                                CONSTRAINT `FK_assessment_item_id` FOREIGN KEY  (`assessment_item_id`) REFERENCES  `assessment_item` (`id`),
+                                UNIQUE `case_assessment_assessment_result_index`(`case_assessment_id`, `assessment_item_id`),
+                                PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;                     				
+                  
+  
+   
                      
 -- -----------------------------------------END NEW ANDREAS
                 -- TODO ADD CASE ASSESSMENT ID TO CASE COLUMNS
@@ -113,7 +112,7 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                         CONSTRAINT `FK_case_status_id` FOREIGN KEY (`case_status_id`) REFERENCES `case_status` (`id`),
                         CONSTRAINT `FK_case_decision_type_id` FOREIGN KEY (`case_decision_type_id`) REFERENCES `case_decision_type` (`id`),
                         CONSTRAINT `FK_case_decision_id` FOREIGN KEY (`case_decision_id`) REFERENCES `case_decision` (`id`),
-                        CONSTRAINT `FK_case_assessment_id` FOREIGN KEY (`case_assessment_id`) REFERENCES `case_assessment` (`id`),
+                        CONSTRAINT `FK2_case_assessment_id` FOREIGN KEY (`case_assessment_id`) REFERENCES `case_assessment` (`id`),
 						 PRIMARY KEY (`id`)
 					  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -167,14 +166,6 @@ INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `p
 INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (3, "Company title", "Company preamble", "Company assisting text" );
 INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (4, "Sustainability title", "Sustainability preamble", "Sustainability assisting text" );
 
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (1, 5, "Did really well");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (2, 1, "Did poorly");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (3, 3, "Did ok");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (4, 5, "Did really well");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (1, 5, "Did really well");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (2, 5, "Did really well");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (3, 5, "Did really well");
-INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (4, 5, "Did really well");
 
 INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-01");
 INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-02");
@@ -184,15 +175,20 @@ INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-
 INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-06");
 INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-07");
 
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (1,1);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (2,1);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (3,1);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (2,2);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (3,3);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (4,4);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (5,1);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (6,2);
-INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (7,3);
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (1, 1, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (1, 2, 1, "Did poorly");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (1, 3, 3, "Did ok");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (2, 4, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (3, 1, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (4, 2, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (5, 3, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (5, 4, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (6, 4, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_item_id`, `score`, `justification`) VALUES (7, 4, 5, "Did really well");
+
+
+
+-- TODO ADD RESULT TSUFF
 
 -- TODO INSERT THE REST
 -- END NEW ANDREAS

@@ -19,10 +19,6 @@ public class AssessmentItem implements Serializable {
     @JoinColumn(name="assessment_section_id")
     private AssessmentSection assessmentSection;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name="assessment_item_id")
-    private List<AssessmentResult> assessmentResults;
-
     private String title;
     private String preamble;
 
@@ -69,13 +65,6 @@ public class AssessmentItem implements Serializable {
         this.assistingText = assistingText;
     }
 
-    public List<AssessmentResult> getAssessmentResults() {
-        return assessmentResults;
-    }
-
-    public void setAssessmentResults(List<AssessmentResult> assessmentResults) {
-        this.assessmentResults = assessmentResults;
-    }
 
 
 

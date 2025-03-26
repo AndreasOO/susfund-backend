@@ -3,6 +3,7 @@ package org.andreasoo.susfund.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -15,11 +16,12 @@ public class CaseAssessment implements Serializable {
     @Id
     private int id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="case_assessment_assessment_item",
-                joinColumns = @JoinColumn(name="case_assessment_id"),
-                inverseJoinColumns = @JoinColumn(name="assessment_item_id"))
-    private List<AssessmentItem> assessmentItems;
+    @Column(name="assessment_date")
+    private LocalDate assessmentDate;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="case_assessment_id")
+    private List<AssessmentResult> assessmentResults;
 
     public int getId() {
         return id;
@@ -29,12 +31,21 @@ public class CaseAssessment implements Serializable {
         this.id = id;
     }
 
-    public List<AssessmentItem> getAssessmentItems() {
-        return assessmentItems;
+
+    public LocalDate getAssessmentDate() {
+        return assessmentDate;
     }
 
-    public void setAssessmentItems(List<AssessmentItem> assessmentItems) {
-        this.assessmentItems = assessmentItems;
+    public void setAssessmentDate(LocalDate assessmentDate) {
+        this.assessmentDate = assessmentDate;
+    }
+
+    public List<AssessmentResult> getAssessmentResults() {
+        return assessmentResults;
+    }
+
+    public void setAssessmentResults(List<AssessmentResult> assessmentResults) {
+        this.assessmentResults = assessmentResults;
     }
 
     @Override

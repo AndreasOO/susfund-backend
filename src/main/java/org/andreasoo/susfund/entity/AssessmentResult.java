@@ -19,6 +19,10 @@ public class AssessmentResult implements Serializable {
     private String justification;
 
 
+    @ManyToOne
+    @JoinColumn(name="assessment_item_id")
+    private AssessmentItem assessmentItem;
+
     public int getId() {
         return id;
     }
@@ -41,5 +45,13 @@ public class AssessmentResult implements Serializable {
 
     public void setJustification(String justification) {
         this.justification = justification;
+    }
+
+    public AssessmentItem getAssessmentItem() {
+        return assessmentItem;
+    }
+
+    public void setAssessmentItem(AssessmentItem assessmentItem) {
+        this.assessmentItem = assessmentItem;
     }
 }
