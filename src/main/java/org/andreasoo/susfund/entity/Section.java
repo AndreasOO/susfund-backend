@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Table (name="section")
 public class Section implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

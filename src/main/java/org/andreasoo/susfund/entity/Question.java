@@ -8,14 +8,17 @@ import java.util.List;
 @Entity
 @Table(name="question")
 public class Question implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String title;
     private String preamble;
     private String assisting_text;
 
     @ManyToOne
+    @JoinColumn(name="section_id")
     private Section section;
 
 

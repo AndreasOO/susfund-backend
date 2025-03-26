@@ -100,14 +100,25 @@ CREATE TABLE `question` (`id` INT NOT NULL AUTO_INCREMENT,
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
--- skriv om för application och question
-DROP TABLE IF EXISTS `applications_questions`;
-CREATE TABLE `applications_questions` ( `application_id` INT NOT NULL,
-                                       `question_id` INT NOT NULL,
-                                       CONSTRAINT `FK_applications_questions_application_id` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`),
-                                       CONSTRAINT `FK_applications_questions_question_id` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
-                                       UNIQUE KEY `applications_questions_index` (`application_id`, `question_id`)
+DROP TABLE IF EXISTS `question_result`;
+CREATE TABLE `question_result` ( `id` INT NOT NULL AUTO_INCREMENT,
+                              `answer` VARCHAR(255) NOT NULL,
+                              `question_id` INT NOT NULL,
+                              `application_id` INT NOT NULL,
+                              CONSTRAINT `FK_question_result_question_id` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
+                              CONSTRAINT `FK_question_result_application_id` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`),
+                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+-- skriv om för application och question
+-- DROP TABLE IF EXISTS `applications_questions`;
+-- CREATE TABLE `applications_questions` ( `application_id` INT NOT NULL,
+--                                        `question_id` INT NOT NULL,
+--                                        CONSTRAINT `FK_applications_questions_application_id` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`),
+--                                       CONSTRAINT `FK_applications_questions_question_id` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
+--                                       UNIQUE KEY `applications_questions_index` (`application_id`, `question_id`)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("SOLE_TRADER");
@@ -174,17 +185,21 @@ INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Sustainability");
 INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 1);
 INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text",  1);
 INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 2);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text",  4);
+INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 4);
 
+INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 1, 1);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 2, 3);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 3, 2);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 4, 5);
 
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (2, 1);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (1, 1);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (3, 4);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (4, 2);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (4, 3);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (5, 1);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (6, 3);
-INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (7, 2);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (2, 1);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (1, 1);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (3, 4);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (4, 2);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (4, 3);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (5, 1);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (6, 3);
+-- INSERT INTO `susfund_db`.`applications_questions` (`application_id`, `question_id`) VALUES (7, 2);
 
 
 

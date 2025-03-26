@@ -15,14 +15,6 @@ public class Application implements Serializable {
     private int id;
     private Date submission_date;
 
-    // Hjälp
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "applications_questions",
-            joinColumns = @JoinColumn(name = "application_id"),
-            inverseJoinColumns = @JoinColumn(name = "question_id")
-    )
-    List<Question> questions;
 
     public Application() {
 
@@ -42,13 +34,5 @@ public class Application implements Serializable {
 
     public void setSubmission_date(Date submission_date) {
         this.submission_date = submission_date;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
     }
 }
