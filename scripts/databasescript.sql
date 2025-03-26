@@ -83,15 +83,16 @@ CREATE TABLE `assessment_result` ( `id` INT NOT NULL AUTO_INCREMENT,
                   
 DROP TABLE IF EXISTS `case_assessment`;
 CREATE TABLE `case_assessment` ( `id` INT NOT NULL AUTO_INCREMENT,
+								`assessment_date` DATE,
                                 PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;   
 
 
-DROP TABLE IF EXISTS `case_assessment_assessment_section`;
-CREATE TABLE `case_assessment_assessment_section` ( 
-								 `assessment_section_id` INT NOT NULL, 
+DROP TABLE IF EXISTS `case_assessment_assessment_item`;
+CREATE TABLE `case_assessment_assessment_item` ( 
+								 `assessment_item_id` INT NOT NULL, 
                                  `case_assessment_id` INT NOT NULL, 
-								 UNIQUE `case_assessment_assessment_section_index`(`assessment_section_id`, `case_assessment_id`)
+								 UNIQUE `case_assessment_assessment_item_index`(`assessment_item_id`, `case_assessment_id`)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;   
                      
 -- -----------------------------------------END NEW ANDREAS
@@ -106,11 +107,13 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                         `case_status_id` INT NOT NULL,
                         `case_decision_type_id` INT NOT NULL,
                         `case_decision_id` INT,
+                        `case_assessment_id` INT NOT NULL,
                         CONSTRAINT `FK_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`),
                         CONSTRAINT `FK_case_manager_id` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
                         CONSTRAINT `FK_case_status_id` FOREIGN KEY (`case_status_id`) REFERENCES `case_status` (`id`),
                         CONSTRAINT `FK_case_decision_type_id` FOREIGN KEY (`case_decision_type_id`) REFERENCES `case_decision_type` (`id`),
                         CONSTRAINT `FK_case_decision_id` FOREIGN KEY (`case_decision_id`) REFERENCES `case_decision` (`id`),
+                        CONSTRAINT `FK_case_assessment_id` FOREIGN KEY (`case_assessment_id`) REFERENCES `case_assessment` (`id`),
 						 PRIMARY KEY (`id`)
 					  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -160,20 +163,48 @@ INSERT INTO `susfund_db`.`assessment_section` (`name`) VALUES ("Company");
 INSERT INTO `susfund_db`.`assessment_section` (`name`) VALUES ("Sustainability");
 
 INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (1, "Economic feasibility title", "Economic feasibility preamble", "Economic feasibility assisting text" );
-INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (1, "Regional Growth title", "Regional Growth preamble", "Regional Growth assisting text" );
-INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (1, "Economic feasibility title", "Economic feasibility preamble", "Economic feasibility assisting text" );
-INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (1, "Economic feasibility title", "Economic feasibility preamble", "Economic feasibility assisting text" );
+INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (2, "Regional Growth title", "Regional Growth preamble", "Regional Growth assisting text" );
+INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (3, "Company title", "Company preamble", "Company assisting text" );
+INSERT INTO `susfund_db`.`assessment_item` (`assessment_section_id`, `title`, `preamble`, `assisting_text`) VALUES (4, "Sustainability title", "Sustainability preamble", "Sustainability assisting text" );
+
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (1, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (2, 1, "Did poorly");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (3, 3, "Did ok");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (4, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (1, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (2, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (3, 5, "Did really well");
+INSERT INTO `susfund_db`.`assessment_result` (`assessment_item_id`, `score`, `justification`) VALUES (4, 5, "Did really well");
+
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-01");
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-02");
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-03");
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-04");
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-05");
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-06");
+INSERT INTO `susfund_db`.`case_assessment` (`assessment_date`) VALUES ("2024-12-07");
+
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (1,1);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (2,1);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (3,1);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (2,2);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (3,3);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (4,4);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (5,1);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (6,2);
+INSERT INTO `susfund_db`.`case_assessment_assessment_item` (`case_assessment_id`, `assessment_item_id`) VALUES (7,3);
+
 -- TODO INSERT THE REST
 -- END NEW ANDREAS
 
 -- TODO INSERT ASSESSMENT ID TO CASE
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("Going solar", 1, 1,1,1, 1);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("I got wind", 1, 1,2,2, 2);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("Shop locally", 1, 1,3,3, 3);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("Funding for future", 1, 2,4,4, 4);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("Going green", 2, 3,2,2, null);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("No more gaslighting", 3, 4,2,2, null);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`) VALUES ("Making the change", 4, 5,2,2, null);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("Going solar", 1, 1,1,1, 1,1);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("I got wind", 1, 1,2,2, 2,2);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("Shop locally", 1, 1,3,3, 3,3);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("Funding for future", 1, 2,4,4, 4,4);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("Going green", 2, 3,2,2, null,5);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("No more gaslighting", 3, 4,2,2, null,6);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`) VALUES ("Making the change", 4, 5,2,2, null,7);
 
                       
                          

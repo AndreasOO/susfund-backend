@@ -39,20 +39,9 @@ public class Cases implements Serializable {
     @JoinColumn(name="case_decision_id")
     private CaseDecision caseDecision;
 
-//    @OneToOne
-//    private ApplicationInformation applicationInformation;
-//
-//    @OneToOne
-//    private Budget budget;
-//
-//    @OneToOne
-//    private Assessment assessment;
-//
-//    @OneToOne
-//    private Decision decision;
-//
-//    @OneToOne
-//    private Decision decision;
+    @ManyToOne
+    @JoinColumn(name="case_assessment_id")
+    private CaseAssessment caseAssessment;
 
     public Cases() {
     }
@@ -121,11 +110,20 @@ public class Cases implements Serializable {
         this.caseDecision = caseDecision;
     }
 
+    public CaseAssessment getCaseAssessment() {
+        return caseAssessment;
+    }
+
+    public void setCaseAssessment(CaseAssessment caseAssessment) {
+        this.caseAssessment = caseAssessment;
+    }
+
     @Override
     public String toString() {
         return "Cases{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", caseAssessment=" + caseAssessment +
                 '}';
     }
 }
