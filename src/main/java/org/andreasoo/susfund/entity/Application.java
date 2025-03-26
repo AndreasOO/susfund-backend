@@ -16,7 +16,12 @@ public class Application implements Serializable {
     private Date submission_date;
 
     // Hjälp
-    @ManyToMany ( fetch = FetchType.LAZY )
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "applications_questions",
+            joinColumns = @JoinColumn(name = "application_id"),
+            inverseJoinColumns = @JoinColumn(name = "question_id")
+    )
     List<Question> questions;
 
     public Application() {

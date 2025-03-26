@@ -18,8 +18,6 @@ public class Question implements Serializable {
     @ManyToOne
     private Section section;
 
-    @ManyToMany (mappedBy = "questions")
-    private List<Application> applications;
 
     public Question() {
 
@@ -63,13 +61,5 @@ public class Question implements Serializable {
 
     public void setSection(Section section) {
         this.section = section;
-    }
-
-    public List<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
     }
 }
