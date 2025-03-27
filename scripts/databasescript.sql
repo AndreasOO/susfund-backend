@@ -267,7 +267,7 @@ INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, 
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Funding for future", 1, 2,4,4, 4,4,4);
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Going green", 2, 3,2,2, null,5,5);
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("No more gaslighting", 3, 4,2,2, null,6,6);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Making the change", 4, 5,2,2, null,7,8);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Making the change", 4, 5,2,2, null,7,7);
 
                       
                          
