@@ -43,20 +43,9 @@ public class Cases implements Serializable {
     @JoinColumn(name="application_id")
     private Application application;
 
-//    @OneToOne
-//    private ApplicationInformation applicationInformation;
-//
-//    @OneToOne
-//    private Budget budget;
-//
-//    @OneToOne
-//    private Assessment assessment;
-//
-//    @OneToOne
-//    private Decision decision;
-//
-//    @OneToOne
-//    private Decision decision;
+    @ManyToOne
+    @JoinColumn(name="case_assessment_id")
+    private CaseAssessment caseAssessment;
 
     public Cases() {
     }
@@ -131,6 +120,14 @@ public class Cases implements Serializable {
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public CaseAssessment getCaseAssessment() {
+        return caseAssessment;
+    }
+
+    public void setCaseAssessment(CaseAssessment caseAssessment) {
+        this.caseAssessment = caseAssessment;
     }
 
     @Override

@@ -6,6 +6,8 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import org.andreasoo.susfund.entity.AssessmentItem;
+import org.andreasoo.susfund.entity.CaseAssessment;
 import org.andreasoo.susfund.entity.Cases;
 
 import java.util.List;
@@ -25,10 +27,7 @@ public class CasesResource {
     @Path("/{id}")
     @GET()
     @Produces("application/json")
-    public Cases getCaseById(@PathParam("id") String id) {
-
-
-
-        return entityManager.find(Cases.class, Integer.valueOf(id));
+    public Cases getCaseById(@PathParam("id") int id) {
+        return entityManager.find(Cases.class, id);
     }
 }
