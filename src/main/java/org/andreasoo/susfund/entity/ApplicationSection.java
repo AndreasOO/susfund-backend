@@ -3,12 +3,10 @@ package org.andreasoo.susfund.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table (name="section")
-public class Section implements Serializable {
+@Table (name="application_section")
+public class ApplicationSection implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +15,7 @@ public class Section implements Serializable {
     private String name;
 
 
-    public Section() {
+    public ApplicationSection() {
 
     }
 
