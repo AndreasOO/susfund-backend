@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="application")
+@Table(name="case_application")
 
-public class Application implements Serializable {
+public class CaseApplication implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,10 +17,10 @@ public class Application implements Serializable {
 
 
     @OneToMany (fetch = FetchType.EAGER)
-    @JoinColumn(name="application_id")
+    @JoinColumn(name="case_application_id")
     List<QuestionResult> questionResults;
 
-    public Application() {
+    public CaseApplication() {
 
     }
 

@@ -40,8 +40,8 @@ public class Cases implements Serializable {
     private CaseDecision caseDecision;
 
     @ManyToOne
-    @JoinColumn(name="application_id")
-    private Application application;
+    @JoinColumn(name="case_application_id")
+    private CaseApplication caseApplication;
 
     @ManyToOne
     @JoinColumn(name="case_assessment_id")
@@ -114,12 +114,12 @@ public class Cases implements Serializable {
         this.caseDecision = caseDecision;
     }
 
-    public Application getApplication() {
-        return application;
+    public CaseApplication getCaseApplication() {
+        return caseApplication;
     }
 
-    public void setApplication(Application application) {
-        this.application = application;
+    public void setCaseApplication(CaseApplication caseApplication) {
+        this.caseApplication = caseApplication;
     }
 
     public CaseAssessment getCaseAssessment() {

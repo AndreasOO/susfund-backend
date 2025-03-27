@@ -97,27 +97,27 @@ CREATE TABLE `assessment_result` ( `id` INT NOT NULL AUTO_INCREMENT,
 -- -----------------------------------------END NEW ANDREAS
                 -- TODO ADD CASE ASSESSMENT ID TO CASE COLUMNS
 
-DROP TABLE IF EXISTS `application`;
-CREATE TABLE `application` ( `id` INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `case_application`;
+CREATE TABLE `case_application` ( `id` INT NOT NULL AUTO_INCREMENT,
                              `submission_date` DATE NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE `section` ( `id` INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `application_section`;
+CREATE TABLE `application_section` ( `id` INT NOT NULL AUTO_INCREMENT,
                          `name` VARCHAR(255) NOT NULL,
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `question`;
-CREATE TABLE `question` (`id` INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `application_question`;
+CREATE TABLE `application_question` (`id` INT NOT NULL AUTO_INCREMENT,
                          `title` VARCHAR(255) NOT NULL,
                          `preamble` VARCHAR(255) NOT NULL,
                          `assisting_text` VARCHAR(255) NOT NULL,
-                         `section_id` INT NOT NULL,
-                         CONSTRAINT `FK_section_id` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`),
+                         `application_section_id` INT NOT NULL,
+                         CONSTRAINT `FK_application_section_id` FOREIGN KEY (`application_section_id`) REFERENCES `application_section` (`id`),
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -125,10 +125,10 @@ CREATE TABLE `question` (`id` INT NOT NULL AUTO_INCREMENT,
 DROP TABLE IF EXISTS `question_result`;
 CREATE TABLE `question_result` ( `id` INT NOT NULL AUTO_INCREMENT,
                                  `answer` VARCHAR(255) NOT NULL,
-                                 `question_id` INT NOT NULL,
-                                 `application_id` INT NOT NULL,
-                                 CONSTRAINT `FK_question_result_question_id` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
-                                 CONSTRAINT `FK_question_result_application_id` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`),
+                                 `application_question_id` INT NOT NULL,
+                                 `case_application_id` INT NOT NULL,
+                                 CONSTRAINT `FK_application_question_id` FOREIGN KEY (`application_question_id`) REFERENCES `application_question` (`id`),
+                                 CONSTRAINT `FK_case_application_id` FOREIGN KEY (`case_application_id`) REFERENCES `case_application` (`id`),
                                  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -144,14 +144,14 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                         `case_decision_type_id` INT NOT NULL,
                         `case_decision_id` INT,
                         `case_assessment_id` INT NOT NULL,
-                        `application_id` INT NOT NULL,
+                        `case_application_id` INT NOT NULL,
                         CONSTRAINT `FK_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`),
                         CONSTRAINT `FK_case_manager_id` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
                         CONSTRAINT `FK_case_status_id` FOREIGN KEY (`case_status_id`) REFERENCES `case_status` (`id`),
                         CONSTRAINT `FK_case_decision_type_id` FOREIGN KEY (`case_decision_type_id`) REFERENCES `case_decision_type` (`id`),
                         CONSTRAINT `FK_case_decision_id` FOREIGN KEY (`case_decision_id`) REFERENCES `case_decision` (`id`),
                         CONSTRAINT `FK2_case_assessment_id` FOREIGN KEY (`case_assessment_id`) REFERENCES `case_assessment` (`id`),
-                        CONSTRAINT `FK_application_id` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`),
+                        CONSTRAINT `FK2_case_application_id` FOREIGN KEY (`case_application_id`) REFERENCES `case_application` (`id`),
 						 PRIMARY KEY (`id`)
 					  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -234,40 +234,40 @@ INSERT INTO `susfund_db`.`assessment_result` (`case_assessment_id`, `assessment_
 -- END NEW ANDREAS
 
 
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-03-23");
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-03-24");
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-03-10");
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-02-11");
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-02-20");
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-02-22");
-INSERT INTO `susfund_db`.`application` (`submission_date`) VALUES ("2025-02-28");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-03-23");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-03-24");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-03-10");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-02-11");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-02-20");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-02-22");
+INSERT INTO `susfund_db`.`case_application` (`submission_date`) VALUES ("2025-02-28");
 
 
-INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Economic feasibility");
-INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Regional Growth");
-INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Company");
-INSERT INTO `susfund_db`.`section` (`name`) VALUES ("Sustainability");
+INSERT INTO `susfund_db`.`application_section` (`name`) VALUES ("Economic feasibility");
+INSERT INTO `susfund_db`.`application_section` (`name`) VALUES ("Regional Growth");
+INSERT INTO `susfund_db`.`application_section` (`name`) VALUES ("Company");
+INSERT INTO `susfund_db`.`application_section` (`name`) VALUES ("Sustainability");
 
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 1);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text",  1);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 2);
-INSERT INTO `susfund_db`.`question` (`title`, `preamble`, `assisting_text`, `section_id`) VALUES ("Title", "Preamble", "Assisting text", 4);
+INSERT INTO `susfund_db`.`application_question` (`title`, `preamble`, `assisting_text`, `application_section_id`) VALUES ("Title", "Preamble", "Assisting text", 1);
+INSERT INTO `susfund_db`.`application_question` (`title`, `preamble`, `assisting_text`, `application_section_id`) VALUES ("Title", "Preamble", "Assisting text",  1);
+INSERT INTO `susfund_db`.`application_question` (`title`, `preamble`, `assisting_text`, `application_section_id`) VALUES ("Title", "Preamble", "Assisting text", 2);
+INSERT INTO `susfund_db`.`application_question` (`title`, `preamble`, `assisting_text`, `application_section_id`) VALUES ("Title", "Preamble", "Assisting text", 4);
 
-INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 1, 1);
-INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 2, 3);
-INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 3, 2);
-INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 4, 5);
-INSERT INTO `susfund_db`.`question_result` (`answer`, `question_id`, `application_id`) VALUES ("Answer", 1, 5);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `application_question_id`, `case_application_id`) VALUES ("Answer", 1, 1);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `application_question_id`, `case_application_id`) VALUES ("Answer", 2, 3);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `application_question_id`, `case_application_id`) VALUES ("Answer", 3, 2);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `application_question_id`, `case_application_id`) VALUES ("Answer", 4, 5);
+INSERT INTO `susfund_db`.`question_result` (`answer`, `application_question_id`, `case_application_id`) VALUES ("Answer", 1, 5);
 
 
 
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Going solar", 1, 1,1,1, 1,1,1);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("I got wind", 1, 1,2,2, 2,2,2);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Shop locally", 1, 1,3,3, 3,3,3);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Funding for future", 1, 2,4,4, 4,4,4);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Going green", 2, 3,2,2, null,5,5);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("No more gaslighting", 3, 4,2,2, null,6,6);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `application_id`) VALUES ("Making the change", 4, 5,2,2, null,7,7);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Going solar", 1, 1,1,1, 1,1,1);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("I got wind", 1, 1,2,2, 2,2,2);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Shop locally", 1, 1,3,3, 3,3,3);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Funding for future", 1, 2,4,4, 4,4,4);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Going green", 2, 3,2,2, null,5,5);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("No more gaslighting", 3, 4,2,2, null,6,6);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Making the change", 4, 5,2,2, null,7,7);
 
                       
                          

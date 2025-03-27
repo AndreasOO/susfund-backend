@@ -3,11 +3,10 @@ package org.andreasoo.susfund.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name="question")
-public class Question implements Serializable {
+@Table(name="application_question")
+public class ApplicationQuestion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,11 +17,11 @@ public class Question implements Serializable {
     private String assisting_text;
 
     @ManyToOne
-    @JoinColumn(name="section_id")
-    private Section section;
+    @JoinColumn(name="application_section_id")
+    private ApplicationSection applicationSection;
 
 
-    public Question() {
+    public ApplicationQuestion() {
 
     }
 
@@ -58,11 +57,11 @@ public class Question implements Serializable {
         this.assisting_text = assisting_text;
     }
 
-    public Section getSection() {
-        return section;
+    public ApplicationSection getApplicationSection() {
+        return applicationSection;
     }
 
-    public void setSection(Section section) {
-        this.section = section;
+    public void setApplicationSection(ApplicationSection applicationSection) {
+        this.applicationSection = applicationSection;
     }
 }
