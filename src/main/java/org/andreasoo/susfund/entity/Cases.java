@@ -40,6 +40,10 @@ public class Cases implements Serializable {
     private CaseDecision caseDecision;
 
     @ManyToOne
+    @JoinColumn(name="application_id")
+    private Application application;
+
+    @ManyToOne
     @JoinColumn(name="case_assessment_id")
     private CaseAssessment caseAssessment;
 
@@ -110,6 +114,14 @@ public class Cases implements Serializable {
         this.caseDecision = caseDecision;
     }
 
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+
     public CaseAssessment getCaseAssessment() {
         return caseAssessment;
     }
@@ -123,7 +135,6 @@ public class Cases implements Serializable {
         return "Cases{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", caseAssessment=" + caseAssessment +
                 '}';
     }
 }
