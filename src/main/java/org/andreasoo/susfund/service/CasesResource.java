@@ -26,6 +26,9 @@ public class CasesResource {
     @GET()
     @Produces("application/json")
     public Cases getCaseById(@PathParam("id") String id) {
+
+
+
         return entityManager.find(Cases.class, Integer.valueOf(id));
     }
 }
