@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `budget_post`;
 DROP TABLE IF EXISTS `case_budget`;
 DROP TABLE IF EXISTS `budget_post_type`;
 
-
+DROP TABLE IF EXISTS `case_budget`;
 CREATE TABLE `case_budget` ( `id` INT NOT NULL AUTO_INCREMENT,
 							`date_last_changed` DATE,
                              PRIMARY KEY (`id`)
@@ -28,6 +28,15 @@ CREATE TABLE `budget_post` ( `id` INT NOT NULL AUTO_INCREMENT,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `budget_organization`;
+CREATE TABLE `budget_organization` (
+								`case_budget_id` INT NOT NULL,
+								`organization_id` INT NOT NULL,
+                                CONSTRAINT `FK2_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`),
+                                CONSTRAINT `FK3_case_budget_id` FOREIGN KEY  (`case_budget_id`) REFERENCES  `case_budget` (`id`),
+                                UNIQUE `budget_organization_index`(`case_budget_id`, `organization_id`),
+                                PRIMARY KEY (`case_budget_id`, `organization_id`)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
@@ -64,16 +73,21 @@ INSERT INTO `susfund_db`.`budget_post` (`estimated_cost`, `budget_post_type_id`,
 
 -- TODO insert into case
 ALTER TABLE `susfund_db`.`cases` ADD COLUMN `case_budget_id` INT NOT NULL;
+
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 1 WHERE `susfund_db`.`cases`.`id` = 1;
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 2 WHERE `susfund_db`.`cases`.`id` = 2;
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 3 WHERE `susfund_db`.`cases`.`id` = 3;
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 4 WHERE `susfund_db`.`cases`.`id` = 4;
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 5 WHERE `susfund_db`.`cases`.`id` = 5;
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 6 WHERE `susfund_db`.`cases`.`id` = 6;
+UPDATE `susfund_db`.`cases` SET `case_budget_id` = 7 WHERE `susfund_db`.`cases`.`id` = 7;
+
+
 ALTER TABLE `susfund_db`.`cases` ADD CONSTRAINT `FK2_case_budget_id` FOREIGN KEY  (`case_budget_id`) REFERENCES  `case_budget` (`id`);
-
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (1);
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (2);
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (3);
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (4);
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (5);
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (6);
-INSERT INTO `susfund_db`.`cases` (`case_budget_id`) VALUES (7);
-
 
 -- TODO join table for organization budget
 
+INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,1);
+INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,2);
+INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,3);
+INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,4);
