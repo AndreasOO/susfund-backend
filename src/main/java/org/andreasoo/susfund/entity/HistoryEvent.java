@@ -24,10 +24,6 @@ public class HistoryEvent implements Serializable {
     @JoinColumn(name="event_type_id")
     private EventType eventType;
 
-    @ManyToOne
-    @JoinColumn(name="cases_id")
-    private Cases cases;
-
     public int getId() {
         return id;
     }
@@ -58,13 +54,5 @@ public class HistoryEvent implements Serializable {
 
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
-    }
-
-    public Cases getCases() {
-        return cases;
-    }
-
-    public void setCases(Cases cases) {
-        this.cases = cases;
     }
 }
