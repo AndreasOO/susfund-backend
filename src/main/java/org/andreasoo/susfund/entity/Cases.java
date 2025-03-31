@@ -3,6 +3,7 @@ package org.andreasoo.susfund.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -46,6 +47,10 @@ public class Cases implements Serializable {
     @ManyToOne
     @JoinColumn(name="case_assessment_id")
     private CaseAssessment caseAssessment;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="cases_id")
+    private List<HistoryEvent> historyEventList;
 
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="case_budget_id")
@@ -132,6 +137,14 @@ public class Cases implements Serializable {
 
     public void setCaseAssessment(CaseAssessment caseAssessment) {
         this.caseAssessment = caseAssessment;
+    }
+
+    public List<HistoryEvent> getHistoryEventList() {
+        return historyEventList;
+    }
+
+    public void setHistoryEventList(List<HistoryEvent> historyEventList) {
+        this.historyEventList = historyEventList;
     }
 
     public CaseBudget getCaseBudget() {

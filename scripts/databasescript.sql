@@ -91,11 +91,9 @@ CREATE TABLE `assessment_result` ( `id` INT NOT NULL AUTO_INCREMENT,
                                 PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-
-
-
 -- -----------------------------------------END NEW ANDREAS
-                -- TODO ADD CASE ASSESSMENT ID TO CASE COLUMNS
+
+-- TODO ADD CASE ASSESSMENT ID TO CASE COLUMNS
 
 DROP TABLE IF EXISTS `case_application`;
 CREATE TABLE `case_application` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -154,6 +152,27 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                         CONSTRAINT `FK2_case_application_id` FOREIGN KEY (`case_application_id`) REFERENCES `case_application` (`id`),
 						 PRIMARY KEY (`id`)
 					  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+-- -----------------------------------------START VIKTORS HISTORY IMPLEMENTATION
+
+DROP TABLE IF EXISTS `event_type`;
+CREATE TABLE `event_type` ( `id` INT NOT NULL AUTO_INCREMENT,
+                            `name` VARCHAR(255) NOT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `history_event`;
+CREATE TABLE `history_event` ( `id` INT NOT NULL AUTO_INCREMENT,
+                               `cases_id` INT NOT NULL,
+                               `event_type_id` INT NOT NULL,
+                               `date` DATE NOT NULL,
+                               `details` VARCHAR(4000) NOT NULL,
+                               CONSTRAINT `FK_event_type_id` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`),
+                               CONSTRAINT `FK_cases_id` FOREIGN KEY (`cases_id`) REFERENCES `cases` (`id`),
+                               PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+-- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
 
 INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("SOLE_TRADER");
 INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("LIMITED_COMPANY"); 
@@ -269,5 +288,17 @@ INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, 
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("No more gaslighting", 3, 4,2,2, null,6,6);
 INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Making the change", 4, 5,2,2, null,7,7);
 
-                      
+-- -----------------------------------------START VIKTORS HISTORY IMPLEMENTATION
+
+INSERT INTO `susfund_db`.`event_type` (`name`) VALUES ("Event type 1");
+INSERT INTO `susfund_db`.`event_type` (`name`) VALUES ("Event type 2");
+INSERT INTO `susfund_db`.`event_type` (`name`) VALUES ("Event type 3");
+
+INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `details`) VALUES (1, 1, "2025-03-27", "Details text");
+INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `details`) VALUES (1, 2, "2025-03-31", "Details text");
+INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `details`) VALUES (2, 3, "2025-03-20", "Details text");
+INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `details`) VALUES (3, 1, "2025-03-25", "Details text");
+
+-- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
+
                          
