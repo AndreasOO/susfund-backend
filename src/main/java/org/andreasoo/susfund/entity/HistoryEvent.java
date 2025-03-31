@@ -3,6 +3,7 @@ package org.andreasoo.susfund.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,7 +15,7 @@ public class HistoryEvent implements Serializable {
 
     private String details;
 
-    //private Date date;
+    private LocalDate date;
 
     public HistoryEvent() {
     }
@@ -41,6 +42,14 @@ public class HistoryEvent implements Serializable {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public EventType getEventType() {
