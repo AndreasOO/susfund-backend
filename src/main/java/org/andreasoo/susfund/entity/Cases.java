@@ -47,6 +47,10 @@ public class Cases implements Serializable {
     @JoinColumn(name="case_assessment_id")
     private CaseAssessment caseAssessment;
 
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="case_budget_id")
+    private CaseBudget caseBudget;
+
     public Cases() {
     }
 
@@ -128,6 +132,14 @@ public class Cases implements Serializable {
 
     public void setCaseAssessment(CaseAssessment caseAssessment) {
         this.caseAssessment = caseAssessment;
+    }
+
+    public CaseBudget getCaseBudget() {
+        return caseBudget;
+    }
+
+    public void setCaseBudget(CaseBudget caseBudget) {
+        this.caseBudget = caseBudget;
     }
 
     @Override
