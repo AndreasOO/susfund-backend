@@ -39,6 +39,12 @@ public class CasesResource {
     @Inject
     private CaseDecisionTypeDao caseDecisionTypeDao;
 
+    @Inject
+    private OrganizationDao organizationDao;
+
+    @Inject
+    private HistoryEventDao historyEventDao;
+
     @GET
     @Produces("application/json")
     public List<Cases> getAllCases() {
@@ -91,5 +97,19 @@ public class CasesResource {
     @Produces("application/json")
     public CaseDecisionType getCaseDecisionTypeByCaseId(@PathParam("id") int id) {
         return caseDecisionTypeDao.getCaseDecisionTypeByCaseId(id);
+    }
+
+    @Path("/{id}/organization")
+    @GET()
+    @Produces("application/json")
+    public Organization getOrganizationByCaseId(@PathParam("id") int id) {
+        return organizationDao.getOrganizationByCaseId(id);
+    }
+
+    @Path("/{id}/history")
+    @GET()
+    @Produces("application/json")
+    public List<HistoryEvent> getHistoryEventsByCaseId(@PathParam("id") int id) {
+        return historyEventDao.getHistoryEventsByCaseId(id);
     }
 }
