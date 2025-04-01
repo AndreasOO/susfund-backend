@@ -14,7 +14,9 @@ public class ApplicationQuestion implements Serializable {
 
     private String title;
     private String preamble;
-    private String assisting_text;
+
+    @Column(name="assisting_text")
+    private String assistingText;
 
     @ManyToOne
     @JoinColumn(name="application_section_id")
@@ -49,12 +51,12 @@ public class ApplicationQuestion implements Serializable {
         this.preamble = preamble;
     }
 
-    public String getAssisting_text() {
-        return assisting_text;
+    public String getAssistingText() {
+        return assistingText;
     }
 
-    public void setAssisting_text(String assisting_text) {
-        this.assisting_text = assisting_text;
+    public void setAssistingText(String assisting_text) {
+        this.assistingText = assisting_text;
     }
 
     public ApplicationSection getApplicationSection() {
