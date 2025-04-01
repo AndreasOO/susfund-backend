@@ -15,6 +15,6 @@ public class CaseDecisionDaoImpl implements CaseDecisionDao {
     @Override
     public CaseDecision getCaseDecisionByCaseId(int caseId) {
         return entityManager.createQuery(
-                "select ca from Cases c join c.caseDecision ca where c.id=" + caseId, CaseDecision.class).getSingleResult();
+                "select cd from Cases c join c.caseDecision cd where c.id=" + caseId, CaseDecision.class).getSingleResult();
     }
 }

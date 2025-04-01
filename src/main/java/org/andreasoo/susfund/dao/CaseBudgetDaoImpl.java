@@ -14,6 +14,6 @@ public class CaseBudgetDaoImpl implements CaseBudgetDao {
     @Override
     public CaseBudget getCaseBudgetByCaseId(int caseId) {
         return entityManager.createQuery(
-                "select ca from Cases c join c.caseBudget ca where c.id=" + caseId, CaseBudget.class).getSingleResult();
+                "select cb from Cases c join c.caseBudget cb where c.id=" + caseId, CaseBudget.class).getSingleResult();
     }
 }
