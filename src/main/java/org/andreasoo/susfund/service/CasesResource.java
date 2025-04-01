@@ -2,17 +2,15 @@ package org.andreasoo.susfund.service;
 
 
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import org.andreasoo.susfund.dao.CaseApplicationDao;
 import org.andreasoo.susfund.dao.CaseAssessmentDao;
+import org.andreasoo.susfund.dao.CaseBudgetDao;
 import org.andreasoo.susfund.dao.CasesDao;
-import org.andreasoo.susfund.dao.CasesDaoImpl;
-import org.andreasoo.susfund.entity.AssessmentResult;
+import org.andreasoo.susfund.entity.CaseBudget;
 import org.andreasoo.susfund.entity.Cases;
 import org.andreasoo.susfund.util.ApplicationUtil;
 import org.andreasoo.susfund.util.AssessmentUtil;
@@ -32,6 +30,9 @@ public class CasesResource {
 
     @Inject
     private CaseApplicationDao caseApplicationDao;
+
+    @Inject
+    private CaseBudgetDao caseBudgetDao;
 
     @GET
     @Produces("application/json")
@@ -57,5 +58,12 @@ public class CasesResource {
     @Produces("application/json")
     public ApplicationUtil getApplicationUtilByCaseId(@PathParam("id") int id) {
         return caseApplicationDao.getApplicationUtilByCaseId(id);
+    }
+
+    @Path("/{id}/budget")
+    @GET()
+    @Produces("application/json")
+    public CaseBudget getCaseBudgetByCaseId(@PathParam("id") int id) {
+        return caseBudgetDao.getCaseBudgetByCaseId(id);
     }
 }
