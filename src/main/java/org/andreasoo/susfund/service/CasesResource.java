@@ -7,10 +7,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import org.andreasoo.susfund.dao.*;
-import org.andreasoo.susfund.entity.CaseBudget;
-import org.andreasoo.susfund.entity.CaseDecision;
-import org.andreasoo.susfund.entity.CaseStatus;
-import org.andreasoo.susfund.entity.Cases;
+import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
 import org.andreasoo.susfund.util.AssessmentUtil;
 
@@ -38,6 +35,9 @@ public class CasesResource {
 
     @Inject
     private CaseStatusDao caseStatusDao;
+
+    @Inject
+    private CaseDecisionTypeDao caseDecisionTypeDao;
 
     @GET
     @Produces("application/json")
@@ -84,5 +84,12 @@ public class CasesResource {
     @Produces("application/json")
     public CaseStatus getCaseStatusByCaseId(@PathParam("id") int id) {
         return caseStatusDao.getCaseStatusByCaseId(id);
+    }
+
+    @Path("/{id}/decisiontype")
+    @GET()
+    @Produces("application/json")
+    public CaseDecisionType getCaseDecisionTypeByCaseId(@PathParam("id") int id) {
+        return caseDecisionTypeDao.getCaseDecisionTypeByCaseId(id);
     }
 }
