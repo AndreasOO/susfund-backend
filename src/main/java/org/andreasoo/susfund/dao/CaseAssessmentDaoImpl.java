@@ -18,19 +18,22 @@ public class CaseAssessmentDaoImpl implements CaseAssessmentDao {
 
     @Override
     public AssessmentUtil getAssessmentUtilByCaseId(int caseId) {
-        //TODO WORKS BUT VIOLATES SINGLE RESPONSIBILITY PRINCIPLE: FIX WITH JPQL
-        CaseAssessment caseAssessment = entityManager.find(Cases.class, caseId).getCaseAssessment();
+        CaseAssessment caseAssessment = entityManager.createQuery(
+                "select ca from Cases c join c.caseAssessment ca where c.id=" + caseId,CaseAssessment.class).getSingleResult();
 
         AssessmentUtil assessmentUtil = new AssessmentUtil();
         assessmentUtil.setCaseAssessmentId(caseAssessment.getId());
 
         List<List<AssessmentResult>> result =
-                caseAssessment.getAssessmentResults().stream()
+                caseAssessment
+                        .getAssessmentResults()
+                        .stream()
                         .map(res1 -> res1.getAssessmentItem().getAssessmentSection().getId())
                         .distinct()
-                        .map(sectionId -> caseAssessment.getAssessmentResults().stream()
-                                .filter(res2 -> res2.getAssessmentItem().getAssessmentSection().getId() == sectionId)
-                                .toList())
+                        .map(sectionId -> caseAssessment.getAssessmentResults()
+                                                                    .stream()
+                                                                    .filter(res2 -> res2.getAssessmentItem().getAssessmentSection().getId() == sectionId)
+                                                                    .toList())
                         .toList();
         assessmentUtil.setAssessmentResults(result);
         return assessmentUtil;
