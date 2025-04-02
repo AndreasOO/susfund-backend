@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.service;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -66,6 +67,7 @@ public class CasesResource {
 
     @Path("/{id}/application")
     @GET()
+    @RolesAllowed("user")
     @Produces("application/json")
     public ApplicationUtil getApplicationUtilByCaseId(@PathParam("id") int id) {
         return caseApplicationDao.getApplicationUtilByCaseId(id);
