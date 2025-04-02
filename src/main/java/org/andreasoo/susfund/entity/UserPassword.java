@@ -9,11 +9,9 @@ public class UserPassword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String password;
 
-    @OneToOne
-    @JoinColumn(name="user_credentials_id")
-    private UserCredentials userCredentials;
 
     public UserPassword() {
 
@@ -35,11 +33,4 @@ public class UserPassword {
         this.password = password;
     }
 
-    public UserCredentials getUserCredentials() {
-        return userCredentials;
-    }
-
-    public void setUserCredentials(UserCredentials userCredentials) {
-        this.userCredentials = userCredentials;
-    }
 }

@@ -175,21 +175,21 @@ CREATE TABLE `history_event` ( `id` INT NOT NULL AUTO_INCREMENT,
 -- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
 -- -----------------------------------------START JOSEFINS USER IMPLEMENTATION
 
+DROP TABLE IF EXISTS `user_password`;
+CREATE TABLE `user_password` (`id` INT NOT NULL AUTO_INCREMENT,
+                              `password` VARCHAR(255) NOT NULL,
+                              PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `user_credentials`;
 CREATE TABLE `user_credentials` (`id` INT NOT NULL AUTO_INCREMENT,
                                 `user_name` VARCHAR(255) NOT NULL,
                                 `case_manager_id` INT NOT NULL,
+                                `user_password_id` INT NOT NULL,
                                  PRIMARY KEY (`id`),
-                                 CONSTRAINT `FK_case_manager_id2` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `user_password`;
-CREATE TABLE `user_password` (`id` INT NOT NULL AUTO_INCREMENT,
-                              `password` VARCHAR(255) NOT NULL,
-                              `user_credentials_id` INT NOT NULL,
-                               PRIMARY KEY (`id`),
-                               CONSTRAINT `FK_user_credentials_id` FOREIGN KEY (`user_credentials_id`) REFERENCES `user_credentials` (`id`)
+                                 CONSTRAINT `FK_case_manager_id2` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
+                                 CONSTRAINT `FK_user_password_id` FOREIGN KEY(`user_password_id`) REFERENCES `user_password` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `user_role`;
@@ -198,8 +198,8 @@ CREATE TABLE `user_role` ( `id` INT NOT NULL AUTO_INCREMENT,
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `user_roles_mapping`;
-CREATE TABLE `user_roles_mapping` ( `user_credentials_id` INT NOT NULL,
+DROP TABLE IF EXISTS `user_credentials_user_roles`;
+CREATE TABLE `user_credentials_user_roles` ( `user_credentials_id` INT NOT NULL,
                             `user_role_id` INT NOT NULL,
                             CONSTRAINT `FK_user_credentials_id2` FOREIGN KEY (`user_credentials_id`) REFERENCES `user_credentials` (`id`),
                             CONSTRAINT `FK_user_role_id` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`id`)
@@ -340,8 +340,8 @@ INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user");
 INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user role 2");
 INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user role 3");
 
-INSERT INTO `susfund_db`.`user_credentials` (`user_name`, `case_manager_id`) VALUES ("testuser", 1);
+INSERT INTO `susfund_db`.`user_password` (`password`) VALUES ("test1234");
 
-INSERT INTO `susfund_db`.`user_password` (`password`, `user_credentials_id`) VALUES ("test1234", 1);
+INSERT INTO `susfund_db`.`user_credentials` (`user_name`, `case_manager_id`, `user_password_id`) VALUES ("testuser", 1, 1);
 
-INSERT INTO `susfund_db`.`user_roles_mapping` (`user_credentials_id`, `user_role_id`) VALUES (1, 1);
+INSERT INTO `susfund_db`.`user_credentials_user_roles` (`user_credentials_id`, `user_role_id`) VALUES (1, 1);
