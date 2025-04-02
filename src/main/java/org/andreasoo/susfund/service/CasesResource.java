@@ -1,11 +1,17 @@
 package org.andreasoo.susfund.service;
 
 
+import jakarta.annotation.Resource;
+import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.EJBContext;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.SecurityContext;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
@@ -17,6 +23,7 @@ import java.util.List;
 
 @Path("/cases")
 public class CasesResource {
+
 
     @Inject
     private CasesDao casesDao;
@@ -54,18 +61,24 @@ public class CasesResource {
     @GET()
     @Produces("application/json")
     public Cases getCaseById(@PathParam("id") int id) {
+
         return casesDao.getCaseById(id);
     }
 
     @Path("/{id}/assessment")
     @GET()
     @Produces("application/json")
-    public AssessmentUtil getAssessmentUtilByCaseId(@PathParam("id") int id) {
+    public AssessmentUtil getAssessmentUtilByCaseId(@PathParam("id") int id, @Context SecurityContext securityContext) {
+        System.out.println(securityContext.getUserPrincipal());
+        System.out.println(securityContext.getAuthenticationScheme());
+        System.out.println(securityContext);
+
         return caseAssessmentDao.getAssessmentUtilByCaseId(id);
     }
 
     @Path("/{id}/application")
     @GET()
+    @RolesAllowed("user")
     @Produces("application/json")
     public ApplicationUtil getApplicationUtilByCaseId(@PathParam("id") int id) {
         return caseApplicationDao.getApplicationUtilByCaseId(id);
