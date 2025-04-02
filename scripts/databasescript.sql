@@ -334,4 +334,14 @@ INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `
 
 -- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
 
-                         
+-- -----------------------------------------START JOSEFINS USER IMPLEMENTATION
+
+INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user");
+INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user role 2");
+INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user role 3");
+
+INSERT INTO `susfund_db`.`user_credentials` (`user_name`, `case_manager_id`) VALUES ("testuser", 1);
+
+INSERT INTO `susfund_db`.`user_password` (`password`, `user_credentials_id`) VALUES ("test1234", 1);
+
+INSERT INTO `susfund_db`.`user_roles_mapping` (`user_credentials_id`, `user_role_id`) VALUES (1, 1);
