@@ -3,6 +3,7 @@ package org.andreasoo.susfund.service;
 
 import jakarta.annotation.Resource;
 import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJBContext;
 import jakarta.inject.Inject;
