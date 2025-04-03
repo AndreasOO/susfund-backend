@@ -27,7 +27,7 @@ public class AuthenticationResource {
     @PersistenceContext
     private EntityManager entityManager;
 
-    SecretKey key = Keys.hmacShaKeyFor("yourSecretKey".getBytes(StandardCharsets.UTF_8));
+    SecretKey key = Keys.hmacShaKeyFor("secretKey".getBytes(StandardCharsets.UTF_8));
 
     // ta in rätt parametrar
     @POST
@@ -53,10 +53,9 @@ public class AuthenticationResource {
         }
 
 
-        // vad ska returneras?
-
+        // vad ska returneras? token?
         String token = generateToken(user);
-        return Response.ok().entity("Bearer " + token).build();
+        return Response.ok().entity(token).build();
     }
 
     // Skapa upp token som kan returneras till klienten som gjort anropet, som klienten kan användas framtida requests
