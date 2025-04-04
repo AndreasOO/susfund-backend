@@ -45,6 +45,9 @@ public class CasesResource {
     @Inject
     private HistoryEventDao historyEventDao;
 
+    @Inject
+    private CaseManagerDao caseManagerDao;
+
     @GET
     @Produces("application/json")
     public List<Cases> getAllCases() {
@@ -111,5 +114,19 @@ public class CasesResource {
     @Produces("application/json")
     public List<HistoryEvent> getHistoryEventsByCaseId(@PathParam("id") int id) {
         return historyEventDao.getHistoryEventsByCaseId(id);
+    }
+
+    @Path("/{id}/casemanager")
+    @GET()
+    @Produces("application/json")
+    public CaseManager getCaseManagerByCaseId(@PathParam("id") int id) {
+        return caseManagerDao.getCaseManagerByCaseId(id);
+    }
+
+    @Path("/casemanagers")
+    @GET()
+    @Produces("application/json")
+    public List<CaseManager> getCaseManagers() {
+        return caseManagerDao.getAllCaseManagers();
     }
 }
