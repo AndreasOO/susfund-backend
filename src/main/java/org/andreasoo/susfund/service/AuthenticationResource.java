@@ -27,7 +27,8 @@ public class AuthenticationResource {
     @PersistenceContext
     private EntityManager entityManager;
 
-    SecretKey key = Keys.hmacShaKeyFor("secretKey".getBytes(StandardCharsets.UTF_8));
+    // hur tusan gör man med key???
+    SecretKey key = Keys.hmacShaKeyFor("something".getBytes(StandardCharsets.UTF_8));
 
     // ta in rätt parametrar
     @POST
@@ -52,7 +53,6 @@ public class AuthenticationResource {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
 
-
         // vad ska returneras? token?
         String token = generateToken(user);
         return Response.ok().entity(token).build();
@@ -62,8 +62,9 @@ public class AuthenticationResource {
     public String generateToken(UserCredentials user) {
         return Jwts.builder()
                 .setSubject(user.getUsername())
+                .claim("userId", user.getId())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // expiration 1 timme
+                .setExpiration(new Date(System.currentTimeMillis() + 3600_000)) // 1 timme
                 .signWith(key)
                 .compact();
     }

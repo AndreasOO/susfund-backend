@@ -7,6 +7,8 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
@@ -18,6 +20,10 @@ import java.util.List;
 
 @Path("/cases")
 public class CasesResource {
+
+    // blir automatiskt tilldelad den som gör anropen
+    @Context
+    private ContainerRequestContext requestContext;
 
     @Inject
     private CasesDao casesDao;
