@@ -2,14 +2,15 @@ package org.andreasoo.susfund.service;
 
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
+import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
+import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
 import java.util.List;
 
@@ -71,12 +72,42 @@ public class CasesResource {
         return caseAssessmentDao.getAssessmentUtilByCaseId(id);
     }
 
+    @Path("/{id}/assessment")
+    @PUT()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateAssessmentItem(@PathParam("id") int caseId, AssessmentUpdateRequest request) {
+        try{
+            caseAssessmentDao.updateAssessmentResultById(caseId, request);
+            return Response.noContent().build();
+        }
+        catch(EntityNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
+
     @Path("/{id}/application")
     @GET()
     @Produces("application/json")
     public ApplicationUtil getApplicationUtilByCaseId(@PathParam("id") int id) {
         return caseApplicationDao.getApplicationUtilByCaseId(id);
     }
+
+    // osäker på path, vad metoden ska returnera till frontend, samt felhantering
+    @Path("/{id}/application")
+    @PUT()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateApplicationQuestion(@PathParam("id") int caseId, ApplicationUpdateRequest request) {
+        try{
+            caseApplicationDao.updateQuestionResultById(caseId, request);
+            return Response.noContent().build();
+        }
+        catch(EntityNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
+
 
     @Path("/{id}/budget")
     @GET()

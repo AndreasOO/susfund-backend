@@ -3,9 +3,10 @@ package org.andreasoo.susfund.dao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.entity.AssessmentResult;
 import org.andreasoo.susfund.entity.CaseAssessment;
-import org.andreasoo.susfund.entity.Cases;
+import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
 
 import java.util.List;
@@ -37,5 +38,18 @@ public class CaseAssessmentDaoImpl implements CaseAssessmentDao {
                         .toList();
         assessmentUtil.setAssessmentResults(result);
         return assessmentUtil;
+    }
+
+    @Transactional
+    public void updateAssessmentResultById(int caseId, AssessmentUpdateRequest request){
+        CaseAssessment caseAssessment = entityManager.find(CaseAssessment.class, caseId);
+
+        caseAssessment.getAssessmentResults().forEach(assessmentResult -> {
+            if(assessmentResult.getAssessmentItem().getId() == request.getAssessmentItemId()){
+                assessmentResult.setScore(request.getScore());
+                assessmentResult.setJustification(request.getJustification());
+            }
+        });
+        entityManager.merge(caseAssessment);
     }
 }

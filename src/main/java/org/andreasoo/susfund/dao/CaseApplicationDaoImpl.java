@@ -3,11 +3,11 @@ package org.andreasoo.susfund.dao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.andreasoo.susfund.entity.AssessmentResult;
+import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.entity.CaseApplication;
-import org.andreasoo.susfund.entity.CaseAssessment;
 import org.andreasoo.susfund.entity.QuestionResult;
 import org.andreasoo.susfund.util.ApplicationUtil;
+import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
 import java.util.List;
 
@@ -38,5 +38,17 @@ public class CaseApplicationDaoImpl implements CaseApplicationDao {
                         .toList();
         applicationUtil.setQuestionResults(result);
         return applicationUtil;
+    }
+
+    @Transactional
+    public void updateQuestionResultById(int caseId, ApplicationUpdateRequest request){
+        CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
+
+        caseApplication.getQuestionResults().forEach(questionResult -> {
+            if(questionResult.getApplicationQuestion().getId() == request.getQuestionId()){
+                questionResult.setAnswer(request.getAnswer());
+            }
+        });
+        entityManager.merge(caseApplication);
     }
 }
