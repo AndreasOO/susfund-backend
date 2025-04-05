@@ -9,6 +9,7 @@ import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
 import org.andreasoo.susfund.util.AssessmentUtil;
+import org.andreasoo.susfund.util.QuestionUpdateRequest;
 
 import java.util.List;
 
@@ -78,9 +79,10 @@ public class CasesResource {
     @POST()
     @Consumes("application/json")
     @Produces("application/json")
-    public Response getQuestionResultById(@PathParam("id") int caseId, int questionResultId, String updatedAnswer) {
+    public Response getQuestionResultById(@PathParam("id") int caseId, QuestionUpdateRequest request) {
+        System.out.println("Received request: " + request.getQuestionId());
         try{
-            caseApplicationDao.updateQuestionResultById(caseId, questionResultId, updatedAnswer);
+            caseApplicationDao.updateQuestionResultById(caseId, request);
             return Response.ok().entity("Answer updated successfully").build();
         }
         catch(EntityNotFoundException e){
