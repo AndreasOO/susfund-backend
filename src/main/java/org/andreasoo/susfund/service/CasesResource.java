@@ -48,6 +48,10 @@ public class CasesResource {
     @Inject
     private CaseManagerDao caseManagerDao;
 
+    @Inject
+    private CaseDecisionResultDao caseDecisionResultDao;
+
+
     @GET
     @Produces("application/json")
     public List<Cases> getAllCases() {
@@ -128,5 +132,19 @@ public class CasesResource {
     @Produces("application/json")
     public List<CaseManager> getCaseManagers() {
         return caseManagerDao.getAllCaseManagers();
+    }
+
+    @Path("/casedecisions")
+    @GET()
+    @Produces("application/json")
+    public List<CaseDecision> getCaseDecisions() {
+        return caseDecisionDao.getAllCaseDecisions();
+    }
+
+    @Path("/casedecisionresults")
+    @GET()
+    @Produces("application/json")
+    public List<CaseDecisionResult> getCaseDecisionResults() {
+        return caseDecisionResultDao.getAllCaseDecisionResults();
     }
 }

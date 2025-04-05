@@ -1,0 +1,23 @@
+package org.andreasoo.susfund.dao;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.andreasoo.susfund.entity.CaseDecision;
+import org.andreasoo.susfund.entity.CaseDecisionResult;
+
+import java.util.List;
+
+@ApplicationScoped
+public class CaseDecisionResultDaoImpl implements CaseDecisionResultDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+
+
+    @Override
+    public List<CaseDecisionResult> getAllCaseDecisionResults() {
+        return entityManager.createQuery("select cdr from CaseDecisionResult cdr",CaseDecisionResult.class).getResultList();
+    }
+}
