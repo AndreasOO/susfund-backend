@@ -2,6 +2,7 @@ package org.andreasoo.susfund.service;
 
 
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.dao.*;
@@ -72,14 +73,19 @@ public class CasesResource {
         return caseApplicationDao.getApplicationUtilByCaseId(id);
     }
 
-    // osäker på path, samt vad metoden ska returnera till frontend
+    // osäker på path, vad metoden ska returnera till frontend, samt felhantering
     @Path("/{id}/application")
     @POST()
     @Consumes("application/json")
     @Produces("application/json")
-    public Response getQuestionResultById(@PathParam("id") int caseId, @PathParam("id") int questionResultId, String updatedAnswer) {
-        caseApplicationDao.updateQuestionResultById(caseId, questionResultId, updatedAnswer);
-        return Response.ok().build();
+    public Response getQuestionResultById(@PathParam("id") int caseId, int questionResultId, String updatedAnswer) {
+        try{
+            caseApplicationDao.updateQuestionResultById(caseId, questionResultId, updatedAnswer);
+            return Response.ok().entity("Answer updated successfully").build();
+        }
+        catch(EntityNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 
 
