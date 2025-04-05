@@ -24,6 +24,12 @@ public class RequestFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
+
+        String path = requestContext.getUriInfo().getPath();
+        if (path.equals("login")) {
+            return;
+        }
+
         String authHeader = requestContext.getHeaders().getFirst("Authorization");
 
         if(authHeader == null ||authHeader.isEmpty()) {
