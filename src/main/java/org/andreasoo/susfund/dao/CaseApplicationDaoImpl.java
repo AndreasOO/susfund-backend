@@ -3,9 +3,8 @@ package org.andreasoo.susfund.dao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.andreasoo.susfund.entity.AssessmentResult;
+import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.entity.CaseApplication;
-import org.andreasoo.susfund.entity.CaseAssessment;
 import org.andreasoo.susfund.entity.QuestionResult;
 import org.andreasoo.susfund.util.ApplicationUtil;
 
@@ -38,5 +37,12 @@ public class CaseApplicationDaoImpl implements CaseApplicationDao {
                         .toList();
         applicationUtil.setQuestionResults(result);
         return applicationUtil;
+    }
+
+    @Transactional
+    public void updateQuestionResultById(int caseId, int questionResultId, String updatedAnswer){
+        CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
+        caseApplication.getQuestionResults().get(questionResultId).setAnswer(updatedAnswer);
+        entityManager.merge(caseApplication);
     }
 }

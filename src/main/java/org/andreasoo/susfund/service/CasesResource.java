@@ -2,10 +2,8 @@ package org.andreasoo.susfund.service;
 
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
@@ -73,6 +71,17 @@ public class CasesResource {
     public ApplicationUtil getApplicationUtilByCaseId(@PathParam("id") int id) {
         return caseApplicationDao.getApplicationUtilByCaseId(id);
     }
+
+    // osäker på path, samt vad metoden ska returnera till frontend
+    @Path("/{id}/application")
+    @POST()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response getQuestionResultById(@PathParam("id") int caseId, @PathParam("id") int questionResultId, String updatedAnswer) {
+        caseApplicationDao.updateQuestionResultById(caseId, questionResultId, updatedAnswer);
+        return Response.ok().build();
+    }
+
 
     @Path("/{id}/budget")
     @GET()
