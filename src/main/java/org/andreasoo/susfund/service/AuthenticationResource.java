@@ -42,8 +42,6 @@ public class AuthenticationResource {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
 
-        // kolla om angivna lösenordet är samma som i user-objektet
-        // lösen borde hashas innan det lagras i databasen och sen borde man använda en biblioteksfunktion för att hasha och verifiera lösenordet
         if(!password.equals(user.getUserPassword().getPassword())) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
@@ -52,7 +50,6 @@ public class AuthenticationResource {
         return Response.ok().entity(token).build();
     }
 
-    // Skapa upp token som kan returneras till klienten som gjort anropet, som klienten kan användas framtida requests
     public String generateToken(UserCredentials user) {
         return Jwts.builder()
                 .setSubject(user.getUsername())
