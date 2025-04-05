@@ -45,7 +45,7 @@ public class CaseApplicationDaoImpl implements CaseApplicationDao {
         CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
 
         caseApplication.getQuestionResults().forEach(questionResult -> {
-            if(questionResult.getId() == request.getQuestionId()){
+            if(questionResult.getApplicationQuestion().getId() == request.getQuestionId()){
                 questionResult.setAnswer(request.getAnswer());
             }
         });

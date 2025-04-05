@@ -69,13 +69,13 @@ public class CasesResource {
     }
 
     @Path("/{id}/assessment")
-    @POST()
+    @PUT()
     @Consumes("application/json")
     @Produces("application/json")
     public Response getAssessmentResultById(@PathParam("id") int caseId, AssessmentUpdateRequest request) {
         try{
             caseAssessmentDao.updateAssessmentResultById(caseId, request);
-            return Response.ok().entity("Answer updated successfully").build();
+            return Response.noContent().build();
         }
         catch(EntityNotFoundException e){
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
@@ -91,13 +91,13 @@ public class CasesResource {
 
     // osäker på path, vad metoden ska returnera till frontend, samt felhantering
     @Path("/{id}/application")
-    @POST()
+    @PUT()
     @Consumes("application/json")
     @Produces("application/json")
     public Response getQuestionResultById(@PathParam("id") int caseId, QuestionUpdateRequest request) {
         try{
             caseApplicationDao.updateQuestionResultById(caseId, request);
-            return Response.ok().entity("Answer updated successfully").build();
+            return Response.noContent().build();
         }
         catch(EntityNotFoundException e){
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();

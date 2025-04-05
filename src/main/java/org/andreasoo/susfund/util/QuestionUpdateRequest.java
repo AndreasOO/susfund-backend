@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.util;
 
 public class QuestionUpdateRequest {
+
     private int questionId;
     private String answer;
 

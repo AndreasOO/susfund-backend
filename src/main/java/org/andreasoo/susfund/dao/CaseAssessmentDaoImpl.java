@@ -48,7 +48,7 @@ public class CaseAssessmentDaoImpl implements CaseAssessmentDao {
         CaseAssessment caseAssessment = entityManager.find(CaseAssessment.class, caseId);
 
         caseAssessment.getAssessmentResults().forEach(assessmentResult -> {
-            if(assessmentResult.getId() == request.getAssessmentId()){
+            if(assessmentResult.getAssessmentItem().getId() == request.getAssessmentItemId()){
                 assessmentResult.setScore(request.getScore());
                 assessmentResult.setJustification(request.getJustification());
             }
