@@ -33,8 +33,7 @@ public class RequestFilter implements ContainerRequestFilter {
         String authHeader = requestContext.getHeaders().getFirst("Authorization");
 
         if(authHeader == null ||authHeader.isEmpty()) {
-            Response response = Response.status(Response.Status.UNAUTHORIZED).type(MediaType.TEXT_PLAIN_TYPE).entity("Token header missing").build();
-            requestContext.abortWith(response);
+            abortWithUnauthorized(requestContext, "Toker header missing");
         }
 
         try{
