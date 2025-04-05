@@ -10,7 +10,7 @@ import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
 import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
-import org.andreasoo.susfund.util.QuestionUpdateRequest;
+import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class CasesResource {
     @PUT()
     @Consumes("application/json")
     @Produces("application/json")
-    public Response getAssessmentResultById(@PathParam("id") int caseId, AssessmentUpdateRequest request) {
+    public Response updateAssessmentItem(@PathParam("id") int caseId, AssessmentUpdateRequest request) {
         try{
             caseAssessmentDao.updateAssessmentResultById(caseId, request);
             return Response.noContent().build();
@@ -98,7 +98,7 @@ public class CasesResource {
     @PUT()
     @Consumes("application/json")
     @Produces("application/json")
-    public Response getQuestionResultById(@PathParam("id") int caseId, QuestionUpdateRequest request) {
+    public Response updateApplicationQuestion(@PathParam("id") int caseId, ApplicationUpdateRequest request) {
         try{
             caseApplicationDao.updateQuestionResultById(caseId, request);
             return Response.noContent().build();

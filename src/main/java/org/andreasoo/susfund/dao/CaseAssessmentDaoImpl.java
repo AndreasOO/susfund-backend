@@ -5,12 +5,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.entity.AssessmentResult;
-import org.andreasoo.susfund.entity.CaseApplication;
 import org.andreasoo.susfund.entity.CaseAssessment;
-import org.andreasoo.susfund.entity.Cases;
 import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
-import org.andreasoo.susfund.util.QuestionUpdateRequest;
 
 import java.util.List;
 

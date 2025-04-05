@@ -7,7 +7,7 @@ import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.entity.CaseApplication;
 import org.andreasoo.susfund.entity.QuestionResult;
 import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.QuestionUpdateRequest;
+import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class CaseApplicationDaoImpl implements CaseApplicationDao {
     }
 
     @Transactional
-    public void updateQuestionResultById(int caseId, QuestionUpdateRequest request){
+    public void updateQuestionResultById(int caseId, ApplicationUpdateRequest request){
         CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
 
         caseApplication.getQuestionResults().forEach(questionResult -> {
