@@ -42,7 +42,12 @@ public class CaseApplicationDaoImpl implements CaseApplicationDao {
     @Transactional
     public void updateQuestionResultById(int caseId, int questionResultId, String updatedAnswer){
         CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
-        caseApplication.getQuestionResults().get(questionResultId).setAnswer(updatedAnswer);
+
+        caseApplication.getQuestionResults().forEach(questionResult -> {
+            if(questionResult.getId() == questionResultId){
+                questionResult.setAnswer(updatedAnswer);
+            }
+        });
         entityManager.merge(caseApplication);
     }
 }
