@@ -9,7 +9,6 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.UserCredentials;
-import org.andreasoo.susfund.service.config.KeyManager;
 
 
 import java.security.Key;
