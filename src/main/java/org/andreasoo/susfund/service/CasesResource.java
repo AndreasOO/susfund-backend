@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.util.ApplicationUtil;
+import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
 import org.andreasoo.susfund.util.QuestionUpdateRequest;
 
@@ -67,6 +68,20 @@ public class CasesResource {
         return caseAssessmentDao.getAssessmentUtilByCaseId(id);
     }
 
+    @Path("/{id}/assessment")
+    @POST()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response getAssessmentResultById(@PathParam("id") int caseId, AssessmentUpdateRequest request) {
+        try{
+            caseAssessmentDao.updateAssessmentResultById(caseId, request);
+            return Response.ok().entity("Answer updated successfully").build();
+        }
+        catch(EntityNotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
+
     @Path("/{id}/application")
     @GET()
     @Produces("application/json")
@@ -80,7 +95,6 @@ public class CasesResource {
     @Consumes("application/json")
     @Produces("application/json")
     public Response getQuestionResultById(@PathParam("id") int caseId, QuestionUpdateRequest request) {
-        System.out.println("Received request: " + request.getQuestionId());
         try{
             caseApplicationDao.updateQuestionResultById(caseId, request);
             return Response.ok().entity("Answer updated successfully").build();
