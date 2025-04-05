@@ -1,24 +1,19 @@
 package org.andreasoo.susfund.service;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.UserCredentials;
-import org.andreasoo.susfund.entity.UserPassword;
+import org.andreasoo.susfund.service.config.KeyManager;
 
 
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @Path("/auth")
@@ -27,15 +22,15 @@ public class AuthenticationResource {
     @PersistenceContext
     private EntityManager entityManager;
 
-    // hur tusan gör man med key???
-    SecretKey key = Keys.hmacShaKeyFor("something".getBytes(StandardCharsets.UTF_8));
+    private final Key key = KeyManager.getSigningKey();
 
-    // ta in rätt parametrar
+    public AuthenticationResource() throws NoSuchAlgorithmException {
+    }
+
     @POST
     @Path("/login")
     public Response login(String username, String password) {
 
-        // för att hämta användaren från databasen
         TypedQuery<UserCredentials> query = entityManager.createQuery(
                 "SELECT u FROM UserCredentials u WHERE u.username = :username", UserCredentials.class);
         query.setParameter("username", username);
@@ -49,11 +44,11 @@ public class AuthenticationResource {
         }
 
         // kolla om angivna lösenordet är samma som i user-objektet
+        // lösen borde hashas innan det lagras i databasen och sen borde man använda en biblioteksfunktion för att hasha och verifiera lösenordet
         if(!password.equals(user.getUserPassword().getPassword())) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
 
-        // vad ska returneras? token?
         String token = generateToken(user);
         return Response.ok().entity(token).build();
     }
@@ -63,6 +58,7 @@ public class AuthenticationResource {
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .claim("userId", user.getId())
+                .claim("roles", user.getUserRoles())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600_000)) // 1 timme
                 .signWith(key)

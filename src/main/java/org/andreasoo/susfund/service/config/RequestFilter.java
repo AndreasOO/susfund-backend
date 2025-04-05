@@ -11,12 +11,16 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 
 @Provider
 public class RequestFilter implements ContainerRequestFilter {
 
-    // hur tusan gör man med key?
-    private static final String SECRET_KEY = "secretKey";
+    private final Key key = KeyManager.getSigningKey();
+
+    public RequestFilter() throws NoSuchAlgorithmException {
+    }
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
@@ -28,13 +32,11 @@ public class RequestFilter implements ContainerRequestFilter {
         }
 
         try{
-
             // parseClaimsJws försöker tolka token och verifierar signaturen
-            Claims claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY.getBytes(StandardCharsets.UTF_8)).build().parseClaimsJws(authHeader).getBody();
+            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authHeader).getBody();
 
-            // om man vill kunna läsa av olika properties till ContainerRequestContext-obj i resource-klass behöver man sätta dem från claims-obj här
             requestContext.setProperty("username", claims.getSubject());
-            requestContext.setProperty("role", claims.get("role", String.class));
+            requestContext.setProperty("roles", claims.get("roles", String.class));
         }
         catch(ExpiredJwtException e){
             abortWithUnauthorized(requestContext, "Expired token");
