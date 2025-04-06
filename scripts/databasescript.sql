@@ -50,6 +50,7 @@ DROP TABLE IF EXISTS `case_decision`;
 CREATE TABLE `case_decision` ( `id` INT NOT NULL AUTO_INCREMENT,
                                 `case_decision_result_id` INT NOT NULL,
                                 `decision_date` DATE NOT NULL,
+                                `justification` VARCHAR(4000) NOT NULL,
                                 CONSTRAINT `FK_case_decision_result_id` FOREIGN KEY  (`case_decision_result_id`) REFERENCES  `case_decision_result` (`id`),
                                 PRIMARY KEY (`id`)
                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -208,10 +209,10 @@ INSERT INTO `susfund_db`.`case_decision_result` (`name`) VALUES ("Approved");
 INSERT INTO `susfund_db`.`case_decision_result` (`name`) VALUES ("Rejected");
 INSERT INTO `susfund_db`.`case_decision_result` (`name`) VALUES ("Partially approved");
 
-INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`) VALUES (1, "2025-03-23");
-INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`) VALUES (2, "2025-02-14");
-INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`) VALUES (3, "2025-03-10");
-INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`) VALUES (1, "2025-03-20");
+INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`, `justification`) VALUES (1, "2025-03-23", "Did really good overall");
+INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`, `justification`) VALUES (2, "2025-02-14", "Did ok but could have done better");
+INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`, `justification`) VALUES (3, "2025-03-10", "Did poorly, rejected due to budget issues");
+INSERT INTO `susfund_db`.`case_decision` (`case_decision_result_id`, `decision_date`, `justification`) VALUES (1, "2025-03-20", "Good focus on sustainability");
 
 
 -- NEW ANDREAS
