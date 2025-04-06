@@ -178,4 +178,13 @@ public class CasesResource {
     public List<CaseDecisionResult> getCaseDecisionResults() {
         return caseDecisionResultDao.getAllCaseDecisionResults();
     }
+
+    @Path("/byorganization/{id}")
+    @GET()
+    @Produces("application/json")
+    public List<Cases> getCasesRelatedToOrganization(@PathParam("id") int id) {
+        return casesDao.getCasesRelatedToOrganization(id);
+    }
+
+
 }
