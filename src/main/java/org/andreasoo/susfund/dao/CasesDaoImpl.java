@@ -24,4 +24,9 @@ public class CasesDaoImpl implements CasesDao {
     public Cases getCaseById(int id) {
         return entityManager.find(Cases.class, id);
     }
+
+    @Override
+    public List<Cases> getCasesRelatedToOrganization(int organizationId) {
+        return entityManager.createQuery("select c from Cases c join c.organization o where o.id="+organizationId,Cases.class).getResultList();
+    }
 }
