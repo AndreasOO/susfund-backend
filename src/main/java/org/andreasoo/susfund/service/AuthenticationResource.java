@@ -5,10 +5,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.UserCredentials;
+import org.andreasoo.susfund.util.LoginRequest;
+import org.andreasoo.susfund.util.TokenBearer;
 
 
 import java.security.Key;
@@ -26,27 +27,33 @@ public class AuthenticationResource {
     public AuthenticationResource() throws NoSuchAlgorithmException {
     }
 
-    @POST
     @Path("/login")
-    public Response login(String username, String password) {
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response login(LoginRequest loginRequest) {
 
+        System.out.println(loginRequest.getUsername());
+        System.out.println(loginRequest.getPassword());
         TypedQuery<UserCredentials> query = entityManager.createQuery(
                 "SELECT u FROM UserCredentials u WHERE u.username = :username", UserCredentials.class);
-        query.setParameter("username", username);
+        query.setParameter("username", loginRequest.getUsername());
 
         UserCredentials user;
         try {
             user = query.getSingleResult();
+            System.out.println("From obj: " + user.getUserPassword().getPassword());
         }
         catch (NoResultException e) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
 
-        if(!password.equals(user.getUserPassword().getPassword())) {
+        if(!loginRequest.getPassword().equals(user.getUserPassword().getPassword())) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
 
-        String token = generateToken(user);
+        TokenBearer token = new TokenBearer();
+        token.setToken(generateToken(user));
         return Response.ok().entity(token).build();
     }
 

@@ -2,15 +2,18 @@ package org.andreasoo.susfund.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table (name="user_credentials")
-public class UserCredentials {
+public class UserCredentials implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="user_name")
     private String username;
 
     @OneToOne(fetch = FetchType.EAGER)
