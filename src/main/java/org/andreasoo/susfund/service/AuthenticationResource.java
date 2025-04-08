@@ -63,7 +63,7 @@ public class AuthenticationResource {
                 .claim("userId", user.getId())
                 .claim("roles", user.getUserRoles())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600_000)) // 1 timme
+                .setExpiration(new Date(System.currentTimeMillis() + 3600_000))
                 .signWith(key)
                 .compact();
     }
