@@ -16,6 +16,8 @@ public class CaseDecision implements Serializable {
     @JoinColumn (name="case_decision_result_id")
     private CaseDecisionResult caseDecisionResult;
 
+    private String justification;
+
     public CaseDecision() {
 
     }
@@ -34,5 +36,13 @@ public class CaseDecision implements Serializable {
 
     public void setCaseDecisionResult(CaseDecisionResult caseDecisionResult) {
         this.caseDecisionResult = caseDecisionResult;
+    }
+
+    public String getJustification() {
+        return justification;
+    }
+
+    public void setJustification(String justification) {
+        this.justification = justification;
     }
 }
