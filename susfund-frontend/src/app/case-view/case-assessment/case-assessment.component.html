@@ -1,0 +1,49 @@
+<div class="container bg-dark-subtle text-dark mt-5 mb-5 pb-2 rounded-1">
+  <h2 class="mb-3 p-2">Assessment</h2>
+  <hr>
+  <div *ngIf="caseAssessmentUtil?.assessmentResults" class="container">
+    <div *ngFor="let sections of caseAssessmentUtil?.assessmentResults" class="row mb-4 pb-4 border-bottom">
+      <h3>{{ sections[0].assessmentItem.assessmentSection.name}}</h3>
+      <div *ngFor="let assessmentResult of sections" class="col-12">
+        <div>
+          <div class="card rounded-4 p-3 bg-secondary-subtle text-dark m-2">
+            <h4>{{ assessmentResult.assessmentItem.title }}</h4>
+            <h5>{{ assessmentResult.assessmentItem.preamble }}</h5>
+            <h6>{{ assessmentResult.assessmentItem.assistingText }}</h6>
+            <textarea class="form-control" rows="3" [value]="assessmentResult.justification"></textarea>
+            <div class="pt-2">
+              <span class="px-3">Poor</span>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                <label class="form-check-label" for="inlineRadio3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                <label class="form-check-label" for="inlineRadio4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5">
+                <label class="form-check-label" for="inlineRadio5">5</label>
+              </div>
+              <span class="px-2">Excellent</span>
+            </div>
+
+            <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

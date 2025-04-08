@@ -1,0 +1,9 @@
+<header class="">
+  <nav class="navbar navbar-expand-sm text-bg-dark border-bottom">
+    <div class="container gap-3">
+      <a href="#" class="nav-link text-light">Case Manager: Sustainable Sally</a>
+      <a *ngIf="isCaseView" [routerLink]="['/cases']"  class="btn bg-gradient text-light">Cases</a>
+      <a [routerLink]="['/overview']"  class="btn bg-gradient text-light ms-auto">Logout</a>
+    </div>
+  </nav>
+</header>
