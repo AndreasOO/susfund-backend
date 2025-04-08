@@ -1,7 +1,14 @@
 package org.andreasoo.susfund.service;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
@@ -18,6 +25,10 @@ import java.util.List;
 
 @Path("/cases")
 public class CasesResource {
+
+    // blir automatiskt tilldelad den som gör anropen
+    @Context
+    private ContainerRequestContext requestContext;
 
     @Inject
     private CasesDao casesDao;
