@@ -33,8 +33,6 @@ public class AuthenticationResource {
     @Produces("application/json")
     public Response login(LoginRequest loginRequest) {
 
-        System.out.println(loginRequest.getUsername());
-        System.out.println(loginRequest.getPassword());
         TypedQuery<UserCredentials> query = entityManager.createQuery(
                 "SELECT u FROM UserCredentials u WHERE u.username = :username", UserCredentials.class);
         query.setParameter("username", loginRequest.getUsername());
@@ -54,7 +52,11 @@ public class AuthenticationResource {
 
         TokenBearer token = new TokenBearer();
         token.setToken(generateToken(user));
-        return Response.ok().entity(token).build();
+        Response response = Response.ok(token).build();
+        response.getHeaders().add("token", token.getToken());
+        return response;
+                
+//        return Response.ok().entity(token).build();
     }
 
     public String generateToken(UserCredentials user) {
