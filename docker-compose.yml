@@ -1,0 +1,11 @@
+services:
+  susfund-fe:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - susfund
+networks:
+  susfund:
