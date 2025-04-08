@@ -55,8 +55,6 @@ public class AuthenticationResource {
         Response response = Response.ok(token).build();
         response.getHeaders().add("token", token.getToken());
         return response;
-                
-//        return Response.ok().entity(token).build();
     }
 
     public String generateToken(UserCredentials user) {

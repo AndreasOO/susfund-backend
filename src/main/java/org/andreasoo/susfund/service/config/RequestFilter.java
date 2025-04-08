@@ -39,7 +39,6 @@ public class RequestFilter implements ContainerRequestFilter {
 
 
         try{
-            // parseClaimsJws försöker tolka token och verifierar signaturen
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authHeader).getBody();
 
         }
