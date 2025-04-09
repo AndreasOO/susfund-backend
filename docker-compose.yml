@@ -13,7 +13,7 @@ services:
     container_name: susfund-db
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.db
     ports:
      - "7777:3306"
     networks:
