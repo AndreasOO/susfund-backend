@@ -1,5 +1,6 @@
 services:
   susfund-fe:
+    container_name: susfund-fe
     build:
       context: .
       dockerfile: Dockerfile.frontend
@@ -7,5 +8,16 @@ services:
       - "4200:4200"
     networks:
       - susfund
+
+  db:
+    container_name: susfund-db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+     - "7777:3306"
+    networks:
+      - susfund
+
 networks:
   susfund:
