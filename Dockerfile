@@ -9,4 +9,4 @@ COPY ./target/SusFund-1.0-SNAPSHOT.war ./SusFund-1.0-SNAPSHOT.war
 #COPY ./wildfly-config/config-script.sh /opt/jboss/
 #RUN opt/jobb/wildfly/bin/jboss-cli.sh --file=config-script.sh
 
-CMD ["/opt/jboss/wildfly/bin/standalone.sh"]
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
