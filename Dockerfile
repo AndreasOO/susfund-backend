@@ -2,8 +2,11 @@ FROM quay.io/wildfly/wildfly
 
 COPY ./wildfly-config/com /opt/jboss/wildfly/modules/com
 
-#COPY ./wildfly-config/config-script.sh /opt/jboss/
-#RUN opt/jobb/wildfly/bin/jboss-cli.sh --file=config-script.sh
+COPY ./wildfly-config/config-script.cli /opt/jboss/config-script.cli
+
+RUN /opt/jboss/wildfly/bin/jboss-cli.sh --file=/opt/jboss/config-script.cli
+
+RUN rm -Rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history/*
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin test1234
 
