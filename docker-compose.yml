@@ -19,5 +19,16 @@ services:
     networks:
       - susfund
 
+  wildfly:
+    container_name: susfund-wildfly
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+    networks:
+      - susfund
+
 networks:
   susfund:
