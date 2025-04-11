@@ -5,7 +5,7 @@
              version="3.2">
 
     <persistence-unit name="myUnit" transaction-type="JTA">
-        <jta-data-source>jdbc/MySQLDataSource</jta-data-source>
+        <jta-data-source>java:/jdbc/MySQLDataSource</jta-data-source>
         <properties>
             <property name="hibernate.show_sql" value="true"/>
             <property name="jakarta.persistence.jdbc.user"   value="root" />

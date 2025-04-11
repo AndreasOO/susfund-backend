@@ -1,3 +1,13 @@
+DROP USER IF EXISTS'casemanager'@'localhost';
+DROP ROLE IF EXISTS casemanager;
+CREATE ROLE 'casemanager';
+GRANT ALL ON susfund_db.* TO 'casemanager';
+CREATE USER 'casemanager'@'localhost' IDENTIFIED BY 'test1234';
+GRANT 'casemanager' TO 'casemanager'@'localhost';
+SET DEFAULT ROLE ALL TO 'casemanager'@'localhost';
+GRANT SUPER ON . TO 'casemanager'@'localhost';
+
+
 DROP SCHEMA IF EXISTS `susfund_db`;
 CREATE SCHEMA IF NOT EXISTS `susfund_db`;
 USE `susfund_db`;
@@ -394,13 +404,3 @@ INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_
 INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,2);
 INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,3);
 INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,4);
-
-
-DROP USER IF EXISTS'casemanager'@'localhost';
-DROP ROLE IF EXISTS casemanager;
-CREATE ROLE 'casemanager';
-GRANT ALL ON susfund_db.* TO 'casemanager';
-CREATE USER 'casemanager'@'localhost' IDENTIFIED BY 'test1234';
-GRANT 'casemanager' TO 'casemanager'@'localhost';
-SET DEFAULT ROLE ALL TO 'casemanager'@'localhost';
-GRANT SUPER ON *.* TO 'casemanager'@'localhost';
