@@ -4,6 +4,10 @@ COPY ./wildfly-config/com /opt/jboss/wildfly/modules/com
 
 COPY ./wildfly-config/config-script.cli /opt/jboss/config-script.cli
 
+COPY ./wildfly-config/logging-script.cli /opt/jboss/logging-script.cli
+
+RUN /opt/jboss/wildfly/bin/jboss-cli.sh --file=/opt/jboss/logging-script.cli
+
 RUN /opt/jboss/wildfly/bin/jboss-cli.sh --file=/opt/jboss/config-script.cli
 
 RUN rm -Rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history/*
@@ -14,4 +18,4 @@ WORKDIR /opt/jboss/wildfly/standalone/deployments
 
 COPY ./target/SusFund-1.0-SNAPSHOT.war ./SusFund-1.0-SNAPSHOT.war
 
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "--debug"]

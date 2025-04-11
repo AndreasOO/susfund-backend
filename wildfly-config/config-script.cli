@@ -1,8 +1,9 @@
 embed-server --server-config=standalone.xml --std-out=echo
 
 batch
+
 /subsystem="datasources"/data-source="MySQLDS":add(\
-  connection-url="jdbc:mysql://localhost:7777/susfund_db", \
+  connection-url="jdbc:mysql://db:7777/susfund_db", \
   driver-name="mysql", \
   enabled="true", \
   jndi-name="java:/jdbc/MySQLDataSource")

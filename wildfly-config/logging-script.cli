@@ -1,0 +1,7 @@
+embed-server
+
+/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level, value=TRACE)
+
+/subsystem=logging/logger=org.wildfly.examples:add(level=TRACE)
+
+stop-embedded-server
