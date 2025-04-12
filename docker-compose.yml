@@ -28,7 +28,7 @@ services:
     container_name: susfund-wildfly
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.wildfly
     ports:
       - "8080:8080"
       - "9990:9990"
