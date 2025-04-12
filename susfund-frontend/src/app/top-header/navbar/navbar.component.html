@@ -1,9 +1,9 @@
 <header class="">
-  <nav class="navbar navbar-expand-sm text-bg-dark border-bottom">
+  <nav class="navbar navbar-expand-sm text-bg-dark border-bottom" style="height: 80px;">
     <div class="container gap-3">
-      <a href="#" class="nav-link text-light">Case Manager: Sustainable Sally</a>
+      <a *ngIf="isLoggedIn" href="#" class="nav-link text-light">Case Manager: Sustainable Sally</a>
       <a *ngIf="isCaseView" [routerLink]="['/cases']"  class="btn bg-gradient text-light">Cases</a>
-      <a [routerLink]="['/overview']"  class="btn bg-gradient text-light ms-auto">Logout</a>
+      <a *ngIf="isLoggedIn" [routerLink]="['/overview']"  class="btn bg-gradient text-light ms-auto" (click)="logOut()">Logout</a>
     </div>
   </nav>
 </header>

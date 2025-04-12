@@ -14,6 +14,18 @@ export class NavbarComponent {
   }
 
   get isCaseView() : boolean {
-    return this.router.url.split('/').pop()!=='' && this.router.url.split('/').pop()!=='cases';
+    return this.router.url.split('/').pop()!=='' && this.router.url.split('/').pop()!=='cases' && this.router.url.split('/').pop()!=='login';
+  }
+
+  get isLoggedIn() : boolean{
+    return this.router.url.split('/').pop()!=='login';
+  }
+
+  logOut(){
+    const token = localStorage.getItem('tokenBearer');
+    if(token){
+      localStorage.removeItem('tokenBearer');
+      this.router.navigate(['/login']);
+    }
   }
 }

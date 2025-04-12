@@ -10,8 +10,8 @@
             <h4>{{ question.applicationQuestion.title }}</h4>
             <h5>{{ question.applicationQuestion.preamble }}</h5>
             <h6>{{ question.applicationQuestion.assistingText }}</h6>
-            <textarea class="form-control" rows="3" [value]="question.answer"></textarea>
-            <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
+            <textarea class="form-control" rows="3" [value]="question.answer" #answerInput></textarea>
+            <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="saveUpdate(answerInput.value, question.applicationQuestion.id)">Save</a>
           </div>
         </div>
 

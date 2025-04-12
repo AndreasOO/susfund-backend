@@ -24,5 +24,4 @@ export class CaseMainViewComponent implements OnInit {
       this.fetcher.getCaseById(this.caseId).subscribe(caseDetails => this.caseDetails = caseDetails!)
       console.log(this.caseDetails)
     }
-
 }

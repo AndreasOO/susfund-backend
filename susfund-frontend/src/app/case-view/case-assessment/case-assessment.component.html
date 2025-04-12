@@ -10,33 +10,33 @@
             <h4>{{ assessmentResult.assessmentItem.title }}</h4>
             <h5>{{ assessmentResult.assessmentItem.preamble }}</h5>
             <h6>{{ assessmentResult.assessmentItem.assistingText }}</h6>
-            <textarea class="form-control" rows="3" [value]="assessmentResult.justification"></textarea>
+            <textarea class="form-control" rows="3" [value]="assessmentResult.justification" #justificationInput></textarea>
             <div class="pt-2">
               <span class="px-3">Poor</span>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">1</label>
+                <input [checked]="assessmentResult.score.toString() === score1.textContent" class="form-check-input" type="radio" [name]="assessmentResult.assessmentItem.id" id="inlineRadio1" value="option1">
+                <label class="form-check-label" #score1 for="inlineRadio1">1</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">2</label>
+                <input [checked]="assessmentResult.score.toString() === score2.textContent" class="form-check-input" type="radio" [name]="assessmentResult.assessmentItem.id" id="inlineRadio2" value="option2">
+                <label class="form-check-label" #score2 for="inlineRadio2">2</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                <label class="form-check-label" for="inlineRadio3">3</label>
+                <input [checked]="assessmentResult.score.toString() === score3.textContent" class="form-check-input" type="radio" [name]="assessmentResult.assessmentItem.id" id="inlineRadio3" value="option3">
+                <label class="form-check-label" #score3 for="inlineRadio3">3</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
-                <label class="form-check-label" for="inlineRadio4">4</label>
+                <input [checked]="assessmentResult.score.toString() === score4.textContent" class="form-check-input" type="radio" [name]="assessmentResult.assessmentItem.id" id="inlineRadio4" value="option4">
+                <label class="form-check-label" #score4 for="inlineRadio4">4</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5">
-                <label class="form-check-label" for="inlineRadio5">5</label>
+                <input [checked]="assessmentResult.score.toString() === score5.textContent" class="form-check-input" type="radio" [name]="assessmentResult.assessmentItem.id" id="inlineRadio5" value="option5">
+                <label class="form-check-label" #score5 for="inlineRadio5">5</label>
               </div>
               <span class="px-2">Excellent</span>
             </div>
 
-            <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
+            <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="saveUpdate(assessmentResult.assessmentItem.id, justificationInput.value, getSelectedScore(assessmentResult.assessmentItem.id))">Save</a>
 
           </div>
 

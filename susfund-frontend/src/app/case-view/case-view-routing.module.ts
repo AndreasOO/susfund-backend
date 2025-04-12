@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {CaseOverviewComponent} from '../case-view/case-overview/case-overview.component';
-import {CaseMainViewComponent} from '../case-view/case-main-view/case-main-view.component';
+import {CaseOverviewComponent} from './case-overview/case-overview.component';
+import {CaseMainViewComponent} from './case-main-view/case-main-view.component';
 import {CaseOrganizationDetailsComponent} from './case-organization-details/case-organization-details.component';
 import {CaseApplicationComponent} from './case-application/case-application.component';
 import {CaseBudgetComponent} from './case-budget/case-budget.component';

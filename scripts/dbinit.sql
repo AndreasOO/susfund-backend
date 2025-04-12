@@ -1,3 +1,4 @@
+
 DROP SCHEMA IF EXISTS `susfund_db`;
 CREATE SCHEMA IF NOT EXISTS `susfund_db`;
 USE `susfund_db`;
@@ -173,6 +174,39 @@ CREATE TABLE `history_event` ( `id` INT NOT NULL AUTO_INCREMENT,
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
+-- -----------------------------------------START JOSEFINS USER IMPLEMENTATION
+
+DROP TABLE IF EXISTS `user_password`;
+CREATE TABLE `user_password` (`id` INT NOT NULL AUTO_INCREMENT,
+                              `password` VARCHAR(255) NOT NULL,
+                              PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `user_credentials`;
+CREATE TABLE `user_credentials` (`id` INT NOT NULL AUTO_INCREMENT,
+                                 `user_name` VARCHAR(255) NOT NULL,
+                                 `case_manager_id` INT NOT NULL,
+                                 `user_password_id` INT NOT NULL,
+                                 PRIMARY KEY (`id`),
+                                 CONSTRAINT `FK_case_manager_id2` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
+                                 CONSTRAINT `FK_user_password_id` FOREIGN KEY(`user_password_id`) REFERENCES `user_password` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role` ( `id` INT NOT NULL AUTO_INCREMENT,
+                           `name` VARCHAR(255) NOT NULL,
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `user_credentials_user_roles`;
+CREATE TABLE `user_credentials_user_roles` ( `user_credentials_id` INT NOT NULL,
+                                             `user_role_id` INT NOT NULL,
+                                             CONSTRAINT `FK_user_credentials_id2` FOREIGN KEY (`user_credentials_id`) REFERENCES `user_credentials` (`id`),
+                                             CONSTRAINT `FK_user_role_id` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+-- ------------------------------------END JOSEFINS USER IMPLEMENTATION
 
 INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("SOLE_TRADER");
 INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("LIMITED_COMPANY");
@@ -300,6 +334,20 @@ INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `
 INSERT INTO `susfund_db`.`history_event` (`cases_id`, `event_type_id`, `date`, `details`) VALUES (3, 1, "2025-03-25", "Details text");
 
 -- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
+
+-- -----------------------------------------START JOSEFINS USER IMPLEMENTATION
+
+INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user");
+INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user role 2");
+INSERT INTO `susfund_db`.`user_role` (`name`) VALUES ("user role 3");
+
+INSERT INTO `susfund_db`.`user_password` (`password`) VALUES ("test1234");
+
+INSERT INTO `susfund_db`.`user_credentials` (`user_name`, `case_manager_id`, `user_password_id`) VALUES ("testuser", 1, 1);
+
+INSERT INTO `susfund_db`.`user_credentials_user_roles` (`user_credentials_id`, `user_role_id`) VALUES (1, 1);
+
+
 
 USE `susfund_db`;
 

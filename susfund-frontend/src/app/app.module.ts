@@ -10,6 +10,7 @@ import {CasesListModule} from './cases-list/cases-list.module';
 import {CasesServicesModule} from './cases-services/cases-services.module';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {loggingInterceptor} from './auth-interceptor';
+import {LoginModule} from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {loggingInterceptor} from './auth-interceptor';
     TopHeaderModule,
     FooterModule,
     CasesListModule,
-    CasesServicesModule
+    CasesServicesModule,
+    LoginModule
   ],
   providers: [
     provideHttpClient(
