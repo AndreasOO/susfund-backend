@@ -68,22 +68,22 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>susfund-backend/main/java</directory>
-            </resource>
-            <resource>
-                <directory>susfund-backend/main/resources</directory>
-            </resource>
-        </resources>
+<!--        <resources>-->
+<!--&lt;!&ndash;            <resource>&ndash;&gt;-->
+<!--&lt;!&ndash;                <directory>susfund-backend/main/java</directory>&ndash;&gt;-->
+<!--&lt;!&ndash;            </resource>&ndash;&gt;-->
+<!--&lt;!&ndash;            <resource>&ndash;&gt;-->
+<!--&lt;!&ndash;                <directory>susfund-backend/main/resources</directory>&ndash;&gt;-->
+<!--&lt;!&ndash;            </resource>&ndash;&gt;-->
+<!--        </resources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
+<!--                <configuration>-->
+<!--                    <failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--                </configuration>-->
             </plugin>
         </plugins>
     </build>
