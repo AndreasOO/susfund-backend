@@ -1,0 +1,6 @@
+.sign-in-btn:hover {
+    filter: brightness(1.025);
+}
+.register-link:hover {
+    filter: brightness(1.5);
+}

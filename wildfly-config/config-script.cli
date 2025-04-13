@@ -1,0 +1,19 @@
+embed-server --server-config=standalone.xml --std-out=echo
+
+batch
+
+/subsystem="datasources"/data-source="MySQLDS":add(\
+  connection-url="jdbc:mysql://db:3306/susfund_db", \
+  driver-name="mysql", \
+  enabled="true", \
+  user-name="root", \
+  password="test1234", \
+  jndi-name="java:/jdbc/MySQLDataSource")
+
+/subsystem="datasources"/jdbc-driver="mysql":add(\
+    driver-name="mysql", \
+    driver-module-name="com.mysql", \
+    jdbc-compliant=true, \
+    driver-class-name="com.mysql.cj.jdbc.Driver")
+
+run-batch

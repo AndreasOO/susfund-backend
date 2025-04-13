@@ -1,0 +1,26 @@
+<aside>
+  <div class="p-4 text-dark min-vh-100">
+    <section>
+      <p>Case Id: {{caseId}}</p>
+      <hr>
+    </section>
+    <section>
+      <ul class="list-unstyled">
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/overview']">Overview</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/organization']">Organization Details</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/application']">Application</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/budget']">Budget</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/assessment']">Assessment</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/decision']">Decision</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/history']">History</a></li>
+        <li class= "border-bottom p-2"><a class="nav-link" [routerLink]="['/cases/' + caseId + '/documents']">Documents</a></li>
+      </ul>
+    </section>
+    <section class="mt-5">
+      <div>
+        <p>Status: {{caseStatus?.name}}</p>
+        <p>Decision Type: {{caseDecisionType?.name}}</p>
+      </div>
+    </section>
+  </div>
+</aside>

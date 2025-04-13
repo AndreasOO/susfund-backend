@@ -12,8 +12,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>22</maven.compiler.target>
-        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
         <junit.version>5.11.0</junit.version>
     </properties>
 
@@ -92,11 +92,22 @@
     </dependencies>
 
     <build>
+<!--        <resources>-->
+<!--&lt;!&ndash;            <resource>&ndash;&gt;-->
+<!--&lt;!&ndash;                <directory>susfund-backend/main/java</directory>&ndash;&gt;-->
+<!--&lt;!&ndash;            </resource>&ndash;&gt;-->
+<!--&lt;!&ndash;            <resource>&ndash;&gt;-->
+<!--&lt;!&ndash;                <directory>susfund-backend/main/resources</directory>&ndash;&gt;-->
+<!--&lt;!&ndash;            </resource>&ndash;&gt;-->
+<!--        </resources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+<!--                <configuration>-->
+<!--                    <failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--                </configuration>-->
             </plugin>
         </plugins>
     </build>

@@ -1,0 +1,25 @@
+
+<div class="text-center">
+    <h1 class="text-dark fw-bold">SusFund</h1>
+    <div class="col-12 d-flex justify-content-center text-lg-start">
+        <div class="bg-white p-4 rounded-4 w-25 shadow">
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+                <p class="text-dark-emphasis fs-3 fw-bold">Log in</p>
+                <div data-mdb-input-init class="form-outline mb-4 text-black">
+                    <label class="form-label fs-5 text-dark-emphasis" for="Username">Username:</label>
+                    <input type="text" id="Username" name="username" ngModel required class="form-control" />
+                </div>
+                <div data-mdb-input-init class="form-outline mb-4 text-black">
+                    <label class="form-label fs-5 text-dark-emphasis" for="Password">Password:</label>
+                    <input type="password" id="Password"  name="password" ngModel required class="form-control" />
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="sign-in-btn btn text-white bg-secondary w-100">Sign in</button>
+                </div>
+                <div class="text-center text-dark-emphasis mt-3">
+                    <p>No account? <a href="#" class="register-link text-dark-emphasis">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
