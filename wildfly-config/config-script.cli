@@ -6,8 +6,8 @@ batch
   connection-url="jdbc:mysql://${env.DB_HOST}:${DB_PORT}/${env.DB_NAME}", \
   driver-name="mysql", \
   enabled="true", \
-  user-name="${env.DB_USERNAME}", \
-  password="${env.DB_PASSWORD}", \
+  user-name="${DB_USERNAME}", \
+  password="${DB_PASSWORD}", \
   jndi-name="java:/jdbc/MySQLDataSource")
 
 /subsystem="datasources"/jdbc-driver="mysql":add(\
