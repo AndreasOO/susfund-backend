@@ -22,10 +22,9 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: susfund-db-secret
-                  key: MYSQL_ROOT_PASSWORD
+              value: test1234
+            - name: MYSQL_ROOT_HOST
+              value: "%"
 ---
 apiVersion: v1
 kind: Service

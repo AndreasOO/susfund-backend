@@ -3,7 +3,7 @@ embed-server --server-config=standalone.xml --std-out=echo
 batch
 
 /subsystem="datasources"/data-source="MySQLDS":add(\
-  connection-url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}", \
+  connection-url="jdbc:mysql://susfund-db-service:3306/susfund_db", \
   driver-name="mysql", \
   enabled="true", \
   user-name="${DB_USERNAME}", \
