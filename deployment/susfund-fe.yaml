@@ -19,7 +19,7 @@ spec:
           image: susfund-fe:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 4200
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -31,6 +31,6 @@ spec:
     app: susfund-frontend
   ports:
     - protocol: TCP
-      port: 4200
-      targetPort: 4200
+      port: 80
+      targetPort: 80
       nodePort: 30200

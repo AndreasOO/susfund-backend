@@ -29,7 +29,7 @@ export class CasesFetcherService {
   }
 
   public getAllCases():Observable<CaseLazy[]> {
-    return this.http.get<CaseDTO[]>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases")
+    return this.http.get<CaseDTO[]>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases")
                     .pipe(map(casesDTOs => casesDTOs.map(caseDTO => {
                       return {
                         id: caseDTO.id,
@@ -45,7 +45,7 @@ export class CasesFetcherService {
   }
 
   public getCasesLazyByCaseOrganization(id:string | undefined):Observable<CaseLazy[]> {
-    return this.http.get<CaseDTO[]>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/"+id+"/casesrelatedtocaseorganization")
+    return this.http.get<CaseDTO[]>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/"+id+"/casesrelatedtocaseorganization")
       .pipe(map(casesDTOs => casesDTOs.map(caseDTO => {
         return {
           id: caseDTO.id,
@@ -61,7 +61,7 @@ export class CasesFetcherService {
   }
 
   public getCaseById(id:string | undefined):Observable<CaseDetails> {
-    return this.http.get<CaseDTO>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id)
+    return this.http.get<CaseDTO>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id)
                     .pipe(map(caseDTO => {
                       return {
                         id:caseDTO.id,
@@ -80,60 +80,60 @@ export class CasesFetcherService {
   }
 
   public getCaseAssessmentUtilByCaseId(id:string | undefined):Observable<CaseAssessmentUtil> {
-    return this.http.get<CaseAssessmentUtil>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/assessment");
+    return this.http.get<CaseAssessmentUtil>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/assessment");
   }
 
   public getApplicationUtilByCaseId(id:string | undefined):Observable<CaseApplicationUtil> {
-    return this.http.get<CaseApplicationUtil>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/application");
+    return this.http.get<CaseApplicationUtil>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/application");
 
   }
   public getBudgetByCaseId(id:string | undefined):Observable<CaseBudget>{
-    return this.http.get<CaseBudget>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/budget");
+    return this.http.get<CaseBudget>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/budget");
   }
 
   public getHistoryEventByCaseId(id:string | undefined):Observable<HistoryEvent[]> {
-    return this.http.get<HistoryEvent[]>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/history")
+    return this.http.get<HistoryEvent[]>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/history")
   }
 
   public getCaseManagerByCaseId(id:string | undefined):Observable<CaseManager> {
-    return this.http.get<CaseManager>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/casemanager")
+    return this.http.get<CaseManager>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/casemanager")
   }
 
   public getAllCaseManagers():Observable<CaseManager[]> {
-    return this.http.get<CaseManager[]>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
+    return this.http.get<CaseManager[]>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
   }
 
   public getCaseDecisionByCaseId(id:string | undefined):Observable<CaseDecision> {
-    return this.http.get<CaseDecision>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/decision")
+    return this.http.get<CaseDecision>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/decision")
   }
 
   public getCaseDecisionTypeByCaseId(id:string | undefined):Observable<CaseDecisionType> {
-    return this.http.get<CaseDecisionType>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/decisiontype")
+    return this.http.get<CaseDecisionType>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/decisiontype")
   }
 
   public getCaseStatusByCaseId(id:string | undefined):Observable<CaseStatus> {
-    return this.http.get<CaseStatus>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/status")
+    return this.http.get<CaseStatus>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/status")
   }
 
 
   public getAllCaseDecisionResultOptions():Observable<CaseDecisionResult[]> {
-    return this.http.get<CaseDecisionResult[]>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/casedecisionresults")
+    return this.http.get<CaseDecisionResult[]>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/casedecisionresults")
   }
 
   public updateApplicationQuestion(caseId:string, update:ApplicationUpdateRequest):Observable<any> {
-    return this.http.put("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/application", update)
+    return this.http.put("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/application", update)
   }
 
   public updateAssessmentItem(caseId:string, update:AssessmentUpdateRequest):Observable<any>{
-    return this.http.put("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/assessment", update)
+    return this.http.put("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/assessment", update)
   }
 
   public getOrganizationByCaseId(id:string | undefined):Observable<Organization> {
-    return this.http.get<Organization>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/organization")
+    return this.http.get<Organization>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/organization")
   }
 
   public login(loginRequest:LoginRequest): Observable<TokenBearer>{
-    return this.http.put<TokenBearer>("http://192.168.49.2:30800/SusFund-1.0-SNAPSHOT/api/auth/login", loginRequest)
+    return this.http.put<TokenBearer>("http://localhost:30800/SusFund-1.0-SNAPSHOT/api/auth/login", loginRequest)
   }
 
 
