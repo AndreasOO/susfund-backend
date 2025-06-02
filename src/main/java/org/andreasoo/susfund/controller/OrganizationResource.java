@@ -1,5 +1,6 @@
 package org.andreasoo.susfund.controller;
 
+import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,7 +12,8 @@ import org.andreasoo.susfund.service.OrganizationService;
 
 import java.util.List;
 
-    @Path("/companies")
+@Stateless
+@Path("/companies")
 public class OrganizationResource {
 
         @Inject

@@ -6,5 +6,6 @@ import org.andreasoo.susfund.util.LoginRequest;
 import java.util.Optional;
 
 public interface LoginService {
+    String generateToken(UserCredentials user);
     Optional<UserCredentials> getUserCredentials(LoginRequest loginRequest);
 }

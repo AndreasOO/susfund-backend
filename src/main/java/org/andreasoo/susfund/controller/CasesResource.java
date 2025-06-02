@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.controller;
 
 
+import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -22,7 +23,7 @@ import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 import java.util.List;
 
 
-
+@Stateless
 @Path("/cases")
 public class CasesResource {
 
