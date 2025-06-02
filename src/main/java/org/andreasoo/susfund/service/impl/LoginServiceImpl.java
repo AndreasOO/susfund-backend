@@ -3,11 +3,13 @@ package org.andreasoo.susfund.service.impl;
 import io.jsonwebtoken.Jwts;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.controller.config.KeyManager;
 import org.andreasoo.susfund.dao.UserCredentialsDao;
 import org.andreasoo.susfund.entity.UserCredentials;
 import org.andreasoo.susfund.service.LoginService;
 import org.andreasoo.susfund.util.LoginRequest;
+import org.andreasoo.susfund.util.TokenBearer;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -41,5 +43,18 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Optional<UserCredentials> getUserCredentials(LoginRequest loginRequest) {
         return userCredentialsDao.getUserCredentials(loginRequest);
+    }
+
+    @Override
+    public Optional<TokenBearer> handleLogin(LoginRequest loginRequest) {
+        Optional<UserCredentials> user = getUserCredentials(loginRequest);
+
+        if (user.isEmpty()){
+            return Optional.empty();
+        } else {
+            TokenBearer token = new TokenBearer();
+            token.setToken(generateToken(user.get()));
+            return Optional.of(token);
+        }
     }
 }

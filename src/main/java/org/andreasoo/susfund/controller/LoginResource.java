@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.controller;
 
 import io.jsonwebtoken.Jwts;
+
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -37,16 +38,13 @@ public class LoginResource {
     @Produces("application/json")
     public Response login(LoginRequest loginRequest) {
 
-        Optional<UserCredentials> result = loginService.getUserCredentials(loginRequest);
+        Optional<TokenBearer> token = loginService.handleLogin(loginRequest);
 
-        if (result.isEmpty()){
+        if (token.isPresent()) {
+            return Response.ok(token).header("token",token.get().getToken()).build();
+        } else {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
-        TokenBearer token = new TokenBearer();
-        token.setToken(loginService.generateToken(result.get()));
 
-        Response response = Response.ok(token).header("token",token.getToken()).build();
-//        response.getHeaders().add("token", token.getToken());
-        return Response.ok(token).header("token",token.getToken()).build();
     }
 }
