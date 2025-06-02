@@ -5,7 +5,10 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     ports:
-      - "4200:4200"
+      - "4200:80"
+    environment:
+      - BE_HOST=localhost
+      - BE_PORT=8080
     networks:
       - susfund
 
@@ -15,9 +18,11 @@ services:
       context: .
       dockerfile: Dockerfile.db
     ports:
-     - "7777:3306"
+      - "7777:3306"
     networks:
       - susfund
+    environment:
+      - MYSQL_ROOT_PASSWORD=test1234
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ptest1234" ]
       interval: 5s
@@ -34,8 +39,14 @@ services:
       - "9990:9990"
     networks:
       - susfund
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=susfund_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=test1234
     depends_on:
-       db:
+      db:
         condition: service_healthy
 
 networks:

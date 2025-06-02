@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: susfund-db-deployment
+  labels:
+    app: susfund-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: susfund-database
+  template:
+    metadata:
+      labels:
+        app: susfund-database
+    spec:
+      containers:
+        - name: susfund-db
+          image: susfund-db:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: susfund-db-secret
+                  key: MYSQL_ROOT_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: susfund-db-service
+spec:
+  selector:
+    app: susfund-database
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306

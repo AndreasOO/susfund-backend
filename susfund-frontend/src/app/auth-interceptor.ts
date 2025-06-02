@@ -4,8 +4,9 @@ import { inject } from '@angular/core';
 import {Router} from '@angular/router';
 
 export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-
+  console.log("made it here 1")
   const router= inject(Router);
+  console.log("made it here 2")
 
   const token = localStorage.getItem('tokenBearer');
 

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: susfund-db-config
+data:
+  DB_HOST: "susfund-db-service"
+  DB_PORT: "3306"
+  DB_NAME: "susfund_db"
