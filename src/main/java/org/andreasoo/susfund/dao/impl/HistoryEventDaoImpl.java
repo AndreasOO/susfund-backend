@@ -1,10 +1,10 @@
-package org.andreasoo.susfund.dao;
+package org.andreasoo.susfund.dao.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.andreasoo.susfund.dao.HistoryEventDao;
 import org.andreasoo.susfund.entity.HistoryEvent;
-import org.andreasoo.susfund.entity.Organization;
 
 import java.util.List;
 

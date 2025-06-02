@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.service;
+package org.andreasoo.susfund.controller.config;
 
 import javax.crypto.KeyGenerator;
 import java.security.Key;

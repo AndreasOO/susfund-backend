@@ -6,5 +6,6 @@ import org.andreasoo.susfund.util.AssessmentUtil;
 
 public interface CaseAssessmentDao {
     AssessmentUtil getAssessmentUtilByCaseId(int caseId);
-    void updateAssessmentResultById(int caseId, AssessmentUpdateRequest request);
+
+    boolean updateAssessmentResultById(int caseId, AssessmentUpdateRequest request);
 }

@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.service;
+package org.andreasoo.susfund.controller;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

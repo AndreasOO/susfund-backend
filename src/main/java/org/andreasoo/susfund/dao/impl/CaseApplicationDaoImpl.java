@@ -1,9 +1,10 @@
-package org.andreasoo.susfund.dao;
+package org.andreasoo.susfund.dao.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.andreasoo.susfund.dao.CaseApplicationDao;
 import org.andreasoo.susfund.entity.CaseApplication;
 import org.andreasoo.susfund.entity.QuestionResult;
 import org.andreasoo.susfund.util.ApplicationUtil;
@@ -41,14 +42,20 @@ public class CaseApplicationDaoImpl implements CaseApplicationDao {
     }
 
     @Transactional
-    public void updateQuestionResultById(int caseId, ApplicationUpdateRequest request){
-        CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
+    public boolean updateQuestionResultById(int caseId, ApplicationUpdateRequest request){
+        try{
+            CaseApplication caseApplication = entityManager.find(CaseApplication.class, caseId);
 
-        caseApplication.getQuestionResults().forEach(questionResult -> {
-            if(questionResult.getApplicationQuestion().getId() == request.getQuestionId()){
-                questionResult.setAnswer(request.getAnswer());
-            }
-        });
-        entityManager.merge(caseApplication);
+            caseApplication.getQuestionResults().forEach(questionResult -> {
+                if(questionResult.getApplicationQuestion().getId() == request.getQuestionId()){
+                    questionResult.setAnswer(request.getAnswer());
+                }
+            });
+            entityManager.merge(caseApplication);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 }

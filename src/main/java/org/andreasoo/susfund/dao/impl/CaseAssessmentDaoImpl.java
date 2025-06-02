@@ -1,9 +1,10 @@
-package org.andreasoo.susfund.dao;
+package org.andreasoo.susfund.dao.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.andreasoo.susfund.dao.CaseAssessmentDao;
 import org.andreasoo.susfund.entity.AssessmentResult;
 import org.andreasoo.susfund.entity.CaseAssessment;
 import org.andreasoo.susfund.util.AssessmentUpdateRequest;
@@ -41,15 +42,21 @@ public class CaseAssessmentDaoImpl implements CaseAssessmentDao {
     }
 
     @Transactional
-    public void updateAssessmentResultById(int caseId, AssessmentUpdateRequest request){
-        CaseAssessment caseAssessment = entityManager.find(CaseAssessment.class, caseId);
+    public boolean updateAssessmentResultById(int caseId, AssessmentUpdateRequest request){
+        try{
+            CaseAssessment caseAssessment = entityManager.find(CaseAssessment.class, caseId);
 
-        caseAssessment.getAssessmentResults().forEach(assessmentResult -> {
-            if(assessmentResult.getAssessmentItem().getId() == request.getAssessmentItemId()){
-                assessmentResult.setScore(request.getScore());
-                assessmentResult.setJustification(request.getJustification());
-            }
-        });
-        entityManager.merge(caseAssessment);
+            caseAssessment.getAssessmentResults().forEach(assessmentResult -> {
+                if(assessmentResult.getAssessmentItem().getId() == request.getAssessmentItemId()){
+                    assessmentResult.setScore(request.getScore());
+                    assessmentResult.setJustification(request.getJustification());
+                }
+            });
+            entityManager.merge(caseAssessment);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 }

@@ -5,5 +5,5 @@ import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
 public interface CaseApplicationDao {
     ApplicationUtil getApplicationUtilByCaseId(int caseId);
-    void updateQuestionResultById(int caseId, ApplicationUpdateRequest applicationUpdateRequest);
+    boolean updateQuestionResultById(int caseId, ApplicationUpdateRequest applicationUpdateRequest);
 }
