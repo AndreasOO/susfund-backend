@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.service.config;
+package org.andreasoo.susfund.controller.config;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.service.config;
+package org.andreasoo.susfund.controller.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -8,7 +8,6 @@ import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
-import org.andreasoo.susfund.service.KeyManager;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;

@@ -1,20 +1,20 @@
-package org.andreasoo.susfund.dao;
+package org.andreasoo.susfund.dao.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.andreasoo.susfund.dao.CaseStatusDao;
 import org.andreasoo.susfund.entity.CaseStatus;
-import org.andreasoo.susfund.entity.Organization;
 
 @ApplicationScoped
-public class OrganizationDaoImpl implements OrganizationDao {
+public class CaseStatusDaoImpl implements CaseStatusDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public Organization getOrganizationByCaseId(int caseId) {
+    public CaseStatus getCaseStatusByCaseId(int caseId) {
         return entityManager.createQuery(
-                "select o from Cases c join c.organization o where c.id=" + caseId, Organization.class).getSingleResult();
+                "select cs from Cases c join c.caseStatus cs where c.id=" + caseId, CaseStatus.class).getSingleResult();
     }
 }

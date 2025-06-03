@@ -1,11 +1,12 @@
-package org.andreasoo.susfund.dao;
+package org.andreasoo.susfund.service;
 
 import org.andreasoo.susfund.entity.Organization;
 
 import java.util.List;
 
-public interface OrganizationDao {
-    Organization getOrganizationByCaseId(int caseId);
+public interface OrganizationService {
+
+    Organization getOrganizationById(int id);
 
     List<Organization> getAllOrganizations();
 }
