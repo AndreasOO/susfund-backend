@@ -107,10 +107,16 @@
                     <execution>
                         <id>scala-compile-first</id>
                         <phase>generate-sources</phase>
-<!--                        <phase>compile</phase>-->
                         <goals>
                             <goal>add-source</goal>
                             <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
