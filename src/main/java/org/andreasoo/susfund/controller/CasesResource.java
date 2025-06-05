@@ -9,10 +9,8 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.ApplicationUtil;
@@ -20,7 +18,9 @@ import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
 import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
+
 import java.util.List;
+import java.util.Set;
 
 
 @Stateless
@@ -39,10 +39,12 @@ public class CasesResource {
     public List<Cases> getAllCases() {
         return casesService.getAllCases();
     }
+
     @Path("/{id}")
     @GET()
     @Produces("application/json")
     public Cases getCaseById(@PathParam("id") int id) {
+//        System.out.println(budgetService.test(id));
         return casesService.getCaseById(id);
     }
 
@@ -50,6 +52,7 @@ public class CasesResource {
     @GET()
     @Produces("application/json")
     public AssessmentUtil getAssessmentUtilByCaseId(@PathParam("id") int id) {
+
         return casesService.getAssessmentUtilByCaseId(id);
     }
 
