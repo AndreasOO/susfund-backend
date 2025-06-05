@@ -12,6 +12,8 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.*;
+import org.andreasoo.susfund.service.BudgetService;
+import org.andreasoo.susfund.service.BudgetServiceImpl;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.ApplicationUtil;
 import org.andreasoo.susfund.util.AssessmentUpdateRequest;
@@ -33,6 +35,8 @@ public class CasesResource {
     @Inject
     private CasesService casesService;
 
+    @Inject
+    private BudgetService budgetService;
 
     @GET
     @Produces("application/json")
@@ -44,7 +48,7 @@ public class CasesResource {
     @GET()
     @Produces("application/json")
     public Cases getCaseById(@PathParam("id") int id) {
-//        System.out.println(budgetService.test(id));
+        System.out.println(budgetService.test(id));
         return casesService.getCaseById(id);
     }
 

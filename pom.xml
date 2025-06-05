@@ -98,21 +98,6 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>net.alchim31.maven</groupId>
-                    <artifactId>scala-maven-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.4.0</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-
         <plugins>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -121,7 +106,8 @@
                 <executions>
                     <execution>
                         <id>scala-compile-first</id>
-                        <phase>compile</phase>
+                        <phase>generate-sources</phase>
+<!--                        <phase>compile</phase>-->
                         <goals>
                             <goal>add-source</goal>
                             <goal>compile</goal>

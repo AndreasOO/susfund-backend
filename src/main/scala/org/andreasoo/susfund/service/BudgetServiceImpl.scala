@@ -1,3 +1,5 @@
+package org.andreasoo.susfund.service
+
 import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
