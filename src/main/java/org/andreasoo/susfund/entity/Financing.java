@@ -10,12 +10,17 @@ public class Financing {
     int id;
 
     @ManyToOne
+    @JoinColumn(name="organization_id")
     Organization organization;
 
+    @Column(name="estimated_financing_in_percentage")
     int estimatedFinancingInPercentage;
+
+    @Column(name="estimated_financing_in_money")
     int estimatedFinancingInMoney;
 
     @ManyToOne
+    @JoinColumn(name="financing_type_id")
     FinancingType financingType;
 
     public Financing() {
