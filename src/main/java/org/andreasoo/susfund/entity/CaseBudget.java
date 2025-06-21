@@ -27,6 +27,10 @@ public class CaseBudget implements Serializable {
     @JoinColumn(name="case_budget_id")
     private List<BudgetPost> budgetPosts;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="case_budget_id")
+    private List<Financing> financing;
+
     public CaseBudget() {
     }
 
