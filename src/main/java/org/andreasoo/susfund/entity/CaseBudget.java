@@ -65,4 +65,12 @@ public class CaseBudget implements Serializable {
     public void setBudgetPosts(List<BudgetPost> budgetPosts) {
         this.budgetPosts = budgetPosts;
     }
+
+    public List<Financing> getFinancing() {
+        return financing;
+    }
+
+    public void setFinancing(List<Financing> financing) {
+        this.financing = financing;
+    }
 }
