@@ -389,6 +389,29 @@ CREATE TABLE `budget_organization` (
                                        PRIMARY KEY (`case_budget_id`, `organization_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+-- ------------------------------------------------------------ START FINANCING
+
+DROP TABLE IF EXISTS `financing_type`;
+CREATE TABLE `financing_type` (
+                                `id` INT NOT NULL AUTO_INCREMENT,
+                                `name` VARCHAR(255) NOT NULL,
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `financing`;
+CREATE TABLE `financing` ( `id` INT NOT NULL AUTO_INCREMENT,
+                            `organization_id` INT NOT NULL,
+                            `financing_type_id` INT NOT NULL,
+                            `case_budget_id` INT NOT NULL,
+                            `estimated_financing_in_percentage` INT NOT NULL,
+                            `estimated_financing_in_money` INT NOT NULL,
+                            CONSTRAINT `FK3_organization_id` FOREIGN KEY  (`organization_id`) REFERENCES `organization` (`id`),
+                            CONSTRAINT `FK_financing_type_id` FOREIGN KEY  (`financing_type_id`) REFERENCES `financing_type` (`id`),
+                            CONSTRAINT `FK4_case_budget_id` FOREIGN KEY  (`case_budget_id`) REFERENCES `case_budget` (`id`),
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+-- -------------------------------------------------------------- END FINANCING
 
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");
@@ -442,3 +465,13 @@ INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_
 INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,2);
 INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,3);
 INSERT INTO `susfund_db`.`budget_organization` (`case_budget_id`, `organization_id`) VALUES (1,4);
+
+INSERT INTO `susfund_db`.`financing_type` (`name`) VALUES ("FINANCING_TYPE_1");
+INSERT INTO `susfund_db`.`financing_type` (`name`) VALUES ("FINANCING_TYPE_2");
+INSERT INTO `susfund_db`.`financing_type` (`name`) VALUES ("FINANCING_TYPE_3");
+INSERT INTO `susfund_db`.`financing_type` (`name`) VALUES ("FINANCING_TYPE_4");
+
+INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (1, 1,2, 15, 100000);
+INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (2, 1,3, 10, 250000);
+INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (3, 3,1, 20, 1000000);
+INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (4, 2,4, 5, 50000);

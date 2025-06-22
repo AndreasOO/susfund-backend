@@ -27,6 +27,10 @@ public class CaseBudget implements Serializable {
     @JoinColumn(name="case_budget_id")
     private List<BudgetPost> budgetPosts;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="case_budget_id")
+    private List<Financing> financing;
+
     public CaseBudget() {
     }
 
@@ -60,5 +64,13 @@ public class CaseBudget implements Serializable {
 
     public void setBudgetPosts(List<BudgetPost> budgetPosts) {
         this.budgetPosts = budgetPosts;
+    }
+
+    public List<Financing> getFinancing() {
+        return financing;
+    }
+
+    public void setFinancing(List<Financing> financing) {
+        this.financing = financing;
     }
 }
