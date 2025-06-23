@@ -11,6 +11,7 @@ import { CaseAssessmentComponent } from './case-assessment/case-assessment.compo
 import { CaseDecisionComponent } from './case-decision/case-decision.component';
 import { CaseHistoryComponent } from './case-history/case-history.component';
 import { CaseDocumentsComponent } from './case-documents/case-documents.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CaseDocumentsComponent } from './case-documents/case-documents.componen
   ],
   imports: [
     CommonModule,
-    CaseViewRoutingModule
+    CaseViewRoutingModule,
+    FormsModule
   ]
 })
 export class CaseViewModule { }

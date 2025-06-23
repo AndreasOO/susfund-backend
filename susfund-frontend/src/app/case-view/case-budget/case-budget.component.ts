@@ -26,4 +26,8 @@ export class CaseBudgetComponent implements OnInit{
     return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
   }
 
+  updateSEK(percentage: number): number {
+    return Math.round(this.getTotal() * (percentage / 100))
+  }
+
 }
