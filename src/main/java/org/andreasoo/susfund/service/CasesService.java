@@ -1,5 +1,6 @@
 package org.andreasoo.susfund.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
