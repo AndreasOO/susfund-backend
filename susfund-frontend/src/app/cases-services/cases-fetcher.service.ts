@@ -138,5 +138,9 @@ export class CasesFetcherService {
     return this.http.put<TokenBearer>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/auth/login", loginRequest)
   }
 
+  public updateAssignedCaseManager(caseId:string, payload:any):Observable<any>{
+    return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casemanager", payload)
+  }
+
 
 }

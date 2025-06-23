@@ -10,4 +10,6 @@ public interface CasesDao {
     List<Cases> getAllCases();
     Cases getCaseById(int id);
     List<Cases> getCasesRelatedToOrganization(int organizationId);
+    // NYTT
+    boolean updateCaseManager(int caseId,int caseManagerId);
 }

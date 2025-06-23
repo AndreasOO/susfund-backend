@@ -49,4 +49,8 @@ public interface CasesService {
     List<CaseDecisionResult> getCaseDecisionResults();
 
     List<Cases> getCasesRelatedToCaseOrganization(int id);
+
+    // NYTT
+    @Transactional
+    boolean updateAssignedCaseManager(int caseId, int caseManagerId);
 }

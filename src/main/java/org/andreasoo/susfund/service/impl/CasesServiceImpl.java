@@ -136,4 +136,12 @@ public class CasesServiceImpl implements CasesService {
     public List<Cases> getCasesRelatedToCaseOrganization(int id) {
         return casesDao.getCasesRelatedToOrganization(id);
     }
+
+    // NYTT
+    @Transactional
+    @Override
+    public boolean updateAssignedCaseManager(int caseId, int caseManagerId){
+        return casesDao.updateCaseManager(caseId, caseManagerId);
+    }
+
 }
