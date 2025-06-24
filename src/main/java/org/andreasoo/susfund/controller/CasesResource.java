@@ -15,10 +15,7 @@ import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.BudgetServiceImpl;
 import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.AssessmentUpdateRequest;
-import org.andreasoo.susfund.util.AssessmentUtil;
-import org.andreasoo.susfund.util.ApplicationUpdateRequest;
+import org.andreasoo.susfund.util.*;
 
 
 import java.util.List;
@@ -170,6 +167,20 @@ public class CasesResource {
     public List<Cases> getCasesRelatedToCaseOrganization(@PathParam("id") int id) {
         return casesService.getCasesRelatedToCaseOrganization(id);
     }
+
+    // NYTT
+    @Path("/{id}/casemanager")
+    @PUT()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateCaseManagerByCaseId(@PathParam("id") int caseId, CaseManagerUpdateRequest payload){
+        boolean update = casesService.updateAssignedCaseManager(caseId, payload.getCaseManagerId());
+        if(update){
+            return Response.noContent().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
 
 
 }
