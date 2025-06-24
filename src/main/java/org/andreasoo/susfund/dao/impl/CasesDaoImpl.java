@@ -34,15 +34,37 @@ public class CasesDaoImpl implements CasesDao {
 
     // NYTT
     @Override
-    public boolean updateCaseManager(int caseId, int caseManagerId){
+    public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){
         try{
             Cases currentCase = entityManager.find(Cases.class, caseId);
+
             CaseManager chosenCaseManager = entityManager.find(CaseManager.class, caseManagerId);
+            CaseManager chosenCaseController = entityManager.find(CaseManager.class, caseControllerId);
+            CaseManager chosenHandledBy = entityManager.find(CaseManager.class, handledById);
+
+            if (chosenCaseManager.equals(chosenCaseController) && chosenCaseManager.getId() != 1 && chosenCaseController.getId() != 1 ||
+                    chosenCaseManager.equals(chosenHandledBy) && chosenCaseManager.getId() != 1 && chosenHandledBy.getId() != 1 ||
+                    chosenCaseController.equals(chosenHandledBy) && chosenCaseController.getId() != 1 && chosenHandledBy.getId() != 1) {
+                return false;
+            }
+
             currentCase.setCaseManager(chosenCaseManager);
+            currentCase.setCaseController(chosenCaseController);
+            currentCase.setHandledBy(chosenHandledBy);
             return true;
         }
         catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public CaseManager getCaseControllerByCaseId(int caseId){
+        return entityManager.find(Cases.class, caseId).getCaseController();
+    }
+
+    @Override
+    public CaseManager getHandledByByCaseId(int caseId){
+        return entityManager.find(Cases.class, caseId).getHandledBy();
     }
 }
