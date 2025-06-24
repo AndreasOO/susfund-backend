@@ -6,5 +6,5 @@ import scala.util.Try
 
 trait BudgetCalculator {
   protected def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget]
-  protected def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget]
+  def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget]
 }

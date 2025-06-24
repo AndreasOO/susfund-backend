@@ -13,13 +13,11 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public Result<CaseBudget> createBudget(CaseBudget caseBudget) {
-
-        return budgetServiceUtil.calculateNewBudget(caseBudget);
+        return budgetServiceUtil.createNewBudget(caseBudget);
     }
 
     @Override
     public Result<CaseBudget> updateBudget(CaseBudget caseBudget) {
-
-        return budgetServiceUtil.calculateExistingBudget(caseBudget);
+        return budgetServiceUtil.updateExistingBudget(caseBudget);
     }
 }

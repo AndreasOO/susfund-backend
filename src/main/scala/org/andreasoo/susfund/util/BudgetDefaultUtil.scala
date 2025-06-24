@@ -2,9 +2,9 @@ package org.andreasoo.susfund.util
 
 import jakarta.enterprise.context.ApplicationScoped
 import org.andreasoo.susfund.entity.{BudgetPost, CaseBudget}
-import scala.jdk.CollectionConverters._
 
-import scala.util.{Failure, Try}
+import scala.jdk.CollectionConverters._
+import scala.util.{Failure, Success, Try}
 
 trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
                                                  with FinancingCalculator
@@ -18,37 +18,108 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
 
   // Scala trait methods
-  override protected def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    val budgetPosts:Set[BudgetPost] = Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
-                                                         .getBudgetPosts
-                                                         .asScala)
+  override def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
 
-    for {
+    val overHeadPercentage = for {
       budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
                                             .getBudgetPosts
                                             .asScala))
 
       totalBudget <- Try(budgetPosts.map(_.getEstimatedCost).sum)
 
-    } yield totalBudget
+      totalOverhead <- Try(budgetPosts.filter(_.getBudgetPostType.getName == "OVERHEAD")
+                                        .map(_.getEstimatedCost)
+                                        .sum)
 
+      totalOverheadPercentage <- Try(totalOverhead * 100 / totalBudget)
 
+    } yield totalOverheadPercentage
 
-
-
+    overHeadPercentage match {
+      case Failure(exception) => Failure(exception)
+      case Success(percent) if percent == 0 => Failure(throw new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent == 0  => Failure(throw new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent < 15  => Failure(throw new IllegalArgumentException("Overhead too low"))
+      case Success(percent) if percent > 30  => Failure(throw new IllegalArgumentException("Overhead high low"))
+      case Success(percent) if percent > 15  => Success(caseBudget.get)
+      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+    }
   }
 
-  override protected def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+  override def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    val overHeadPercentage = for {
+      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
+        .getBudgetPosts
+        .asScala))
 
-  override protected def validateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+      totalBudget <- Try(budgetPosts.map(_.getEstimatedCost).sum)
 
-  override protected def validateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+      totalOverhead <- Try(budgetPosts.filter(_.getBudgetPostType.getName == "OVERHEAD")
+        .map(_.getEstimatedCost)
+        .sum)
 
-  override protected def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+      totalOverheadPercentage <- Try(totalOverhead * 100 / totalBudget)
 
-  override protected def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+    } yield totalOverheadPercentage
 
-  override protected def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+    overHeadPercentage match {
+      case Failure(exception) => Failure(exception)
+      case Success(percent) if percent == 0 => Failure(throw new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent == 0  => Failure(throw new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent < 15  => Failure(throw new IllegalArgumentException("Overhead too low"))
+      case Success(percent) if percent > 30  => Failure(throw new IllegalArgumentException("Overhead high low"))
+      case Success(percent) if percent > 15  => Success(caseBudget.get)
+      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+    }
+  }
 
-  override protected def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = ???
+  override def validateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    val emptyCostPosts = for {
+      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
+        .getBudgetPosts
+        .asScala))
+
+      emptyCostPosts <- Try(budgetPosts.map(_.getEstimatedCost).filter(_ == 0))
+
+    } yield emptyCostPosts
+
+    emptyCostPosts match {
+      case Success(posts) if posts.isEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
+      case Success(posts) if posts.nonEmpty => Success(caseBudget.get)
+      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+    }
+  }
+
+  override def validateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    val emptyCostPosts = for {
+      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
+        .getBudgetPosts
+        .asScala))
+
+      emptyCostPosts <- Try(budgetPosts.map(_.getEstimatedCost).filter(_ == 0))
+
+    } yield emptyCostPosts
+
+    emptyCostPosts match {
+      case Success(posts) if posts.isEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
+      case Success(posts) if posts.nonEmpty => Success(caseBudget.get)
+      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+    }
+  }
+
+  override def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    caseBudget
+  }
+
+  override def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    caseBudget
+  }
+
+  override def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    caseBudget
+  }
+
+  override def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    caseBudget
+  }
 }
