@@ -42,9 +42,7 @@ public class CasesDaoImpl implements CasesDao {
             CaseManager chosenCaseController = entityManager.find(CaseManager.class, caseControllerId);
             CaseManager chosenHandledBy = entityManager.find(CaseManager.class, handledById);
 
-            if (chosenCaseManager.equals(chosenCaseController) && chosenCaseManager.getId() != 1 && chosenCaseController.getId() != 1 ||
-                    chosenCaseManager.equals(chosenHandledBy) && chosenCaseManager.getId() != 1 && chosenHandledBy.getId() != 1 ||
-                    chosenCaseController.equals(chosenHandledBy) && chosenCaseController.getId() != 1 && chosenHandledBy.getId() != 1) {
+            if (chosenCaseManager.equals(chosenCaseController) && chosenCaseManager.getId() != 1 && chosenCaseController.getId() != 1) {
                 return false;
             }
 

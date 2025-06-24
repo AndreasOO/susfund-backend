@@ -17,6 +17,7 @@ import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;
 
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -180,7 +181,6 @@ public class CasesResource {
         return casesService.getCasesRelatedToCaseOrganization(id);
     }
 
-    // NYTT
     @Path("/{id}/casemanager")
     @PUT()
     @Consumes("application/json")
@@ -188,14 +188,10 @@ public class CasesResource {
     public Response updateCaseAssigmentByCaseId(@PathParam("id") int caseId, CaseAssignmentUpdateRequest payload){
         boolean update = casesService.updateCaseAssignment(caseId, payload.getCaseManagerId(), payload.getCaseControllerId(), payload.getHandledById());
         if(update){
-            return Response.noContent().build();
+            return Response.ok().entity(Collections.singletonMap("message", "Case assignments were successfully updated.")).build();
         }
         else{
-            String error = "Something went wrong. Make sure each assigned role is assigned to different casemanagers";
-            return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "The assigned case manager and case controller must be different. Please review your selections.")).build();
         }
     }
-
-
-
 }

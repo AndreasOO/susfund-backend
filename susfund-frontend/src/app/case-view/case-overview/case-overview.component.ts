@@ -29,6 +29,9 @@ export class CaseOverviewComponent implements OnInit{
   selectedCaseControllerId:number | undefined
   selectedHandledById:number | undefined
 
+  errorMessage: string | null = null
+  successMessage: string | null = null
+
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
@@ -69,10 +72,14 @@ export class CaseOverviewComponent implements OnInit{
     }
 
     this.fetcher.updateAssignedCaseManager(this.caseId!, payload).subscribe({
-      next: () => console.log('Successfully updated casemanager'),
+      next: response => {
+        this.successMessage = response.message;
+        this.errorMessage = null
+      },
       error: err => {
         if (err.status === 400){
-          alert(err.error)
+          this.errorMessage = err.error?.error;
+          this.successMessage = null
         }
       }
     })
