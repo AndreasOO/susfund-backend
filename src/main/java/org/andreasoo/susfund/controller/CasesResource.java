@@ -14,10 +14,7 @@ import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.AssessmentUpdateRequest;
-import org.andreasoo.susfund.util.AssessmentUtil;
-import org.andreasoo.susfund.util.ApplicationUpdateRequest;
+import org.andreasoo.susfund.util.*;
 
 
 import java.util.List;
@@ -96,6 +93,22 @@ public class CasesResource {
     @Produces("application/json")
     public CaseBudget getCaseBudgetByCaseId(@PathParam("id") int id) {
         return casesService.getCaseBudgetByCaseId(id);
+    }
+
+    @Path("/{id}/budget")
+    @PUT()
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response updateCaseBudgetByCaseId(@PathParam("id") int id,  CaseBudget caseBudget) {
+        Result<CaseBudget> result = budgetService.updateBudget(id, caseBudget);
+
+        boolean success = result.success();
+
+        if (success) {
+            return Response.ok(result.resultObj()).build();
+        } else {
+            return Response.status(417, result.error()).build();
+        }
     }
 
     @Path("/{id}/decision")

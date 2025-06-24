@@ -30,4 +30,9 @@ public class CasesDaoImpl implements CasesDao {
     public List<Cases> getCasesRelatedToOrganization(int organizationId) {
         return entityManager.createQuery("select c from Cases c join c.organization o where o.id="+organizationId,Cases.class).getResultList();
     }
+
+    @Override
+    public Cases updateCase(Cases caseToUpdate) {
+        return entityManager.merge(caseToUpdate);
+    }
 }

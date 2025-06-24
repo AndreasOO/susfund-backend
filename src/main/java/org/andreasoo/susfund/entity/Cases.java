@@ -52,7 +52,7 @@ public class Cases implements Serializable {
     @JoinColumn(name="cases_id")
     private List<HistoryEvent> historyEventList;
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="case_budget_id")
     private CaseBudget caseBudget;
 

@@ -9,5 +9,6 @@ import java.util.List;
 public interface CasesDao {
     List<Cases> getAllCases();
     Cases getCaseById(int id);
+    Cases updateCase(Cases caseToUpdate);
     List<Cases> getCasesRelatedToOrganization(int organizationId);
 }

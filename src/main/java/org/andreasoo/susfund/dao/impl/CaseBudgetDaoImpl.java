@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CaseBudgetDao;
 import org.andreasoo.susfund.entity.CaseBudget;
+import org.andreasoo.susfund.entity.Cases;
 
 @ApplicationScoped
 public class CaseBudgetDaoImpl implements CaseBudgetDao {
@@ -17,4 +18,11 @@ public class CaseBudgetDaoImpl implements CaseBudgetDao {
         return entityManager.createQuery(
                 "select cb from Cases c join c.caseBudget cb where c.id=" + caseId, CaseBudget.class).getSingleResult();
     }
+
+    @Override
+    public CaseBudget updateCaseBudget(CaseBudget caseBudget) {
+        return entityManager.merge(caseBudget);
+    }
+
+
 }

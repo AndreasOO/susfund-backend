@@ -18,7 +18,7 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
 
   // Scala trait methods
-  override def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
 
     val overHeadPercentage = for {
       budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
@@ -84,8 +84,9 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     } yield emptyCostPosts
 
     emptyCostPosts match {
-      case Success(posts) if posts.isEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
-      case Success(posts) if posts.nonEmpty => Success(caseBudget.get)
+      case Failure(exception) => Failure(exception)
+      case Success(posts) if posts.nonEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
+      case Success(posts) if posts.isEmpty => Success(caseBudget.get)
       case _ => Failure(throw new IllegalArgumentException("Unknown error"))
     }
   }
@@ -101,8 +102,9 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     } yield emptyCostPosts
 
     emptyCostPosts match {
-      case Success(posts) if posts.isEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
-      case Success(posts) if posts.nonEmpty => Success(caseBudget.get)
+      case Failure(exception) => Failure(exception)
+      case Success(posts) if posts.nonEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
+      case Success(posts) if posts.isEmpty => Success(caseBudget.get)
       case _ => Failure(throw new IllegalArgumentException("Unknown error"))
     }
   }

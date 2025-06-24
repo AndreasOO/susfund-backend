@@ -9,5 +9,5 @@ public interface BudgetService {
     Result<CaseBudget> createBudget(CaseBudget caseBudget);
 
     @Transactional
-    Result<CaseBudget> updateBudget(CaseBudget caseBudget);
+    Result<CaseBudget> updateBudget(int id, CaseBudget caseBudget);
 }
