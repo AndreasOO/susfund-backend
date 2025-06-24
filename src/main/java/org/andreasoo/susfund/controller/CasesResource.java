@@ -102,11 +102,10 @@ public class CasesResource {
     public Response updateCaseBudgetByCaseId(@PathParam("id") int id,  CaseBudget caseBudget) {
         Result<CaseBudget> result = budgetService.updateBudget(id, caseBudget);
 
-        boolean success = result.success();
-
-        if (success) {
+        if (result.success()) {
             return Response.ok(result.resultObj()).build();
         } else {
+            System.out.println("logged error: " + result.error());
             return Response.status(417, result.error()).build();
         }
     }

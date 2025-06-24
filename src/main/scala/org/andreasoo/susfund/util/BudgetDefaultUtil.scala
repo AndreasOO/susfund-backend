@@ -17,19 +17,19 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
   def updateExistingBudget(caseBudget: CaseBudget):Result[CaseBudget]
 
 
-  // Scala trait methods
   override protected def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
 
     val overHeadPercentage = for {
-      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
-                                            .getBudgetPosts
-                                            .asScala))
+
+      budget <- caseBudget
+
+      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
 
       totalBudget <- Try(budgetPosts.map(_.getEstimatedCost).sum)
 
       totalOverhead <- Try(budgetPosts.filter(_.getBudgetPostType.getName == "OVERHEAD")
-                                        .map(_.getEstimatedCost)
-                                        .sum)
+                                      .map(_.getEstimatedCost)
+                                      .sum)
 
       totalOverheadPercentage <- Try(totalOverhead * 100 / totalBudget)
 
@@ -37,20 +37,21 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
     overHeadPercentage match {
       case Failure(exception) => Failure(exception)
-      case Success(percent) if percent == 0 => Failure(throw new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent == 0  => Failure(throw new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent < 15  => Failure(throw new IllegalArgumentException("Overhead too low"))
-      case Success(percent) if percent > 30  => Failure(throw new IllegalArgumentException("Overhead high low"))
+      case Success(percent) if percent == 0 => Failure(new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent == 0  => Failure(new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent < 15  => Failure(new IllegalArgumentException("Overhead too low"))
+      case Success(percent) if percent > 30  => Failure(new IllegalArgumentException("Overhead high low"))
       case Success(percent) if percent > 15  => Success(caseBudget.get)
-      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
 
   override def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val overHeadPercentage = for {
-      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
-        .getBudgetPosts
-        .asScala))
+
+      budget <- caseBudget
+
+      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
 
       totalBudget <- Try(budgetPosts.map(_.getEstimatedCost).sum)
 
@@ -64,20 +65,21 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
     overHeadPercentage match {
       case Failure(exception) => Failure(exception)
-      case Success(percent) if percent == 0 => Failure(throw new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent == 0  => Failure(throw new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent < 15  => Failure(throw new IllegalArgumentException("Overhead too low"))
-      case Success(percent) if percent > 30  => Failure(throw new IllegalArgumentException("Overhead high low"))
+      case Success(percent) if percent == 0 => Failure(new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent == 0  => Failure(new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent < 15  => Failure(new IllegalArgumentException("Overhead too low"))
+      case Success(percent) if percent > 30  => Failure(new IllegalArgumentException("Overhead high low"))
       case Success(percent) if percent > 15  => Success(caseBudget.get)
-      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
 
   override def validateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val emptyCostPosts = for {
-      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
-        .getBudgetPosts
-        .asScala))
+
+      budget <- caseBudget
+
+      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
 
       emptyCostPosts <- Try(budgetPosts.map(_.getEstimatedCost).filter(_ == 0))
 
@@ -85,17 +87,18 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
     emptyCostPosts match {
       case Failure(exception) => Failure(exception)
-      case Success(posts) if posts.nonEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
+      case Success(posts) if posts.nonEmpty => Failure(new IllegalArgumentException("Empty Cost Posts"))
       case Success(posts) if posts.isEmpty => Success(caseBudget.get)
-      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
 
   override def validateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val emptyCostPosts = for {
-      budgetPosts <- Try(Set.from(caseBudget.getOrElse(throw new IllegalArgumentException("No budget"))
-        .getBudgetPosts
-        .asScala))
+
+      budget <- caseBudget
+
+      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
 
       emptyCostPosts <- Try(budgetPosts.map(_.getEstimatedCost).filter(_ == 0))
 
@@ -103,9 +106,9 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
     emptyCostPosts match {
       case Failure(exception) => Failure(exception)
-      case Success(posts) if posts.nonEmpty => Failure(throw new IllegalArgumentException("Empty Cost Posts"))
+      case Success(posts) if posts.nonEmpty => Failure(new IllegalArgumentException("Empty Cost Posts"))
       case Success(posts) if posts.isEmpty => Success(caseBudget.get)
-      case _ => Failure(throw new IllegalArgumentException("Unknown error"))
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
 

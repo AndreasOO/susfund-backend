@@ -24,9 +24,8 @@ class BudgetServiceUtil extends BudgetDefaultUtil {
   override def updateExistingBudget(caseBudget: CaseBudget): Result[CaseBudget] = {
 
     val calculatedBudget = for {
-//      validatedBudget <- validateNewBudget(Try(caseBudget))
-//      calculatedBudget <- calculateNewBudget(Try(validatedBudget))
-      calculatedBudget <- calculateNewBudget(Try(caseBudget))
+      validatedBudget <- validateNewBudget(Try(caseBudget))
+      calculatedBudget <- calculateNewBudget(Try(validatedBudget))
 
     } yield calculatedBudget
 
