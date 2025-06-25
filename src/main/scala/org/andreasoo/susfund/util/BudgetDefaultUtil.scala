@@ -13,6 +13,22 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
 
 
+  def handleNewBudget(caseBudget: CaseBudget):Try[CaseBudget] = {
+    for {
+      validatedBudget <- validateNewBudget(Try(caseBudget))
+      calculatedBudget <- calculateNewBudget(Try(validatedBudget))
+
+    } yield calculatedBudget
+  }
+
+  def handleExistingBudget(caseBudget: CaseBudget):Try[CaseBudget] = {
+    for {
+      validatedBudget <- validateNewBudget(Try(caseBudget))
+      calculatedBudget <- calculateNewBudget(Try(validatedBudget))
+
+    } yield calculatedBudget
+  }
+
   def createNewBudget(caseBudget: CaseBudget):Result[CaseBudget]
   def updateExistingBudget(caseBudget: CaseBudget):Result[CaseBudget]
 
@@ -46,7 +62,7 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     }
   }
 
-  override def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def calculateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val overHeadPercentage = for {
 
       budget <- caseBudget
@@ -74,7 +90,7 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     }
   }
 
-  override def validateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def validateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val emptyCostPosts = for {
 
       budget <- caseBudget
@@ -93,7 +109,7 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     }
   }
 
-  override def validateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def validateExistingBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val emptyCostPosts = for {
 
       budget <- caseBudget
@@ -112,19 +128,19 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     }
   }
 
-  override def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     caseBudget
   }
 
-  override def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     caseBudget
   }
 
-  override def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     caseBudget
   }
 
-  override def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  override protected def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     caseBudget
   }
 }
