@@ -39,6 +39,8 @@ export class CasesFetcherService {
                         companyName:caseDTO.organization.name,
                         companyId:caseDTO.organization.id,
                         caseManager:caseDTO.caseManager.name,
+                        caseController:caseDTO.caseController.name,
+                        handledBy:caseDTO.handledBy.name,
                         controller:caseDTO.caseManager.name,
                         caseStatus:caseDTO.caseStatus.name,
                         caseDecisionType:caseDTO.caseDecisionType.name
@@ -55,7 +57,8 @@ export class CasesFetcherService {
           companyName:caseDTO.organization.name,
           companyId:caseDTO.organization.id,
           caseManager:caseDTO.caseManager.name,
-          controller:caseDTO.caseManager.name,
+          caseController:caseDTO.caseController.name,
+          // controller:caseDTO.caseManager.name,
           caseStatus:caseDTO.caseStatus.name,
           caseDecisionType:caseDTO.caseDecisionType.name
         }
@@ -70,6 +73,8 @@ export class CasesFetcherService {
                         name:caseDTO.name,
                         organization:caseDTO.organization,
                         caseManager:caseDTO.caseManager,
+                        caseController:caseDTO.caseController,
+                        handledBy:caseDTO.handledBy,
                         caseStatus:caseDTO.caseStatus,
                         caseDecisionType:caseDTO.caseDecisionType,
                         caseDecision:caseDTO.caseDecision,
@@ -99,6 +104,14 @@ export class CasesFetcherService {
 
   public getCaseManagerByCaseId(id:string | undefined):Observable<CaseManager> {
     return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/casemanager")
+  }
+
+  public getCaseControllerByCaseId(id:string | undefined):Observable<CaseManager> {
+    return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/casecontroller")
+  }
+
+  public getHandledByByCaseId(id:string | undefined):Observable<CaseManager> {
+    return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/handledby")
   }
 
   public getAllCaseManagers():Observable<CaseManager[]> {

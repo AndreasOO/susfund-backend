@@ -144,6 +144,8 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                        `case_decision_id` INT,
                        `case_assessment_id` INT NOT NULL,
                        `case_application_id` INT NOT NULL,
+                       `case_controller_id` INT NOT NULL,
+                       `handled_by_id` INT NOT NULL,
                        CONSTRAINT `FK_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`),
                        CONSTRAINT `FK_case_manager_id` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
                        CONSTRAINT `FK_case_status_id` FOREIGN KEY (`case_status_id`) REFERENCES `case_status` (`id`),
@@ -151,6 +153,8 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                        CONSTRAINT `FK_case_decision_id` FOREIGN KEY (`case_decision_id`) REFERENCES `case_decision` (`id`),
                        CONSTRAINT `FK2_case_assessment_id` FOREIGN KEY (`case_assessment_id`) REFERENCES `case_assessment` (`id`),
                        CONSTRAINT `FK2_case_application_id` FOREIGN KEY (`case_application_id`) REFERENCES `case_application` (`id`),
+                       CONSTRAINT `FK2_case_manager_id` FOREIGN KEY (`case_controller_id`) REFERENCES `case_manager` (`id`),
+                       CONSTRAINT `FK3_case_manager_id` FOREIGN KEY (`handled_by_id`) REFERENCES `case_manager` (`id`),
                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -314,13 +318,13 @@ INSERT INTO `susfund_db`.`question_result` (`answer`, `application_question_id`,
 
 
 
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Going solar", 1, 1,1,1, 1,1,1);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("I got wind", 1, 1,2,2, 2,2,2);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Shop locally", 1, 1,3,3, 3,3,3);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Funding for future", 1, 2,4,4, 4,4,4);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Going green", 2, 3,2,2, null,5,5);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("No more gaslighting", 3, 4,2,2, null,6,6);
-INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Making the change", 4, 5,2,2, null,7,7);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Going solar", 1, 1, 2, 3,1,1, 1,1,1);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("I got wind", 1, 1, 1, 1,2,2, 2,2,2);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Shop locally", 1, 1, 1, 1, 3,3, 3,3,3);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Funding for future", 1, 2, 3, 4, 4,4, 4,4,4);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Going green", 2, 3, 2, 3,2,2, null,5,5);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("No more gaslighting", 3, 4, 2, 1,2,2, null,6,6);
+INSERT INTO `susfund_db`.`cases` (`name`, `organization_id`, `case_manager_id`, `case_controller_id`, `handled_by_id`, `case_status_id`, `case_decision_type_id`, `case_decision_id`, `case_assessment_id`, `case_application_id`) VALUES ("Making the change", 4, 5, 3, 2,2,2, null,7,7);
 
 -- -----------------------------------------START VIKTORS HISTORY IMPLEMENTATION
 

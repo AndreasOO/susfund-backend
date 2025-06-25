@@ -13,13 +13,12 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.BudgetService;
-import org.andreasoo.susfund.service.BudgetServiceImpl;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;
 
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 
 @Stateless
@@ -140,6 +139,20 @@ public class CasesResource {
         return casesService.getCaseManagerByCaseId(id);
     }
 
+    @Path("/{id}/casecontroller")
+    @GET()
+    @Produces("application/json")
+    public CaseManager getCaseControllerByCaseId(@PathParam("id") int id) {
+        return casesService.getCaseControllerByCaseId(id);
+    }
+
+    @Path("/{id}/handledby")
+    @GET()
+    @Produces("application/json")
+    public CaseManager getHandledByByCaseId(@PathParam("id") int id) {
+        return casesService.getHandledByByCaseId(id);
+    }
+
     @Path("/casemanagers")
     @GET()
     @Produces("application/json")
@@ -168,19 +181,17 @@ public class CasesResource {
         return casesService.getCasesRelatedToCaseOrganization(id);
     }
 
-    // NYTT
     @Path("/{id}/casemanager")
     @PUT()
     @Consumes("application/json")
     @Produces("application/json")
-    public Response updateCaseManagerByCaseId(@PathParam("id") int caseId, CaseManagerUpdateRequest payload){
-        boolean update = casesService.updateAssignedCaseManager(caseId, payload.getCaseManagerId());
+    public Response updateCaseAssigmentByCaseId(@PathParam("id") int caseId, CaseAssignmentUpdateRequest payload){
+        boolean update = casesService.updateCaseAssignment(caseId, payload.getCaseManagerId(), payload.getCaseControllerId(), payload.getHandledById());
         if(update){
-            return Response.noContent().build();
+            return Response.ok().entity(Collections.singletonMap("message", "Case assignments were successfully updated.")).build();
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "The assigned case manager and case controller must be different. Please review your selections.")).build();
+        }
     }
-
-
-
 }

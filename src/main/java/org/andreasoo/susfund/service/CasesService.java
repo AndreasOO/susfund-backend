@@ -42,6 +42,10 @@ public interface CasesService {
 
     CaseManager getCaseManagerByCaseId(int id);
 
+    CaseManager getCaseControllerByCaseId(int id);
+
+    CaseManager getHandledByByCaseId(int id);
+
     List<CaseManager> getCaseManagers();
 
     List<CaseDecision> getCaseDecisions();
@@ -52,5 +56,5 @@ public interface CasesService {
 
     // NYTT
     @Transactional
-    boolean updateAssignedCaseManager(int caseId, int caseManagerId);
+    boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById);
 }

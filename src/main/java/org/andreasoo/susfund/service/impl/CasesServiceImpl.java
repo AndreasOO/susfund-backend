@@ -118,6 +118,16 @@ public class CasesServiceImpl implements CasesService {
     }
 
     @Override
+    public CaseManager getCaseControllerByCaseId(int id) {
+        return casesDao.getCaseControllerByCaseId(id);
+    }
+
+    @Override
+    public CaseManager getHandledByByCaseId(int id) {
+        return casesDao.getHandledByByCaseId(id);
+    }
+
+    @Override
     public List<CaseManager> getCaseManagers() {
         return caseManagerDao.getAllCaseManagers();
     }
@@ -140,8 +150,8 @@ public class CasesServiceImpl implements CasesService {
     // NYTT
     @Transactional
     @Override
-    public boolean updateAssignedCaseManager(int caseId, int caseManagerId){
-        return casesDao.updateCaseManager(caseId, caseManagerId);
+    public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){
+        return casesDao.updateCaseAssignment(caseId, caseManagerId, caseControllerId, handledById);
     }
 
 }

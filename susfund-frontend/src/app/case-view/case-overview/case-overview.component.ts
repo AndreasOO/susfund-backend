@@ -16,12 +16,21 @@ import {CaseBudget} from '../../cases-services/case-entity/case-budget';
 export class CaseOverviewComponent implements OnInit{
 
   caseId:string | undefined
+
   currentCaseManager:CaseManager | undefined
+  currentCaseController:CaseManager | undefined
+  currentHandledBy:CaseManager | undefined
+
   caseManagerList:CaseManager[] | undefined
   caseDetails:CaseDetails | undefined
   caseBudget : CaseBudget | undefined
 
   selectedCaseManagerId:number | undefined
+  selectedCaseControllerId:number | undefined
+  selectedHandledById:number | undefined
+
+  errorMessage: string | null = null
+  successMessage: string | null = null
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
@@ -37,6 +46,18 @@ export class CaseOverviewComponent implements OnInit{
       this.currentCaseManager = caseManager!;
       this.selectedCaseManagerId = this.currentCaseManager?.id;
     });
+
+    this.fetcher.getCaseControllerByCaseId(this.caseId).subscribe(caseController => {
+      this.currentCaseController = caseController!;
+      this.selectedCaseControllerId = this.currentCaseController?.id;
+    });
+
+    this.fetcher.getHandledByByCaseId(this.caseId).subscribe(handledBy => {
+      this.currentHandledBy = handledBy!;
+      this.selectedHandledById = this.currentHandledBy?.id;
+    });
+
+
   }
 
   getTotalBudget(): number {
@@ -44,11 +65,23 @@ export class CaseOverviewComponent implements OnInit{
   }
 
   saveCaseManagerUpdate(){
-    const payload = { caseManagerId: String(this.selectedCaseManagerId)}
+    const payload = {
+      caseManagerId: String(this.selectedCaseManagerId),
+      caseControllerId: String(this.selectedCaseControllerId),
+      handledById: String(this.selectedHandledById)
+    }
 
     this.fetcher.updateAssignedCaseManager(this.caseId!, payload).subscribe({
-      next: () => console.log('Successfully updated casemanager'),
-      error: err => console.error('Something went wrong: ', err)
+      next: response => {
+        this.successMessage = response.message;
+        this.errorMessage = null
+      },
+      error: err => {
+        if (err.status === 400){
+          this.errorMessage = err.error?.error;
+          this.successMessage = null
+        }
+      }
     })
   }
 }
