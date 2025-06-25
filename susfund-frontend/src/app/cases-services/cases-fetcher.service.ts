@@ -155,5 +155,9 @@ export class CasesFetcherService {
     return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casemanager", payload)
   }
 
+  public updateCaseDecision(caseId:string, payload:any):Observable<any>{
+    return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casedecision", payload)
+  }
+
 
 }

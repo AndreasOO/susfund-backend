@@ -6,10 +6,7 @@ import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.util.ApplicationUpdateRequest;
-import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.AssessmentUpdateRequest;
-import org.andreasoo.susfund.util.AssessmentUtil;
+import org.andreasoo.susfund.util.*;
 
 import java.util.List;
 
@@ -152,6 +149,12 @@ public class CasesServiceImpl implements CasesService {
     @Override
     public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){
         return casesDao.updateCaseAssignment(caseId, caseManagerId, caseControllerId, handledById);
+    }
+
+    @Transactional
+    @Override
+    public boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request){
+        return casesDao.updateCaseDecision(caseId, request);
     }
 
 }
