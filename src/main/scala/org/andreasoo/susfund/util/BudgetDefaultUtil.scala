@@ -107,22 +107,19 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator with Finan
   }
 
   override def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    val totalFinancing = for {
+    val financingPercentage = for {
       budget <- caseBudget
       financing <- Try(Set.from(budget.getFinancing.asScala))
-      totalFinancing <- Try(financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum)
-    } yield totalFinancing
-
-    val totalBudget = for {
-      budget <- caseBudget
+      totalFinancing = financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum
       budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
-      totalBudget <- Try(budgetPosts.map(_.getEstimatedCost).sum)
-    } yield totalBudget
+      totalBudget = budgetPosts.map(budget => budget.getEstimatedCost).sum
+      financingPercentage = (totalFinancing / totalBudget) * 100
+    } yield financingPercentage
 
-    totalFinancing match {
+    financingPercentage match {
       case Failure(exception) => Failure(exception)
-      case Success(financing) if financing > totalBudget => Failure(new IllegalArgumentException("Financing should not exceed budget"))
-      case Success(financing) if financing == totalBudget || financing < totalBudget => Success(caseBudget.get)
+      case Success(financing) if financing > 50 => Success(caseBudget.get)
+      case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
       case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
