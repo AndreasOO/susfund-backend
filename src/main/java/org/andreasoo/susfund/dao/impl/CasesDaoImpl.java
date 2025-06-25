@@ -5,8 +5,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CasesDao;
+import org.andreasoo.susfund.entity.CaseDecisionResult;
+import org.andreasoo.susfund.entity.CaseDecisionType;
 import org.andreasoo.susfund.entity.CaseManager;
 import org.andreasoo.susfund.entity.Cases;
+import org.andreasoo.susfund.util.CaseDecisionUpdateRequest;
 
 import java.util.List;
 
@@ -64,5 +67,23 @@ public class CasesDaoImpl implements CasesDao {
     @Override
     public CaseManager getHandledByByCaseId(int caseId){
         return entityManager.find(Cases.class, caseId).getHandledBy();
+    }
+
+    @Override
+    public boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request){
+        Cases currentCase = entityManager.find(Cases.class, caseId);
+        CaseManager currentCaseManager = entityManager.find(CaseManager.class, currentCase.getCaseManager().getId());
+
+        CaseManager chosenCaseController = entityManager.find(CaseManager.class, request.getCaseControllerId());
+        CaseDecisionResult chosenCaseDecisionResult = entityManager.find(CaseDecisionResult.class, request.getCaseDecisionResultId());
+
+        if (currentCaseManager.equals(chosenCaseController) || chosenCaseController.getId() == 1 || request.getJustification().isBlank()) {
+            return false;
+        }
+
+        currentCase.setCaseController(chosenCaseController);
+        currentCase.getCaseDecision().setCaseDecisionResult(chosenCaseDecisionResult);
+        currentCase.getCaseDecision().setJustification(request.getJustification());
+        return true;
     }
 }

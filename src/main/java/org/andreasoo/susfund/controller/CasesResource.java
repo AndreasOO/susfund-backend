@@ -194,4 +194,19 @@ public class CasesResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "The assigned case manager and case controller must be different. Please review your selections.")).build();
         }
     }
+
+
+    @Path("/{id}/casedecision")
+    @PUT()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateCaseDecisionByCaseId(@PathParam("id") int caseId, CaseDecisionUpdateRequest payload){
+        boolean update = casesService.updateCaseDecision(caseId, payload);
+        if(update){
+            return Response.ok().entity(Collections.singletonMap("message", "Case decision was successfully updated.")).build();
+        }
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "Please look over following fields: Case controller can not be unassigned and must be different from the assigned case manager. Justification can not be blank")).build();
+        }
+    }
 }
