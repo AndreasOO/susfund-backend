@@ -14,10 +14,12 @@ public class CaseDecisionResultDaoImpl implements CaseDecisionResultDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-
-
     @Override
     public List<CaseDecisionResult> getAllCaseDecisionResults() {
         return entityManager.createQuery("select cdr from CaseDecisionResult cdr",CaseDecisionResult.class).getResultList();
+    }
+
+    public CaseDecisionResult getCaseDecisionResultById(int id) {
+        return entityManager.find(CaseDecisionResult.class, id);
     }
 }
