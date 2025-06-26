@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CaseDecisionResultDao {
     List<CaseDecisionResult> getAllCaseDecisionResults();
+    CaseDecisionResult getCaseDecisionResultById(int id);
 }

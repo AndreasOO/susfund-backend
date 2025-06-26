@@ -148,13 +148,33 @@ public class CasesServiceImpl implements CasesService {
     @Transactional
     @Override
     public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){
-        return casesDao.updateCaseAssignment(caseId, caseManagerId, caseControllerId, handledById);
+
+        CaseManager chosenCaseManager = caseManagerDao.getCaseManagerById(caseManagerId);
+        CaseManager chosenCaseController = caseManagerDao.getCaseManagerById(caseControllerId);
+        CaseManager chosenHandledBy = caseManagerDao.getCaseManagerById(handledById);
+
+        if (chosenCaseManager.equals(chosenCaseController) && chosenCaseManager.getId() != 1 && chosenCaseController.getId() != 1) {
+            return false;
+        }
+
+        return casesDao.updateCaseManagerByCaseId(caseId, chosenCaseManager) &&
+                casesDao.updateCaseControllerByCaseId(caseId, chosenCaseController) &&
+                casesDao.updateHandledByByCaseId(caseId, chosenHandledBy);
     }
 
     @Transactional
     @Override
     public boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request){
-        return casesDao.updateCaseDecision(caseId, request);
-    }
 
+        CaseManager currentCaseManager = casesDao.getCaseManagerByCaseId(caseId);
+        CaseManager chosenCaseController = caseManagerDao.getCaseManagerById(request.getCaseControllerId());
+
+        if (currentCaseManager.equals(chosenCaseController) || chosenCaseController.getId() == 1 || request.getJustification().isBlank()) {
+            return false;
+        }
+
+        return casesDao.updateCaseControllerByCaseId(caseId, chosenCaseController) &&
+                casesDao.updateJustificationByCaseId(caseId, request.getJustification()) &&
+                casesDao.updateCaseDecisionResultByCaseId(caseId, caseDecisionResultDao.getCaseDecisionResultById(request.getCaseDecisionResultId()));
+    }
 }

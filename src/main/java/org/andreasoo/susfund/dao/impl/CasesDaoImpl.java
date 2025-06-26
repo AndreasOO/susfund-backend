@@ -35,30 +35,6 @@ public class CasesDaoImpl implements CasesDao {
         return entityManager.createQuery("select c from Cases c join c.organization o where o.id="+organizationId,Cases.class).getResultList();
     }
 
-    // NYTT
-    @Override
-    public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){
-        try{
-            Cases currentCase = entityManager.find(Cases.class, caseId);
-
-            CaseManager chosenCaseManager = entityManager.find(CaseManager.class, caseManagerId);
-            CaseManager chosenCaseController = entityManager.find(CaseManager.class, caseControllerId);
-            CaseManager chosenHandledBy = entityManager.find(CaseManager.class, handledById);
-
-            if (chosenCaseManager.equals(chosenCaseController) && chosenCaseManager.getId() != 1 && chosenCaseController.getId() != 1) {
-                return false;
-            }
-
-            currentCase.setCaseManager(chosenCaseManager);
-            currentCase.setCaseController(chosenCaseController);
-            currentCase.setHandledBy(chosenHandledBy);
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
-
     @Override
     public CaseManager getCaseControllerByCaseId(int caseId){
         return entityManager.find(Cases.class, caseId).getCaseController();
@@ -70,20 +46,68 @@ public class CasesDaoImpl implements CasesDao {
     }
 
     @Override
-    public boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request){
-        Cases currentCase = entityManager.find(Cases.class, caseId);
-        CaseManager currentCaseManager = entityManager.find(CaseManager.class, currentCase.getCaseManager().getId());
+    public CaseManager getCaseManagerByCaseId(int caseId){
+        return entityManager.find(Cases.class, caseId).getCaseManager();
+    }
 
-        CaseManager chosenCaseController = entityManager.find(CaseManager.class, request.getCaseControllerId());
-        CaseDecisionResult chosenCaseDecisionResult = entityManager.find(CaseDecisionResult.class, request.getCaseDecisionResultId());
-
-        if (currentCaseManager.equals(chosenCaseController) || chosenCaseController.getId() == 1 || request.getJustification().isBlank()) {
+    @Override
+    public boolean updateCaseControllerByCaseId(int caseId, CaseManager caseController){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.setCaseController(caseController);
+            return true;
+        }
+        catch(Exception e){
             return false;
         }
-
-        currentCase.setCaseController(chosenCaseController);
-        currentCase.getCaseDecision().setCaseDecisionResult(chosenCaseDecisionResult);
-        currentCase.getCaseDecision().setJustification(request.getJustification());
-        return true;
     }
+
+    @Override
+    public boolean updateCaseManagerByCaseId(int caseId, CaseManager caseManager){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.setCaseManager(caseManager);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateHandledByByCaseId(int caseId, CaseManager handledBy){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.setHandledBy(handledBy);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateCaseDecisionResultByCaseId(int caseId, CaseDecisionResult caseDecisionResult){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.getCaseDecision().setCaseDecisionResult(caseDecisionResult);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateJustificationByCaseId(int caseId, String justification){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.getCaseDecision().setJustification(justification);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
 }
