@@ -38,4 +38,16 @@ public class BudgetServiceImpl implements BudgetService {
         }
         return new Result<>(calculatedCaseBudget.resultObj(), calculatedCaseBudget.error(),  calculatedCaseBudget.success());
     }
+
+    @Override
+    public Result<CaseBudget> updateFinancing(int id, CaseBudget caseBudget) {
+        Result<CaseBudget> validatedCaseBudget = budgetServiceUtil.updateExistingFinancing(caseBudget);
+        if (validatedCaseBudget.success()) {
+            Cases caseToUpdate = casesDao.getCaseById(id);
+            caseToUpdate.setCaseBudget(validatedCaseBudget.resultObj());
+            Cases updatedCase = casesDao.updateCase(caseToUpdate);
+            updatedCase.getCaseBudget().getFinancing().forEach(financing -> System.out.println(financing.getEstimatedFinancingInMoney() + " " + financing.getEstimatedFinancingInPercentage()));
+        }
+        return new Result<>(validatedCaseBudget.resultObj(), validatedCaseBudget.error(), validatedCaseBudget.success());
+    }
 }

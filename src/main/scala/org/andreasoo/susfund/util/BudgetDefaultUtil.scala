@@ -29,8 +29,17 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     } yield calculatedBudget
   }
 
+  def handleExistingFinancing(caseBudget: CaseBudget):Try[CaseBudget] = {
+    for {
+      validatedFinancing <- validateExistingFinancing(Try(caseBudget))
+      calculatedFinancing <- calculateExistingFinancing(Try(validatedFinancing))
+    } yield calculatedFinancing
+  }
+
   def createNewBudget(caseBudget: CaseBudget):Result[CaseBudget]
   def updateExistingBudget(caseBudget: CaseBudget):Result[CaseBudget]
+
+  def updateExistingFinancing(caseBudget: CaseBudget):Result[CaseBudget]
 
 
   override protected def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
@@ -129,11 +138,45 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
   }
 
   override protected def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    caseBudget
+    val financingPercentage = for {
+      budget <- caseBudget
+
+      financing <- Try(Set.from(budget.getFinancing.asScala))
+      totalFinancing = financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum
+
+      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
+      totalBudget = budgetPosts.map(budget => budget.getEstimatedCost).sum
+
+    } yield (totalFinancing / totalBudget) * 100
+
+    financingPercentage match {
+      case Failure(exception) => Failure(exception)
+      case Success(financing) if financing > 50 => Success(caseBudget.get)
+      case Success(financing) if financing > 100 => Failure(new IllegalArgumentException("Financing should not exceed budget"))
+      case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
+    }
   }
 
   override protected def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    caseBudget
+    val financingPercentage = for {
+      budget <- caseBudget
+
+      financing <- Try(Set.from(budget.getFinancing.asScala))
+      totalFinancing = financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum
+
+      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
+      totalBudget = budgetPosts.map(budget => budget.getEstimatedCost).sum
+
+    } yield (totalFinancing / totalBudget) * 100
+
+    financingPercentage match {
+      case Failure(exception) => Failure(exception)
+      case Success(financing) if financing > 50 => Success(caseBudget.get)
+      case Success(financing) if financing > 100 => Failure(new IllegalArgumentException("Financing should not exceed budget"))
+      case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
+    }
   }
 
   override protected def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
@@ -141,6 +184,30 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
   }
 
   override protected def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    caseBudget
+    val errors = for {
+      budget <- caseBudget
+      totalBudget = budget.getBudgetPosts.asScala.toSet.map(_.getEstimatedCost).sum
+      financing = budget.getFinancing.asScala.toSet
+      errors = financing.filter { finance =>
+        val expected = finance.getEstimatedFinancingInPercentage * 0.01 * totalBudget
+        expected != finance.getEstimatedFinancingInMoney
+      }
+      if errors.isEmpty
+    } yield budget
+
+    errors match {
+      case Failure(exception) => Failure(new IllegalArgumentException("Errors in financing"))
+      case Success(result) => Success(caseBudget.get)
+      case _ => Failure(new IllegalArgumentException("Unknown error"))
+    }
+  }
+
+
+  def returnResult(caseBudget: Try[CaseBudget]): Result[CaseBudget] = {
+    caseBudget match {
+      case Success(budget) => Result(budget)
+      case Failure(exception) => Result(caseBudget, exception.getMessage, success = false)
+      case _ => Result(caseBudget, "Unknown error in final step", success = false)
+    }
   }
 }

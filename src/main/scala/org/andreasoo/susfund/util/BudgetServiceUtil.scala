@@ -36,4 +36,14 @@ class BudgetServiceUtil extends BudgetDefaultUtil {
     }
   }
 
+  override def updateExistingFinancing(caseBudget: CaseBudget): Result[CaseBudget] = {
+    val calculatedFinancing = for {
+
+      calculatedFinancing <- handleExistingFinancing(caseBudget)
+
+    } yield calculatedFinancing
+
+    returnResult(calculatedFinancing)
+  }
+
 }

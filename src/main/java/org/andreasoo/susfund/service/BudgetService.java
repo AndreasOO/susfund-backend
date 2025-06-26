@@ -10,4 +10,7 @@ public interface BudgetService {
 
     @Transactional
     Result<CaseBudget> updateBudget(int id, CaseBudget caseBudget);
+
+    @Transactional
+    Result<CaseBudget> updateFinancing(int id, CaseBudget caseBudget);
 }
