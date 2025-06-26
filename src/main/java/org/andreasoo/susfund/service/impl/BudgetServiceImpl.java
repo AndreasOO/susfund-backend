@@ -38,4 +38,8 @@ public class BudgetServiceImpl implements BudgetService {
         }
         return new Result<>(calculatedCaseBudget.resultObj(), calculatedCaseBudget.error(),  calculatedCaseBudget.success());
     }
+
+    public Result<CaseBudget> updateFinancing(int id, CaseBudget caseBudget){
+        Result<CaseBudget> validatedCaseBudget = budgetServiceUtil.updateExistingBudget(caseBudget);
+    }
 }

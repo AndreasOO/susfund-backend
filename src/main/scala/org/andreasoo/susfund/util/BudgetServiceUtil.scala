@@ -36,4 +36,13 @@ class BudgetServiceUtil extends BudgetDefaultUtil {
     }
   }
 
+
+  override def createNewFinancing(caseBudget: CaseBudget): Result[CaseBudget] = {
+
+  }
+
+  override def updateExistingFinancing(caseBudget: CaseBudget): Result[CaseBudget] = {
+
+  }
+
 }
