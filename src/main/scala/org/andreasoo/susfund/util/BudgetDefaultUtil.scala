@@ -1,19 +1,17 @@
 package org.andreasoo.susfund.util
 
 import jakarta.enterprise.context.ApplicationScoped
-import org.andreasoo.susfund.entity.{BudgetPost, CaseBudget}
+import org.andreasoo.susfund.entity.{BudgetPost, CaseBudget, Financing}
 
 import scala.jdk.CollectionConverters._
 import scala.util.{Failure, Success, Try}
 
 trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
                                                  with FinancingCalculator
-                                                 with FinancingValidator
-{
+                                                 with FinancingValidator {
 
 
-
-  def handleNewBudget(caseBudget: CaseBudget):Try[CaseBudget] = {
+  def handleNewBudget(caseBudget: CaseBudget): Try[CaseBudget] = {
     for {
       validatedBudget <- validateNewBudget(Try(caseBudget))
       calculatedBudget <- calculateNewBudget(Try(validatedBudget))
@@ -21,7 +19,7 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     } yield calculatedBudget
   }
 
-  def handleExistingBudget(caseBudget: CaseBudget):Try[CaseBudget] = {
+  def handleExistingBudget(caseBudget: CaseBudget): Try[CaseBudget] = {
     for {
       validatedBudget <- validateNewBudget(Try(caseBudget))
       calculatedBudget <- calculateNewBudget(Try(validatedBudget))
@@ -29,17 +27,18 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     } yield calculatedBudget
   }
 
-  def handleExistingFinancing(caseBudget: CaseBudget):Try[CaseBudget] = {
+  def handleExistingFinancing(caseBudget: CaseBudget): Try[CaseBudget] = {
     for {
       validatedFinancing <- validateExistingFinancing(Try(caseBudget))
       calculatedFinancing <- calculateExistingFinancing(Try(validatedFinancing))
     } yield calculatedFinancing
   }
 
-  def createNewBudget(caseBudget: CaseBudget):Result[CaseBudget]
-  def updateExistingBudget(caseBudget: CaseBudget):Result[CaseBudget]
+  def createNewBudget(caseBudget: CaseBudget): Result[CaseBudget]
 
-  def updateExistingFinancing(caseBudget: CaseBudget):Result[CaseBudget]
+  def updateExistingBudget(caseBudget: CaseBudget): Result[CaseBudget]
+
+  def updateExistingFinancing(caseBudget: CaseBudget): Result[CaseBudget]
 
 
   override protected def calculateNewBudget(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
@@ -53,8 +52,8 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
       totalBudget <- Try(budgetPosts.map(_.getEstimatedCost).sum)
 
       totalOverhead <- Try(budgetPosts.filter(_.getBudgetPostType.getName == "OVERHEAD")
-                                      .map(_.getEstimatedCost)
-                                      .sum)
+        .map(_.getEstimatedCost)
+        .sum)
 
       totalOverheadPercentage <- Try(totalOverhead * 100 / totalBudget)
 
@@ -63,10 +62,10 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     overHeadPercentage match {
       case Failure(exception) => Failure(exception)
       case Success(percent) if percent == 0 => Failure(new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent == 0  => Failure(new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent < 15  => Failure(new IllegalArgumentException("Overhead too low"))
-      case Success(percent) if percent > 30  => Failure(new IllegalArgumentException("Overhead high low"))
-      case Success(percent) if percent > 15  => Success(caseBudget.get)
+      case Success(percent) if percent == 0 => Failure(new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent < 15 => Failure(new IllegalArgumentException("Overhead too low"))
+      case Success(percent) if percent > 30 => Failure(new IllegalArgumentException("Overhead high low"))
+      case Success(percent) if percent > 15 => Success(caseBudget.get)
       case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
@@ -91,10 +90,10 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     overHeadPercentage match {
       case Failure(exception) => Failure(exception)
       case Success(percent) if percent == 0 => Failure(new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent == 0  => Failure(new IllegalArgumentException("No Overhead"))
-      case Success(percent) if percent < 15  => Failure(new IllegalArgumentException("Overhead too low"))
-      case Success(percent) if percent > 30  => Failure(new IllegalArgumentException("Overhead high low"))
-      case Success(percent) if percent > 15  => Success(caseBudget.get)
+      case Success(percent) if percent == 0 => Failure(new IllegalArgumentException("No Overhead"))
+      case Success(percent) if percent < 15 => Failure(new IllegalArgumentException("Overhead too low"))
+      case Success(percent) if percent > 30 => Failure(new IllegalArgumentException("Overhead high low"))
+      case Success(percent) if percent > 15 => Success(caseBudget.get)
       case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
@@ -141,57 +140,71 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
     caseBudget
   }
 
+  override protected def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+    caseBudget
+  }
+
   override protected def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    val financingPercentage = for {
+    val calculatedPercentage = for {
       budget <- caseBudget
 
       financing <- Try(List.from(budget.getFinancing.asScala))
       totalFinancing = financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum
 
-
       budgetPosts <- Try(List.from(budget.getBudgetPosts.asScala))
       totalBudget = budgetPosts.map(budget => budget.getEstimatedCost).sum
 
-    } yield{
-      println("Total financing: " + totalFinancing)
-      println("Total budget: " + totalBudget)
-      (totalFinancing.toDouble / totalBudget.toDouble) * 100
-    }
+      _ <- if (totalBudget == 0)
+        Failure(new IllegalArgumentException("Total budget is zero"))
+      else
+        Success(())
 
-    println("Result: " + financingPercentage)
+    } yield (totalFinancing.toDouble / totalBudget.toDouble) * 100
 
-    financingPercentage match {
+    calculatedPercentage match {
       case Failure(exception) => Failure(exception)
       case Success(financing) if financing > 100 => Failure(new IllegalArgumentException("Financing should not exceed budget"))
-      case Success(financing) if financing >= 50 => Success(caseBudget.get)
+      case Success(financing) if financing >= 50 => caseBudget
       case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
       case _ => Failure(new IllegalArgumentException("Unknown error"))
     }
   }
 
-  override protected def validateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    caseBudget
-  }
-
   override protected def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    val financingErrors = for {
-      budget <- caseBudget
-      totalBudget = budget.getBudgetPosts.asScala.map((post: BudgetPost) => post.getEstimatedCost).sum
-      errors = budget.getFinancing.asScala.toSet.filter { finance =>
-        val expected = finance.getEstimatedFinancingInPercentage * 0.01 * totalBudget
-        println("Total budget: " + totalBudget)
-        println("Expected sek: " + expected)
-        println("Actual sek in finance obj: " + finance.getEstimatedFinancingInMoney)
-        println("Actual percent in finance obj: " + finance.getEstimatedFinancingInPercentage)
-        math.round(expected) != finance.getEstimatedFinancingInMoney
+    caseBudget.flatMap { budget =>
+      val totalBudget = budget.getBudgetPosts.asScala.map((post: BudgetPost) => post.getEstimatedCost).sum
+      val financingList = budget.getFinancing.asScala.toList
+      val errors = getFinancingErrors(financingList, totalBudget)
+
+      if (errors.isEmpty) Success(budget)
+      else {
+        Failure(new IllegalArgumentException("Mismatch between estimated financing in money and the expected value based on its percentage of the total budget"))
       }
-    } yield errors
-
-    financingErrors.foreach(error=> println("Error in: " + error))
-
-    financingErrors.flatMap(errors => {
-      if (errors.isEmpty) caseBudget
-      else Failure(new IllegalArgumentException("Errors in financing"))
-    })
+    }
   }
+
+  private def getFinancingErrors(financing: List[Financing], totalBudget: Int): List[Financing] = {
+    financing.filter { finance =>
+      val expected = finance.getEstimatedFinancingInPercentage * 0.01 * totalBudget
+      math.round(expected) != finance.getEstimatedFinancingInMoney
+    }
+  }
+
+
+  //  override protected def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
+  //    val financingErrors = for {
+  //      budget <- caseBudget
+  //      totalBudget = budget.getBudgetPosts.asScala.map((post: BudgetPost) => post.getEstimatedCost).sum
+  //      errors = budget.getFinancing.asScala.toList.filter { finance =>
+  //        val expected = finance.getEstimatedFinancingInPercentage * 0.01 * totalBudget
+  //        math.round(expected) != finance.getEstimatedFinancingInMoney
+  //      }
+  //    } yield errors
+  //
+  //    financingErrors.flatMap(errors => {
+  //      if (errors.isEmpty) caseBudget
+  //      else Failure(new IllegalArgumentException("Errors in financing"))
+  //    })
+  //  }
+
 }
