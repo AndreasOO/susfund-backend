@@ -32,19 +32,23 @@
 <div class="container bg-dark-subtle text-dark mt-5 mb-5 pb-2 rounded-1">
   <h2 class="p-2">Case Assignment</h2>
   <hr>
+  <p *ngIf="errorMessage" class="alert alert-danger mt-3 mb-3" role="alert">{{errorMessage}}</p>
+  <p *ngIf="successMessage" class="alert alert-success mt-3 mb-3" role="alert">{{successMessage}}</p>
+
   <h4 class="pb-3">Case Manager</h4>
-  <select class="form-select" aria-label="case manager select">
-    <option selected>{{currentCaseManager?.name}}</option>
-    <option *ngFor="let casemanager of caseManagerList" value="{{casemanager.id}}">{{casemanager.name}}</option>
+  <select class="form-select" aria-label="case manager select" [(ngModel)]="selectedCaseManagerId">
+    <option *ngFor="let casemanager of caseManagerList" [value]="casemanager.id">{{casemanager.name}}</option>
   </select>
-
-<hr>
+  <hr>
   <h4 class="pb-3">Case Controller</h4>
-  <select class="form-select" aria-label="case manager select">
-    <option selected>{{currentCaseManager?.name}}</option>
-    <option *ngFor="let casemanager of caseManagerList" value="{{casemanager.id}}">{{casemanager.name}}</option>
+  <select class="form-select" aria-label="case manager select" [(ngModel)]="selectedCaseControllerId">
+    <option *ngFor="let casemanager of caseManagerList" [value]="casemanager.id">{{casemanager.name}}</option>
   </select>
-  <a href="#" class="btn btn btn-secondary col-1 mt-2">Save</a>
+  <hr>
+  <h4 class="pb-3">Handled by</h4>
+  <select class="form-select" aria-label="case manager select" [(ngModel)]="selectedHandledById">
+    <option *ngFor="let casemanager of caseManagerList" [value]="casemanager.id">{{casemanager.name}}</option>
+  </select>
+  <hr>
+  <button class="btn btn btn-secondary col-1 mt-2" (click)="saveCaseManagerUpdate()">Save</button>
 </div>
-
-

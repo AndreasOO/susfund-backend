@@ -13,8 +13,12 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.BudgetService;
+import org.andreasoo.susfund.service.BudgetServiceImpl;
 import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.util.*;
+import org.andreasoo.susfund.util.ApplicationUtil;
+import org.andreasoo.susfund.util.AssessmentUpdateRequest;
+import org.andreasoo.susfund.util.AssessmentUtil;
+import org.andreasoo.susfund.util.ApplicationUpdateRequest;
 
 
 import java.util.List;
@@ -153,6 +157,20 @@ public class CasesResource {
         return casesService.getCaseManagerByCaseId(id);
     }
 
+    @Path("/{id}/casecontroller")
+    @GET()
+    @Produces("application/json")
+    public CaseManager getCaseControllerByCaseId(@PathParam("id") int id) {
+        return casesService.getCaseControllerByCaseId(id);
+    }
+
+    @Path("/{id}/handledby")
+    @GET()
+    @Produces("application/json")
+    public CaseManager getHandledByByCaseId(@PathParam("id") int id) {
+        return casesService.getHandledByByCaseId(id);
+    }
+
     @Path("/casemanagers")
     @GET()
     @Produces("application/json")
@@ -181,7 +199,34 @@ public class CasesResource {
         return casesService.getCasesRelatedToCaseOrganization(id);
     }
 
+    @Path("/{id}/casemanager")
+    @PUT()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateCaseAssigmentByCaseId(@PathParam("id") int caseId, CaseAssignmentUpdateRequest payload){
+        boolean update = casesService.updateCaseAssignment(caseId, payload.getCaseManagerId(), payload.getCaseControllerId(), payload.getHandledById());
+        if(update){
+            return Response.ok().entity(Collections.singletonMap("message", "Case assignments were successfully updated.")).build();
+        }
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "The assigned case manager and case controller must be different. Please review your selections.")).build();
+        }
+    }
 
+
+    @Path("/{id}/casedecision")
+    @PUT()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateCaseDecisionByCaseId(@PathParam("id") int caseId, CaseDecisionUpdateRequest payload){
+        boolean update = casesService.updateCaseDecision(caseId, payload);
+        if(update){
+            return Response.ok().entity(Collections.singletonMap("message", "Case decision was successfully updated.")).build();
+        }
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "Please look over following fields: Case controller can not be unassigned and must be different from the assigned case manager. Justification can not be blank")).build();
+        }
+    }
     @Path("/{id}/financing")
     @PUT()
     @Produces("application/json")

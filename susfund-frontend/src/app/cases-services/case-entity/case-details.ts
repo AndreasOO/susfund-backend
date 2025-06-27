@@ -12,7 +12,11 @@ export interface CaseDetails {
   id:number,
   name:string,
   organization:Organization,
+
   caseManager:CaseManager,
+  caseController:CaseManager,
+  handledBy:CaseManager,
+
   caseStatus:CaseStatus,
   caseDecisionType:CaseDecisionType,
   caseDecision:CaseDecision,

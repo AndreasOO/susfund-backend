@@ -6,10 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.*;
-import org.andreasoo.susfund.util.ApplicationUpdateRequest;
-import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.AssessmentUpdateRequest;
-import org.andreasoo.susfund.util.AssessmentUtil;
+import org.andreasoo.susfund.util.*;
 
 import java.util.List;
 
@@ -43,6 +40,10 @@ public interface CasesService {
 
     CaseManager getCaseManagerByCaseId(int id);
 
+    CaseManager getCaseControllerByCaseId(int id);
+
+    CaseManager getHandledByByCaseId(int id);
+
     List<CaseManager> getCaseManagers();
 
     List<CaseDecision> getCaseDecisions();
@@ -50,4 +51,11 @@ public interface CasesService {
     List<CaseDecisionResult> getCaseDecisionResults();
 
     List<Cases> getCasesRelatedToCaseOrganization(int id);
+
+    // NYTT
+    @Transactional
+    boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById);
+
+    @Transactional
+    boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request);
 }

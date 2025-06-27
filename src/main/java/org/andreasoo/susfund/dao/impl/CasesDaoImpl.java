@@ -32,6 +32,82 @@ public class CasesDaoImpl implements CasesDao {
     }
 
     @Override
+    public CaseManager getCaseControllerByCaseId(int caseId){
+        return entityManager.find(Cases.class, caseId).getCaseController();
+    }
+
+    @Override
+    public CaseManager getHandledByByCaseId(int caseId){
+        return entityManager.find(Cases.class, caseId).getHandledBy();
+    }
+
+    @Override
+    public CaseManager getCaseManagerByCaseId(int caseId){
+        return entityManager.find(Cases.class, caseId).getCaseManager();
+    }
+
+    @Override
+    public boolean updateCaseControllerByCaseId(int caseId, CaseManager caseController){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.setCaseController(caseController);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateCaseManagerByCaseId(int caseId, CaseManager caseManager){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.setCaseManager(caseManager);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateHandledByByCaseId(int caseId, CaseManager handledBy){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.setHandledBy(handledBy);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateCaseDecisionResultByCaseId(int caseId, CaseDecisionResult caseDecisionResult){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.getCaseDecision().setCaseDecisionResult(caseDecisionResult);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateJustificationByCaseId(int caseId, String justification){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            currentCase.getCaseDecision().setJustification(justification);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+
+    @Override
     public Cases updateCase(Cases caseToUpdate) {
         return entityManager.merge(caseToUpdate);
     }

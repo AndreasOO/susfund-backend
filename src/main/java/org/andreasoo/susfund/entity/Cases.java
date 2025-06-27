@@ -29,6 +29,14 @@ public class Cases implements Serializable {
     private CaseManager caseManager;
 
     @ManyToOne
+    @JoinColumn(name="case_controller_id")
+    private CaseManager caseController;
+
+    @ManyToOne
+    @JoinColumn(name="handled_by_id")
+    private CaseManager handledBy;
+
+    @ManyToOne
     @JoinColumn(name="case_status_id")
     private CaseStatus caseStatus;
 
@@ -153,6 +161,22 @@ public class Cases implements Serializable {
 
     public void setCaseBudget(CaseBudget caseBudget) {
         this.caseBudget = caseBudget;
+    }
+
+    public CaseManager getCaseController() {
+        return caseController;
+    }
+
+    public void setCaseController(CaseManager caseController) {
+        this.caseController = caseController;
+    }
+
+    public CaseManager getHandledBy() {
+        return handledBy;
+    }
+
+    public void setHandledBy(CaseManager handledBy) {
+        this.handledBy = handledBy;
     }
 
     @Override

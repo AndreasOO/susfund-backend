@@ -6,10 +6,7 @@ import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.util.ApplicationUpdateRequest;
-import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.AssessmentUpdateRequest;
-import org.andreasoo.susfund.util.AssessmentUtil;
+import org.andreasoo.susfund.util.*;
 
 import java.util.List;
 
@@ -118,6 +115,16 @@ public class CasesServiceImpl implements CasesService {
     }
 
     @Override
+    public CaseManager getCaseControllerByCaseId(int id) {
+        return casesDao.getCaseControllerByCaseId(id);
+    }
+
+    @Override
+    public CaseManager getHandledByByCaseId(int id) {
+        return casesDao.getHandledByByCaseId(id);
+    }
+
+    @Override
     public List<CaseManager> getCaseManagers() {
         return caseManagerDao.getAllCaseManagers();
     }
@@ -135,5 +142,39 @@ public class CasesServiceImpl implements CasesService {
     @Override
     public List<Cases> getCasesRelatedToCaseOrganization(int id) {
         return casesDao.getCasesRelatedToOrganization(id);
+    }
+
+    // NYTT
+    @Transactional
+    @Override
+    public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){
+
+        CaseManager chosenCaseManager = caseManagerDao.getCaseManagerById(caseManagerId);
+        CaseManager chosenCaseController = caseManagerDao.getCaseManagerById(caseControllerId);
+        CaseManager chosenHandledBy = caseManagerDao.getCaseManagerById(handledById);
+
+        if (chosenCaseManager.equals(chosenCaseController) && chosenCaseManager.getId() != 1 && chosenCaseController.getId() != 1) {
+            return false;
+        }
+
+        return casesDao.updateCaseManagerByCaseId(caseId, chosenCaseManager) &&
+                casesDao.updateCaseControllerByCaseId(caseId, chosenCaseController) &&
+                casesDao.updateHandledByByCaseId(caseId, chosenHandledBy);
+    }
+
+    @Transactional
+    @Override
+    public boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request){
+
+        CaseManager currentCaseManager = casesDao.getCaseManagerByCaseId(caseId);
+        CaseManager chosenCaseController = caseManagerDao.getCaseManagerById(request.getCaseControllerId());
+
+        if (currentCaseManager.equals(chosenCaseController) || chosenCaseController.getId() == 1 || request.getJustification().isBlank()) {
+            return false;
+        }
+
+        return casesDao.updateCaseControllerByCaseId(caseId, chosenCaseController) &&
+                casesDao.updateJustificationByCaseId(caseId, request.getJustification()) &&
+                casesDao.updateCaseDecisionResultByCaseId(caseId, caseDecisionResultDao.getCaseDecisionResultById(request.getCaseDecisionResultId()));
     }
 }

@@ -3,6 +3,7 @@ package org.andreasoo.susfund.dao.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.andreasoo.susfund.dao.CaseManagerDao;
 import org.andreasoo.susfund.entity.CaseManager;
 
@@ -23,5 +24,10 @@ public class CaseManagerDaoImpl implements CaseManagerDao {
     @Override
     public List<CaseManager> getAllCaseManagers() {
         return entityManager.createQuery("select cm from CaseManager cm", CaseManager.class).getResultList();
+    }
+
+    @Override
+    public CaseManager getCaseManagerById(int id) {
+        return entityManager.find(CaseManager.class, id);
     }
 }
