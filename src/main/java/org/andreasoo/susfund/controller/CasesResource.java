@@ -13,14 +13,12 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.*;
 import org.andreasoo.susfund.service.BudgetService;
-import org.andreasoo.susfund.service.BudgetServiceImpl;
+//import org.andreasoo.susfund.service.BudgetServiceImpl;
 import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.util.ApplicationUtil;
-import org.andreasoo.susfund.util.AssessmentUpdateRequest;
-import org.andreasoo.susfund.util.AssessmentUtil;
-import org.andreasoo.susfund.util.ApplicationUpdateRequest;
+import org.andreasoo.susfund.util.*;
 
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -227,19 +225,36 @@ public class CasesResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "Please look over following fields: Case controller can not be unassigned and must be different from the assigned case manager. Justification can not be blank")).build();
         }
     }
-    @Path("/{id}/financing")
+
+    @Path("/{id}/casebudget/financingupdate")
     @PUT()
     @Produces("application/json")
     @Consumes("application/json")
-    public Response updateCaseBudgetFinancingByCaseId(@PathParam("id") int id) {
-        Result<CaseBudget> result = budgetService.updateFinancing(id);
+    public Response updateCaseBudgetByCaseIdWithFinancingUpdate(@PathParam("id") int id, CaseBudget caseBudget) {
+        Result<CaseBudget> result = budgetService.updateFinancing(id, caseBudget);
 
         if (result.success()) {
-            return Response.ok(result.resultObj()).build();
+            return Response.ok(Collections.singletonMap("message", "Case budget is validated and OK")).build();
         } else {
             System.out.println("logged error: " + result.error());
-            return Response.status(417, result.error()).build();
+            return Response.status(417).entity(Collections.singletonMap("error", result.error())).build();
         }
     }
+
+    @Path("/{id}/casebudget/financing")
+    @PUT()
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response updateFinancingByCaseId(@PathParam("id") int id, FinancingUpdateRequest payload) {
+        boolean update = budgetService.updateFinancingListByCaseId(id, payload.getFinancing());
+        if(update){
+            return Response.ok().entity(Collections.singletonMap("message", "Financing was successfully updated.")).build();
+        }
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "Something went wrong when saving financing update")).build();
+        }
+    }
+
+
 
 }

@@ -3,9 +3,13 @@ package org.andreasoo.susfund.dao.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.CaseBudgetDao;
 import org.andreasoo.susfund.entity.CaseBudget;
 import org.andreasoo.susfund.entity.Cases;
+import org.andreasoo.susfund.entity.Financing;
+
+import java.util.List;
 
 @ApplicationScoped
 public class CaseBudgetDaoImpl implements CaseBudgetDao {
@@ -24,5 +28,26 @@ public class CaseBudgetDaoImpl implements CaseBudgetDao {
         return entityManager.merge(caseBudget);
     }
 
+
+    @Transactional
+    @Override
+    public boolean updateFinancingByCaseId(int caseId, List<Financing> financing){
+        try{
+            Cases currentCase = entityManager.find(Cases.class, caseId);
+            CaseBudget currentCaseBudget = currentCase.getCaseBudget();
+
+            currentCaseBudget.getFinancing().clear();
+
+            for(Financing f: financing){
+                currentCaseBudget.getFinancing().add(f);
+            }
+
+            currentCaseBudget.setFinancing(financing);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
 
 }

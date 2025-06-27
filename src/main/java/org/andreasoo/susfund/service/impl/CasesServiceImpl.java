@@ -144,7 +144,6 @@ public class CasesServiceImpl implements CasesService {
         return casesDao.getCasesRelatedToOrganization(id);
     }
 
-    // NYTT
     @Transactional
     @Override
     public boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById){

@@ -26,6 +26,10 @@
 
 <div class="container bg-dark-subtle  text-dark mt-5 mb-5 rounded-1">
   <h2 class="p-2">Financing</h2>
+
+  <p *ngIf="errorMessage" class="alert alert-danger mt-3 mb-3" role="alert">{{errorMessage}}</p>
+  <p *ngIf="successMessage" class="alert alert-success mt-3 mb-3" role="alert">{{successMessage}}</p>
+
   <table class="table">
     <thead>
     <tr>
@@ -37,89 +41,29 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let financing of caseBudget?.financing">
-      <td style="width: 20%;">{{financing?.organization?.id}}</td>
-      <td style="width: 20%;">{{financing?.organization?.name}}</td>
-      <td style="width: 20%;">{{financing?.financingType?.name}}</td>
+    <tr *ngFor="let finance of financing">
+      <td style="width: 20%;">{{finance?.organization?.id}}</td>
+      <td style="width: 20%;">{{finance?.organization?.name}}</td>
+      <td style="width: 20%;">{{finance?.financingType?.name}}</td>
       <td style="width: 20%;">
         <div class="input-group">
           <input
             type="number"
             min="0"
             max="100"
-            [(ngModel)]="financing.estimatedFinancingInPercentage"
+            [(ngModel)]="finance.estimatedFinancingInPercentage"
+            (ngModelChange)="percentageChange($event, finance)"
             class="text-end form-control">
           <div class="input-group-append">
             <span class="input-group-text">%</span>
           </div>
         </div>
       </td>
-      <td style="width: 20%;">{{updateSEK(financing.estimatedFinancingInPercentage)}}</td>
+      <td style="width: 20%;">{{finance.estimatedFinancingInMoney}}</td>
     </tr>
     </tbody>
   </table>
   <div class="row justify-content-between">
-    <button class="btn btn-light col-3 m-4">Save</button>
+    <button class="btn btn-light col-3 m-4" (click)="saveFinancing()">Save</button>
   </div>
 </div>
-
-
-
-
-
-
-<!--<div class="container bg-dark-subtle  text-dark mt-5 rounded-1">-->
-<!--  <h2 class="p-2">Budget</h2>-->
-<!--  <hr>-->
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">Cost Type</th>-->
-<!--      <th scope="col">Description</th>-->
-<!--      <th scope="col">Estimated Cost</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let post of caseBudget?.budgetPosts">-->
-<!--      <td class="col-4">{{post.budgetPostType.name}}</td>-->
-<!--      <td class="col-4"> <input type="text" class="form-control"></td>-->
-<!--      <td class="col-4"> <input type="number" value="{{post.estimatedCost}}" class="text-end form-control"> </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--  <div class="row justify-content-between">-->
-<!--    <button class="btn btn-light col-3 m-4">Save</button>-->
-<!--    <h4 class="col-3 m-4">Total: {{ getTotal() }} </h4>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="container bg-dark-subtle  text-dark mt-5 mb-5 rounded-1">-->
-<!--  <h2 class="p-2">Financing Organizations</h2>-->
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">Organization Id</th>-->
-<!--      <th scope="col">Name</th>-->
-<!--      <th scope="col">Estimated Financing</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let organization of caseBudget?.financingOrganizations">-->
-<!--      <td class="col-4">{{organization.id}}</td>-->
-<!--      <td class="col-4">{{organization.name}}</td>-->
-<!--      <td class="col-4">-->
-<!--        <div class="input-group">-->
-<!--          <input type="number" value="0" class="text-end form-control">-->
-<!--          <div class="input-group-append">-->
-<!--            <span class="input-group-text">%</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--  <div class="row justify-content-between">-->
-<!--    <button class="btn btn-light col-3 m-4">Save</button>-->
-
-<!--  </div>-->
-<!--</div>-->

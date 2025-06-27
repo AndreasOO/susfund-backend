@@ -5,7 +5,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CasesDao;
+import org.andreasoo.susfund.entity.CaseDecisionResult;
+import org.andreasoo.susfund.entity.CaseManager;
 import org.andreasoo.susfund.entity.Cases;
+import org.andreasoo.susfund.entity.Financing;
 
 import java.util.List;
 
@@ -111,4 +114,5 @@ public class CasesDaoImpl implements CasesDao {
     public Cases updateCase(Cases caseToUpdate) {
         return entityManager.merge(caseToUpdate);
     }
+
 }

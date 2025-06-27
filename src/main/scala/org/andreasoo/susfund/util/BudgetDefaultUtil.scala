@@ -162,8 +162,8 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
 
     financingPercentage match {
       case Failure(exception) => Failure(exception)
-      case Success(financing) if financing >= 50 => Success(caseBudget.get)
       case Success(financing) if financing > 100 => Failure(new IllegalArgumentException("Financing should not exceed budget"))
+      case Success(financing) if financing >= 50 => Success(caseBudget.get)
       case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
       case _ => Failure(new IllegalArgumentException("Unknown error"))
     }

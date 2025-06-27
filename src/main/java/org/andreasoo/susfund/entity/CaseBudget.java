@@ -28,7 +28,7 @@ public class CaseBudget implements Serializable {
     @JoinColumn(name="case_budget_id")
     private List<BudgetPost> budgetPosts;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="case_budget_id")
     private List<Financing> financing;
 
