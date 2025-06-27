@@ -138,41 +138,31 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
   }
 
   override protected def calculateNewFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    val financingPercentage = for {
-      budget <- caseBudget
-
-      financing <- Try(Set.from(budget.getFinancing.asScala))
-      totalFinancing = financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum
-
-      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
-      totalBudget = budgetPosts.map(budget => budget.getEstimatedCost).sum
-
-    } yield (totalFinancing / totalBudget) * 100
-
-    financingPercentage match {
-      case Failure(exception) => Failure(exception)
-      case Success(financing) if financing > 50 => Success(caseBudget.get)
-      case Success(financing) if financing > 100 => Failure(new IllegalArgumentException("Financing should not exceed budget"))
-      case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
-      case _ => Failure(new IllegalArgumentException("Unknown error"))
-    }
+    caseBudget
   }
 
   override protected def calculateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
     val financingPercentage = for {
       budget <- caseBudget
 
-      financing <- Try(Set.from(budget.getFinancing.asScala))
+      financing <- Try(List.from(budget.getFinancing.asScala))
       totalFinancing = financing.map(inMoney => inMoney.getEstimatedFinancingInMoney).sum
 
-      budgetPosts <- Try(Set.from(budget.getBudgetPosts.asScala))
+
+      budgetPosts <- Try(List.from(budget.getBudgetPosts.asScala))
       totalBudget = budgetPosts.map(budget => budget.getEstimatedCost).sum
 
-    } yield (totalFinancing / totalBudget) * 100
+    } yield{
+      println("Total financing: " + totalFinancing)
+      println("Total budget: " + totalBudget)
+      (totalFinancing.toDouble / totalBudget.toDouble) * 100
+    }
+
+    println("Result: " + financingPercentage)
 
     financingPercentage match {
       case Failure(exception) => Failure(exception)
-      case Success(financing) if financing > 50 => Success(caseBudget.get)
+      case Success(financing) if financing >= 50 => Success(caseBudget.get)
       case Success(financing) if financing > 100 => Failure(new IllegalArgumentException("Financing should not exceed budget"))
       case Success(financing) if financing < 50 => Failure(new IllegalArgumentException("Financing does not reach the goal"))
       case _ => Failure(new IllegalArgumentException("Unknown error"))
@@ -184,30 +174,24 @@ trait BudgetDefaultUtil extends BudgetCalculator with BudgetValidator
   }
 
   override protected def validateExistingFinancing(caseBudget: Try[CaseBudget]): Try[CaseBudget] = {
-    val errors = for {
+    val financingErrors = for {
       budget <- caseBudget
-      totalBudget = budget.getBudgetPosts.asScala.toSet.map(_.getEstimatedCost).sum
-      financing = budget.getFinancing.asScala.toSet
-      errors = financing.filter { finance =>
+      totalBudget = budget.getBudgetPosts.asScala.map((post: BudgetPost) => post.getEstimatedCost).sum
+      errors = budget.getFinancing.asScala.toSet.filter { finance =>
         val expected = finance.getEstimatedFinancingInPercentage * 0.01 * totalBudget
-        expected != finance.getEstimatedFinancingInMoney
+        println("Total budget: " + totalBudget)
+        println("Expected sek: " + expected)
+        println("Actual sek in finance obj: " + finance.getEstimatedFinancingInMoney)
+        println("Actual percent in finance obj: " + finance.getEstimatedFinancingInPercentage)
+        math.round(expected) != finance.getEstimatedFinancingInMoney
       }
-      if errors.isEmpty
-    } yield budget
+    } yield errors
 
-    errors match {
-      case Failure(exception) => Failure(new IllegalArgumentException("Errors in financing"))
-      case Success(result) => Success(caseBudget.get)
-      case _ => Failure(new IllegalArgumentException("Unknown error"))
-    }
-  }
+    financingErrors.foreach(error=> println("Error in: " + error))
 
-
-  def returnResult(caseBudget: Try[CaseBudget]): Result[CaseBudget] = {
-    caseBudget match {
-      case Success(budget) => Result(budget)
-      case Failure(exception) => Result(caseBudget, exception.getMessage, success = false)
-      case _ => Result(caseBudget, "Unknown error in final step", success = false)
-    }
+    financingErrors.flatMap(errors => {
+      if (errors.isEmpty) caseBudget
+      else Failure(new IllegalArgumentException("Errors in financing"))
+    })
   }
 }

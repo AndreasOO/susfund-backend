@@ -43,7 +43,12 @@ class BudgetServiceUtil extends BudgetDefaultUtil {
 
     } yield calculatedFinancing
 
-    returnResult(calculatedFinancing)
+
+    calculatedFinancing match {
+      case Success(budget) => Result(budget)
+      case Failure(exception) => Result(caseBudget, exception.getMessage, success = false)
+      case _ => Result(caseBudget, "Unknown error in final step", success = false)
+    }
   }
 
 }

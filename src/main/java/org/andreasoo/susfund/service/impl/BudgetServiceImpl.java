@@ -40,7 +40,8 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Result<CaseBudget> updateFinancing(int id, CaseBudget caseBudget) {
+    public Result<CaseBudget> updateFinancing(int id) {
+        CaseBudget caseBudget = caseBudgetDao.getCaseBudgetByCaseId(id);
         Result<CaseBudget> validatedCaseBudget = budgetServiceUtil.updateExistingFinancing(caseBudget);
         if (validatedCaseBudget.success()) {
             Cases caseToUpdate = casesDao.getCaseById(id);

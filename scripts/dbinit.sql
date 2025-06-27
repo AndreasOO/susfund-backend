@@ -473,5 +473,5 @@ INSERT INTO `susfund_db`.`financing_type` (`name`) VALUES ("FINANCING_TYPE_4");
 
 INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (1, 1,2, 15, 100000);
 INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (2, 1,3, 10, 250000);
-INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (3, 3,1, 20, 1000000);
+INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (3, 3,1, 50, 42000);
 INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (4, 2,4, 5, 50000);

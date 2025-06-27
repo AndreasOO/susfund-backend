@@ -182,4 +182,19 @@ public class CasesResource {
     }
 
 
+    @Path("/{id}/financing")
+    @PUT()
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response updateCaseBudgetFinancingByCaseId(@PathParam("id") int id) {
+        Result<CaseBudget> result = budgetService.updateFinancing(id);
+
+        if (result.success()) {
+            return Response.ok(result.resultObj()).build();
+        } else {
+            System.out.println("logged error: " + result.error());
+            return Response.status(417, result.error()).build();
+        }
+    }
+
 }
