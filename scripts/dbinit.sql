@@ -4,8 +4,6 @@ CREATE SCHEMA IF NOT EXISTS `susfund_db`;
 USE `susfund_db`;
 
 
-
-
 DROP TABLE IF EXISTS `organization_type`;
 CREATE TABLE `organization_type` ( `id` INT NOT NULL AUTO_INCREMENT,
                                    `name` VARCHAR(255) NOT NULL,
@@ -416,6 +414,40 @@ CREATE TABLE `financing` ( `id` INT NOT NULL AUTO_INCREMENT,
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- -------------------------------------------------------------- END FINANCING
+
+-- ---------------------------------------------------------------------------- START FIELD DEFINITION
+
+DROP TABLE IF EXISTS `field_definition_entity`;
+CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
+                                         `title` VARCHAR(255) NOT NULL,
+                                         `preamble` VARCHAR(255) NOT NULL,
+                                         `assisting_text` VARCHAR(255) NOT NULL,
+                                         `has_comment` BIT(1) NOT NULL,
+                                         `start_date` DATE NOT NULL,
+                                         `end_date` DATE NOT NULL,
+                                         `field_type` VARCHAR(255) NOT NULL,
+                                         `section` VARCHAR(255) NOT NULL,
+                                         `DISCRIMINATOR_FIELD_TYPE` VARCHAR(255) NOT NULL,
+                                         PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `field_value_entity`;
+CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
+                                    `field_definition_entity_id` INT NOT NULL,
+                                    `case_id` INT NOT NULL,
+                                    `string_value` VARCHAR(255) NOT NULL,
+                                    `event_details` VARCHAR(255) NOT NULL,
+                                    `total_financing_ratio` INT NOT NULL,
+                                    `last_updated` DATE NOT NULL,
+                                    `event_date` DATE NOT NULL,
+                                    `decision_date` DATE NOT NULL,
+                                    `DISCRIMINATOR_VALUE_TYPE` VARCHAR(255) NOT NULL,
+                                    CONSTRAINT `FK_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
+                                    CONSTRAINT `FK_case_id` FOREIGN KEY  (`case_id`) REFERENCES  `cases` (`id`),
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+-- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");
