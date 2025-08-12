@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.updated;
 
 public enum FrontendLocation {
     SIDEBAR_LEFT,

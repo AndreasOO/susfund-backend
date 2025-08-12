@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.updated;
 
 public enum FieldType {
     TEXT_FIELD,

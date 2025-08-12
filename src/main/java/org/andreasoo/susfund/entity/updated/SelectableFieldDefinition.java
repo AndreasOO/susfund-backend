@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.updated;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @DiscriminatorValue(value="SELECTABLE")
-public class SelectableFieldDefinition extends  FieldDefinition {
+public class SelectableFieldDefinition extends FieldDefinition {
 
     @OneToMany
     @JoinColumn(name="field_defition_entity_id")

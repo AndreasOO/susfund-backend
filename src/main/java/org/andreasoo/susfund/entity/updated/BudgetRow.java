@@ -1,0 +1,20 @@
+package org.andreasoo.susfund.entity.updated;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="budget_row")
+public class BudgetRow {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    private Long id;
+
+    @Column(name="estimated_cost")
+    int estimatedCost;
+
+    @Column(name="cost_type")
+    CostType costType;
+
+
+}
