@@ -422,7 +422,7 @@ CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                          `title` VARCHAR(255) NOT NULL,
                                          `preamble` VARCHAR(255) NOT NULL,
                                          `assisting_text` VARCHAR(255) NOT NULL,
-                                         `has_comment` BIT(1) NOT NULL,
+                                         `has_comment` TINYINT NOT NULL,
                                          `start_date` DATE NOT NULL,
                                          `end_date` DATE NOT NULL,
                                          `field_type` VARCHAR(255) NOT NULL,
@@ -441,11 +441,51 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `last_updated` DATE NOT NULL,
                                     `event_date` DATE NOT NULL,
                                     `decision_date` DATE NOT NULL,
-                                    `DISCRIMINATOR_VALUE_TYPE` VARCHAR(255) NOT NULL,
-                                    CONSTRAINT `FK_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
+                                    `DISCRIMINATOR_FIELD_TYPE` VARCHAR(255) NOT NULL,
+                                    CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
                                     CONSTRAINT `FK_case_id` FOREIGN KEY  (`case_id`) REFERENCES  `cases` (`id`),
                                     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `financing_row`;
+CREATE TABLE `financing_row` ( `id` INT NOT NULL AUTO_INCREMENT,
+                                    `field_value_entity_id` INT NOT NULL,
+                                    `organization_id` INT NOT NULL,
+                                    `financing_amount` INT NOT NULL,
+                                    `financing_percentage` INT NOT NULL,
+                                    CONSTRAINT `FK1_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
+                                    CONSTRAINT `FK3_organization_id` FOREIGN KEY  (`organization_id`) REFERENCES  `organization` (`id`),
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `budget_row`;
+CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
+                                    `field_value_entity_id` INT NOT NULL,
+                                    `estimated_cost` INT NOT NULL,
+                                    `cost_type` VARCHAR(255) NOT NULL,
+                                    CONSTRAINT `FK2_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `selectable_value`;
+CREATE TABLE `selectable_value` (`id` INT NOT NULL AUTO_INCREMENT,
+                                 `field_definition_entity_id` INT NOT NULL,
+                                 `selectable_type` VARCHAR(255) NOT NULL,
+                                 `value` VARCHAR(255) NOT NULL,
+                                 CONSTRAINT `FK2_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
+                                 PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `justification_entity`;
+CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
+                                    `field_value_entity_id` INT NOT NULL,
+                                    `selectable_value_id` INT NOT NULL,
+                                    `justification_type` VARCHAR(255) NOT NULL,
+                                    CONSTRAINT `FK3_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
+                                    CONSTRAINT `FK1_selectable_value_id` FOREIGN KEY  (`selectable_value_id`) REFERENCES  `selectable_value` (`id`),
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
