@@ -17,5 +17,8 @@ public class BudgetRow {
     @Enumerated(EnumType.STRING)
     CostType costType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="field_value_entity_id")
+    BudgetFieldValue owningBudget;
 
 }

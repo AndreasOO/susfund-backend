@@ -20,4 +20,8 @@ public class FinancingRow {
     @Column(name="financing_percentage")
     int financingPercentage;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="field_value_entity_id")
+    BudgetFieldValue owningBudget;
+
 }

@@ -8,12 +8,10 @@ import java.util.List;
 @DiscriminatorValue(value="BUDGET")
 public class BudgetFieldValue extends AbstractFieldValue<BudgetFieldDefinition>{
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name="field_value_entity_id")
+    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
     List<FinancingRow> financingRows;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name="field_value_entity_id")
+    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
     List<BudgetRow> budgetRows;
 
     @Column(name="total_financing_ratio")

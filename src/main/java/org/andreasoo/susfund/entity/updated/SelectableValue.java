@@ -14,4 +14,6 @@ public class SelectableValue {
     SelectableType selectableType;
 
     String value;
+
+    Long targetKey;
 }
