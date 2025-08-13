@@ -1,9 +1,9 @@
 package org.andreasoo.susfund.entity.updated;
 
 public enum SelectableType {
-    TYPE1,
-    TYPE2,
-    TYPE3,
-    TYPE4,
-    TYPE5,
+    CASE_MANAGER,
+    CASE_CONTROLLER,
+    TYPE_3,
+    TYPE_4,
+    TYPE_5,
 }

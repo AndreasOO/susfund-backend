@@ -14,6 +14,7 @@ public class BudgetRow {
     int estimatedCost;
 
     @Column(name="cost_type")
+    @Enumerated(EnumType.STRING)
     CostType costType;
 
 

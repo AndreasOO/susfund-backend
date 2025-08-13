@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 public class SelectableValue {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     Long id;
 
     @Column(name="selectable_type")
