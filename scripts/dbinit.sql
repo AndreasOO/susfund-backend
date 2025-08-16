@@ -555,3 +555,27 @@ INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `c
 INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (2, 1,3, 10, 250000);
 INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (3, 3,1, 20, 1000000);
 INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `case_budget_id`, `estimated_financing_in_percentage`, `estimated_financing_in_money`) VALUES (4, 2,4, 5, 50000);
+
+-- ------------------------------------------------ inserts new database
+
+
+DROP TABLE IF EXISTS `field_definition_entity`;
+CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
+                                         `title` VARCHAR(255),
+                                         `preamble` VARCHAR(255),
+                                         `assisting_text` VARCHAR(255),
+                                         `has_comment` TINYINT,
+                                         `start_date` DATE,
+                                         `end_date` DATE,
+                                         `field_type` VARCHAR(255) NOT NULL,
+                                         `budget_type` VARCHAR(255),
+                                         `selectable` VARCHAR(255),
+                                         `frontend_location` VARCHAR(255),
+                                         `row_index` INT,
+                                         `section` VARCHAR(255),
+                                         `DISCRIMINATOR_FIELD_DEFINITION_TYPE` VARCHAR(255) NOT NULL,
+                                         PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `has_comment`, `start_date`, `end_date`, `field_type`, `budget_type`, `selectable`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`) VALUES ();
