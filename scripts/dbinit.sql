@@ -564,22 +564,9 @@ INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assist
 
 
 
--- ---- OVERVIEW // ej textfield, ändra till vad?
+-- ---- OVERVIEW
 
--- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
--- VALUES ("Case", "Case id:", "Case title:", "TEXT_FIELD", "MAIN_VIEW", "1", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
---
--- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
--- VALUES ("Organization", "Organization id:", "Organization name:", "TEXT_FIELD", "MAIN_VIEW", "2", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
---
--- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
--- VALUES ("Application", "Case id:", "Signed by:", "TEXT_FIELD", "MAIN_VIEW", "3", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
---
--- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
--- VALUES ("Assessment", "Latest assessment:", "Performed by:", "TEXT_FIELD", "MAIN_VIEW", "4", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
---
--- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
--- VALUES ("Budget", "Total budget:", "Controlled by:", "TEXT_FIELD", "MAIN_VIEW", "5", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
+
 
 -- ---- APPLICATION QUESTIONS
 
