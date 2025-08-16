@@ -442,6 +442,7 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `string_value` VARCHAR(255),
                                     `event_details` VARCHAR(255),
                                     `total_financing_ratio` INT,
+                                    `score` INT,
                                     `last_updated` DATE,
                                     `event_date` DATE,
                                     `decision_date` DATE,
@@ -559,23 +560,72 @@ INSERT INTO `susfund_db`.`financing` (`organization_id`, `financing_type_id`, `c
 -- ------------------------------------------------ inserts new database
 
 
-DROP TABLE IF EXISTS `field_definition_entity`;
-CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
-                                         `title` VARCHAR(255),
-                                         `preamble` VARCHAR(255),
-                                         `assisting_text` VARCHAR(255),
-                                         `has_comment` TINYINT,
-                                         `start_date` DATE,
-                                         `end_date` DATE,
-                                         `field_type` VARCHAR(255) NOT NULL,
-                                         `budget_type` VARCHAR(255),
-                                         `selectable` VARCHAR(255),
-                                         `frontend_location` VARCHAR(255),
-                                         `row_index` INT,
-                                         `section` VARCHAR(255),
-                                         `DISCRIMINATOR_FIELD_DEFINITION_TYPE` VARCHAR(255) NOT NULL,
-                                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `has_comment`, `start_date`, `end_date`, `field_type`, `budget_type`, `selectable`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`) VALUES ("title", "preamble", "assisting text", );
 
 
-INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `has_comment`, `start_date`, `end_date`, `field_type`, `budget_type`, `selectable`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`) VALUES ();
+
+-- ---- OVERVIEW // ej textfield, ändra till vad?
+
+-- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+-- VALUES ("Case", "Case id:", "Case title:", "TEXT_FIELD", "MAIN_VIEW", "1", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
+--
+-- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+-- VALUES ("Organization", "Organization id:", "Organization name:", "TEXT_FIELD", "MAIN_VIEW", "2", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
+--
+-- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+-- VALUES ("Application", "Case id:", "Signed by:", "TEXT_FIELD", "MAIN_VIEW", "3", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
+--
+-- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+-- VALUES ("Assessment", "Latest assessment:", "Performed by:", "TEXT_FIELD", "MAIN_VIEW", "4", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
+--
+-- INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+-- VALUES ("Budget", "Total budget:", "Controlled by:", "TEXT_FIELD", "MAIN_VIEW", "5", "Case Overview", "SIMPLE_FIELD_DEFINITION" );
+
+-- ---- APPLICATION QUESTIONS
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("title", "preamble", "assisting text", "APPLICATION_QUESTION",
+        "MAIN_VIEW", "1", "Economic feasibility", "SIMPLE_FIELD_DEFINITION");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("title", "preamble", "assisting text", "APPLICATION_QUESTION", "MAIN_VIEW", "2", "Sustainability", "SIMPLE_FIELD_DEFINITION");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("title", "preamble", "assisting text", "APPLICATION_QUESTION", "MAIN_VIEW", "3", "Regional Growth", "SIMPLE_FIELD_DEFINITION");
+
+-- ---- APPLICATION QUESTIONS
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Economic feasibility title", "Economic feasibility preamble", "Economic feasibility assisting text", "ASSESSMENT_QUESTION", "MAIN_VIEW", "1", "Economic feasibility", "SIMPLE_FIELD_DEFINITION");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Sustainability title", "Sustainability preamble", "Sustainability assisting text", "ASSESSMENT_QUESTION", "MAIN_VIEW", "2", "Sustainability", "SIMPLE_FIELD_DEFINITION");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Regional Growth title", "Regional Growth preamble", "Regional Growth assisting text", "ASSESSMENT_QUESTION", "MAIN_VIEW", "3", "Regional Growth", "SIMPLE_FIELD_DEFINITION");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `preamble`, `assisting_text`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Company title", "Company preamble", "Company assisting text", "ASSESSMENT_QUESTION", "MAIN_VIEW", "4", "Company", "SIMPLE_FIELD_DEFINITION");
+
+-- ---- BUDGET
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Description", "TEXT_FIELD", "MAIN_VIEW", "1", "Budget", "BUDGET");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Estimated Cost", "NUMERIC_FIELD", "MAIN_VIEW", "1", "Budget", "BUDGET");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `field_type`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Estimated financing %", "NUMERIC_FIELD", "MAIN_VIEW", "1", "Financing", "BUDGET");
+
+-- ---- DECISION
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`field_type`, `selectable`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("SELECTABLE", "CASE_DECISION", "MAIN_VIEW", "1", "Decision", "SELECTABLE");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`, `field_type`,`frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Motivation", "TEXT_FIELD", "MAIN_VIEW", "2", "Decision", "SIMPLE_FIELD_DEFINITION");
+
+INSERT INTO `susfund_db`.`field_definition_entity` (`title`,`field_type`, `selectable`, `frontend_location`, `row_index`, `section`, `DISCRIMINATOR_FIELD_DEFINITION_TYPE`)
+VALUES ("Case Controller", "SELECTABLE", "CASE_MANAGER", "MAIN_VIEW", "3", "Decision", "SELECTABLE");
+
