@@ -494,6 +494,7 @@ CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
 
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
+
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");

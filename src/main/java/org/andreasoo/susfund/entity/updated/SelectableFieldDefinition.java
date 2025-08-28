@@ -1,9 +1,6 @@
 package org.andreasoo.susfund.entity.updated;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -11,8 +8,22 @@ import java.util.Set;
 @DiscriminatorValue(value="SELECTABLE")
 public class SelectableFieldDefinition extends FieldDefinition {
 
-    @OneToMany
-    @JoinColumn(name="field_defition_entity_id")
-    Set<SelectableValue> selectableValues;
+    public  SelectableFieldDefinition() {
+        super();
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="field_definition_entity_id")
+    protected Set<SelectableValue> selectableValues;
+
+
+    public Set<SelectableValue> getSelectableValues() {
+        return selectableValues;
+    }
+
+    public void setSelectableValues(Set<SelectableValue> selectableValues) {
+        this.selectableValues = selectableValues;
+    }
+
 
 }
