@@ -21,4 +21,35 @@ public class BudgetRow {
     @JoinColumn(name="field_value_entity_id")
     BudgetFieldValue owningBudget;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getEstimatedCost() {
+        return estimatedCost;
+    }
+
+    public void setEstimatedCost(int estimatedCost) {
+        this.estimatedCost = estimatedCost;
+    }
+
+    public CostType getCostType() {
+        return costType;
+    }
+
+    public void setCostType(CostType costType) {
+        this.costType = costType;
+    }
+
+    public BudgetFieldValue getOwningBudget() {
+        return owningBudget;
+    }
+
+    public void setOwningBudget(BudgetFieldValue owningBudget) {
+        this.owningBudget = owningBudget;
+    }
 }
