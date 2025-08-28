@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FieldDefinitionDao {
     FieldDefinition getFieldDefinitionById(Long id);
-    List<FieldDefinition> getAllFieldDefinitionByCaseId(Long id);
+    List<FieldDefinition> getAllFieldDefinitions();
 
     FieldDefinition saveFieldDefinition(FieldDefinition fieldDefinition);
 }

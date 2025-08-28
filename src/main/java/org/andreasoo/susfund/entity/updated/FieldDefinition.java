@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class FieldDefinition {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -31,7 +31,12 @@ public class FieldDefinition {
     @Column(name="end_date")
     private LocalDate endDate;
 
-    private String section;
+    @Enumerated(EnumType.STRING)
+    private Section section;
+
+    @Column(name="sub_section")
+    @Enumerated(EnumType.STRING)
+    private SubSection subSection;
 
     @Column(name="field_type")
     @Enumerated(EnumType.STRING)
@@ -101,12 +106,20 @@ public class FieldDefinition {
         this.endDate = endDate;
     }
 
-    public String getSection() {
+    public Section getSection() {
         return section;
     }
 
-    public void setSection(String section) {
+    public void setSection(Section section) {
         this.section = section;
+    }
+
+    public SubSection getSubSection() {
+        return subSection;
+    }
+
+    public void setSubSection(SubSection subSection) {
+        this.subSection = subSection;
     }
 
     public FieldType getFieldType() {

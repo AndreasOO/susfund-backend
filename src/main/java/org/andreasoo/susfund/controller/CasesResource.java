@@ -12,8 +12,10 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.old.*;
+import org.andreasoo.susfund.entity.updated.*;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.CasesService;
+import org.andreasoo.susfund.service.FieldDefinitionService;
 import org.andreasoo.susfund.util.*;
 
 
@@ -33,6 +35,9 @@ public class CasesResource {
 
     @Inject
     private BudgetService budgetService;
+
+    @Inject
+    private FieldDefinitionService fieldDefinitionService;
 
     @GET
     @Produces("application/json")
@@ -208,5 +213,58 @@ public class CasesResource {
         else{
             return Response.status(Response.Status.BAD_REQUEST).entity(Collections.singletonMap("error", "Please look over following fields: Case controller can not be unassigned and must be different from the assigned case manager. Justification can not be blank")).build();
         }
+    }
+
+    @Path("/fields")
+    @GET()
+    @Produces("application/json")
+    public List<FieldDefinition> getFieldDefinitions() {
+        return fieldDefinitionService.getAllFieldDefinitions();
+    }
+
+    @Path("/createfields")
+    @GET()
+    @Produces("application/json")
+    public Response createFieldDefinition() {
+
+        FieldDefinition fdn1 = new FieldDefinition();
+        fdn1.setFieldType(FieldType.APPLICATION_QUESTION);
+        fdn1.setSection(Section.APPLICATION);
+        fdn1.setTitle("Test Title");
+        fdn1.setPreamble("Test Preamble");
+        fdn1.setAssistingText("Test assisting text");
+        fdn1.setHasComment(true);
+        fdn1.setRowIndex(1L);
+        fdn1.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+        fdn1.setSubSection(SubSection.SUSTAINABILITY);
+
+
+        FieldDefinition fdn2 = new FieldDefinition();
+        fdn2.setFieldType(FieldType.ASSESSMENT_QUESTION);
+        fdn2.setSection(Section.ASSESSMENT);
+        fdn2.setTitle("Test Title2");
+        fdn2.setPreamble("Test Preamble2");
+        fdn2.setAssistingText("Test assisting text2");
+        fdn2.setHasComment(true);
+        fdn2.setRowIndex(2L);
+        fdn2.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+        fdn2.setSubSection(SubSection.FINANCING);
+
+
+        BudgetFieldDefinition fdn3 = new BudgetFieldDefinition();
+        fdn3.setFieldType(FieldType.BUDGET);
+        fdn3.setSection(Section.BUDGET);
+        fdn3.setTitle("Test Title3");
+        fdn3.setPreamble("Test Preamble3");
+        fdn3.setAssistingText("Test assisting text3");
+        fdn3.setHasComment(false);
+        fdn3.setRowIndex(3L);
+        fdn3.setBudgetType(BudgetType.NORMAL);
+        fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+
+        fieldDefinitionService.createFieldDefinition(fdn1);
+        fieldDefinitionService.createFieldDefinition(fdn2);
+        fieldDefinitionService.createFieldDefinition(fdn3);
+        return Response.ok().build();
     }
 }

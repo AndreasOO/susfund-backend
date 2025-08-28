@@ -27,7 +27,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
         return fieldDefinitionDao.getFieldDefinitionById(id);
     }
 
-    public List<FieldDefinition> getAllFieldDefinitionsForCase(Long caseId) {
-        return fieldDefinitionDao.getAllFieldDefinitionByCaseId(caseId);
+    public List<FieldDefinition> getAllFieldDefinitions() {
+        return fieldDefinitionDao.getAllFieldDefinitions();
     }
 }
