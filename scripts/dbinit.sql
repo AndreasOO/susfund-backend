@@ -432,7 +432,7 @@ CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                          `frontend_location` VARCHAR(255),
                                          `row_index` INT,
                                          `section` VARCHAR(255),
-                                         `DISCRIMINATOR_FIELD_DEFINITION_TYPE` VARCHAR(255) NOT NULL,
+                                         `DISCRIMINATOR_FIELD_TYPE` VARCHAR(255) NOT NULL,
                                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
