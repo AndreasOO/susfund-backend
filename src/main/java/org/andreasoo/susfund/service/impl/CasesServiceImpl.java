@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.*;
-import org.andreasoo.susfund.entity.*;
+import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;
 

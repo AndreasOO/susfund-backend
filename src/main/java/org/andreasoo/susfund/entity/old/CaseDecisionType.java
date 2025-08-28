@@ -1,22 +1,20 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Table (name="application_section")
-public class ApplicationSection implements Serializable {
+@Table(name="case_decision_type")
 
+public class CaseDecisionType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
-    private String name;
+    String name;
 
-
-    public ApplicationSection() {
-
+    public CaseDecisionType() {
     }
 
     public int getId() {

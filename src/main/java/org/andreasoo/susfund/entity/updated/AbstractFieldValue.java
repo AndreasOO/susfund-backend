@@ -2,7 +2,7 @@ package org.andreasoo.susfund.entity.updated;
 
 
 import jakarta.persistence.*;
-import org.andreasoo.susfund.entity.Cases;
+import org.andreasoo.susfund.entity.old.Cases;
 
 @Entity
 @Table(name="field_value_entity")

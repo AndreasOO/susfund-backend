@@ -1,24 +1,23 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name="event_type")
-public class EventType implements Serializable {
+@Table(name="budget_post_type")
+public class BudgetPostType implements Serializable {
     @Id
     private int id;
 
     private String name;
 
-    public EventType() {
+
+    public BudgetPostType() {
     }
 
-    public EventType(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public int getId() {
         return id;

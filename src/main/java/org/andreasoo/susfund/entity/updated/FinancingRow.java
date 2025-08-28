@@ -1,7 +1,7 @@
 package org.andreasoo.susfund.entity.updated;
 
 import jakarta.persistence.*;
-import org.andreasoo.susfund.entity.Organization;
+import org.andreasoo.susfund.entity.old.Organization;
 
 @Entity
 public class FinancingRow {

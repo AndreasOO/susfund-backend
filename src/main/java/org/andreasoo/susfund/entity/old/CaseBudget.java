@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
 import jakarta.persistence.*;
 

@@ -3,9 +3,8 @@ package org.andreasoo.susfund.dao.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.andreasoo.susfund.dao.CaseManagerDao;
-import org.andreasoo.susfund.entity.CaseManager;
+import org.andreasoo.susfund.entity.old.CaseManager;
 
 import java.util.List;
 

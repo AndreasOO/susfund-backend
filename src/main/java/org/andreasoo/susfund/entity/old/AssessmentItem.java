@@ -1,9 +1,8 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name="assessment_item")

@@ -1,10 +1,8 @@
 package org.andreasoo.susfund.dao;
 
-import jakarta.inject.Inject;
-import org.andreasoo.susfund.entity.CaseDecisionResult;
-import org.andreasoo.susfund.entity.CaseManager;
-import org.andreasoo.susfund.entity.Cases;
-import org.andreasoo.susfund.util.CaseDecisionUpdateRequest;
+import org.andreasoo.susfund.entity.old.CaseDecisionResult;
+import org.andreasoo.susfund.entity.old.CaseManager;
+import org.andreasoo.susfund.entity.old.Cases;
 
 import java.util.List;
 

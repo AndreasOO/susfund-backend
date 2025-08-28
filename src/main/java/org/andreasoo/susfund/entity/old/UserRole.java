@@ -1,23 +1,21 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name="organization_type")
-public class OrganizationType implements Serializable {
+@Table (name="user_role")
+public class UserRole implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
-    public OrganizationType() {
-    }
+    public UserRole() {
 
-    public OrganizationType(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {

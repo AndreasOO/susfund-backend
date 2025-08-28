@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CaseBudgetDao;
-import org.andreasoo.susfund.entity.CaseBudget;
+import org.andreasoo.susfund.entity.old.CaseBudget;
 
 @ApplicationScoped
 public class CaseBudgetDaoImpl implements CaseBudgetDao {

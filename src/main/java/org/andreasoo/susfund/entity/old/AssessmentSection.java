@@ -1,19 +1,16 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name="case_status")
-
-public class CaseStatus {
+@Table(name="assessment_section")
+public class AssessmentSection implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
-    String name;
-
-    public CaseStatus() {
-    }
+    private String name;
 
     public int getId() {
         return id;
@@ -30,4 +27,5 @@ public class CaseStatus {
     public void setName(String name) {
         this.name = name;
     }
+
 }

@@ -1,23 +1,21 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name="budget_post_type")
-public class BudgetPostType implements Serializable {
+@Table(name="case_decision_result")
+public class CaseDecisionResult implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
+    public CaseDecisionResult() {
 
-    public BudgetPostType() {
     }
-
 
     public int getId() {
         return id;

@@ -1,23 +1,25 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 
 @Entity
-@Table(name="financing_type")
-public class FinancingType {
+@Table(name="case_manager")
+public class CaseManager implements Serializable {
     @Id
-    int id;
-    String name;
+    private int id;
 
-    public FinancingType() {
+    private String name;
+
+    public CaseManager() {
     }
 
-    public FinancingType(int id, String name) {
+    public CaseManager(int id, String name) {
         this.id = id;
         this.name = name;
     }
+
 
     public int getId() {
         return id;
@@ -34,4 +36,5 @@ public class FinancingType {
     public void setName(String name) {
         this.name = name;
     }
+
 }

@@ -11,7 +11,7 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.entity.*;
+import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;

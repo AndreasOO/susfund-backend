@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.service;
 
-import org.andreasoo.susfund.entity.Organization;
+import org.andreasoo.susfund.entity.old.Organization;
 
 import java.util.List;
 

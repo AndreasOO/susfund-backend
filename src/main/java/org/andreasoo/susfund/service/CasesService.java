@@ -1,10 +1,7 @@
 package org.andreasoo.susfund.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.entity.*;
+import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.util.*;
 
 import java.util.List;

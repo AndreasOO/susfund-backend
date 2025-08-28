@@ -1,20 +1,23 @@
-package org.andreasoo.susfund.entity;
+package org.andreasoo.susfund.entity.old;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name="case_decision_result")
-public class CaseDecisionResult implements Serializable {
+@Table(name="event_type")
+public class EventType implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    public CaseDecisionResult() {
+    public EventType() {
+    }
 
+    public EventType(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public int getId() {

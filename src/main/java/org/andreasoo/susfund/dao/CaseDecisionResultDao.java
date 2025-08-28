@@ -1,7 +1,6 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.CaseDecision;
-import org.andreasoo.susfund.entity.CaseDecisionResult;
+import org.andreasoo.susfund.entity.old.CaseDecisionResult;
 
 import java.util.List;
 

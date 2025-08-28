@@ -1,7 +1,5 @@
 package org.andreasoo.susfund.util;
 
-import org.andreasoo.susfund.entity.CaseDecisionType;
-
 public class CaseDecisionUpdateRequest {
     int caseDecisionResultId;
     String justification;
