@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name="history_event2")
 public class HistoryEvent2 {
 
 

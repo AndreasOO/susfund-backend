@@ -436,6 +436,7 @@ CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+-- ------- LA TILL ASSESSMENT_JUSTIFICATION, ASSESSMENT_SCORE, DECISION_RESULT_TYPE
 DROP TABLE IF EXISTS `field_value_entity`;
 CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `field_definition_entity_id` INT NOT NULL,
@@ -446,6 +447,9 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `last_updated` DATE,
                                     `event_date` DATE,
                                     `decision_date` DATE,
+                                    `assessment_justification` VARCHAR(255),
+                                    `assessment_score` VARCHAR(255),
+                                    `decision_result_type` VARCHAR(255),
                                     `DISCRIMINATOR_FIELD_VALUE_TYPE` VARCHAR(255) NOT NULL,
                                     CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
                                     CONSTRAINT `FK_case_id` FOREIGN KEY  (`owning_case`) REFERENCES  `cases` (`id`),
@@ -496,6 +500,17 @@ CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
                                     CONSTRAINT `FK3_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                                     CONSTRAINT `FK1_selectable_value_id` FOREIGN KEY  (`selectable_value_id`) REFERENCES  `selectable_value` (`id`),
                                     PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+-- ----- NY
+DROP TABLE IF EXISTS `history_event2`;
+CREATE TABLE `history_event2` (`id` INT NOT NULL AUTO_INCREMENT,
+                               `field_value_entity_id` INT NOT NULL,
+                               `history_event_type` VARCHAR(255),
+                               `history_event_date` DATE,
+                               `history_event_details` VARCHAR(255),
+                               CONSTRAINT `FK4_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
+                               PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
