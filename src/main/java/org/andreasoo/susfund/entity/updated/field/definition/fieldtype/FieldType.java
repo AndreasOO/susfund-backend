@@ -4,7 +4,7 @@ public enum FieldType {
     TEXT_FIELD,
     NUMERIC_FIELD,
     DATE_FIELD,
-    SELECTABLE,
+    DECISION,
     BUDGET,
     APPLICATION_SECTION,
     ASSESSMENT_SECTION,

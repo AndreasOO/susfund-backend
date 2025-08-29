@@ -14,7 +14,6 @@ public class SelectableFieldDefinition extends FieldDefinition {
         super();
     }
 
-//    @OneToMany(cascade = CascadeType.ALL)
     @ManyToMany(cascade = CascadeType.PERSIST, fetch =  FetchType.EAGER)
     @JoinTable(
             name="fdn_slv",

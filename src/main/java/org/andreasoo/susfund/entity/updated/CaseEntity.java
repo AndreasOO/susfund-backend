@@ -2,7 +2,6 @@ package org.andreasoo.susfund.entity.updated;
 
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.old.*;
-import org.andreasoo.susfund.entity.updated.field.definition.decision.CaseDecisionType2;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 

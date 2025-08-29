@@ -17,9 +17,10 @@ import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetFieldD
 import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetType;
 import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
 import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
+import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
 import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableFieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.definition.selectable.section.Section;
-import org.andreasoo.susfund.entity.updated.field.definition.selectable.section.SubSection;
+import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
+import org.andreasoo.susfund.entity.updated.field.definition.section.SubSection;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.service.FieldDefinitionService;
@@ -278,7 +279,7 @@ public class CasesResource {
 //        );
 
         SelectableFieldDefinition fdn4 = new SelectableFieldDefinition();
-        fdn4.setFieldType(FieldType.SELECTABLE);
+        fdn4.setFieldType(FieldType.DECISION);
         fdn4.setSection(Section.DECISION);
         fdn4.setTitle("Test Title4");
         fdn4.setPreamble("Test Preamble4");
@@ -294,14 +295,6 @@ public class CasesResource {
 
         fieldDefinitionService.createFieldDefinition(fdn4);
 
-//        if (savedFdn instanceof  SelectableFieldDefinition) {
-//            SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.getFieldDefinition(savedFdn.getId()) ;
-//            selectableFieldDefinition.setSelectableValues(Set.of(
-//                                        new SelectableValue(SelectableType.CASE_DECISION, "Approved", null),
-//                                        new SelectableValue(SelectableType.CASE_DECISION, "Rejected", null),
-//                                        new SelectableValue(SelectableType.CASE_DECISION, "Partially Approved", null)));
-//            fieldDefinitionService.createFieldDefinition(selectableFieldDefinition);
-//        }
 
 
 
