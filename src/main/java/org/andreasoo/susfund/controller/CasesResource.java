@@ -289,12 +289,12 @@ public class CasesResource {
         fdn4.setSelectableValues(fieldDefinitionService.getAllSelectableValues().stream().collect(Collectors.toSet()));
         fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
-        fieldDefinitionService.createFieldDefinition(fdn1);
-        fieldDefinitionService.createFieldDefinition(fdn2);
-        fieldDefinitionService.createFieldDefinition(fdn3);
+        FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
+        FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
 
-        fieldDefinitionService.createFieldDefinition(fdn4);
 
+        BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
+        SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn4);
 
 
 
