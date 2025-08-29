@@ -12,7 +12,14 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.old.*;
-import org.andreasoo.susfund.entity.updated.*;
+import org.andreasoo.susfund.entity.updated.field.definition.*;
+import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetFieldDefinition;
+import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetType;
+import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
+import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableFieldDefinition;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.section.Section;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.section.SubSection;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.service.FieldDefinitionService;
@@ -21,7 +28,6 @@ import org.andreasoo.susfund.util.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 

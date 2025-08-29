@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity.updated;
+package org.andreasoo.susfund.entity.updated.field.value.budget;
 
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.old.Organization;

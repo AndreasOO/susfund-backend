@@ -1,8 +1,9 @@
-package org.andreasoo.susfund.entity.updated;
+package org.andreasoo.susfund.entity.updated.field.value;
 
 
 import jakarta.persistence.*;
-import org.andreasoo.susfund.entity.old.Cases;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
+import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 
 @Entity
 @Table(name="field_value_entity")

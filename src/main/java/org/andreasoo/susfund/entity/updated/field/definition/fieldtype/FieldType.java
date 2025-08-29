@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity.updated;
+package org.andreasoo.susfund.entity.updated.field.definition.fieldtype;
 
 public enum FieldType {
     TEXT_FIELD,
@@ -9,5 +9,6 @@ public enum FieldType {
     APPLICATION_SECTION,
     ASSESSMENT_SECTION,
     APPLICATION_QUESTION,
-    ASSESSMENT_QUESTION
+    ASSESSMENT_QUESTION,
+    HISTORY_LOG
 }

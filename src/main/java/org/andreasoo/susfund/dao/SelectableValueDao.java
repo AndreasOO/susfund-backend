@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.updated.SelectableValue;
+import org.andreasoo.susfund.entity.updated.field.value.selectable.SelectableValue;
 
 import java.util.List;
 

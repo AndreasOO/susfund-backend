@@ -1,6 +1,10 @@
-package org.andreasoo.susfund.entity.updated;
+package org.andreasoo.susfund.entity.updated.field.definition;
 
 import jakarta.persistence.*;
+import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
+import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.section.Section;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.section.SubSection;
 
 import java.time.LocalDate;
 

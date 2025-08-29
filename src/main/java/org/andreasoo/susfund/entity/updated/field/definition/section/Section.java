@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity.updated;
+package org.andreasoo.susfund.entity.updated.field.definition.section;
 
 public enum Section {
     ASSESSMENT,

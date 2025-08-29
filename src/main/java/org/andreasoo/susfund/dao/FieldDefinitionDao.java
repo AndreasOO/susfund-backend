@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.updated.FieldDefinition;
+import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
-package org.andreasoo.susfund.entity.updated;
+package org.andreasoo.susfund.entity.updated.field.definition.budget;
 
 import jakarta.persistence.*;
+import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 
 @Entity
 @DiscriminatorValue(value="BUDGET")
