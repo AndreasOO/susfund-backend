@@ -13,6 +13,10 @@ public class TextFieldValue extends AbstractFieldValue<FieldDefinition> {
     @Column(name="string_value")
     String stringValue;
 
+    public TextFieldValue(){
+        super();
+    }
+
     @Override
     public String getValueAsString() {
         return "";
