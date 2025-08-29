@@ -22,6 +22,7 @@ import org.andreasoo.susfund.util.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Stateless
@@ -263,6 +264,13 @@ public class CasesResource {
         fdn3.setBudgetType(BudgetType.NORMAL);
         fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
+
+//        fieldDefinitionService.createSelectableValues(
+//                Set.of(new SelectableValue(SelectableType.CASE_DECISION, "Approved", null),
+//                        new SelectableValue(SelectableType.CASE_DECISION, "Rejected", null),
+//                        new SelectableValue(SelectableType.CASE_DECISION,"Partially Approved", null)).stream().toList()
+//        );
+
         SelectableFieldDefinition fdn4 = new SelectableFieldDefinition();
         fdn4.setFieldType(FieldType.SELECTABLE);
         fdn4.setSection(Section.DECISION);
@@ -271,15 +279,26 @@ public class CasesResource {
         fdn4.setAssistingText("Test assisting text4");
         fdn4.setHasComment(true);
         fdn4.setRowIndex(4L);
-        fdn4.setSelectableValues(Set.of(new SelectableValue(SelectableType.CASE_DECISION, "Approved", null),
-                                        new SelectableValue(SelectableType.CASE_DECISION, "Rejected", null),
-                                        new SelectableValue(SelectableType.CASE_DECISION, "Partially Approved", null)));
+        fdn4.setSelectableValues(fieldDefinitionService.getAllSelectableValues().stream().collect(Collectors.toSet()));
         fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
         fieldDefinitionService.createFieldDefinition(fdn1);
         fieldDefinitionService.createFieldDefinition(fdn2);
         fieldDefinitionService.createFieldDefinition(fdn3);
+
         fieldDefinitionService.createFieldDefinition(fdn4);
+
+//        if (savedFdn instanceof  SelectableFieldDefinition) {
+//            SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.getFieldDefinition(savedFdn.getId()) ;
+//            selectableFieldDefinition.setSelectableValues(Set.of(
+//                                        new SelectableValue(SelectableType.CASE_DECISION, "Approved", null),
+//                                        new SelectableValue(SelectableType.CASE_DECISION, "Rejected", null),
+//                                        new SelectableValue(SelectableType.CASE_DECISION, "Partially Approved", null)));
+//            fieldDefinitionService.createFieldDefinition(selectableFieldDefinition);
+//        }
+
+
+
         return Response.ok().build();
     }
 }

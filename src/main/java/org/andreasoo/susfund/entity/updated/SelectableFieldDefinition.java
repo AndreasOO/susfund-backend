@@ -12,8 +12,13 @@ public class SelectableFieldDefinition extends FieldDefinition {
         super();
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="field_definition_entity_id")
+//    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch =  FetchType.EAGER)
+    @JoinTable(
+            name="fdn_slv",
+            joinColumns = {@JoinColumn(name="field_definition_id")},
+            inverseJoinColumns = {@JoinColumn(name="selectable_value_id")}
+    )
     protected Set<SelectableValue> selectableValues;
 
 

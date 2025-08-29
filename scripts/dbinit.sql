@@ -474,11 +474,18 @@ CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
 
 DROP TABLE IF EXISTS `selectable_value`;
 CREATE TABLE `selectable_value` (`id` INT NOT NULL AUTO_INCREMENT,
-                                 `field_definition_entity_id` INT NOT NULL,
                                  `selectable_type` VARCHAR(255) NOT NULL,
                                  `value` VARCHAR(255) NOT NULL,
-                                 CONSTRAINT `FK2_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
                                  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `fdn_slv`;
+CREATE TABLE `fdn_slv` (`field_definition_id` INT NOT NULL ,
+                        `selectable_value_id` INT NOT NULL ,
+                        CONSTRAINT `FK4_field_definition_id` FOREIGN KEY  (`field_definition_id`) REFERENCES  `field_definition_entity` (`id`),
+                        CONSTRAINT `FK_selectable_value_id` FOREIGN KEY  (`selectable_value_id`) REFERENCES  `selectable_value` (`id`),
+                                 PRIMARY KEY (`field_definition_id`,`selectable_value_id`)
+
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `justification_entity`;
@@ -494,6 +501,9 @@ CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
 
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Approved");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Rejected");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Partially Approved");
 
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");
