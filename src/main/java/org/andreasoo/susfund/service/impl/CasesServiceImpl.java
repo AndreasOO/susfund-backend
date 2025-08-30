@@ -5,6 +5,11 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.*;
 import org.andreasoo.susfund.entity.old.*;
+import org.andreasoo.susfund.entity.updated.CaseDecisionType2;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
+import org.andreasoo.susfund.entity.updated.CaseStatus2;
+import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
+import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;
 
@@ -45,6 +50,12 @@ public class CasesServiceImpl implements CasesService {
 
     @Inject
     private CaseDecisionResultDao caseDecisionResultDao;
+
+    @Inject
+    private FieldDefinitionDao fieldDefinitionDao;
+
+    @Inject
+    private CaseEntityDao caseEntityDao;
 
 
     @Override
@@ -176,5 +187,23 @@ public class CasesServiceImpl implements CasesService {
         return casesDao.updateCaseControllerByCaseId(caseId, chosenCaseController) &&
                 casesDao.updateJustificationByCaseId(caseId, request.getJustification()) &&
                 casesDao.updateCaseDecisionResultByCaseId(caseId, caseDecisionResultDao.getCaseDecisionResultById(request.getCaseDecisionResultId()));
+    }
+
+    public CaseEntity createCaseWithMockData() {
+        CaseEntity caseEntity = new CaseEntity();
+
+        caseEntity.setName("test");
+        caseEntity.setCaseManager(caseManagerDao.getCaseManagerById(1));
+        caseEntity.setCaseController(caseManagerDao.getCaseManagerById(1));
+        caseEntity.setHandledBy(caseManagerDao.getCaseManagerById(1));
+        caseEntity.setCaseStatus(CaseStatus2.UNHANDLED);
+        caseEntity.setCaseDecisionType(CaseDecisionType2.APPLICATION_APPROVAL);
+        caseEntity.setOrganization(organizationDao.getOrganizationByCaseId(1));
+        caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
+                                                        .stream()
+                                                        .<AbstractFieldValue<? extends FieldDefinition>>map(FieldDefinition::createFieldValue)
+                                                        .toList());
+            return caseEntity;
+//        return caseEntityDao.save(caseEntity);
     }
 }

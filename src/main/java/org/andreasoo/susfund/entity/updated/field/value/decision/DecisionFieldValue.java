@@ -1,11 +1,13 @@
 package org.andreasoo.susfund.entity.updated.field.value.decision;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
+@DiscriminatorValue(value="DECISION")
 public class DecisionFieldValue extends AbstractFieldValue<FieldDefinition> {
 
     public DecisionFieldValue() {

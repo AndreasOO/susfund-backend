@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.entity.old.*;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.*;
 import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetFieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetType;
@@ -229,6 +230,14 @@ public class CasesResource {
     @Produces("application/json")
     public List<FieldDefinition> getFieldDefinitions() {
         return fieldDefinitionService.getAllFieldDefinitions();
+    }
+
+    @Path("/createcase")
+    @GET()
+    @Produces("application/json")
+    public Response createCaseWithFieldValues() {
+        CaseEntity caze = casesService.createCaseWithMockData();
+        return Response.ok(caze).build();
     }
 
     @Path("/createfields")

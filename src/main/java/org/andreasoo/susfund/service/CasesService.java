@@ -2,6 +2,7 @@ package org.andreasoo.susfund.service;
 
 import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.entity.old.*;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.util.*;
 
 import java.util.List;
@@ -47,6 +48,8 @@ public interface CasesService {
     List<CaseDecisionResult> getCaseDecisionResults();
 
     List<Cases> getCasesRelatedToCaseOrganization(int id);
+
+    CaseEntity createCaseWithMockData();
 
     // NYTT
     @Transactional

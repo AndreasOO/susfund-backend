@@ -12,6 +12,7 @@ import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 public abstract class AbstractFieldValue <T extends FieldDefinition> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,6 +24,10 @@ public abstract class AbstractFieldValue <T extends FieldDefinition> {
 
     public T getFieldDefinition() {
         return (T) owningFieldDefinition;
+    }
+
+    public void setFieldDefinition(FieldDefinition fieldDefinition) {
+        this.owningFieldDefinition = fieldDefinition;
     }
 
     public abstract String getValueAsString();
@@ -41,10 +46,6 @@ public abstract class AbstractFieldValue <T extends FieldDefinition> {
 
     public void setOwningCase(CaseEntity owningCase) {
         this.owningCase = owningCase;
-    }
-
-    public FieldDefinition getOwningFieldDefinition() {
-        return owningFieldDefinition;
     }
 
     public void setOwningFieldDefinition(FieldDefinition owningFieldDefinition) {

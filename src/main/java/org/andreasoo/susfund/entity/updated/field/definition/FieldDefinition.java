@@ -1,10 +1,17 @@
 package org.andreasoo.susfund.entity.updated.field.definition;
 
+import com.mysql.cj.callback.MysqlCallbackHandler;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
 import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
 import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
 import org.andreasoo.susfund.entity.updated.field.definition.section.SubSection;
+import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 
 import java.time.LocalDate;
 
@@ -52,6 +59,23 @@ public class FieldDefinition {
 
     @Column(name="row_index")
     private Long rowIndex;
+
+
+    public AbstractFieldValue<? extends FieldDefinition> createFieldValue() {
+        AbstractFieldValue<? extends FieldDefinition> fieldValue=  switch (fieldType) {
+            case TEXT_FIELD -> new TextFieldValue();
+            case NUMERIC_FIELD -> new TextFieldValue();
+            case DATE_FIELD -> new TextFieldValue();
+            case DECISION -> new DecisionFieldValue();
+            case BUDGET -> new BudgetFieldValue();
+            case APPLICATION_QUESTION -> new TextFieldValue();
+            case ASSESSMENT_QUESTION -> new AssessmentFieldValue();
+            case HISTORY_LOG -> new HistoryLogFieldValue();
+        };
+
+        fieldValue.setFieldDefinition(this);
+        return fieldValue;
+    }
 
 
     public Long getId() {
