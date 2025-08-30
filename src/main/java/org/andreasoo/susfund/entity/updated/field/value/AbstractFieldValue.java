@@ -27,5 +27,27 @@ public abstract class AbstractFieldValue <T extends FieldDefinition> {
 
     public abstract String getValueAsString();
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CaseEntity getOwningCase() {
+        return owningCase;
+    }
+
+    public void setOwningCase(CaseEntity owningCase) {
+        this.owningCase = owningCase;
+    }
+
+    public FieldDefinition getOwningFieldDefinition() {
+        return owningFieldDefinition;
+    }
+
+    public void setOwningFieldDefinition(FieldDefinition owningFieldDefinition) {
+        this.owningFieldDefinition = owningFieldDefinition;
+    }
 }

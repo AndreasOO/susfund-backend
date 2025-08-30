@@ -417,6 +417,24 @@ CREATE TABLE `financing` ( `id` INT NOT NULL AUTO_INCREMENT,
 
 -- ---------------------------------------------------------------------------- START FIELD DEFINITION
 
+DROP TABLE IF EXISTS `case_entity`;
+CREATE TABLE `case_entity` (`id` INT NOT NULL AUTO_INCREMENT,
+                            `name` VARCHAR(255) NOT NULL,
+                            `organization_id` INT NOT NULL,
+                            `case_manager_id` INT NOT NULL,
+                            `case_controller_id` INT NOT NULL,
+                            `handled_by_id` INT NOT NULL,
+                            `case_status_id` INT NOT NULL,
+                            `case_decision_type` VARCHAR(255),
+                            CONSTRAINT `FK10_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`),
+                            CONSTRAINT `FK10_case_manager_id` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
+                            CONSTRAINT `FK11_case_manager_id` FOREIGN KEY (`case_controller_id`) REFERENCES `case_manager` (`id`),
+                            CONSTRAINT `FK12_case_manager_id` FOREIGN KEY (`handled_by_id`) REFERENCES `case_manager` (`id`),
+                            CONSTRAINT `FK13_case_status_id` FOREIGN KEY (`case_status_id`) REFERENCES `case_status` (`id`),
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
 DROP TABLE IF EXISTS `field_definition_entity`;
 CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                          `title` VARCHAR(255),
@@ -452,7 +470,7 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `decision_result_type` VARCHAR(255),
                                     `DISCRIMINATOR_FIELD_VALUE_TYPE` VARCHAR(255) NOT NULL,
                                     CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
-                                    CONSTRAINT `FK_case_id` FOREIGN KEY  (`owning_case`) REFERENCES  `cases` (`id`),
+                                    CONSTRAINT `FK9_case_id` FOREIGN KEY  (`owning_case`) REFERENCES  `case_entity` (`id`),
                                     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
@@ -502,7 +520,7 @@ CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
                                     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
--- ----- NY
+-- ----- NYA
 DROP TABLE IF EXISTS `history_event2`;
 CREATE TABLE `history_event2` (`id` INT NOT NULL AUTO_INCREMENT,
                                `field_value_entity_id` INT NOT NULL,
@@ -513,8 +531,8 @@ CREATE TABLE `history_event2` (`id` INT NOT NULL AUTO_INCREMENT,
                                PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
+
 
 INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Approved");
 INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Rejected");

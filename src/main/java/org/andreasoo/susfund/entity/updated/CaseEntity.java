@@ -38,9 +38,9 @@ public class CaseEntity implements Serializable {
     private CaseStatus caseStatus;
 
     // TODO: NEW, NEED TO CREATE TABLE AND INSERT VALUES
+    @Column(name="case_decision_type")
     @Enumerated(EnumType.STRING)
     private CaseDecisionType2 caseDecisionType;
-
 
     @OneToMany(mappedBy = "owningCase")
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
@@ -129,6 +129,22 @@ public class CaseEntity implements Serializable {
 
     public void setHandledBy(CaseManager handledBy) {
         this.handledBy = handledBy;
+    }
+
+    public CaseDecisionType2 getCaseDecisionType() {
+        return caseDecisionType;
+    }
+
+    public void setCaseDecisionType(CaseDecisionType2 caseDecisionType) {
+        this.caseDecisionType = caseDecisionType;
+    }
+
+    public List<AbstractFieldValue<? extends FieldDefinition>> getFieldValues() {
+        return fieldValues;
+    }
+
+    public void setFieldValues(List<AbstractFieldValue<? extends FieldDefinition>> fieldValues) {
+        this.fieldValues = fieldValues;
     }
 
     @Override
