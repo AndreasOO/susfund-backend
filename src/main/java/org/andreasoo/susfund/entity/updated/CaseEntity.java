@@ -33,9 +33,10 @@ public class CaseEntity implements Serializable {
     @JoinColumn(name="handled_by_id")
     private CaseManager handledBy;
 
-    @ManyToOne
-    @JoinColumn(name="case_status_id")
-    private CaseStatus caseStatus;
+
+    @Column(name="case_status")
+    @Enumerated(EnumType.STRING)
+    private CaseStatus2 caseStatus;
 
     // TODO: NEW, NEED TO CREATE TABLE AND INSERT VALUES
     @Column(name="case_decision_type")
@@ -107,11 +108,11 @@ public class CaseEntity implements Serializable {
         this.caseManager = caseManager;
     }
 
-    public CaseStatus getCaseStatus() {
+    public CaseStatus2 getCaseStatus() {
         return caseStatus;
     }
 
-    public void setCaseStatus(CaseStatus caseStatus) {
+    public void setCaseStatus(CaseStatus2 caseStatus) {
         this.caseStatus = caseStatus;
     }
 
