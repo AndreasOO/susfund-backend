@@ -20,13 +20,14 @@ public abstract class AbstractFieldValue <T extends FieldDefinition> {
     CaseEntity owningCase;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="field_definition_entity_id")
     private FieldDefinition owningFieldDefinition;
 
     public T getFieldDefinition() {
         return (T) owningFieldDefinition;
     }
 
-    public void setFieldDefinition(FieldDefinition fieldDefinition) {
+    public void setOwningFieldDefinition(FieldDefinition fieldDefinition) {
         this.owningFieldDefinition = fieldDefinition;
     }
 
@@ -48,7 +49,7 @@ public abstract class AbstractFieldValue <T extends FieldDefinition> {
         this.owningCase = owningCase;
     }
 
-    public void setOwningFieldDefinition(FieldDefinition owningFieldDefinition) {
-        this.owningFieldDefinition = owningFieldDefinition;
-    }
+//    public void setOwningFieldDefinition(FieldDefinition owningFieldDefinition) {
+//        this.owningFieldDefinition = owningFieldDefinition;
+//    }
 }

@@ -1,6 +1,5 @@
 package org.andreasoo.susfund.entity.updated.field.definition;
 
-import com.mysql.cj.callback.MysqlCallbackHandler;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
 import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
@@ -73,7 +72,7 @@ public class FieldDefinition {
             case HISTORY_LOG -> new HistoryLogFieldValue();
         };
 
-        fieldValue.setFieldDefinition(this);
+        fieldValue.setOwningFieldDefinition(this);
         return fieldValue;
     }
 

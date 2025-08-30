@@ -6,6 +6,7 @@ import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
 import java.util.Set;
 
+@Entity
 @DiscriminatorValue(value="HISTORY_LOG")
 public class HistoryLogFieldValue extends AbstractFieldValue<FieldDefinition> {
 

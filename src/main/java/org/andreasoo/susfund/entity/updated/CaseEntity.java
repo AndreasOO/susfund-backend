@@ -43,7 +43,7 @@ public class CaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private CaseDecisionType2 caseDecisionType;
 
-    @OneToMany(mappedBy = "owningCase")
+    @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL)
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
 //    @ManyToOne
 //    @JoinColumn(name="case_decision_id")

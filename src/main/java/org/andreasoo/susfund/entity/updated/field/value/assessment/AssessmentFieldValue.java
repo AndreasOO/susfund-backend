@@ -2,9 +2,11 @@ package org.andreasoo.susfund.entity.updated.field.value.assessment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
+@Entity
 @DiscriminatorValue(value="ASSESSMENT_RESULT")
 public class AssessmentFieldValue extends AbstractFieldValue<FieldDefinition> {
 
