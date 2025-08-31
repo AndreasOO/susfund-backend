@@ -240,6 +240,14 @@ public class CasesResource {
         return Response.ok(caze).build();
     }
 
+    @Path("/createvalues")
+    @GET()
+    @Produces("application/json")
+    public Response addFieldValuesToCase() {
+        CaseEntity caze = casesService.addFieldValues();
+        return Response.ok(caze).build();
+    }
+
     @Path("/createfields")
     @GET()
     @Produces("application/json")

@@ -51,6 +51,8 @@ public interface CasesService {
 
     CaseEntity createCaseWithMockData();
 
+    CaseEntity addFieldValues();
+
     // NYTT
     @Transactional
     boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById);

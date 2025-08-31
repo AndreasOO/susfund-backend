@@ -1,17 +1,16 @@
 package org.andreasoo.susfund.entity.updated.field.value.textfield;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
 @Entity
 @DiscriminatorValue(value="TEXT")
+@Access(AccessType.FIELD)
 public class TextFieldValue extends AbstractFieldValue<FieldDefinition> {
 
     @Column(name="string_value")
-    String stringValue;
+    private String stringValue;
 
     public TextFieldValue(){
         super();

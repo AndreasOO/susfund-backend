@@ -13,7 +13,7 @@ public class CaseEntityDaoImpl implements CaseEntityDao {
     private EntityManager entityManager;
 
     @Override
-    public CaseEntity getById(Long id) {
+    public CaseEntity getById(int id) {
         CaseEntity caze = entityManager.find(CaseEntity.class, id);
         caze.getFieldValues();
         return caze;

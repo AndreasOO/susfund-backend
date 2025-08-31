@@ -10,6 +10,10 @@ import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.CaseStatus2;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;
 
@@ -200,13 +204,53 @@ public class CasesServiceImpl implements CasesService {
         caseEntity.setCaseDecisionType(CaseDecisionType2.APPLICATION_APPROVAL);
         caseEntity.setOrganization(organizationDao.getOrganizationByCaseId(1));
 
-        caseEntityDao.save(caseEntity);
+//        caseEntityDao.save(caseEntity);
+//
+//        caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
+//                                                        .stream()
+//                                                        .<AbstractFieldValue<? extends FieldDefinition>>map(FieldDefinition::createFieldValue)
+//                                                        .toList());
+//            return caseEntity;
+        return caseEntityDao.save(caseEntity);
+    }
+
+    @Override
+    public CaseEntity addFieldValues(){
+        CaseEntity caseEntity = caseEntityDao.getById(1);
+
+//        TextFieldValue tdf = new TextFieldValue();
+//        AssessmentFieldValue afv = new AssessmentFieldValue();
+//        BudgetFieldValue bfv = new BudgetFieldValue();
+//        DecisionFieldValue dfv = new DecisionFieldValue();
+//
+//        FieldDefinition application = fieldDefinitionDao.getFieldDefinitionById(1L);
+//        tdf.setOwningFieldDefinition(application);
+//        tdf.setOwningCase(caseEntity);
+//        caseEntity.getFieldValues().add(tdf);
+//
+//        FieldDefinition assessment = fieldDefinitionDao.getFieldDefinitionById(2L);
+//        afv.setOwningFieldDefinition(assessment);
+//        afv.setOwningCase(caseEntity);
+//        caseEntity.getFieldValues().add(afv);
+//
+//        FieldDefinition budget = fieldDefinitionDao.getFieldDefinitionById(3L);
+//        bfv.setOwningFieldDefinition(budget);
+//        bfv.setOwningCase(caseEntity);
+//        caseEntity.getFieldValues().add(bfv);
+//
+//        FieldDefinition selectable = fieldDefinitionDao.getFieldDefinitionById(4L);
+//        dfv.setOwningFieldDefinition(selectable);
+//        dfv.setOwningCase(caseEntity);
+//        caseEntity.getFieldValues().add(dfv);
 
         caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
-                                                        .stream()
-                                                        .<AbstractFieldValue<? extends FieldDefinition>>map(FieldDefinition::createFieldValue)
-                                                        .toList());
-//            return caseEntity;
+                .stream()
+                .<AbstractFieldValue<? extends FieldDefinition>>map(fieldDefinition -> {
+                    AbstractFieldValue<? extends FieldDefinition> value = fieldDefinition.createFieldValue();
+                    value.setOwningCase(caseEntity);
+                    return value;
+                })
+                .toList());
         return caseEntityDao.save(caseEntity);
     }
 }

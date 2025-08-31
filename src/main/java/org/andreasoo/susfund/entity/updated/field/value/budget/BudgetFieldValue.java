@@ -19,8 +19,6 @@ public class BudgetFieldValue extends AbstractFieldValue<BudgetFieldDefinition> 
     @Column(name="total_financing_ratio")
     int totalFinancingRatio;
 
-    String stringValue;
-
     @Override
     public String getValueAsString() {
         return "";
