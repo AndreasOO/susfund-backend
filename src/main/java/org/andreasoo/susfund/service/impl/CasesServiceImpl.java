@@ -199,14 +199,11 @@ public class CasesServiceImpl implements CasesService {
         caseEntity.setCaseStatus(CaseStatus2.UNHANDLED);
         caseEntity.setCaseDecisionType(CaseDecisionType2.APPLICATION_APPROVAL);
         caseEntity.setOrganization(organizationDao.getOrganizationByCaseId(1));
-
-        caseEntityDao.save(caseEntity);
-
         caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
                                                         .stream()
-                                                        .<AbstractFieldValue<? extends FieldDefinition>>map(FieldDefinition::createFieldValue)
+                                                        .<AbstractFieldValue<? extends FieldDefinition>>
+                                                                map(fdn -> fdn.createFieldValue(caseEntity))
                                                         .toList());
-//            return caseEntity;
         return caseEntityDao.save(caseEntity);
     }
 }

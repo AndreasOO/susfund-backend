@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.entity.updated.field.definition;
 
 import jakarta.persistence.*;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
 import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
 import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
@@ -60,16 +61,16 @@ public class FieldDefinition {
     private Long rowIndex;
 
 
-    public AbstractFieldValue<? extends FieldDefinition> createFieldValue() {
+    public AbstractFieldValue<? extends FieldDefinition> createFieldValue(CaseEntity caseEntity) {
         AbstractFieldValue<? extends FieldDefinition> fieldValue=  switch (fieldType) {
-            case TEXT_FIELD -> new TextFieldValue();
-            case NUMERIC_FIELD -> new TextFieldValue();
-            case DATE_FIELD -> new TextFieldValue();
-            case DECISION -> new DecisionFieldValue();
-            case BUDGET -> new BudgetFieldValue();
-            case APPLICATION_QUESTION -> new TextFieldValue();
-            case ASSESSMENT_QUESTION -> new AssessmentFieldValue();
-            case HISTORY_LOG -> new HistoryLogFieldValue();
+            case TEXT_FIELD -> new TextFieldValue(caseEntity);
+            case NUMERIC_FIELD -> new TextFieldValue(caseEntity);
+            case DATE_FIELD -> new TextFieldValue(caseEntity);
+            case DECISION -> new DecisionFieldValue(caseEntity);
+            case BUDGET -> new BudgetFieldValue(caseEntity);
+            case APPLICATION_QUESTION -> new TextFieldValue(caseEntity);
+            case ASSESSMENT_QUESTION -> new AssessmentFieldValue(caseEntity);
+            case HISTORY_LOG -> new HistoryLogFieldValue(caseEntity);
         };
 
         fieldValue.setOwningFieldDefinition(this);

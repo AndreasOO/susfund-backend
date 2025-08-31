@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.entity.updated.field.value.budget;
 
 import jakarta.persistence.*;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetFieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
@@ -9,6 +10,14 @@ import java.util.List;
 @Entity
 @DiscriminatorValue(value="BUDGET")
 public class BudgetFieldValue extends AbstractFieldValue<BudgetFieldDefinition> {
+
+    public BudgetFieldValue() {
+        super();
+    }
+
+    public BudgetFieldValue(CaseEntity owningCase) {
+        super(owningCase);
+    }
 
     @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
     List<FinancingRow> financingRows;
@@ -19,10 +28,33 @@ public class BudgetFieldValue extends AbstractFieldValue<BudgetFieldDefinition> 
     @Column(name="total_financing_ratio")
     int totalFinancingRatio;
 
-    String stringValue;
 
     @Override
     public String getValueAsString() {
         return "";
+    }
+
+    public List<FinancingRow> getFinancingRows() {
+        return financingRows;
+    }
+
+    public void setFinancingRows(List<FinancingRow> financingRows) {
+        this.financingRows = financingRows;
+    }
+
+    public List<BudgetRow> getBudgetRows() {
+        return budgetRows;
+    }
+
+    public void setBudgetRows(List<BudgetRow> budgetRows) {
+        this.budgetRows = budgetRows;
+    }
+
+    public int getTotalFinancingRatio() {
+        return totalFinancingRatio;
+    }
+
+    public void setTotalFinancingRatio(int totalFinancingRatio) {
+        this.totalFinancingRatio = totalFinancingRatio;
     }
 }

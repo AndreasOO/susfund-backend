@@ -1,6 +1,7 @@
 package org.andreasoo.susfund.entity.updated.field.value.history;
 
 import jakarta.persistence.*;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
@@ -13,6 +14,10 @@ public class HistoryLogFieldValue extends AbstractFieldValue<FieldDefinition> {
 
     public HistoryLogFieldValue() {
         super();
+    }
+
+    public HistoryLogFieldValue(CaseEntity owningCase) {
+        super(owningCase);
     }
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

@@ -1,9 +1,11 @@
 package org.andreasoo.susfund.entity.updated.field.value;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
+
 
 @Entity
 @Table(name="field_value_entity")
@@ -11,10 +13,18 @@ import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 @DiscriminatorColumn(name="DISCRIMINATOR_FIELD_VALUE_TYPE")
 public abstract class AbstractFieldValue <T extends FieldDefinition> {
 
+    public AbstractFieldValue() {
+    }
+
+    public AbstractFieldValue(CaseEntity owningCase) {
+        this.owningCase = owningCase;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="owning_case")
     CaseEntity owningCase;

@@ -3,6 +3,7 @@ package org.andreasoo.susfund.entity.updated.field.value.textfield;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
@@ -10,12 +11,17 @@ import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 @DiscriminatorValue(value="TEXT")
 public class TextFieldValue extends AbstractFieldValue<FieldDefinition> {
 
+    public TextFieldValue() {
+        super();
+    }
+
+    public TextFieldValue(CaseEntity owningCase) {
+        super(owningCase);
+    }
+
     @Column(name="string_value")
     String stringValue;
 
-    public TextFieldValue(){
-        super();
-    }
 
     @Override
     public String getValueAsString() {
