@@ -3,7 +3,7 @@ package org.andreasoo.susfund.dto;
 import org.andreasoo.susfund.entity.updated.CaseDecisionType2;
 import org.andreasoo.susfund.entity.updated.CaseStatus2;
 
-public class CaseEntityDTO extends AbstractDTO {
+public class CaseDTO extends AbstractDTO {
 
     private int id;
     private String name;
@@ -15,16 +15,16 @@ public class CaseEntityDTO extends AbstractDTO {
     private CaseDecisionType2 caseDecisionType;
     private SupportTypeNodeDTO supportTypeNode;
 
-    public CaseEntityDTO() {
-        super("caseEntity");
+    public CaseDTO() {
+        super("case");
 
     }
 
-    public CaseEntityDTO(int id, String name, OrganizationDTO organization,
-                         CaseManagerDTO caseManager, CaseManagerDTO caseController,
-                         CaseManagerDTO handledBy, CaseStatus2 caseStatus,
-                         CaseDecisionType2 caseDecisionType, SupportTypeNodeDTO supportTypeNode) {
-        super("caseEntity");
+    public CaseDTO(int id, String name, OrganizationDTO organization,
+                   CaseManagerDTO caseManager, CaseManagerDTO caseController,
+                   CaseManagerDTO handledBy, CaseStatus2 caseStatus,
+                   CaseDecisionType2 caseDecisionType, SupportTypeNodeDTO supportTypeNode) {
+        super("case");
         this.id = id;
         this.name = name;
         this.organization = organization;
