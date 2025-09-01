@@ -1,5 +1,6 @@
 package org.andreasoo.susfund.entity.updated;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
@@ -46,7 +47,9 @@ public class CaseEntity implements Serializable {
     @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL)
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
 
-    @ManyToOne
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="support_type_node_id")
     private SupportTypeNode supportTypeNode;
 

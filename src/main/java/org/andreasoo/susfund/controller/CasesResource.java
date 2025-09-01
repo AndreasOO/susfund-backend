@@ -251,7 +251,7 @@ public class CasesResource {
     public Response createFieldDefinition() {
 
         SupportTypeNode stn = new SupportTypeNode();
-        stn.setTechName("SUPPORT TYPE");
+        stn.setTechName("FTG:/2022:/REGIONAL_INVESTMENT:/INFRASTRUCTURE");
         SupportTypeNode savedSupportTypeNode = supportTypeNodeService.saveSupportTypeNode(stn);
 
         FieldDefinition fdn1 = new FieldDefinition();
