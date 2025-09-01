@@ -250,6 +250,10 @@ public class CasesResource {
     @Produces("application/json")
     public Response createFieldDefinition() {
 
+        SupportTypeNode stn = new SupportTypeNode();
+        stn.setTechName("SUPPORT TYPE");
+        SupportTypeNode savedSupportTypeNode = supportTypeNodeService.saveSupportTypeNode(stn);
+
         FieldDefinition fdn1 = new FieldDefinition();
         fdn1.setFieldType(FieldType.APPLICATION_QUESTION);
         fdn1.setSection(Section.APPLICATION);
@@ -291,10 +295,6 @@ public class CasesResource {
 //                        new SelectableValue(SelectableType.CASE_DECISION, "Rejected", null),
 //                        new SelectableValue(SelectableType.CASE_DECISION,"Partially Approved", null)).stream().toList()
 //        );
-
-        SupportTypeNode stn = new SupportTypeNode();
-        stn.setTechName("SUPPORT TYPE");
-        SupportTypeNode savedSupportTypeNode = supportTypeNodeService.saveSupportTypeNode(stn);
 
 
         SelectableFieldDefinition fdn4 = new SelectableFieldDefinition();

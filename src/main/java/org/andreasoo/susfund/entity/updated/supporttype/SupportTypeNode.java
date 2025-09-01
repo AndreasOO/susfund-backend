@@ -3,6 +3,7 @@ package org.andreasoo.susfund.entity.updated.supporttype;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class SupportTypeNode {
             joinColumns = {@JoinColumn(name="support_type_node_id")},
             inverseJoinColumns = {@JoinColumn(name="field_definition_id")}
     )
-    private List<FieldDefinition> fieldDefinitions;
+    private List<FieldDefinition> fieldDefinitions = new ArrayList<>();
 
     public Long getId() {
         return id;
