@@ -8,6 +8,8 @@
         <jta-data-source>jdbc/MySQLDataSource</jta-data-source>
         <properties>
             <property name="hibernate.show_sql" value="true"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/yourdb?useUnicode=true&amp;characterEncoding=UTF-8"/>
         </properties>
     </persistence-unit>
 </persistence>

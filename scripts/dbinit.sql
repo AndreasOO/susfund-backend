@@ -1,6 +1,10 @@
 
+SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 DROP SCHEMA IF EXISTS `susfund_db`;
-CREATE SCHEMA IF NOT EXISTS `susfund_db`;
+CREATE SCHEMA IF NOT EXISTS `susfund_db`
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
 USE `susfund_db`;
 
 
@@ -8,7 +12,9 @@ DROP TABLE IF EXISTS `organization_type`;
 CREATE TABLE `organization_type` ( `id` INT NOT NULL AUTO_INCREMENT,
                                    `name` VARCHAR(255) NOT NULL,
                                    PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE `organization` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -16,33 +22,43 @@ CREATE TABLE `organization` ( `id` INT NOT NULL AUTO_INCREMENT,
                               `organization_type_id` INT NOT NULL,
                               CONSTRAINT `FK_organization_type_id` FOREIGN KEY (`organization_type_id`) REFERENCES `organization_type` (`id`),
                               PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `case_manager`;
 CREATE TABLE `case_manager` ( `id` INT NOT NULL AUTO_INCREMENT,
                               `name` VARCHAR(255) NOT NULL,
                               PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `case_status`;
 CREATE TABLE `case_status` ( `id` INT NOT NULL AUTO_INCREMENT,
                              `name` VARCHAR(255) NOT NULL,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `case_decision_type`;
 CREATE TABLE `case_decision_type` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `name` VARCHAR(255) NOT NULL,
                                     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `case_decision_result`;
 CREATE TABLE `case_decision_result` ( `id` INT NOT NULL AUTO_INCREMENT,
                                       `name` VARCHAR(255) NOT NULL,
                                       PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `case_decision`;
 CREATE TABLE `case_decision` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -51,7 +67,9 @@ CREATE TABLE `case_decision` ( `id` INT NOT NULL AUTO_INCREMENT,
                                `justification` VARCHAR(4000) NOT NULL,
                                CONSTRAINT `FK_case_decision_result_id` FOREIGN KEY  (`case_decision_result_id`) REFERENCES  `case_decision_result` (`id`),
                                PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- ----------------------------------------- START NEW ANDREAS
 
@@ -59,7 +77,9 @@ DROP TABLE IF EXISTS `assessment_section`;
 CREATE TABLE `assessment_section` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `name` VARCHAR(255) NOT NULL,
                                     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `assessment_item`;
 CREATE TABLE `assessment_item` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -69,13 +89,17 @@ CREATE TABLE `assessment_item` ( `id` INT NOT NULL AUTO_INCREMENT,
                                  `assisting_text` VARCHAR(255) NOT NULL,
                                  CONSTRAINT `FK_assessment_section_id` FOREIGN KEY  (`assessment_section_id`) REFERENCES  `assessment_section` (`id`),
                                  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `case_assessment`;
 CREATE TABLE `case_assessment` ( `id` INT NOT NULL AUTO_INCREMENT,
                                  `assessment_date` DATE,
                                  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `assessment_result`;
@@ -88,7 +112,9 @@ CREATE TABLE `assessment_result` ( `id` INT NOT NULL AUTO_INCREMENT,
                                    CONSTRAINT `FK_assessment_item_id` FOREIGN KEY  (`assessment_item_id`) REFERENCES  `assessment_item` (`id`),
                                    UNIQUE `case_assessment_assessment_result_index`(`case_assessment_id`, `assessment_item_id`),
                                    PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- -----------------------------------------END NEW ANDREAS
 
@@ -98,7 +124,9 @@ DROP TABLE IF EXISTS `case_application`;
 CREATE TABLE `case_application` ( `id` INT NOT NULL AUTO_INCREMENT,
                                   `submission_date` DATE NOT NULL,
                                   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 
@@ -106,7 +134,9 @@ DROP TABLE IF EXISTS `application_section`;
 CREATE TABLE `application_section` ( `id` INT NOT NULL AUTO_INCREMENT,
                                      `name` VARCHAR(255) NOT NULL,
                                      PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `application_question`;
 CREATE TABLE `application_question` (`id` INT NOT NULL AUTO_INCREMENT,
@@ -116,7 +146,9 @@ CREATE TABLE `application_question` (`id` INT NOT NULL AUTO_INCREMENT,
                                      `application_section_id` INT NOT NULL,
                                      CONSTRAINT `FK_application_section_id` FOREIGN KEY (`application_section_id`) REFERENCES `application_section` (`id`),
                                      PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `question_result`;
@@ -127,7 +159,9 @@ CREATE TABLE `question_result` ( `id` INT NOT NULL AUTO_INCREMENT,
                                  CONSTRAINT `FK_application_question_id` FOREIGN KEY (`application_question_id`) REFERENCES `application_question` (`id`),
                                  CONSTRAINT `FK_case_application_id` FOREIGN KEY (`case_application_id`) REFERENCES `case_application` (`id`),
                                  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 
@@ -154,7 +188,9 @@ CREATE TABLE `cases` ( `id` INT NOT NULL AUTO_INCREMENT,
                        CONSTRAINT `FK2_case_manager_id` FOREIGN KEY (`case_controller_id`) REFERENCES `case_manager` (`id`),
                        CONSTRAINT `FK3_case_manager_id` FOREIGN KEY (`handled_by_id`) REFERENCES `case_manager` (`id`),
                        PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- -----------------------------------------START VIKTORS HISTORY IMPLEMENTATION
 
@@ -162,7 +198,9 @@ DROP TABLE IF EXISTS `event_type`;
 CREATE TABLE `event_type` ( `id` INT NOT NULL AUTO_INCREMENT,
                             `name` VARCHAR(255) NOT NULL,
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `history_event`;
 CREATE TABLE `history_event` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -173,7 +211,9 @@ CREATE TABLE `history_event` ( `id` INT NOT NULL AUTO_INCREMENT,
                                CONSTRAINT `FK_event_type_id` FOREIGN KEY (`event_type_id`) REFERENCES `event_type` (`id`),
                                CONSTRAINT `FK_cases_id` FOREIGN KEY (`cases_id`) REFERENCES `cases` (`id`),
                                PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- -----------------------------------------END VIKTORS HISTORY IMPLEMENTATION
 -- -----------------------------------------START JOSEFINS USER IMPLEMENTATION
@@ -182,7 +222,9 @@ DROP TABLE IF EXISTS `user_password`;
 CREATE TABLE `user_password` (`id` INT NOT NULL AUTO_INCREMENT,
                               `password` VARCHAR(255) NOT NULL,
                               PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `user_credentials`;
@@ -193,20 +235,26 @@ CREATE TABLE `user_credentials` (`id` INT NOT NULL AUTO_INCREMENT,
                                  PRIMARY KEY (`id`),
                                  CONSTRAINT `FK_case_manager_id2` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
                                  CONSTRAINT `FK_user_password_id` FOREIGN KEY(`user_password_id`) REFERENCES `user_password` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` ( `id` INT NOT NULL AUTO_INCREMENT,
                            `name` VARCHAR(255) NOT NULL,
                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `user_credentials_user_roles`;
 CREATE TABLE `user_credentials_user_roles` ( `user_credentials_id` INT NOT NULL,
                                              `user_role_id` INT NOT NULL,
                                              CONSTRAINT `FK_user_credentials_id2` FOREIGN KEY (`user_credentials_id`) REFERENCES `user_credentials` (`id`),
                                              CONSTRAINT `FK_user_role_id` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- ------------------------------------END JOSEFINS USER IMPLEMENTATION
 
@@ -361,14 +409,18 @@ DROP TABLE IF EXISTS `case_budget`;
 CREATE TABLE `case_budget` ( `id` INT NOT NULL AUTO_INCREMENT,
                              `date_last_changed` DATE,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `budget_post_type`;
 CREATE TABLE `budget_post_type` ( `id` INT NOT NULL AUTO_INCREMENT,
                                   `name` VARCHAR(255) NOT NULL,
                                   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `budget_post`;
@@ -379,7 +431,9 @@ CREATE TABLE `budget_post` ( `id` INT NOT NULL AUTO_INCREMENT,
                              CONSTRAINT `FK_budget_post_type_id` FOREIGN KEY  (`budget_post_type_id`) REFERENCES  `budget_post_type` (`id`),
                              CONSTRAINT `FK_case_budget_id` FOREIGN KEY  (`case_budget_id`) REFERENCES  `case_budget` (`id`),
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `budget_organization`;
 CREATE TABLE `budget_organization` (
@@ -389,7 +443,9 @@ CREATE TABLE `budget_organization` (
                                        CONSTRAINT `FK3_case_budget_id` FOREIGN KEY  (`case_budget_id`) REFERENCES  `case_budget` (`id`),
                                        UNIQUE `budget_organization_index`(`case_budget_id`, `organization_id`),
                                        PRIMARY KEY (`case_budget_id`, `organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- ------------------------------------------------------------ START FINANCING
 
@@ -398,7 +454,9 @@ CREATE TABLE `financing_type` (
                                 `id` INT NOT NULL AUTO_INCREMENT,
                                 `name` VARCHAR(255) NOT NULL,
                                 PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `financing`;
 CREATE TABLE `financing` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -411,7 +469,9 @@ CREATE TABLE `financing` ( `id` INT NOT NULL AUTO_INCREMENT,
                             CONSTRAINT `FK_financing_type_id` FOREIGN KEY  (`financing_type_id`) REFERENCES `financing_type` (`id`),
                             CONSTRAINT `FK4_case_budget_id` FOREIGN KEY  (`case_budget_id`) REFERENCES `case_budget` (`id`),
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- -------------------------------------------------------------- END FINANCING
 
@@ -431,7 +491,9 @@ CREATE TABLE `case_entity` (`id` INT NOT NULL AUTO_INCREMENT,
                             CONSTRAINT `FK11_case_manager_id` FOREIGN KEY (`case_controller_id`) REFERENCES `case_manager` (`id`),
                             CONSTRAINT `FK12_case_manager_id` FOREIGN KEY (`handled_by_id`) REFERENCES `case_manager` (`id`),
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 
 DROP TABLE IF EXISTS `field_definition_entity`;
@@ -451,7 +513,9 @@ CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                          `section` VARCHAR(255),
                                          `DISCRIMINATOR_FIELD_TYPE` VARCHAR(255) NOT NULL,
                                          PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- ------- LA TILL ASSESSMENT_JUSTIFICATION, ASSESSMENT_SCORE, DECISION_RESULT_TYPE
 DROP TABLE IF EXISTS `field_value_entity`;
@@ -471,7 +535,9 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
                                     CONSTRAINT `FK9_case_id` FOREIGN KEY  (`owning_case`) REFERENCES  `case_entity` (`id`),
                                     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `financing_row`;
 CREATE TABLE `financing_row` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -482,7 +548,9 @@ CREATE TABLE `financing_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                                 CONSTRAINT `FK1_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                                 CONSTRAINT `FK4_organization_id` FOREIGN KEY  (`organization_id`) REFERENCES  `organization` (`id`),
                                 PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `budget_row`;
 CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
@@ -491,14 +559,18 @@ CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                             `cost_type` VARCHAR(255) NOT NULL,
                             CONSTRAINT `FK2_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `selectable_value`;
 CREATE TABLE `selectable_value` (`id` INT NOT NULL AUTO_INCREMENT,
                                  `selectable_type` VARCHAR(255) NOT NULL,
                                  `value` VARCHAR(255) NOT NULL,
                                  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `fdn_slv`;
 CREATE TABLE `fdn_slv` (`field_definition_id` INT NOT NULL ,
@@ -507,7 +579,9 @@ CREATE TABLE `fdn_slv` (`field_definition_id` INT NOT NULL ,
                         CONSTRAINT `FK_selectable_value_id` FOREIGN KEY  (`selectable_value_id`) REFERENCES  `selectable_value` (`id`),
                                  PRIMARY KEY (`field_definition_id`,`selectable_value_id`)
 
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `justification_entity`;
 CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
@@ -517,7 +591,9 @@ CREATE TABLE `justification_entity` (`id` INT NOT NULL AUTO_INCREMENT,
                                     CONSTRAINT `FK3_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                                     CONSTRAINT `FK1_selectable_value_id` FOREIGN KEY  (`selectable_value_id`) REFERENCES  `selectable_value` (`id`),
                                     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- ----- NYA
 DROP TABLE IF EXISTS `history_event2`;
@@ -528,7 +604,9 @@ CREATE TABLE `history_event2` (`id` INT NOT NULL AUTO_INCREMENT,
                                `history_event_details` VARCHAR(255),
                                CONSTRAINT `FK4_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                                PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
