@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
+import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
 
 import java.io.Serializable;
 import java.util.List;
@@ -38,32 +39,16 @@ public class CaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private CaseStatus2 caseStatus;
 
-    // TODO: NEW, NEED TO CREATE TABLE AND INSERT VALUES
     @Column(name="case_decision_type")
     @Enumerated(EnumType.STRING)
     private CaseDecisionType2 caseDecisionType;
 
     @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL)
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
-//    @ManyToOne
-//    @JoinColumn(name="case_decision_id")
-//    private CaseDecision caseDecision;
 
-//    @ManyToOne
-//    @JoinColumn(name="case_application_id")
-//    private CaseApplication caseApplication;
-//
-//    @ManyToOne
-//    @JoinColumn(name="case_assessment_id")
-//    private CaseAssessment caseAssessment;
-
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name="cases_id")
-//    private List<HistoryEvent> historyEventList;
-
-//    @OneToOne(fetch=FetchType.EAGER)
-//    @JoinColumn(name="case_budget_id")
-//    private CaseBudget caseBudget;
+    @ManyToOne
+    @JoinColumn(name="support_type_node_id")
+    private SupportTypeNode supportTypeNode;
 
     public CaseEntity() {
     }
@@ -146,6 +131,14 @@ public class CaseEntity implements Serializable {
 
     public void setFieldValues(List<AbstractFieldValue<? extends FieldDefinition>> fieldValues) {
         this.fieldValues = fieldValues;
+    }
+
+    public SupportTypeNode getSupportTypeNode() {
+        return supportTypeNode;
+    }
+
+    public void setSupportTypeNode(SupportTypeNode supportTypeNode) {
+        this.supportTypeNode = supportTypeNode;
     }
 
     @Override

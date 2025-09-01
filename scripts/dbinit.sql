@@ -477,6 +477,15 @@ CREATE TABLE `financing` ( `id` INT NOT NULL AUTO_INCREMENT,
 
 -- ---------------------------------------------------------------------------- START FIELD DEFINITION
 
+DROP TABLE IF EXISTS `support_type_node`;
+CREATE TABLE `support_type_node` (`id` INT NOT NULL AUTO_INCREMENT,
+                                   `tech_name` VARCHAR(255),
+                                   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+
 DROP TABLE IF EXISTS `case_entity`;
 CREATE TABLE `case_entity` (`id` INT NOT NULL AUTO_INCREMENT,
                             `name` VARCHAR(255) NOT NULL,
@@ -486,10 +495,12 @@ CREATE TABLE `case_entity` (`id` INT NOT NULL AUTO_INCREMENT,
                             `handled_by_id` INT NOT NULL,
                             `case_status` VARCHAR(255) NOT NULL,
                             `case_decision_type` VARCHAR(255) NOT NULL,
+                            `support_type_node_id` INT NOT NULL,
                             CONSTRAINT `FK10_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`),
                             CONSTRAINT `FK10_case_manager_id` FOREIGN KEY (`case_manager_id`) REFERENCES `case_manager` (`id`),
                             CONSTRAINT `FK11_case_manager_id` FOREIGN KEY (`case_controller_id`) REFERENCES `case_manager` (`id`),
                             CONSTRAINT `FK12_case_manager_id` FOREIGN KEY (`handled_by_id`) REFERENCES `case_manager` (`id`),
+                            CONSTRAINT `FK2_support_type_node_id` FOREIGN KEY (`support_type_node_id`) REFERENCES `support_type_node` (`id`),
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 
   CHARACTER SET utf8mb4
@@ -514,6 +525,17 @@ CREATE TABLE `field_definition_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                          `DISCRIMINATOR_FIELD_TYPE` VARCHAR(255) NOT NULL,
                                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `stn_fdn`;
+CREATE TABLE `stn_fdn` (`field_definition_id` INT NOT NULL,
+                        `support_type_node_id` INT NOT NULL,
+                        CONSTRAINT `FK5_field_definition_id` FOREIGN KEY  (`field_definition_id`) REFERENCES `field_definition_entity` (`id`),
+                        CONSTRAINT `FK_support_type_node_id` FOREIGN KEY  (`support_type_node_id`) REFERENCES `support_type_node` (`id`),
+                        PRIMARY KEY (`field_definition_id`,`support_type_node_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 

@@ -57,6 +57,9 @@ public class CasesServiceImpl implements CasesService {
     @Inject
     private CaseEntityDao caseEntityDao;
 
+    @Inject
+    private SupportTypeNodeDao supportTypeNodeDao;
+
 
     @Override
     public Cases getCaseById(int id) {
@@ -199,11 +202,21 @@ public class CasesServiceImpl implements CasesService {
         caseEntity.setCaseStatus(CaseStatus2.UNHANDLED);
         caseEntity.setCaseDecisionType(CaseDecisionType2.APPLICATION_APPROVAL);
         caseEntity.setOrganization(organizationDao.getOrganizationByCaseId(1));
-        caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
-                                                        .stream()
-                                                        .<AbstractFieldValue<? extends FieldDefinition>>
-                                                                map(fdn -> fdn.createFieldValue(caseEntity))
-                                                        .toList());
+        caseEntity.setSupportTypeNode(supportTypeNodeDao.getSupportTypeNodeById(1L));
+
+        caseEntity.setFieldValues(caseEntity.getSupportTypeNode().getFieldDefinitions()
+                .stream()
+                .<AbstractFieldValue<? extends FieldDefinition>>
+                        map(fdn -> fdn.createFieldValue(caseEntity))
+                .toList());
+
+
+
+//        caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
+//                                                        .stream()
+//                                                        .<AbstractFieldValue<? extends FieldDefinition>>
+//                                                                map(fdn -> fdn.createFieldValue(caseEntity))
+//                                                        .toList());
         return caseEntityDao.save(caseEntity);
     }
 }

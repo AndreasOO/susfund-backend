@@ -49,12 +49,11 @@ public interface CasesService {
 
     List<Cases> getCasesRelatedToCaseOrganization(int id);
 
-    CaseEntity createCaseWithMockData();
-
-    // NYTT
     @Transactional
     boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById);
 
     @Transactional
     boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request);
+
+    CaseEntity createCaseWithMockData();
 }
