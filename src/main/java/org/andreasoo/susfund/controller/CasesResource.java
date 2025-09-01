@@ -22,9 +22,11 @@ import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
 import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableFieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
 import org.andreasoo.susfund.entity.updated.field.definition.section.SubSection;
+import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
 import org.andreasoo.susfund.service.BudgetService;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.service.FieldDefinitionService;
+import org.andreasoo.susfund.service.SupportTypeNodeService;
 import org.andreasoo.susfund.util.*;
 
 
@@ -48,6 +50,9 @@ public class CasesResource {
 
     @Inject
     private FieldDefinitionService fieldDefinitionService;
+
+    @Inject
+    private SupportTypeNodeService supportTypeNodeService;
 
     @GET
     @Produces("application/json")
@@ -245,6 +250,10 @@ public class CasesResource {
     @Produces("application/json")
     public Response createFieldDefinition() {
 
+        SupportTypeNode stn = new SupportTypeNode();
+        stn.setTechName("FTG:/2022:/REGIONAL_INVESTMENT:/INFRASTRUCTURE");
+        SupportTypeNode savedSupportTypeNode = supportTypeNodeService.saveSupportTypeNode(stn);
+
         FieldDefinition fdn1 = new FieldDefinition();
         fdn1.setFieldType(FieldType.APPLICATION_QUESTION);
         fdn1.setSection(Section.APPLICATION);
@@ -287,6 +296,7 @@ public class CasesResource {
 //                        new SelectableValue(SelectableType.CASE_DECISION,"Partially Approved", null)).stream().toList()
 //        );
 
+
         SelectableFieldDefinition fdn4 = new SelectableFieldDefinition();
         fdn4.setFieldType(FieldType.DECISION);
         fdn4.setSection(Section.DECISION);
@@ -311,6 +321,8 @@ public class CasesResource {
         fdn6.setRowIndex(1L);
         fdn6.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
+
+
         FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
 
@@ -320,6 +332,9 @@ public class CasesResource {
 
         FieldDefinition numericFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn5);
         FieldDefinition dateFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn6);
+
+        savedSupportTypeNode.getFieldDefinitions().addAll(fieldDefinitionService.getAllFieldDefinitions());
+        supportTypeNodeService.saveSupportTypeNode(savedSupportTypeNode);
 
         return Response.ok().build();
     }
