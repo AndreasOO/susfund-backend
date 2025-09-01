@@ -9,8 +9,10 @@ import org.andreasoo.susfund.entity.updated.field.definition.section.SubSection;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.datefield.DateFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 
 import java.time.LocalDate;
@@ -64,8 +66,8 @@ public class FieldDefinition {
     public AbstractFieldValue<? extends FieldDefinition> createFieldValue(CaseEntity caseEntity) {
         AbstractFieldValue<? extends FieldDefinition> fieldValue=  switch (fieldType) {
             case TEXT_FIELD -> new TextFieldValue(caseEntity);
-            case NUMERIC_FIELD -> new TextFieldValue(caseEntity);
-            case DATE_FIELD -> new TextFieldValue(caseEntity);
+            case NUMERIC_FIELD -> new NumericFieldValue(caseEntity);
+            case DATE_FIELD -> new DateFieldValue(caseEntity);
             case DECISION -> new DecisionFieldValue(caseEntity);
             case BUDGET -> new BudgetFieldValue(caseEntity);
             case APPLICATION_QUESTION -> new TextFieldValue(caseEntity);

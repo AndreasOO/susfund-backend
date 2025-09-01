@@ -298,6 +298,19 @@ public class CasesResource {
         fdn4.setSelectableValues(fieldDefinitionService.getAllSelectableValues().stream().collect(Collectors.toSet()));
         fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
+
+        FieldDefinition fdn5 = new FieldDefinition();
+        fdn5.setFieldType(FieldType.NUMERIC_FIELD);
+        fdn5.setSection(Section.DECISION);
+        fdn5.setRowIndex(2L);
+        fdn5.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+
+        FieldDefinition fdn6 = new FieldDefinition();
+        fdn6.setFieldType(FieldType.DATE_FIELD);
+        fdn6.setSection(Section.DECISION);
+        fdn6.setRowIndex(1L);
+        fdn6.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+
         FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
 
@@ -305,7 +318,8 @@ public class CasesResource {
         BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
         SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn4);
 
-
+        FieldDefinition numericFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn5);
+        FieldDefinition dateFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn6);
 
         return Response.ok().build();
     }
