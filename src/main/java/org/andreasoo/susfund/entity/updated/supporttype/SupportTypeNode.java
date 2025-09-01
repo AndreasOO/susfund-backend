@@ -1,5 +1,6 @@
 package org.andreasoo.susfund.entity.updated.supporttype;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 
@@ -17,6 +18,7 @@ public class SupportTypeNode {
     @Column(name="tech_name")
     private String techName;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.PERSIST, fetch =  FetchType.LAZY)
     @JoinTable(
             name="stn_fdn",

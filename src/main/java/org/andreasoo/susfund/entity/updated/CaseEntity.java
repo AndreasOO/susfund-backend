@@ -48,7 +48,7 @@ public class CaseEntity implements Serializable {
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
 
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="support_type_node_id")
     private SupportTypeNode supportTypeNode;
