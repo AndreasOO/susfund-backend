@@ -8,11 +8,11 @@ public class DecisionFieldValueDTO extends AbstractFieldValueDTO<FieldDefinition
     private DecisionResultType decisionResultType;
 
     protected DecisionFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "decisionFieldValue");
     }
 
     public DecisionFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, DecisionResultType decisionResultType) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "decisionFieldValue");
         this.decisionResultType = decisionResultType;
     }
 

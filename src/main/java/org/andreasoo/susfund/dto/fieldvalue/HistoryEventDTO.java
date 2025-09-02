@@ -3,20 +3,24 @@ package org.andreasoo.susfund.dto.fieldvalue;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import org.andreasoo.susfund.dto.AbstractDTO;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEventType;
 
 import java.time.LocalDate;
 
-public class HistoryEventDTO {
+public class HistoryEventDTO extends AbstractDTO {
 
     private Long id;
     private String historyEventDetails;
     private LocalDate historyEventDate;
     private HistoryEventType historyEventType;
 
-    public HistoryEventDTO(){}
+    public HistoryEventDTO(){
+        super("historyEventDTO");
+    }
 
     public HistoryEventDTO(Long id, String historyEventDetails, LocalDate historyEventDate, HistoryEventType historyEventType) {
+        super("historyEventDTO");
         this.id = id;
         this.historyEventDetails = historyEventDetails;
         this.historyEventDate = historyEventDate;

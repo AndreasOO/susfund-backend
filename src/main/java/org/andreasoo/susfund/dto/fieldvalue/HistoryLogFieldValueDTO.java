@@ -11,11 +11,11 @@ public class HistoryLogFieldValueDTO extends AbstractFieldValueDTO<FieldDefiniti
     private Set<HistoryEventDTO> historyEvents;
 
     protected HistoryLogFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "historyLogFieldValue");
     }
 
     public HistoryLogFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, Set<HistoryEventDTO> historyEvents) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "historyLogFieldValue");
         this.historyEvents = historyEvents;
     }
 
