@@ -581,6 +581,7 @@ CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                             `field_value_entity_id` INT NOT NULL,
                             `estimated_cost` INT NOT NULL,
                             `cost_type` VARCHAR(255) NOT NULL,
+                            `accrued_cost` INT NOT NULL,
                             CONSTRAINT `FK2_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 

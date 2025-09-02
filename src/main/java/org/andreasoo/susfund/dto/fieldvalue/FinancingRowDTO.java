@@ -7,13 +7,23 @@ public class FinancingRowDTO {
     private OrganizationDTO organization;
     private int financingAmount;
     private int financingPercentage;
+    private Long id;
 
     public FinancingRowDTO(){}
 
-    public FinancingRowDTO(OrganizationDTO organization, int financingAmount, int financingPercentage) {
+    public FinancingRowDTO(Long id, OrganizationDTO organization, int financingAmount, int financingPercentage) {
+        this.id = id;
         this.organization = organization;
         this.financingAmount = financingAmount;
         this.financingPercentage = financingPercentage;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public OrganizationDTO getOrganization() {

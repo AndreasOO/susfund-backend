@@ -1,11 +1,15 @@
 package org.andreasoo.susfund.dto;
 
+import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
+import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.CaseDecisionType2;
 import org.andreasoo.susfund.entity.updated.CaseStatus2;
 
+import java.util.List;
+
 public class CaseDTO extends AbstractDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private OrganizationDTO organization;
     private CaseManagerDTO caseManager;
@@ -14,16 +18,18 @@ public class CaseDTO extends AbstractDTO {
     private CaseStatus2 caseStatus;
     private CaseDecisionType2 caseDecisionType;
     private SupportTypeNodeDTO supportTypeNode;
+    private List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields;
 
     public CaseDTO() {
         super("case");
 
     }
 
-    public CaseDTO(int id, String name, OrganizationDTO organization,
+    public CaseDTO(Long id, String name, OrganizationDTO organization,
                    CaseManagerDTO caseManager, CaseManagerDTO caseController,
                    CaseManagerDTO handledBy, CaseStatus2 caseStatus,
-                   CaseDecisionType2 caseDecisionType, SupportTypeNodeDTO supportTypeNode) {
+                   CaseDecisionType2 caseDecisionType, SupportTypeNodeDTO supportTypeNode,
+                   List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields) {
         super("case");
         this.id = id;
         this.name = name;
@@ -34,13 +40,14 @@ public class CaseDTO extends AbstractDTO {
         this.caseStatus = caseStatus;
         this.caseDecisionType = caseDecisionType;
         this.supportTypeNode = supportTypeNode;
+        this.fields = fields;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

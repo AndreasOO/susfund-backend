@@ -5,26 +5,26 @@ import org.andreasoo.susfund.entity.updated.field.value.budget.CostType;
 
 public class BudgetRowDTO {
 
-    private OrganizationDTO organization;
     private int estimatedCost;
     private CostType costType;
     private int accruedCost;
+    private Long id;
 
     public BudgetRowDTO(){}
 
-    public BudgetRowDTO(OrganizationDTO organization, int estimatedCost, CostType costType, int accruedCost) {
-        this.organization = organization;
+    public BudgetRowDTO(Long id, int estimatedCost, CostType costType, int accruedCost) {
+        this.id = id;
         this.estimatedCost = estimatedCost;
         this.costType = costType;
         this.accruedCost = accruedCost;
     }
 
-    public OrganizationDTO getOrganization() {
-        return organization;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrganization(OrganizationDTO organization) {
-        this.organization = organization;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getEstimatedCost() {
