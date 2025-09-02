@@ -15,7 +15,7 @@ import java.util.List;
 public class CaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String name;
 
@@ -44,7 +44,7 @@ public class CaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private CaseDecisionType2 caseDecisionType;
 
-    @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
 
 
@@ -56,14 +56,14 @@ public class CaseEntity implements Serializable {
     public CaseEntity() {
     }
 
-    public CaseEntity(int id, String name, Organization organization, CaseManager caseManager) {
+    public CaseEntity(Long id, String name, Organization organization, CaseManager caseManager) {
         this.id = id;
         this.name = name;
         this.organization = organization;
         this.caseManager = caseManager;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -76,7 +76,7 @@ public class CaseEntity implements Serializable {
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

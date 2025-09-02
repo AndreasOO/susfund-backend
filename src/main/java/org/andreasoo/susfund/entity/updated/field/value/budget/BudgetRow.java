@@ -21,6 +21,9 @@ public class BudgetRow {
     @JoinColumn(name="field_value_entity_id")
     BudgetFieldValue owningBudget;
 
+    @Column(name="accrued_cost")
+    int accruedCost;
+
     public Long getId() {
         return id;
     }
@@ -47,6 +50,14 @@ public class BudgetRow {
 
     public BudgetFieldValue getOwningBudget() {
         return owningBudget;
+    }
+
+    public int getAccruedCost() {
+        return accruedCost;
+    }
+
+    public void setAccruedCost(int accruedCost) {
+        this.accruedCost = accruedCost;
     }
 
     public void setOwningBudget(BudgetFieldValue owningBudget) {

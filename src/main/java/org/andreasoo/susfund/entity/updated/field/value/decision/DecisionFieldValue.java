@@ -3,11 +3,12 @@ package org.andreasoo.susfund.entity.updated.field.value.decision;
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableFieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
 @Entity
 @DiscriminatorValue(value="DECISION")
-public class DecisionFieldValue extends AbstractFieldValue<FieldDefinition> {
+public class DecisionFieldValue extends AbstractFieldValue<SelectableFieldDefinition> {
 
     public DecisionFieldValue() {
         super();
