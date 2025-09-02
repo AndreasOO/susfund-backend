@@ -19,6 +19,7 @@ import {CaseApplication} from './case-entity/case-application';
 import {AssessmentUpdateRequest} from './case-util/assessment-update-request';
 import {LoginRequest} from './case-util/login-request';
 import {TokenBearer} from './case-util/token-bearer';
+import {SimpleCaseDto} from './case-entity/new/simple-case-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -159,5 +160,9 @@ export class CasesFetcherService {
     return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casedecision", payload)
   }
 
+  // tillfällig för ett enda case av ny sort
+  public getTheOneAndOnlyCase():Observable<SimpleCaseDto> {
+    return this.http.get<SimpleCaseDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/getsimplecase")
+  }
 
 }

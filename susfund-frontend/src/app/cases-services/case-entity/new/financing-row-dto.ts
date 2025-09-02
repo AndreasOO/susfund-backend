@@ -4,5 +4,6 @@ export interface FinancingRowDto {
   id:number,
   organization:OrganizationDto,
   financingAmount:number,
-  financingPercentage:number
+  financingPercentage:number,
+  dtoClass:string
 }

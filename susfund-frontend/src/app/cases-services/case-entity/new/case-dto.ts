@@ -13,5 +13,6 @@ export interface CaseDto {
   caseStatus:string,
   caseDecisionType:string,
   supportTypeNode:SupportTypeNodeDto,
-  fieldDefinitions:FieldDefinitionDto[]
+  fieldDefinitions:FieldDefinitionDto[],
+  dtoClass:string
 }

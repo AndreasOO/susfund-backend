@@ -11,10 +11,7 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.dto.CaseDTO;
-import org.andreasoo.susfund.dto.CaseManagerDTO;
-import org.andreasoo.susfund.dto.OrganizationDTO;
-import org.andreasoo.susfund.dto.SupportTypeNodeDTO;
+import org.andreasoo.susfund.dto.*;
 import org.andreasoo.susfund.dto.fielddefinition.BudgetFieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fielddefinition.SelectableFieldDefinitionDTO;
@@ -537,4 +534,18 @@ public class CasesResource {
 
         return Response.ok().build();
     }
+
+
+
+    @Path("/getsimplecase")
+    @GET()
+    @Produces("application/json")
+    public Response getSimpleCase() {
+        CaseEntity caze = casesService.createCaseWithMockData();
+
+        SimpleCaseDTO simpleCase = new SimpleCaseDTO(caze.getId(), caze.getName(), caze.getOrganization().getName(), caze.getCaseManager().getName(), caze.getCaseController().getName(), caze.getCaseStatus(), caze.getCaseDecisionType());
+
+        return Response.ok(simpleCase).build();
+    }
+
 }
