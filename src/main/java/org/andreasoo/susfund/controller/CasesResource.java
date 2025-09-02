@@ -439,8 +439,6 @@ public class CasesResource {
                         default -> throw new RuntimeException("oops");
                     }
                 }).toList()
-
-
         );
 
         return Response.ok(caseDTO).build();
@@ -479,16 +477,16 @@ public class CasesResource {
         fdn2.setSubSection(SubSection.FINANCING);
 
 
-        BudgetFieldDefinition fdn3 = new BudgetFieldDefinition();
-        fdn3.setFieldType(FieldType.BUDGET);
-        fdn3.setSection(Section.BUDGET);
-        fdn3.setTitle("Test Title3");
-        fdn3.setPreamble("Test Preamble3");
-        fdn3.setAssistingText("Test assisting text3");
-        fdn3.setHasComment(false);
-        fdn3.setRowIndex(3L);
-        fdn3.setBudgetType(BudgetType.NORMAL);
-        fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+//        BudgetFieldDefinition fdn3 = new BudgetFieldDefinition();
+//        fdn3.setFieldType(FieldType.BUDGET);
+//        fdn3.setSection(Section.BUDGET);
+//        fdn3.setTitle("Test Title3");
+//        fdn3.setPreamble("Test Preamble3");
+//        fdn3.setAssistingText("Test assisting text3");
+//        fdn3.setHasComment(false);
+//        fdn3.setRowIndex(3L);
+//        fdn3.setBudgetType(BudgetType.NORMAL);
+//        fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
 
 //        fieldDefinitionService.createSelectableValues(
@@ -528,7 +526,7 @@ public class CasesResource {
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
 
 
-        BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
+//        BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
         SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn4);
 
         FieldDefinition numericFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn5);

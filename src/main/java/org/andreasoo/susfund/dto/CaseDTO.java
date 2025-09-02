@@ -114,4 +114,12 @@ public class CaseDTO extends AbstractDTO {
     public void setSupportTypeNode(SupportTypeNodeDTO supportTypeNode) {
         this.supportTypeNode = supportTypeNode;
     }
+
+    public List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields) {
+        this.fields = fields;
+    }
 }
