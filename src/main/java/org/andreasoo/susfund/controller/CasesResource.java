@@ -39,10 +39,7 @@ import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldV
 import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
-import org.andreasoo.susfund.service.BudgetService;
-import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.service.FieldDefinitionService;
-import org.andreasoo.susfund.service.SupportTypeNodeService;
+import org.andreasoo.susfund.service.*;
 import org.andreasoo.susfund.util.*;
 
 
@@ -69,6 +66,9 @@ public class CasesResource {
 
     @Inject
     private SupportTypeNodeService supportTypeNodeService;
+
+    @Inject
+    private GeneralMappingService generalMappingService;
 
     @GET
     @Produces("application/json")
@@ -440,8 +440,9 @@ public class CasesResource {
                     }
                 }).toList()
         );
-
-        return Response.ok(caseDTO).build();
+        return Response.ok(generalMappingService.mapToDTO(caze)).build();
+//        return Response.ok(generalMappingService.mapCaseToDTO(caze)).build();
+//        return Response.ok(caseDTO).build();
     }
 
     @Path("/createfields")
