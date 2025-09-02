@@ -3,17 +3,21 @@ package org.andreasoo.susfund.dto.fieldvalue;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import org.andreasoo.susfund.dto.AbstractDTO;
 import org.andreasoo.susfund.entity.updated.field.value.selectable.SelectableType;
 
-public class SelectableValueDTO {
+public class SelectableValueDTO extends AbstractDTO {
 
     Long id;
     String value;
     SelectableType selectableType;
 
-    public SelectableValueDTO(){}
+    public SelectableValueDTO() {
+        super("selectableValue");
+    }
 
     public SelectableValueDTO(Long id, String value, SelectableType selectableType) {
+        super("selectableValue");
         this.id = id;
         this.value = value;
         this.selectableType = selectableType;

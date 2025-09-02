@@ -9,11 +9,11 @@ public class TextFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO>
     private String stringValue;
 
     protected TextFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "textFieldValue");
     }
 
     public TextFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, String stringValue) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "textFieldValue");
         this.stringValue = stringValue;
     }
 

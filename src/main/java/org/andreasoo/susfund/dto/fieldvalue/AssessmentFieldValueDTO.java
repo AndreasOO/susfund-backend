@@ -10,11 +10,11 @@ public class AssessmentFieldValueDTO extends AbstractFieldValueDTO<FieldDefiniti
     private String assessmentJustification;
 
     protected AssessmentFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "assessmentFieldValue");
     }
 
     public AssessmentFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, Integer assessmentScore, String assessmentJustification) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "assessmentFieldValue");
         this.assessmentScore = assessmentScore;
         this.assessmentJustification = assessmentJustification;
     }

@@ -2,7 +2,7 @@ package org.andreasoo.susfund.dto;
 
 public abstract class AbstractDTO {
 
-    private final String dtoClass;
+    private String dtoClass;
 
     public AbstractDTO(String dtoClass){
         this.dtoClass = dtoClass;
@@ -10,5 +10,9 @@ public abstract class AbstractDTO {
 
     public String getDtoClass() {
         return dtoClass;
+    }
+
+    public void setDtoClass(String dtoClass) {
+        this.dtoClass = dtoClass;
     }
 }

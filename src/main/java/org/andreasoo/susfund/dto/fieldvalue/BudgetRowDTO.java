@@ -1,18 +1,22 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
+import org.andreasoo.susfund.dto.AbstractDTO;
 import org.andreasoo.susfund.dto.OrganizationDTO;
 import org.andreasoo.susfund.entity.updated.field.value.budget.CostType;
 
-public class BudgetRowDTO {
+public class BudgetRowDTO extends AbstractDTO {
 
     private int estimatedCost;
     private CostType costType;
     private int accruedCost;
     private Long id;
 
-    public BudgetRowDTO(){}
+    public BudgetRowDTO(){
+        super("budgetRowDTO");
+    }
 
     public BudgetRowDTO(Long id, int estimatedCost, CostType costType, int accruedCost) {
+        super("budgetRowDTO");
         this.id = id;
         this.estimatedCost = estimatedCost;
         this.costType = costType;

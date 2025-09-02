@@ -5,6 +5,7 @@ import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetFieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,10 +21,10 @@ public class BudgetFieldValue extends AbstractFieldValue<BudgetFieldDefinition> 
     }
 
     @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
-    List<FinancingRow> financingRows;
+    List<FinancingRow> financingRows = new ArrayList<>();
 
     @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
-    List<BudgetRow> budgetRows;
+    List<BudgetRow> budgetRows = new ArrayList<>();
 
     @Column(name="total_financing_ratio")
     int totalFinancingRatio;
