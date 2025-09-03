@@ -36,10 +36,7 @@ import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldV
 import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
-import org.andreasoo.susfund.service.BudgetService;
-import org.andreasoo.susfund.service.CasesService;
-import org.andreasoo.susfund.service.FieldDefinitionService;
-import org.andreasoo.susfund.service.SupportTypeNodeService;
+import org.andreasoo.susfund.service.*;
 import org.andreasoo.susfund.util.*;
 
 
@@ -66,6 +63,9 @@ public class CasesResource {
 
     @Inject
     private SupportTypeNodeService supportTypeNodeService;
+
+    @Inject
+    private GeneralMappingService generalMappingService;
 
     @GET
     @Produces("application/json")
@@ -259,7 +259,7 @@ public class CasesResource {
         CaseDTO caseDTO = new CaseDTO(
                 caze.getId(),
                 caze.getName(),
-                new OrganizationDTO(caze.getOrganization().getId(), caze.getOrganization().getName(), caze.getOrganization().getOrganizationType().toString()),
+                new OrganizationDTO(caze.getOrganization().getId(), caze.getOrganization().getName(), caze.getOrganization().getOrganizationType().getName()),
                 new CaseManagerDTO(caze.getCaseManager().getId(), caze.getCaseManager().getName()),
                 new CaseManagerDTO(caze.getCaseController().getId(), caze.getCaseController().getName()),
                 new CaseManagerDTO(caze.getHandledBy().getId(), caze.getHandledBy().getName()),
@@ -363,7 +363,7 @@ public class CasesResource {
                                                                                                 row.getId(),
                                                                                                 new OrganizationDTO(row.getOrganization().getId(),
                                                                                                                     row.getOrganization().getName(),
-                                                                                                                    row.getOrganization().getOrganizationType().toString()),
+                                                                                                                    row.getOrganization().getOrganizationType().getName()),
                                                                                                 row.getFinancingAmount(),
                                                                                                 row.getFinancingPercentage()))
                                                                    .toList(),
@@ -437,8 +437,9 @@ public class CasesResource {
                     }
                 }).toList()
         );
-
-        return Response.ok(caseDTO).build();
+        return Response.ok(generalMappingService.mapToDTO(caze)).build();
+//        return Response.ok(generalMappingService.mapCaseToDTO(caze)).build();
+//        return Response.ok(caseDTO).build();
     }
 
     @Path("/createfields")
@@ -474,16 +475,16 @@ public class CasesResource {
         fdn2.setSubSection(SubSection.FINANCING);
 
 
-//        BudgetFieldDefinition fdn3 = new BudgetFieldDefinition();
-//        fdn3.setFieldType(FieldType.BUDGET);
-//        fdn3.setSection(Section.BUDGET);
-//        fdn3.setTitle("Test Title3");
-//        fdn3.setPreamble("Test Preamble3");
-//        fdn3.setAssistingText("Test assisting text3");
-//        fdn3.setHasComment(false);
-//        fdn3.setRowIndex(3L);
-//        fdn3.setBudgetType(BudgetType.NORMAL);
-//        fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+        BudgetFieldDefinition fdn3 = new BudgetFieldDefinition();
+        fdn3.setFieldType(FieldType.BUDGET);
+        fdn3.setSection(Section.BUDGET);
+        fdn3.setTitle("Test Title3");
+        fdn3.setPreamble("Test Preamble3");
+        fdn3.setAssistingText("Test assisting text3");
+        fdn3.setHasComment(false);
+        fdn3.setRowIndex(3L);
+        fdn3.setBudgetType(BudgetType.NORMAL);
+        fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
 
 //        fieldDefinitionService.createSelectableValues(
@@ -523,7 +524,7 @@ public class CasesResource {
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
 
 
-//        BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
+        BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
         SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn4);
 
         FieldDefinition numericFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn5);

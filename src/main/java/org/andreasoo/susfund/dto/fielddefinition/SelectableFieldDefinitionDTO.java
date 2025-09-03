@@ -5,7 +5,6 @@ import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType
 import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
 import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
 import org.andreasoo.susfund.entity.updated.field.definition.section.SubSection;
-import org.andreasoo.susfund.entity.updated.field.value.selectable.SelectableValue;
 
 import java.util.Set;
 
@@ -21,6 +20,7 @@ public class SelectableFieldDefinitionDTO extends FieldDefinitionDTO {
 
     public SelectableFieldDefinitionDTO(Long id, String title, String preamble, String assistingText, Boolean hasComment, Section section, SubSection subSection, FieldType fieldType, FrontendLocation frontendLocation, Long rowIndex, Set<SelectableValueDTO> selectableValues) {
         super(id, title, preamble, assistingText, hasComment, section, subSection, fieldType, frontendLocation, rowIndex);
+        this.setDtoClass("selectableFieldDefinition");
         this.selectableValues = selectableValues;
     }
 

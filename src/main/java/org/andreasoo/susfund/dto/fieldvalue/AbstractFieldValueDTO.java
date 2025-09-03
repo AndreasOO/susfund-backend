@@ -8,8 +8,8 @@ public abstract class AbstractFieldValueDTO<T extends FieldDefinitionDTO> extend
     public final Long owningCaseId;
     public final FieldDefinitionDTO owningFieldDefinition;
 
-    protected AbstractFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super("fieldValue");
+    protected AbstractFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, String dtoClassName) {
+        super(dtoClassName);
         this.owningCaseId = owningCaseId;
         this.owningFieldDefinition = owningFieldDefinition;
     }

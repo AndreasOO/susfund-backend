@@ -7,11 +7,11 @@ public class NumericFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionD
     private Integer numericValue;
 
     protected NumericFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "numericFieldValue");
     }
 
     public NumericFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, Integer numericValue) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "numericFieldValue");
         this.numericValue = numericValue;
     }
 

@@ -11,11 +11,11 @@ public class BudgetFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDT
     private List<BudgetRowDTO> budgetRows;
 
     protected BudgetFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition, "budgetFieldValue");
     }
 
     public BudgetFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, Integer totalFinancingRatio, List<FinancingRowDTO> financingRows, List<BudgetRowDTO> budgetRows) {
-        super(owningCaseId, owningFieldDefinition);
+        super(owningCaseId, owningFieldDefinition,  "budgetFieldValue");
         this.totalFinancingRatio = totalFinancingRatio;
         this.financingRows = financingRows;
         this.budgetRows = budgetRows;

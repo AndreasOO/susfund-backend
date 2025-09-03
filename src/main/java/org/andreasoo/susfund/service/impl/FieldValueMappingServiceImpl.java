@@ -1,0 +1,68 @@
+package org.andreasoo.susfund.service.impl;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
+import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
+import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
+import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.datefield.DateFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
+import org.andreasoo.susfund.mapper.fields.FieldValueMapper;
+import org.andreasoo.susfund.mapper.fields.*;
+import org.andreasoo.susfund.service.FieldValueMappingService;
+
+import java.util.Map;
+
+@ApplicationScoped
+public class FieldValueMappingServiceImpl implements FieldValueMappingService {
+
+    private final Map<Class<? extends AbstractFieldValue<?>>, FieldValueMapper<?, ?>> mappers;
+
+    @Inject
+    public FieldValueMappingServiceImpl(
+            TextFieldValueMapper textMapper,
+            NumericFieldValueMapper numericMapper,
+            DateFieldValueMapper dateMapper,
+            DecisionFieldValueMapper decisionMapper,
+            BudgetFieldValueMapper budgetMapper,
+            AssessmentFieldValueMapper assessmentMapper,
+            HistoryLogFieldValueMapper historyLogMapper) {
+
+        this.mappers = Map.of(
+                TextFieldValue.class, textMapper,
+                NumericFieldValue.class, numericMapper,
+                DateFieldValue.class, dateMapper,
+                DecisionFieldValue.class, decisionMapper,
+                BudgetFieldValue.class, budgetMapper,
+                AssessmentFieldValue.class, assessmentMapper,
+                HistoryLogFieldValue.class, historyLogMapper
+        );
+    }
+
+    @Override
+    public AbstractFieldValueDTO<? extends FieldDefinitionDTO> mapFieldValueToDTO(AbstractFieldValue<?> fieldValue) {
+        return getMapper(fieldValue.getClass())
+                .mapToDTO(fieldValue);
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    private <T extends AbstractFieldValue<?>> FieldValueMapper<T, AbstractFieldValueDTO<?>> getMapper(Class<?> fieldValueType) {
+        FieldValueMapper<?, ?> mapper = mappers.get(fieldValueType);
+
+        if (mapper == null) {
+            throw new IllegalArgumentException("No mapper found for field value type: " + fieldValueType.getSimpleName());
+        }
+
+        return (FieldValueMapper<T, AbstractFieldValueDTO<?>>) mapper;
+    }
+}
+
+

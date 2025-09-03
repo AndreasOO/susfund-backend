@@ -20,13 +20,13 @@ public class FieldDefinitionDTO extends AbstractDTO {
     private Long rowIndex;
 
     public FieldDefinitionDTO() {
-        super("fieldDefinition");
+        super("simpleFieldDefinition");
     }
 
     public FieldDefinitionDTO(Long id, String title, String preamble, String assistingText,
                               Boolean hasComment, Section section, SubSection subSection,
                               FieldType fieldType, FrontendLocation frontendLocation, Long rowIndex) {
-        super("fieldDefinition");
+        super("simpleFieldDefinition");
         this.id = id;
         this.title = title;
         this.preamble = preamble;
