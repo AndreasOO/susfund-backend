@@ -10,7 +10,7 @@ import org.andreasoo.susfund.entity.updated.field.definition.selectable.Selectab
 
 import java.util.stream.Collectors;
 
-public interface BaseFieldDefinitionMapper {
+public interface FieldDefinitionDTOFactory {
 
     default FieldDefinitionDTO createFieldDefinitionDTO(FieldDefinition fieldDef) {
         return new FieldDefinitionDTO(

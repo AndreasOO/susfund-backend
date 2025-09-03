@@ -7,7 +7,7 @@ import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue
 @ApplicationScoped
 public class TextFieldValueMapper
         implements FieldValueMapper<TextFieldValue, TextFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public TextFieldValueDTO mapToDTO(TextFieldValue fieldValue) {

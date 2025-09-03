@@ -7,7 +7,7 @@ import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldVa
 @ApplicationScoped
 public class DecisionFieldValueMapper
         implements FieldValueMapper<DecisionFieldValue, DecisionFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public DecisionFieldValueDTO mapToDTO(DecisionFieldValue fieldValue) {

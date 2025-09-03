@@ -2,7 +2,6 @@ package org.andreasoo.susfund.entity.updated.field.definition.selectable;
 
 import jakarta.persistence.*;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.value.selectable.SelectableValue;
 
 import java.util.Set;
 

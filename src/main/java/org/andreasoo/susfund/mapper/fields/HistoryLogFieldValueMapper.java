@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class HistoryLogFieldValueMapper
         implements FieldValueMapper<HistoryLogFieldValue, HistoryLogFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public HistoryLogFieldValueDTO mapToDTO(HistoryLogFieldValue fieldValue) {

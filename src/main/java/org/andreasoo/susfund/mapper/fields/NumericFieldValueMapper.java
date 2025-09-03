@@ -7,7 +7,7 @@ import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFiel
 @ApplicationScoped
 public class NumericFieldValueMapper
         implements FieldValueMapper<NumericFieldValue, NumericFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public NumericFieldValueDTO mapToDTO(NumericFieldValue fieldValue) {

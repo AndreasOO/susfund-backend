@@ -7,7 +7,7 @@ import org.andreasoo.susfund.entity.updated.field.value.datefield.DateFieldValue
 @ApplicationScoped
 public class DateFieldValueMapper
         implements FieldValueMapper<DateFieldValue, DateFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public DateFieldValueDTO mapToDTO(DateFieldValue fieldValue) {

@@ -10,7 +10,7 @@ import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
 @ApplicationScoped
 public class BudgetFieldValueMapper
         implements FieldValueMapper<BudgetFieldValue, BudgetFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public BudgetFieldValueDTO mapToDTO(BudgetFieldValue fieldValue) {

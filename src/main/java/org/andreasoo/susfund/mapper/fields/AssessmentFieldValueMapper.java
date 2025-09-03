@@ -7,7 +7,7 @@ import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFie
 @ApplicationScoped
 public class AssessmentFieldValueMapper
         implements FieldValueMapper<AssessmentFieldValue, AssessmentFieldValueDTO>,
-                   BaseFieldDefinitionMapper {
+                   FieldDefinitionDTOFactory {
 
     @Override
     public AssessmentFieldValueDTO mapToDTO(AssessmentFieldValue fieldValue) {
