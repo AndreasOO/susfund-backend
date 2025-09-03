@@ -3,16 +3,16 @@ package org.andreasoo.susfund.mapper.fields;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.AssessmentFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
 
 @ApplicationScoped
-public class AssessmentFieldValueMapper extends BaseFieldValueMapper
-        implements FieldValueMapper<AssessmentFieldValue, AssessmentFieldValueDTO> {
+public class AssessmentFieldValueMapper
+        implements FieldValueMapper<AssessmentFieldValue, AssessmentFieldValueDTO>,
+                   BaseFieldDefinitionMapper {
 
     @Override
-    public AssessmentFieldValueDTO mapToDTO(AssessmentFieldValue fieldValue, Long caseId) {
+    public AssessmentFieldValueDTO mapToDTO(AssessmentFieldValue fieldValue) {
         return new AssessmentFieldValueDTO(
-                caseId,
+                fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getAssessmentScore(),
                 fieldValue.getAssessmentJustification()

@@ -3,16 +3,16 @@ package org.andreasoo.susfund.mapper.fields;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.DecisionFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
 
 @ApplicationScoped
-public class DecisionFieldValueMapper extends BaseFieldValueMapper
-        implements FieldValueMapper<DecisionFieldValue, DecisionFieldValueDTO> {
+public class DecisionFieldValueMapper
+        implements FieldValueMapper<DecisionFieldValue, DecisionFieldValueDTO>,
+                   BaseFieldDefinitionMapper {
 
     @Override
-    public DecisionFieldValueDTO mapToDTO(DecisionFieldValue fieldValue, Long caseId) {
+    public DecisionFieldValueDTO mapToDTO(DecisionFieldValue fieldValue) {
         return new DecisionFieldValueDTO(
-                caseId,
+                fieldValue.getOwningCase().getId(),
                 createSelectableFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getDecisionResultType()
         );

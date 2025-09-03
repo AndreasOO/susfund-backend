@@ -6,12 +6,10 @@ import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
+import org.andreasoo.susfund.mapper.fields.FieldValueMapper;
 import org.andreasoo.susfund.mapper.fields.*;
 import org.andreasoo.susfund.service.FieldValueMappingService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
@@ -42,7 +40,7 @@ public class FieldValueMappingServiceImpl implements FieldValueMappingService {
     }
 
     @Override
-    public AbstractFieldValueDTO<? extends FieldDefinitionDTO> mapFieldValueToDTO(AbstractFieldValue<?> fieldValue, Long caseId) {
+    public AbstractFieldValueDTO<? extends FieldDefinitionDTO> mapFieldValueToDTO(AbstractFieldValue<?> fieldValue) {
         FieldValueMapper<AbstractFieldValue<?>, AbstractFieldValueDTO<?>> mapper =
                 (FieldValueMapper<AbstractFieldValue<?>, AbstractFieldValueDTO<?>>)
                         mappers.get(fieldValue.getFieldDefinition().getFieldType());
@@ -50,16 +48,7 @@ public class FieldValueMappingServiceImpl implements FieldValueMappingService {
         if (mapper == null) {
             throw new IllegalArgumentException("No mapper found for field type: " + fieldValue.getFieldDefinition().getFieldType());
         }
-
-        return mapper.mapToDTO(fieldValue, caseId);
-    }
-
-    @Override
-    public List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> mapFieldValuesToDTOs(List<? extends AbstractFieldValue<?>> fieldValues, Long caseId) {
-        if (fieldValues == null) return new ArrayList<>();
-        return fieldValues.stream()
-                .<AbstractFieldValueDTO<? extends FieldDefinitionDTO>>map(fv -> mapFieldValueToDTO(fv, caseId))
-                .toList();
+        return mapper.mapToDTO(fieldValue);
     }
 }
 

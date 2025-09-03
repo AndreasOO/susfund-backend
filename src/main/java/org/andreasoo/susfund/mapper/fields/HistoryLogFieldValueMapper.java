@@ -4,18 +4,18 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.HistoryEventDTO;
 import org.andreasoo.susfund.dto.fieldvalue.HistoryLogFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
 
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class HistoryLogFieldValueMapper extends BaseFieldValueMapper
-        implements FieldValueMapper<HistoryLogFieldValue, HistoryLogFieldValueDTO> {
+public class HistoryLogFieldValueMapper
+        implements FieldValueMapper<HistoryLogFieldValue, HistoryLogFieldValueDTO>,
+                   BaseFieldDefinitionMapper {
 
     @Override
-    public HistoryLogFieldValueDTO mapToDTO(HistoryLogFieldValue fieldValue, Long caseId) {
+    public HistoryLogFieldValueDTO mapToDTO(HistoryLogFieldValue fieldValue) {
         return new HistoryLogFieldValueDTO(
-                caseId,
+                fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getHistoryEvents().stream()
                         .map(he -> new HistoryEventDTO(
