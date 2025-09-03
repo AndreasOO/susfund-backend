@@ -3,16 +3,16 @@ package org.andreasoo.susfund.mapper.fields;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.NumericFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
 
 @ApplicationScoped
-public class NumericFieldValueMapper extends BaseFieldValueMapper
-        implements FieldValueMapper<NumericFieldValue, NumericFieldValueDTO> {
+public class NumericFieldValueMapper
+        implements FieldValueMapper<NumericFieldValue, NumericFieldValueDTO>,
+                   FieldDefinitionDTOFactory {
 
     @Override
-    public NumericFieldValueDTO mapToDTO(NumericFieldValue fieldValue, Long caseId) {
+    public NumericFieldValueDTO mapToDTO(NumericFieldValue fieldValue) {
         return new NumericFieldValueDTO(
-                caseId,
+                fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getNumericValue()
         );

@@ -6,7 +6,7 @@ import jakarta.inject.Inject;
 import org.andreasoo.susfund.dao.FieldDefinitionDao;
 import org.andreasoo.susfund.dao.SelectableValueDao;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.value.selectable.SelectableValue;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableValue;
 import org.andreasoo.susfund.service.FieldDefinitionService;
 
 import java.util.List;

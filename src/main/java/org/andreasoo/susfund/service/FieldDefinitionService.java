@@ -1,7 +1,7 @@
 package org.andreasoo.susfund.service;
 
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.value.selectable.SelectableValue;
+import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableValue;
 
 import java.util.List;
 

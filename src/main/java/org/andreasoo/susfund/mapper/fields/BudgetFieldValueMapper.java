@@ -6,16 +6,16 @@ import org.andreasoo.susfund.dto.fieldvalue.BudgetFieldValueDTO;
 import org.andreasoo.susfund.dto.fieldvalue.BudgetRowDTO;
 import org.andreasoo.susfund.dto.fieldvalue.FinancingRowDTO;
 import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
 
 @ApplicationScoped
-public class BudgetFieldValueMapper extends BaseFieldValueMapper
-        implements FieldValueMapper<BudgetFieldValue, BudgetFieldValueDTO> {
+public class BudgetFieldValueMapper
+        implements FieldValueMapper<BudgetFieldValue, BudgetFieldValueDTO>,
+                   FieldDefinitionDTOFactory {
 
     @Override
-    public BudgetFieldValueDTO mapToDTO(BudgetFieldValue fieldValue, Long caseId) {
+    public BudgetFieldValueDTO mapToDTO(BudgetFieldValue fieldValue) {
         return new BudgetFieldValueDTO(
-                caseId,
+                fieldValue.getOwningCase().getId(),
                 createBudgetFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getTotalFinancingRatio(),
                 fieldValue.getFinancingRows().stream()

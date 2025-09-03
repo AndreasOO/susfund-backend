@@ -10,9 +10,9 @@ import org.andreasoo.susfund.entity.updated.field.definition.selectable.Selectab
 
 import java.util.stream.Collectors;
 
-public abstract class BaseFieldValueMapper {
+public interface FieldDefinitionDTOFactory {
 
-    protected FieldDefinitionDTO createFieldDefinitionDTO(FieldDefinition fieldDef) {
+    default FieldDefinitionDTO createFieldDefinitionDTO(FieldDefinition fieldDef) {
         return new FieldDefinitionDTO(
                 fieldDef.getId(),
                 fieldDef.getTitle(),
@@ -27,7 +27,7 @@ public abstract class BaseFieldValueMapper {
         );
     }
 
-    protected SelectableFieldDefinitionDTO createSelectableFieldDefinitionDTO(SelectableFieldDefinition fieldDef) {
+    default SelectableFieldDefinitionDTO createSelectableFieldDefinitionDTO(SelectableFieldDefinition fieldDef) {
         return new SelectableFieldDefinitionDTO(
                 fieldDef.getId(),
                 fieldDef.getTitle(),
@@ -45,7 +45,7 @@ public abstract class BaseFieldValueMapper {
         );
     }
 
-    protected BudgetFieldDefinitionDTO createBudgetFieldDefinitionDTO(BudgetFieldDefinition fieldDef) {
+    default BudgetFieldDefinitionDTO createBudgetFieldDefinitionDTO(BudgetFieldDefinition fieldDef) {
         return new BudgetFieldDefinitionDTO(
                 fieldDef.getId(),
                 fieldDef.getTitle(),

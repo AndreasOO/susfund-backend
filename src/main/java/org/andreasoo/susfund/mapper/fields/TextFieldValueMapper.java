@@ -3,16 +3,16 @@ package org.andreasoo.susfund.mapper.fields;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.TextFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
-import org.andreasoo.susfund.mapper.FieldValueMapper;
 
 @ApplicationScoped
-public class TextFieldValueMapper extends BaseFieldValueMapper
-        implements FieldValueMapper<TextFieldValue, TextFieldValueDTO> {
+public class TextFieldValueMapper
+        implements FieldValueMapper<TextFieldValue, TextFieldValueDTO>,
+                   FieldDefinitionDTOFactory {
 
     @Override
-    public TextFieldValueDTO mapToDTO(TextFieldValue fieldValue, Long caseId) {
+    public TextFieldValueDTO mapToDTO(TextFieldValue fieldValue) {
         return new TextFieldValueDTO(
-                caseId,
+                fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getStringValue()
         );

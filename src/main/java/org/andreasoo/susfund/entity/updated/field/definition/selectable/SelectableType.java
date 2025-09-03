@@ -1,4 +1,4 @@
-package org.andreasoo.susfund.entity.updated.field.value.selectable;
+package org.andreasoo.susfund.entity.updated.field.definition.selectable;
 
 public enum SelectableType {
     CASE_MANAGER,

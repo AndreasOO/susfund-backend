@@ -13,9 +13,4 @@ import java.util.List;
 
 public interface GeneralMappingService {
     <E, D> D mapToDTO(E entity);
-    <E, D> List<D> mapListToDTO(List<E> entities);
-    CaseDTO mapCaseToDTO(CaseEntity entity);
-    OrganizationDTO mapOrganizationToDTO(Organization entity);
-    CaseManagerDTO mapCaseManagerToDTO(CaseManager entity);
-    SupportTypeNodeDTO mapSupportTypeNodeToDTO(SupportTypeNode entity);
 }
