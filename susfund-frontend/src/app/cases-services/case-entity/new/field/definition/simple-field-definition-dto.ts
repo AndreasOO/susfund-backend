@@ -1,5 +1,6 @@
-export interface FieldDefinitionDto {
+export interface SimpleFieldDefinitionDto {
   id: number,
+  dtoClass:string
   title: string,
   preAmble: string,
   assistingText: string,
@@ -9,5 +10,4 @@ export interface FieldDefinitionDto {
   frontendLocation:string,
   rowIndex:number,
   fieldType:string,
-  dtoClass:string
 }

@@ -1,5 +1,6 @@
-import {FieldDefinitionDto} from './field-definition-dto';
 
-export interface BudgetFieldDefinitionDto extends FieldDefinitionDto {
+import {SimpleFieldDefinitionDto} from './simple-field-definition-dto';
+
+export interface BudgetFieldDefinitionDto extends SimpleFieldDefinitionDto {
   budgetType:string
 }

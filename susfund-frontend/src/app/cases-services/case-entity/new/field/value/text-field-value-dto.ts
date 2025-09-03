@@ -1,8 +1,9 @@
-import {FieldDefinitionDto} from '../definition/field-definition-dto';
+
+import {SimpleFieldDefinitionDto} from '../definition/simple-field-definition-dto';
 
 export interface TextFieldValueDto {
-  stringValue:string
+  dtoClass:string,
   owningCaseId:number,
-  owningFieldDefinition:FieldDefinitionDto,
-  dtoClass:string
+  owningFieldDefinition:SimpleFieldDefinitionDto,
+  stringValue:string
 }
