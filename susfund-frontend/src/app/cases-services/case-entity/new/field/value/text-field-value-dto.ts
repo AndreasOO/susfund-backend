@@ -3,8 +3,7 @@ import {SimpleFieldDefinitionDto} from '../definition/simple-field-definition-dt
 
 export interface TextFieldValueDto {
   id:number,
-  dtoClass:string,
-  owningCaseId:number,
-  owningFieldDefinition:SimpleFieldDefinitionDto,
-  stringValue:string
+  fieldDefinition:SimpleFieldDefinitionDto,
+  stringValue:string,
+  valueAsString:string
 }

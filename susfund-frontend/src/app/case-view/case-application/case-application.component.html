@@ -1,17 +1,39 @@
+<!--<div class="container bg-dark-subtle text-dark mt-5 mb-5 pb-2 rounded-1">-->
+<!--  <h2 class="mb-3 p-2">Application</h2>-->
+<!--  <hr>-->
+<!--  <div *ngIf="caseApplicationUtil?.questionResults" class="container">-->
+<!--    <div *ngFor="let sections of caseApplicationUtil?.questionResults" class="row mb-4 pb-4 border-bottom">-->
+<!--      <h3>{{ sections[0].applicationQuestion.applicationSection.name}}</h3>-->
+<!--      <div *ngFor="let question of sections" class="col-12">-->
+<!--        <div>-->
+<!--          <div class="card rounded-4 p-3 bg-secondary-subtle text-dark m-2">-->
+<!--            <h4>{{ question.applicationQuestion.title }}</h4>-->
+<!--            <h5>{{ question.applicationQuestion.preamble }}</h5>-->
+<!--            <h6>{{ question.applicationQuestion.assistingText }}</h6>-->
+<!--            <textarea class="form-control" rows="3" [value]="question.answer" #answerInput></textarea>-->
+<!--            <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="saveUpdate(answerInput.value, question.applicationQuestion.id)">Save</a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
 <div class="container bg-dark-subtle text-dark mt-5 mb-5 pb-2 rounded-1">
   <h2 class="mb-3 p-2">Application</h2>
   <hr>
-  <div *ngIf="caseApplicationUtil?.questionResults" class="container">
-    <div *ngFor="let sections of caseApplicationUtil?.questionResults" class="row mb-4 pb-4 border-bottom">
-      <h3>{{ sections[0].applicationQuestion.applicationSection.name}}</h3>
-      <div *ngFor="let question of sections" class="col-12">
+  <div *ngIf="textFieldValues" class="container">
+    <div *ngFor="let textFieldValue of textFieldValues" class="row mb-4 pb-4 border-bottom">
+      <h3>{{ textFieldValue.fieldDefinition.subSection}}</h3>
+      <div class="col-12">
         <div>
           <div class="card rounded-4 p-3 bg-secondary-subtle text-dark m-2">
-            <h4>{{ question.applicationQuestion.title }}</h4>
-            <h5>{{ question.applicationQuestion.preamble }}</h5>
-            <h6>{{ question.applicationQuestion.assistingText }}</h6>
-            <textarea class="form-control" rows="3" [value]="question.answer" #answerInput></textarea>
-            <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="saveUpdate(answerInput.value, question.applicationQuestion.id)">Save</a>
+            <h4>{{ textFieldValue.fieldDefinition.title }}</h4>
+            <h5>{{ textFieldValue.fieldDefinition.preamble }}</h5>
+            <h6>{{ textFieldValue.fieldDefinition.assistingText }}</h6>
+            <textarea class="form-control" rows="3" [value]="textFieldValue.stringValue" #answerInput></textarea>
+            <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
           </div>
         </div>
 

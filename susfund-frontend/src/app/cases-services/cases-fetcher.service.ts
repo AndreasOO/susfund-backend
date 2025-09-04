@@ -21,6 +21,7 @@ import {LoginRequest} from './case-util/login-request';
 import {TokenBearer} from './case-util/token-bearer';
 import {SimpleCaseDto} from './case-entity/new/simple-case-dto';
 import {AssessmentFieldValueDto} from './case-entity/new/field/value/assessment-field-value-dto';
+import {TextFieldValueDto} from './case-entity/new/field/value/text-field-value-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -166,8 +167,12 @@ export class CasesFetcherService {
     return this.http.get<SimpleCaseDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/getsimplecase")
   }
 
-  public getAssessmentQuestions():Observable<AssessmentFieldValueDto[]> {
+  public getAssessmentFields():Observable<AssessmentFieldValueDto[]> {
     return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/assessment-fields")
+  }
+
+  public getApplicationFields():Observable<TextFieldValueDto[]> {
+    return this.http.get<TextFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/assessment-fields")
   }
 
 }

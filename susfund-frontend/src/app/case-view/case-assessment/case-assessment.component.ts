@@ -13,9 +13,6 @@ import {AssessmentFieldValueDto} from '../../cases-services/case-entity/new/fiel
 })
 export class CaseAssessmentComponent implements OnInit {
 
-  // caseId:string | undefined
-  // caseAssessmentUtil:CaseAssessmentUtil | undefined
-
   assessmentFieldValues:AssessmentFieldValueDto[] = [];
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
@@ -23,29 +20,7 @@ export class CaseAssessmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    // this.fetcher.getCaseAssessmentUtilByCaseId(this.caseId).subscribe(caseAssessmentUtil => this.caseAssessmentUtil = caseAssessmentUtil!)
-
-    // ny
-    // this.fetcher.getAssessmentQuestions().subscribe(assessmentFields => this.assessmentFieldValues = assessmentFields!);
-
-
-    this.fetcher.getAssessmentQuestions().subscribe(assessmentFields => {
-      this.assessmentFieldValues = assessmentFields!;
-
-      // DEBUG: Logga ut hela objektet som kom från backend
-      console.log('Raw response from backend:', this.assessmentFieldValues);
-
-      // DEBUG: Logga varje fält individuellt
-      this.assessmentFieldValues.forEach((field, index) => {
-        console.log(`--- Question ${index + 1} ---`);
-        console.log('id:', field.id);
-        console.log('assessmentScore:', field.assessmentScore);
-        console.log('assessmentJustification:', field.assessmentJustification);
-        console.log('valueAsString:', field.valueAsString);
-        console.log('fieldDefinition:', field.fieldDefinition);
-      });
-    });
+    this.fetcher.getAssessmentFields().subscribe(assessmentFields => {this.assessmentFieldValues = assessmentFields!;});
 
   }
 

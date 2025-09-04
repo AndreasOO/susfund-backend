@@ -559,4 +559,13 @@ public class CasesResource {
         return Response.ok(assessmentValues).build();
     }
 
+
+    @Path("/application-fields")
+    @GET()
+    @Produces("application/json")
+    public Response getAppplicationFields(){
+        CaseEntity caseEntity = casesService.createCaseWithMockData();
+        List<AbstractFieldValue<? extends FieldDefinition>> applicationValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.APPLICATION_QUESTION).toList();
+        return Response.ok(applicationValues).build();
+    }
 }
