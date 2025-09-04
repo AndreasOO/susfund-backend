@@ -20,6 +20,7 @@ import {AssessmentUpdateRequest} from './case-util/assessment-update-request';
 import {LoginRequest} from './case-util/login-request';
 import {TokenBearer} from './case-util/token-bearer';
 import {SimpleCaseDto} from './case-entity/new/simple-case-dto';
+import {AssessmentFieldValueDto} from './case-entity/new/field/value/assessment-field-value-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -160,9 +161,13 @@ export class CasesFetcherService {
     return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casedecision", payload)
   }
 
-  // tillfällig för ett enda case av ny sort
+  // NYA FÖR TESTING
   public getTheOneAndOnlyCase():Observable<SimpleCaseDto> {
     return this.http.get<SimpleCaseDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/getsimplecase")
+  }
+
+  public getAssessmentQuestions():Observable<AssessmentFieldValueDto[]> {
+    return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/assessment-fields")
   }
 
 }

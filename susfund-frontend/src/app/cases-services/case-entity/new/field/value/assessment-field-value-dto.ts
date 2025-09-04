@@ -1,9 +1,9 @@
 import {SimpleFieldDefinitionDto} from '../definition/simple-field-definition-dto';
 
 export interface AssessmentFieldValueDto {
-  dtoClass:string,
-  owningCaseId:number,
-  owningFieldDefinition:SimpleFieldDefinitionDto
+  id:number,
+  fieldDefinition:SimpleFieldDefinitionDto
   assessmentScore:number,
-  assessmentJustification:string
+  assessmentJustification:string,
+  valueAsString:string
 }

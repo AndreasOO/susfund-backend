@@ -2,6 +2,7 @@ import {SimpleFieldDefinitionDto} from '../definition/simple-field-definition-dt
 import {HistoryEventDto} from '../../history-event-dto';
 
 export interface HistoryLogFieldValueDto {
+  id:number,
   dtoClass:string,
   owningCaseId:number,
   owningFieldDefinition:SimpleFieldDefinitionDto,

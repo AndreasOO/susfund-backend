@@ -1,8 +1,7 @@
 export interface SimpleFieldDefinitionDto {
   id: number,
-  dtoClass:string
   title: string,
-  preAmble: string,
+  preamble: string,
   assistingText: string,
   hasComment:boolean,
   section:string,
@@ -10,4 +9,6 @@ export interface SimpleFieldDefinitionDto {
   frontendLocation:string,
   rowIndex:number,
   fieldType:string,
+  endDate:Date | null,
+  startDate:Date | null,
 }

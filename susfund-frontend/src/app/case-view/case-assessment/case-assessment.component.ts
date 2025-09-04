@@ -3,6 +3,7 @@ import {Router, ROUTER_OUTLET_DATA} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseAssessmentUtil} from '../../cases-services/case-util/case-assessment-util';
 import {AssessmentUpdateRequest} from '../../cases-services/case-util/assessment-update-request';
+import {AssessmentFieldValueDto} from '../../cases-services/case-entity/new/field/value/assessment-field-value-dto';
 
 @Component({
   selector: 'app-case-assessment',
@@ -12,32 +13,56 @@ import {AssessmentUpdateRequest} from '../../cases-services/case-util/assessment
 })
 export class CaseAssessmentComponent implements OnInit {
 
-  caseId:string | undefined
-  caseAssessmentUtil:CaseAssessmentUtil | undefined
+  // caseId:string | undefined
+  // caseAssessmentUtil:CaseAssessmentUtil | undefined
+
+  assessmentFieldValues:AssessmentFieldValueDto[] = [];
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
 
   ngOnInit() {
-    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getCaseAssessmentUtilByCaseId(this.caseId).subscribe(caseAssessmentUtil => this.caseAssessmentUtil = caseAssessmentUtil!)
+    // this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    // this.fetcher.getCaseAssessmentUtilByCaseId(this.caseId).subscribe(caseAssessmentUtil => this.caseAssessmentUtil = caseAssessmentUtil!)
+
+    // ny
+    // this.fetcher.getAssessmentQuestions().subscribe(assessmentFields => this.assessmentFieldValues = assessmentFields!);
+
+
+    this.fetcher.getAssessmentQuestions().subscribe(assessmentFields => {
+      this.assessmentFieldValues = assessmentFields!;
+
+      // DEBUG: Logga ut hela objektet som kom från backend
+      console.log('Raw response from backend:', this.assessmentFieldValues);
+
+      // DEBUG: Logga varje fält individuellt
+      this.assessmentFieldValues.forEach((field, index) => {
+        console.log(`--- Question ${index + 1} ---`);
+        console.log('id:', field.id);
+        console.log('assessmentScore:', field.assessmentScore);
+        console.log('assessmentJustification:', field.assessmentJustification);
+        console.log('valueAsString:', field.valueAsString);
+        console.log('fieldDefinition:', field.fieldDefinition);
+      });
+    });
+
   }
 
-  public saveUpdate(assessmentItemId:number, updatedJustification:string, updatedScore:number){
-    const update:AssessmentUpdateRequest ={
-      assessmentItemId:assessmentItemId,
-      score:updatedScore,
-      justification:updatedJustification
-    }
-
-    const response = this.fetcher.updateAssessmentItem(this.caseId!, update).subscribe(response =>{
-        console.log(response)
-      },
-      error => console.log(error)
-    );
-
-  }
+  // public saveUpdate(assessmentItemId:number, updatedJustification:string, updatedScore:number){
+  //   const update:AssessmentUpdateRequest ={
+  //     assessmentItemId:assessmentItemId,
+  //     score:updatedScore,
+  //     justification:updatedJustification
+  //   }
+  //
+  //   const response = this.fetcher.updateAssessmentItem(this.caseId!, update).subscribe(response =>{
+  //       console.log(response)
+  //     },
+  //     error => console.log(error)
+  //   );
+  //
+  // }
 
   public getSelectedScore(groupName:number){
 
