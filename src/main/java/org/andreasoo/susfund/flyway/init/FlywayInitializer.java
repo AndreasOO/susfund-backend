@@ -22,14 +22,23 @@ public class FlywayInitializer {
     @PostConstruct
     public void initializeFlyway() {
         try {
+
+            /*
+            connection-url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", \
+            driver-name="mysql", \
+            enabled="true", \
+            user-name="${DB_USERNAME}", \
+            password="${DB_PASSWORD}", \
+             */
+
             LOGGER.info("Starting Flyway database migrations...");
 
             // Build database URL from environment variables (matching docker-compose)
-            String dbHost = System.getenv().getOrDefault("DB_HOST", "localhost");
-            String dbPort = System.getenv().getOrDefault("DB_PORT", "3306");
-            String dbName = System.getenv().getOrDefault("DB_NAME", "susfund_db");
-            String dbUsername = System.getenv().getOrDefault("DB_USERNAME", "root");
-            String dbPassword = System.getenv().getOrDefault("DB_PASSWORD", "test1234");
+            String dbHost = System.getenv().getOrDefault("DB_HOST", "${DB_HOST}");
+            String dbPort = System.getenv().getOrDefault("DB_PORT", "${DB_PORT}");
+            String dbName = System.getenv().getOrDefault("DB_NAME", "${DB_NAME}");
+            String dbUsername = System.getenv().getOrDefault("DB_USERNAME", "${DB_USERNAME}");
+            String dbPassword = System.getenv().getOrDefault("DB_PASSWORD", "${DB_PASSWORD}");
 
             String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
                     dbHost, dbPort, dbName);
@@ -62,15 +71,6 @@ public class FlywayInitializer {
 
             // Run migrations
             var result = flyway.migrate();
-
-//            for (var migration : flyway.info().all()) {
-//                LOGGER.info(String.format("AFTER MIGRATE Migration found: version=%s, description=%s, type=%s, script=%s, state=%s",
-//                        migration.getVersion(),
-//                        migration.getDescription(),
-//                        migration.getType(),
-//                        migration.getScript(),
-//                        migration.getState()));
-//            }
 
             if (result.success) {
                 LOGGER.info(String.format("Successfully applied %d migrations. New schema version: %s",
