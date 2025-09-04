@@ -25,13 +25,13 @@
   <hr>
   <div *ngIf="textFieldValues" class="container">
     <div *ngFor="let textFieldValue of textFieldValues" class="row mb-4 pb-4 border-bottom">
-      <h3>{{ textFieldValue.fieldDefinition.subSection}}</h3>
+      <h3>{{ textFieldValue.owningFieldDefinition.subSection}}</h3>
       <div class="col-12">
         <div>
           <div class="card rounded-4 p-3 bg-secondary-subtle text-dark m-2">
-            <h4>{{ textFieldValue.fieldDefinition.title }}</h4>
-            <h5>{{ textFieldValue.fieldDefinition.preamble }}</h5>
-            <h6>{{ textFieldValue.fieldDefinition.assistingText }}</h6>
+            <h4>{{ textFieldValue.owningFieldDefinition.title }}</h4>
+            <h5>{{ textFieldValue.owningFieldDefinition.preamble }}</h5>
+            <h6>{{ textFieldValue.owningFieldDefinition.assistingText }}</h6>
             <textarea class="form-control" rows="3" [value]="textFieldValue.stringValue" #answerInput></textarea>
             <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
           </div>

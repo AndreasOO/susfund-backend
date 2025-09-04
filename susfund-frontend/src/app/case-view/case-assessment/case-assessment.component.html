@@ -51,14 +51,14 @@
   <h2 class="mb-3 p-2">Assessment</h2>
   <hr>
   <div  *ngFor="let assessmentFieldValue of assessmentFieldValues" class="container">
-    <div *ngIf="assessmentFieldValue.fieldDefinition" class="row mb-4 pb-4 border-bottom">
-      <h3>{{assessmentFieldValue.fieldDefinition.subSection}}</h3>
+    <div *ngIf="assessmentFieldValue.owningFieldDefinition" class="row mb-4 pb-4 border-bottom">
+      <h3>{{assessmentFieldValue.owningFieldDefinition.subSection}}</h3>
       <div class="col-12">
         <div>
           <div class="card rounded-4 p-3 bg-secondary-subtle text-dark m-2">
-            <h4>{{ assessmentFieldValue.fieldDefinition.title }}</h4>
-            <h5>{{ assessmentFieldValue.fieldDefinition.preamble }}</h5>
-            <h6>{{ assessmentFieldValue.fieldDefinition.assistingText }}</h6>
+            <h4>{{ assessmentFieldValue.owningFieldDefinition.title }}</h4>
+            <h5>{{ assessmentFieldValue.owningFieldDefinition.preamble }}</h5>
+            <h6>{{ assessmentFieldValue.owningFieldDefinition.assistingText }}</h6>
             <textarea class="form-control" rows="3" [value]="assessmentFieldValue.assessmentJustification" #justificationInput></textarea>
             <div class="pt-2">
               <span class="px-3">Poor</span>
@@ -67,7 +67,7 @@
                   class="form-check-input"
                   type="radio"
                   [id]="'radio' + score"
-                  [name]="assessmentFieldValue.id.toString()"
+                  [name]="assessmentFieldValue.owningFieldDefinition.id.toString()"
                   [value]="score"
                   [(ngModel)]="assessmentFieldValue.assessmentScore">
                 <label class="form-check-label" [for]="'radio' + score">{{score}}</label>

@@ -1,9 +1,6 @@
 import {SimpleFieldDefinitionDto} from '../definition/simple-field-definition-dto';
+import {FieldValueDto} from './field-value-dto';
 
-export interface DateFieldValueDto {
-  id:number,
-  dtoClass:string,
-  owningCaseId:number,
-  owningFieldDefinition:SimpleFieldDefinitionDto,
+export interface DateFieldValueDto extends FieldValueDto{
   dateValue:Date
 }

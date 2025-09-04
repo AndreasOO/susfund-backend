@@ -36,6 +36,7 @@ import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldV
 import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
+import org.andreasoo.susfund.mapper.fields.FieldDefinitionDTOFactory;
 import org.andreasoo.susfund.service.*;
 import org.andreasoo.susfund.util.*;
 
@@ -66,6 +67,10 @@ public class CasesResource {
 
     @Inject
     private GeneralMappingService generalMappingService;
+
+    @Inject
+    private FieldValueMappingService fieldValueMappingService;
+
 
     @GET
     @Produces("application/json")
@@ -556,16 +561,24 @@ public class CasesResource {
     public Response getAssessmentFields(){
         CaseEntity caseEntity = casesService.createCaseWithMockData();
         List<AbstractFieldValue<? extends FieldDefinition>> assessmentValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.ASSESSMENT_QUESTION).toList();
-        return Response.ok(assessmentValues).build();
+        return Response.ok(assessmentValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 
 
     @Path("/application-fields")
     @GET()
     @Produces("application/json")
-    public Response getAppplicationFields(){
+    public Response getApplicationFields(){
         CaseEntity caseEntity = casesService.createCaseWithMockData();
         List<AbstractFieldValue<? extends FieldDefinition>> applicationValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.APPLICATION_QUESTION).toList();
-        return Response.ok(applicationValues).build();
+        return Response.ok(applicationValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+    @Path("/organization")
+    @GET()
+    @Produces("application/json")
+    public Response getOrganization(){
+        CaseEntity caseEntity = casesService.createCaseWithMockData();
+        return Response.ok(generalMappingService.mapToDTO(caseEntity.getOrganization())).build();
     }
 }

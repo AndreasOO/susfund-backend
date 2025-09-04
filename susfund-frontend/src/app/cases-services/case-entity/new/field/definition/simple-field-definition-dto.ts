@@ -11,4 +11,5 @@ export interface SimpleFieldDefinitionDto {
   fieldType:string,
   endDate:Date | null,
   startDate:Date | null,
+  dtoClass:string
 }
