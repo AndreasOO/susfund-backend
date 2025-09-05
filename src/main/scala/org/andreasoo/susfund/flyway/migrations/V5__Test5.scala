@@ -6,10 +6,7 @@ import java.sql.Connection
 
 class V5__Test5 extends ScalaMigrationBase {
 
-  /**
-   * Abstract method that subclasses must implement to define their migration logic
-   */
   override def migrate(connection: Connection): Unit = {
-    execute(connection, "ALTER TABLE test_table_flyway3 ADD COLUMN `name3` VARCHAR(255);")
+    execute(connection, "ALTER TABLE field_value_entity ADD COLUMN `decision_motivation` VARCHAR(255);")
   }
 }

@@ -6,9 +6,6 @@ import java.sql.Connection
 
 class V2__Test extends ScalaMigrationBase {
 
-  /**
-   * Abstract method that subclasses must implement to define their migration logic
-   */
   override def migrate(connection: Connection): Unit = {
     execute(connection, "CREATE TABLE `test_table_flyway` " +
       "( `id` INT NOT NULL AUTO_INCREMENT," +

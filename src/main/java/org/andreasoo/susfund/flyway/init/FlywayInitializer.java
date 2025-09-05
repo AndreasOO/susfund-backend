@@ -23,17 +23,8 @@ public class FlywayInitializer {
     public void initializeFlyway() {
         try {
 
-            /*
-            connection-url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", \
-            driver-name="mysql", \
-            enabled="true", \
-            user-name="${DB_USERNAME}", \
-            password="${DB_PASSWORD}", \
-             */
-
             LOGGER.info("Starting Flyway database migrations...");
 
-            // Build database URL from environment variables (matching docker-compose)
             String dbHost = System.getenv().getOrDefault("DB_HOST", "${DB_HOST}");
             String dbPort = System.getenv().getOrDefault("DB_PORT", "${DB_PORT}");
             String dbName = System.getenv().getOrDefault("DB_NAME", "${DB_NAME}");
@@ -60,16 +51,7 @@ public class FlywayInitializer {
             LOGGER.info(String.format("Current schema version: %s",
                     migrationInfo.current() != null ? migrationInfo.current().getVersion() : "Empty database"));
 
-//            for (var migration : flyway.info().all()) {
-//                LOGGER.info(String.format("BEFORE MIGRATE Migration found: version=%s, description=%s, type=%s, script=%s, state=%s",
-//                        migration.getVersion(),
-//                        migration.getDescription(),
-//                        migration.getType(),
-//                        migration.getScript(),
-//                        migration.getState()));
-//            }
 
-            // Run migrations
             var result = flyway.migrate();
 
             if (result.success) {
