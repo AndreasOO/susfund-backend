@@ -7,13 +7,16 @@ public class DecisionFieldValueDTO extends AbstractFieldValueDTO<FieldDefinition
 
     private DecisionResultType decisionResultType;
 
+    private String motivation;
+
     protected DecisionFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
         super(owningCaseId, owningFieldDefinition, "decisionFieldValue");
     }
 
-    public DecisionFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, DecisionResultType decisionResultType) {
+    public DecisionFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, DecisionResultType decisionResultType, String motivation) {
         super(owningCaseId, owningFieldDefinition, "decisionFieldValue");
         this.decisionResultType = decisionResultType;
+        this.motivation = motivation;
     }
 
     public DecisionResultType getDecisionResultType() {
@@ -22,5 +25,13 @@ public class DecisionFieldValueDTO extends AbstractFieldValueDTO<FieldDefinition
 
     public void setDecisionResultType(DecisionResultType decisionResultType) {
         this.decisionResultType = decisionResultType;
+    }
+
+    public String getMotivation() {
+        return motivation;
+    }
+
+    public void setMotivation(String motivation) {
+        this.motivation = motivation;
     }
 }

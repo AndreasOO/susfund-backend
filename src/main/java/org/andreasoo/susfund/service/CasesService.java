@@ -56,4 +56,6 @@ public interface CasesService {
     boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request);
 
     CaseEntity createCaseWithMockData();
+
+    CaseEntity getCaseEntityById(Long id);
 }

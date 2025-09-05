@@ -554,6 +554,7 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `decision_date` DATE,
                                     `assessment_justification` VARCHAR(255),
                                     `assessment_score` VARCHAR(255),
+                                    `decision_motivation` VARCHAR(255),
                                     `decision_result_type` VARCHAR(255),
                                     `DISCRIMINATOR_FIELD_VALUE_TYPE` VARCHAR(255) NOT NULL,
                                     CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
@@ -636,9 +637,9 @@ CREATE TABLE `history_event2` (`id` INT NOT NULL AUTO_INCREMENT,
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
 
-INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Approved");
-INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Rejected");
-INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Partially Approved");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "APPROVED");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "REJECTED");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "PARTIALLY APPROVED");
 
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");

@@ -27,6 +27,7 @@ import {OrganizationDto} from './case-entity/new/organization-dto';
 import {DecisionFieldValueDto} from './case-entity/new/field/value/decision-field-value-dto';
 import {BudgetFieldValueDto} from './case-entity/new/field/value/budget-field-value-dto';
 import {HistoryLogFieldValueDto} from './case-entity/new/field/value/history-log-field-value-dto';
+import {CaseManagerDto} from './case-entity/new/case-manager-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -122,8 +123,8 @@ export class CasesFetcherService {
     return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/handledby")
   }
 
-  public getAllCaseManagers():Observable<CaseManager[]> {
-    return this.http.get<CaseManager[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
+  public getAllCaseManagers():Observable<CaseManagerDto[]> {
+    return this.http.get<CaseManagerDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
   }
 
   public getCaseDecisionByCaseId(id:string | undefined):Observable<CaseDecision> {
@@ -181,7 +182,7 @@ export class CasesFetcherService {
   }
 
   public getCaseEntity():Observable<CaseEntityDto> {
-    return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/createcase")
+    return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/get-case-entity")
   }
 
   public getOrganization():Observable<OrganizationDto> {
@@ -196,8 +197,8 @@ export class CasesFetcherService {
     return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/budget-field")
   }
 
-
   public getHistoryFieldValue():Observable<HistoryLogFieldValueDto[]> {
     return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/history-field")
   }
+
 }

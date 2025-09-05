@@ -14,7 +14,8 @@ public class DecisionFieldValueMapper
         return new DecisionFieldValueDTO(
                 fieldValue.getOwningCase().getId(),
                 createSelectableFieldDefinitionDTO(fieldValue.getFieldDefinition()),
-                fieldValue.getDecisionResultType()
+                fieldValue.getDecisionResultType(),
+                fieldValue.getMotivation()
         );
     }
 }

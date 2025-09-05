@@ -35,7 +35,6 @@ public class CaseEntity implements Serializable {
     @JoinColumn(name="handled_by_id")
     private CaseManager handledBy;
 
-
     @Column(name="case_status")
     @Enumerated(EnumType.STRING)
     private CaseStatus2 caseStatus;
@@ -46,8 +45,6 @@ public class CaseEntity implements Serializable {
 
     @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
-
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="support_type_node_id")

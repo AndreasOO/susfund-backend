@@ -4,5 +4,6 @@ import {SelectableFieldDefinitionDto} from '../definition/selectable-field-defin
 
 export interface DecisionFieldValueDto extends FieldValueDto {
   decisionResultType:string | null,
+  motivation:string,
   owningFieldDefinition: SelectableFieldDefinitionDto
 }

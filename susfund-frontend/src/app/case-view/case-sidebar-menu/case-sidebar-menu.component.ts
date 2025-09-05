@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseStatus} from '../../cases-services/case-entity/case-status';
 import {CaseDecisionType} from '../../cases-services/case-entity/case-decision-type';
+import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
 
 @Component({
   selector: 'app-case-sidebar-menu',
@@ -18,6 +19,8 @@ export class CaseSidebarMenuComponent implements OnInit{
   caseStatus:CaseStatus | undefined
   caseDecisionType:CaseDecisionType | undefined
 
+  caseEntity:CaseEntityDto|undefined
+
   constructor(public router:Router, private fetcher:CasesFetcherService) {
   }
 
@@ -25,6 +28,8 @@ export class CaseSidebarMenuComponent implements OnInit{
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
     this.fetcher.getCaseStatusByCaseId(this.caseId).subscribe(caseStatus => this.caseStatus = caseStatus!)
     this.fetcher.getCaseDecisionTypeByCaseId(this.caseId).subscribe(caseDecisionType => this.caseDecisionType = caseDecisionType!)
+
+    this.fetcher.getCaseEntity().subscribe(caseEntity => this.caseEntity = caseEntity!)
   }
 
 }

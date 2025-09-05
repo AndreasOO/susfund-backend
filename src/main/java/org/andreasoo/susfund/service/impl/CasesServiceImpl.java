@@ -15,6 +15,8 @@ import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetRow;
 import org.andreasoo.susfund.entity.updated.field.value.budget.CostType;
 import org.andreasoo.susfund.entity.updated.field.value.budget.FinancingRow;
+import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionResultType;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEvent2;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEventType;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
@@ -205,8 +207,8 @@ public class CasesServiceImpl implements CasesService {
         CaseEntity caseEntity = new CaseEntity();
 
         caseEntity.setName("test");
-        caseEntity.setCaseManager(caseManagerDao.getCaseManagerById(1));
-        caseEntity.setCaseController(caseManagerDao.getCaseManagerById(1));
+        caseEntity.setCaseManager(caseManagerDao.getCaseManagerById(2));
+        caseEntity.setCaseController(caseManagerDao.getCaseManagerById(3));
         caseEntity.setHandledBy(caseManagerDao.getCaseManagerById(1));
         caseEntity.setCaseStatus(CaseStatus2.UNHANDLED);
         caseEntity.setCaseDecisionType(CaseDecisionType2.APPLICATION_APPROVAL);
@@ -229,6 +231,15 @@ public class CasesServiceImpl implements CasesService {
         HistoryLogFieldValue historyLog = (HistoryLogFieldValue) caseEntity.getFieldValues().stream().filter(field -> field.getFieldDefinition().getFieldType() == FieldType.HISTORY_LOG).findFirst().orElseThrow(() -> new IllegalArgumentException("no history field found"));
         historyLog.getHistoryEvents().add(new HistoryEvent2(historyLog, "Event details", LocalDate.now(), HistoryEventType.ASSESSMENT_CHANGE));
 
+        DecisionFieldValue decision = (DecisionFieldValue) caseEntity.getFieldValues().stream().filter(field -> field.getFieldDefinition().getFieldType() == FieldType.DECISION).findFirst().orElseThrow(() -> new IllegalArgumentException("no decision field found"));
+        decision.setDecisionResultType(DecisionResultType.REJECTED);
+        decision.setMotivation("no motivation just no");
+
         return caseEntityDao.save(caseEntity);
+    }
+
+    @Override
+    public CaseEntity getCaseEntityById(Long id){
+        return caseEntityDao.getById(id);
     }
 }

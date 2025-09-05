@@ -25,11 +25,11 @@ public abstract class AbstractFieldValue <T extends FieldDefinition> {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="owning_case")
     CaseEntity owningCase;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="field_definition_entity_id")
     private FieldDefinition owningFieldDefinition;
 
