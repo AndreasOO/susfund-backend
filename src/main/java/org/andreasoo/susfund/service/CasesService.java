@@ -1,10 +1,8 @@
 package org.andreasoo.susfund.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.entity.*;
+import org.andreasoo.susfund.entity.old.*;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.util.*;
 
 import java.util.List;
@@ -51,10 +49,13 @@ public interface CasesService {
 
     List<Cases> getCasesRelatedToCaseOrganization(int id);
 
-    // NYTT
     @Transactional
     boolean updateCaseAssignment(int caseId, int caseManagerId, int caseControllerId, int handledById);
 
     @Transactional
     boolean updateCaseDecision(int caseId, CaseDecisionUpdateRequest request);
+
+    CaseEntity createCaseWithMockData();
+
+    CaseEntity getCaseEntityById(Long id);
 }

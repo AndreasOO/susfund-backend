@@ -2,62 +2,79 @@
 <div class="container bg-dark-subtle  text-dark mt-5 rounded-1">
   <h2 class="p-2">Budget</h2>
   <hr>
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Cost Type</th>
-      <th scope="col">Description</th>
-      <th scope="col">Estimated Cost</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let post of caseBudget?.budgetPosts">
-      <td class="col-4">{{post.budgetPostType.name}}</td>
-      <td class="col-4"> <input type="text" class="form-control"></td>
-      <td class="col-4"> <input type="number" value="{{post.estimatedCost}}" class="text-end form-control"> </td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="row justify-content-between">
-    <button class="btn btn-light col-3 m-4">Save</button>
-    <h4 class="col-3 m-4">Total: {{ getTotal() }} </h4>
+  <div *ngIf="budgetFields">
+    <div *ngFor="let budgetField of budgetFields">
+      <div *ngIf="budgetField.owningFieldDefinition">
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Cost Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Estimated Cost</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of budgetField.budgetRows">
+            <td class="col-4">{{row.costType}}</td>
+            <td class="col-4"> <input type="text" value="{{row.description}}" class="form-control"></td>
+            <td class="col-4"> <input type="number" value="{{row.estimatedCost}}" class="text-end form-control"> </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="row justify-content-between">
+          <button class="btn btn-light col-3 m-4">Save</button>
+          <h4 class="col-3 m-4">Total: {{ "TOTAL" }} </h4>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="container bg-dark-subtle  text-dark mt-5 mb-5 rounded-1">
   <h2 class="p-2">Financing</h2>
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col" style="width: 15%;">Organization Id</th>
-      <th scope="col" style="width: 20%;">Organization name</th>
-      <th scope="col" style="width: 20%;">Financing type</th>
-      <th scope="col" style="width: 20%;">Estimated financing %</th>
-      <th scope="col" style="width: 20%;">Estimated financing SEK</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let financing of caseBudget?.financing">
-      <td style="width: 20%;">{{financing?.organization?.id}}</td>
-      <td style="width: 20%;">{{financing?.organization?.name}}</td>
-      <td style="width: 20%;">{{financing?.financingType?.name}}</td>
-      <td style="width: 20%;">
-        <div class="input-group">
-          <input
-            type="number"
-            min="0"
-            max="100"
-            [(ngModel)]="financing.estimatedFinancingInPercentage"
-            class="text-end form-control">
-          <div class="input-group-append">
-            <span class="input-group-text">%</span>
-          </div>
-        </div>
-      </td>
-      <td style="width: 20%;">{{updateSEK(financing.estimatedFinancingInPercentage)}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div *ngIf="budgetFields">
+    <div *ngFor="let budgetField of budgetFields">
+      <div *ngIf="budgetField.owningFieldDefinition">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col" style="width: 15%;">Organization Id</th>
+            <th scope="col" style="width: 20%;">Organization name</th>
+            <th scope="col" style="width: 20%;">Financing type</th>
+            <th scope="col" style="width: 20%;">Estimated financing %</th>
+            <th scope="col" style="width: 20%;">Estimated financing SEK</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of budgetField.financingRows">
+            <td style="width: 20%;">{{row.organization.id}}</td>
+            <td style="width: 20%;">{{row.organization.name}}</td>
+            <td style="width: 20%;">{{row.financingType}}</td>
+            <td style="width: 20%;">
+              <div class="input-group">
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  [(ngModel)]="row.financingPercentage"
+                  class="text-end form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </td>
+            <td style="width: 20%;">{{row.financingAmount}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+
   <div class="row justify-content-between">
     <button class="btn btn-light col-3 m-4">Save</button>
   </div>

@@ -5,11 +5,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CasesDao;
-import org.andreasoo.susfund.entity.CaseDecisionResult;
-import org.andreasoo.susfund.entity.CaseDecisionType;
-import org.andreasoo.susfund.entity.CaseManager;
-import org.andreasoo.susfund.entity.Cases;
-import org.andreasoo.susfund.util.CaseDecisionUpdateRequest;
+import org.andreasoo.susfund.entity.old.CaseDecisionResult;
+import org.andreasoo.susfund.entity.old.CaseManager;
+import org.andreasoo.susfund.entity.old.Cases;
 
 import java.util.List;
 

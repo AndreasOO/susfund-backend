@@ -4,6 +4,9 @@ import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseManager} from '../../cases-services/case-entity/case-manager';
 import {CaseBudget} from '../../cases-services/case-entity/case-budget';
+import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
+import {DateFieldValueDto} from '../../cases-services/case-entity/new/field/value/date-field-value-dto';
+import {BudgetFieldValueDto} from '../../cases-services/case-entity/new/field/value/budget-field-value-dto';
 
 
 
@@ -15,73 +18,130 @@ import {CaseBudget} from '../../cases-services/case-entity/case-budget';
 })
 export class CaseOverviewComponent implements OnInit{
 
-  caseId:string | undefined
-
-  currentCaseManager:CaseManager | undefined
-  currentCaseController:CaseManager | undefined
-  currentHandledBy:CaseManager | undefined
-
-  caseManagerList:CaseManager[] | undefined
-  caseDetails:CaseDetails | undefined
-  caseBudget : CaseBudget | undefined
-
-  selectedCaseManagerId:number | undefined
-  selectedCaseControllerId:number | undefined
-  selectedHandledById:number | undefined
-
-  errorMessage: string | null = null
-  successMessage: string | null = null
+  caseEntity:CaseEntityDto | undefined
+  // dateField:DateFieldValueDto | undefined
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
 
   ngOnInit() {
-    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getCaseById(this.caseId).subscribe(caseDetails => this.caseDetails = caseDetails!)
-    this.fetcher.getAllCaseManagers().subscribe(caseManagerList => this.caseManagerList = caseManagerList!)
-    this.fetcher.getBudgetByCaseId(this.caseId).subscribe(caseBudget => this.caseBudget = caseBudget!)
+    this.fetcher.getCaseEntity().subscribe(caseEntity => this.caseEntity = caseEntity!)
 
-    this.fetcher.getCaseManagerByCaseId(this.caseId).subscribe(caseManager => {
-      this.currentCaseManager = caseManager!;
-      this.selectedCaseManagerId = this.currentCaseManager?.id;
-    });
+    // const dateFields = this.caseEntity?.fields
+    //   .filter(field => field.owningFieldDefinition.fieldType === "DATE_FIELD")
+    //   .map(field => field as DateFieldValueDto);
+    // this.dateField = dateFields?.[0];
 
-    this.fetcher.getCaseControllerByCaseId(this.caseId).subscribe(caseController => {
-      this.currentCaseController = caseController!;
-      this.selectedCaseControllerId = this.currentCaseController?.id;
-    });
-
-    this.fetcher.getHandledByByCaseId(this.caseId).subscribe(handledBy => {
-      this.currentHandledBy = handledBy!;
-      this.selectedHandledById = this.currentHandledBy?.id;
-    });
+    // const budgetFields = this.caseEntity?.fields.filter(field => field.owningFieldDefinition.fieldType == "BUDGET").map(field => field as BudgetFieldValueDto)
 
 
   }
 
-  getTotalBudget(): number {
-    return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
-  }
+  // getLatestAssessment(){
+  //   const dateFields = this.caseEntity?.fields.filter(field => field.owningFieldDefinition.fieldType === "DATE_FIELD").map(field => field as DateFieldValueDto);
+  //
+  //   this.dateField = dateFields?.[0];
+  // }
 
-  saveCaseManagerUpdate(){
-    const payload = {
-      caseManagerId: String(this.selectedCaseManagerId),
-      caseControllerId: String(this.selectedCaseControllerId),
-      handledById: String(this.selectedHandledById)
-    }
-
-    this.fetcher.updateAssignedCaseManager(this.caseId!, payload).subscribe({
-      next: response => {
-        this.successMessage = response.message;
-        this.errorMessage = null
-      },
-      error: err => {
-        if (err.status === 400){
-          this.errorMessage = err.error?.error;
-          this.successMessage = null
-        }
-      }
-    })
-  }
+  // getTotalBudget(): number {
+  //   return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
+  // }
+  //
+  // saveCaseManagerUpdate(){
+  //   const payload = {
+  //     caseManagerId: String(this.selectedCaseManagerId),
+  //     caseControllerId: String(this.selectedCaseControllerId),
+  //     handledById: String(this.selectedHandledById)
+  //   }
+  //
+  //   this.fetcher.updateAssignedCaseManager(this.caseId!, payload).subscribe({
+  //     next: response => {
+  //       this.successMessage = response.message;
+  //       this.errorMessage = null
+  //     },
+  //     error: err => {
+  //       if (err.status === 400){
+  //         this.errorMessage = err.error?.error;
+  //         this.successMessage = null
+  //       }
+  //     }
+  //   })
+  // }
 }
+
+
+
+
+// export class CaseOverviewComponent implements OnInit{
+//
+//   caseId:string | undefined
+//
+//   currentCaseManager:CaseManager | undefined
+//   currentCaseController:CaseManager | undefined
+//   currentHandledBy:CaseManager | undefined
+//
+//   caseManagerList:CaseManager[] | undefined
+//   caseDetails:CaseDetails | undefined
+//   caseBudget : CaseBudget | undefined
+//
+//   selectedCaseManagerId:number | undefined
+//   selectedCaseControllerId:number | undefined
+//   selectedHandledById:number | undefined
+//
+//   errorMessage: string | null = null
+//   successMessage: string | null = null
+//
+//   constructor(public router:Router, private fetcher:CasesFetcherService) {
+//
+//   }
+//
+//   ngOnInit() {
+//     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+//     this.fetcher.getCaseById(this.caseId).subscribe(caseDetails => this.caseDetails = caseDetails!)
+//     this.fetcher.getAllCaseManagers().subscribe(caseManagerList => this.caseManagerList = caseManagerList!)
+//     this.fetcher.getBudgetByCaseId(this.caseId).subscribe(caseBudget => this.caseBudget = caseBudget!)
+//
+//     this.fetcher.getCaseManagerByCaseId(this.caseId).subscribe(caseManager => {
+//       this.currentCaseManager = caseManager!;
+//       this.selectedCaseManagerId = this.currentCaseManager?.id;
+//     });
+//
+//     this.fetcher.getCaseControllerByCaseId(this.caseId).subscribe(caseController => {
+//       this.currentCaseController = caseController!;
+//       this.selectedCaseControllerId = this.currentCaseController?.id;
+//     });
+//
+//     this.fetcher.getHandledByByCaseId(this.caseId).subscribe(handledBy => {
+//       this.currentHandledBy = handledBy!;
+//       this.selectedHandledById = this.currentHandledBy?.id;
+//     });
+//
+//
+//   }
+//
+//   getTotalBudget(): number {
+//     return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
+//   }
+//
+//   saveCaseManagerUpdate(){
+//     const payload = {
+//       caseManagerId: String(this.selectedCaseManagerId),
+//       caseControllerId: String(this.selectedCaseControllerId),
+//       handledById: String(this.selectedHandledById)
+//     }
+//
+//     this.fetcher.updateAssignedCaseManager(this.caseId!, payload).subscribe({
+//       next: response => {
+//         this.successMessage = response.message;
+//         this.errorMessage = null
+//       },
+//       error: err => {
+//         if (err.status === 400){
+//           this.errorMessage = err.error?.error;
+//           this.successMessage = null
+//         }
+//       }
+//     })
+//   }
+// }

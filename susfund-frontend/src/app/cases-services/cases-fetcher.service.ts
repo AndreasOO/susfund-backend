@@ -19,6 +19,15 @@ import {CaseApplication} from './case-entity/case-application';
 import {AssessmentUpdateRequest} from './case-util/assessment-update-request';
 import {LoginRequest} from './case-util/login-request';
 import {TokenBearer} from './case-util/token-bearer';
+import {SimpleCaseDto} from './case-entity/new/simple-case-dto';
+import {AssessmentFieldValueDto} from './case-entity/new/field/value/assessment-field-value-dto';
+import {TextFieldValueDto} from './case-entity/new/field/value/text-field-value-dto';
+import {CaseEntityDto} from './case-entity/new/case-entity-dto';
+import {OrganizationDto} from './case-entity/new/organization-dto';
+import {DecisionFieldValueDto} from './case-entity/new/field/value/decision-field-value-dto';
+import {BudgetFieldValueDto} from './case-entity/new/field/value/budget-field-value-dto';
+import {HistoryLogFieldValueDto} from './case-entity/new/field/value/history-log-field-value-dto';
+import {CaseManagerDto} from './case-entity/new/case-manager-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -114,8 +123,8 @@ export class CasesFetcherService {
     return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/handledby")
   }
 
-  public getAllCaseManagers():Observable<CaseManager[]> {
-    return this.http.get<CaseManager[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
+  public getAllCaseManagers():Observable<CaseManagerDto[]> {
+    return this.http.get<CaseManagerDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
   }
 
   public getCaseDecisionByCaseId(id:string | undefined):Observable<CaseDecision> {
@@ -159,5 +168,37 @@ export class CasesFetcherService {
     return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casedecision", payload)
   }
 
+  // NYA FÖR TESTING
+  public getTheOneAndOnlyCase():Observable<SimpleCaseDto> {
+    return this.http.get<SimpleCaseDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/getsimplecase")
+  }
+
+  public getAssessmentFields():Observable<AssessmentFieldValueDto[]> {
+    return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/assessment-fields")
+  }
+
+  public getApplicationFields():Observable<TextFieldValueDto[]> {
+    return this.http.get<TextFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/application-fields")
+  }
+
+  public getCaseEntity():Observable<CaseEntityDto> {
+    return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/get-case-entity")
+  }
+
+  public getOrganization():Observable<OrganizationDto> {
+    return this.http.get<OrganizationDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/organization")
+  }
+
+  public getDecisionFieldValue():Observable<DecisionFieldValueDto[]> {
+    return this.http.get<DecisionFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/decision-field")
+  }
+
+  public getBudgetFieldValue():Observable<BudgetFieldValueDto[]> {
+    return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/budget-field")
+  }
+
+  public getHistoryFieldValue():Observable<HistoryLogFieldValueDto[]> {
+    return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/history-field")
+  }
 
 }

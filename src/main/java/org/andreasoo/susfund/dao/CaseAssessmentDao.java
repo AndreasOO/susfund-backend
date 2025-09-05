@@ -1,6 +1,5 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.AssessmentResult;
 import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
 

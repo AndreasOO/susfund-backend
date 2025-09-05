@@ -1,7 +1,6 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.HistoryEvent;
-import org.andreasoo.susfund.entity.Organization;
+import org.andreasoo.susfund.entity.old.HistoryEvent;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CaseDecisionDao;
-import org.andreasoo.susfund.entity.CaseDecision;
+import org.andreasoo.susfund.entity.old.CaseDecision;
 
 import java.util.List;
 

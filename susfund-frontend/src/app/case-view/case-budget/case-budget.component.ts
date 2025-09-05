@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseBudget} from '../../cases-services/case-entity/case-budget';
+import {BudgetFieldValueDto} from '../../cases-services/case-entity/new/field/value/budget-field-value-dto';
 
 @Component({
   selector: 'app-case-budget',
@@ -11,23 +12,28 @@ import {CaseBudget} from '../../cases-services/case-entity/case-budget';
 })
 export class CaseBudgetComponent implements OnInit{
 
-  caseId : string | undefined
-  caseBudget : CaseBudget | undefined
+  // caseId : string | undefined
+  // caseBudget : CaseBudget | undefined
+
+  budgetFields:BudgetFieldValueDto[] = []
 
   constructor(public router:Router, public fetcher:CasesFetcherService) {
   }
 
   ngOnInit() {
-    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getBudgetByCaseId(this.caseId).subscribe(caseBudget => this.caseBudget = caseBudget!)
+    // this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    // this.fetcher.getBudgetByCaseId(this.caseId).subscribe(caseBudget => this.caseBudget = caseBudget!)
+
+
+    this.fetcher.getBudgetFieldValue().subscribe(fields => this.budgetFields = fields)
   }
 
-  getTotal(): number {
-    return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
-  }
-
-  updateSEK(percentage: number): number {
-    return Math.round(this.getTotal() * (percentage / 100))
-  }
+  // getTotal(): number {
+  //   return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
+  // }
+  //
+  // updateSEK(percentage: number): number {
+  //   return Math.round(this.getTotal() * (percentage / 100))
+  // }
 
 }

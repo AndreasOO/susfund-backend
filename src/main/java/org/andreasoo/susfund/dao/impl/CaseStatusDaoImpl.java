@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CaseStatusDao;
-import org.andreasoo.susfund.entity.CaseStatus;
+import org.andreasoo.susfund.entity.old.CaseStatus;
 
 @ApplicationScoped
 public class CaseStatusDaoImpl implements CaseStatusDao {

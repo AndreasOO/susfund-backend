@@ -5,8 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.CaseAssessmentDao;
-import org.andreasoo.susfund.entity.AssessmentResult;
-import org.andreasoo.susfund.entity.CaseAssessment;
+import org.andreasoo.susfund.entity.old.AssessmentResult;
+import org.andreasoo.susfund.entity.old.CaseAssessment;
 import org.andreasoo.susfund.util.AssessmentUpdateRequest;
 import org.andreasoo.susfund.util.AssessmentUtil;
 

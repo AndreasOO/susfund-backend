@@ -1,7 +1,6 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.CaseManager;
-import org.andreasoo.susfund.entity.Organization;
+import org.andreasoo.susfund.entity.old.CaseManager;
 
 import java.util.List;
 

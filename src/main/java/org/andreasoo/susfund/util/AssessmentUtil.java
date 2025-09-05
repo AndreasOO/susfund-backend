@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.util;
 
-import org.andreasoo.susfund.entity.AssessmentResult;
+import org.andreasoo.susfund.entity.old.AssessmentResult;
 
 
 import java.util.List;

@@ -5,9 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.dao.UserCredentialsDao;
-import org.andreasoo.susfund.entity.UserCredentials;
+import org.andreasoo.susfund.entity.old.UserCredentials;
 import org.andreasoo.susfund.util.LoginRequest;
 
 import java.util.Optional;
