@@ -9,10 +9,19 @@ import org.andreasoo.susfund.entity.updated.CaseDecisionType2;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.CaseStatus2;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
+import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
+import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetRow;
+import org.andreasoo.susfund.entity.updated.field.value.budget.CostType;
+import org.andreasoo.susfund.entity.updated.field.value.budget.FinancingRow;
+import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEvent2;
+import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEventType;
+import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
 import org.andreasoo.susfund.service.CasesService;
 import org.andreasoo.susfund.util.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @ApplicationScoped
@@ -210,13 +219,16 @@ public class CasesServiceImpl implements CasesService {
                         map(fdn -> fdn.createFieldValue(caseEntity))
                 .toList());
 
+        // BEHÖVDE LÄGGA TILL  cascade = CascadeType.ALL på budgetRows och financingRows i BudgetFieldValue för annars sparas inte dessa vid save(caseEntity)
+        BudgetFieldValue budget = (BudgetFieldValue) caseEntity.getFieldValues().stream().filter(field -> field.getFieldDefinition().getFieldType() == FieldType.BUDGET).findFirst().orElseThrow(() -> new IllegalArgumentException("no budget field found"));
 
+        budget.getBudgetRows().add(new BudgetRow(budget, 1000, CostType.TYPE_4, 2000));
+        Organization org = organizationDao.getOrganizationByCaseId(1);
+        budget.getFinancingRows().add(new FinancingRow(budget, org, 500, 50));
 
-//        caseEntity.setFieldValues(fieldDefinitionDao.getAllFieldDefinitions()
-//                                                        .stream()
-//                                                        .<AbstractFieldValue<? extends FieldDefinition>>
-//                                                                map(fdn -> fdn.createFieldValue(caseEntity))
-//                                                        .toList());
+        HistoryLogFieldValue historyLog = (HistoryLogFieldValue) caseEntity.getFieldValues().stream().filter(field -> field.getFieldDefinition().getFieldType() == FieldType.HISTORY_LOG).findFirst().orElseThrow(() -> new IllegalArgumentException("no history field found"));
+        historyLog.getHistoryEvents().add(new HistoryEvent2(historyLog, "Event details", LocalDate.now(), HistoryEventType.ASSESSMENT_CHANGE));
+
         return caseEntityDao.save(caseEntity);
     }
 }

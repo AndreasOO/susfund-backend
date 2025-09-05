@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class BudgetRow {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="estimated_cost")
@@ -23,6 +23,17 @@ public class BudgetRow {
 
     @Column(name="accrued_cost")
     int accruedCost;
+
+    public BudgetRow(){
+
+    }
+
+    public BudgetRow(BudgetFieldValue owningBudget, int estimatedCost, CostType costType, int accruedCost) {
+        this.estimatedCost = estimatedCost;
+        this.costType = costType;
+        this.owningBudget = owningBudget;
+        this.accruedCost = accruedCost;
+    }
 
     public Long getId() {
         return id;

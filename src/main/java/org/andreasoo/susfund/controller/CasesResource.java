@@ -524,6 +524,15 @@ public class CasesResource {
         fdn6.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
 
+        FieldDefinition fdn7 = new FieldDefinition();
+        fdn7.setFieldType(FieldType.HISTORY_LOG);
+        fdn4.setSection(Section.HISTORY);
+        fdn4.setTitle("History Title");
+        fdn4.setHasComment(false);
+        fdn4.setRowIndex(1L);
+        fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+
+
 
         FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
@@ -534,6 +543,9 @@ public class CasesResource {
 
         FieldDefinition numericFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn5);
         FieldDefinition dateFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn6);
+
+        FieldDefinition historyFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn7);
+
 
         savedSupportTypeNode.getFieldDefinitions().addAll(fieldDefinitionService.getAllFieldDefinitions());
         supportTypeNodeService.saveSupportTypeNode(savedSupportTypeNode);
@@ -580,5 +592,32 @@ public class CasesResource {
     public Response getOrganization(){
         CaseEntity caseEntity = casesService.createCaseWithMockData();
         return Response.ok(generalMappingService.mapToDTO(caseEntity.getOrganization())).build();
+    }
+
+    @Path("/decision-field")
+    @GET()
+    @Produces("application/json")
+    public Response getDecisionFields(){
+        CaseEntity caseEntity = casesService.createCaseWithMockData();
+        List<AbstractFieldValue<? extends FieldDefinition>> decisionFieldValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.DECISION).toList();
+        return Response.ok(decisionFieldValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+    @Path("/budget-field")
+    @GET()
+    @Produces("application/json")
+    public Response getBudgetFields(){
+        CaseEntity caseEntity = casesService.createCaseWithMockData();
+        List<AbstractFieldValue<? extends FieldDefinition>> budgetFieldValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.BUDGET).toList();
+        return Response.ok(budgetFieldValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+    @Path("/history-field")
+    @GET()
+    @Produces("application/json")
+    public Response getHistoryFields(){
+        CaseEntity caseEntity = casesService.createCaseWithMockData();
+        List<AbstractFieldValue<? extends FieldDefinition>> historyFields = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.HISTORY_LOG).toList();
+        return Response.ok(historyFields.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 }

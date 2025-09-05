@@ -24,6 +24,9 @@ import {AssessmentFieldValueDto} from './case-entity/new/field/value/assessment-
 import {TextFieldValueDto} from './case-entity/new/field/value/text-field-value-dto';
 import {CaseEntityDto} from './case-entity/new/case-entity-dto';
 import {OrganizationDto} from './case-entity/new/organization-dto';
+import {DecisionFieldValueDto} from './case-entity/new/field/value/decision-field-value-dto';
+import {BudgetFieldValueDto} from './case-entity/new/field/value/budget-field-value-dto';
+import {HistoryLogFieldValueDto} from './case-entity/new/field/value/history-log-field-value-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -185,4 +188,16 @@ export class CasesFetcherService {
     return this.http.get<OrganizationDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/organization")
   }
 
+  public getDecisionFieldValue():Observable<DecisionFieldValueDto[]> {
+    return this.http.get<DecisionFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/decision-field")
+  }
+
+  public getBudgetFieldValue():Observable<BudgetFieldValueDto[]> {
+    return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/budget-field")
+  }
+
+
+  public getHistoryFieldValue():Observable<HistoryLogFieldValueDto[]> {
+    return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/history-field")
+  }
 }

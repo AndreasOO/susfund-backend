@@ -5,12 +5,17 @@ import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
 import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @DiscriminatorValue(value="HISTORY_LOG")
 public class HistoryLogFieldValue extends AbstractFieldValue<FieldDefinition> {
 
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name="history_log_value_id")
+    @OneToMany(mappedBy = "owningHistoryLog", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<HistoryEvent2>  historyEvents = new HashSet<>();
 
     public HistoryLogFieldValue() {
         super();
@@ -19,11 +24,6 @@ public class HistoryLogFieldValue extends AbstractFieldValue<FieldDefinition> {
     public HistoryLogFieldValue(CaseEntity owningCase) {
         super(owningCase);
     }
-
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name="history_log_value_id")
-    private Set<HistoryEvent2>  historyEvents;
-
 
     public Set<HistoryEvent2> getHistoryEvents() {
         return historyEvents;
