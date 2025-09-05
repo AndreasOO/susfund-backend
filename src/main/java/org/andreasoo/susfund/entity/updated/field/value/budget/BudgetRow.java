@@ -24,15 +24,18 @@ public class BudgetRow {
     @Column(name="accrued_cost")
     int accruedCost;
 
+    private String description;
+
     public BudgetRow(){
 
     }
 
-    public BudgetRow(BudgetFieldValue owningBudget, int estimatedCost, CostType costType, int accruedCost) {
+    public BudgetRow(BudgetFieldValue owningBudget, int estimatedCost, CostType costType, int accruedCost, String description) {
         this.estimatedCost = estimatedCost;
         this.costType = costType;
         this.owningBudget = owningBudget;
         this.accruedCost = accruedCost;
+        this.description = description;
     }
 
     public Long getId() {
@@ -73,5 +76,13 @@ public class BudgetRow {
 
     public void setOwningBudget(BudgetFieldValue owningBudget) {
         this.owningBudget = owningBudget;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

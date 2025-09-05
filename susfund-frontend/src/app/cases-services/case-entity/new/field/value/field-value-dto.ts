@@ -4,6 +4,7 @@ import {BudgetFieldValueDto} from './budget-field-value-dto';
 import {BudgetFieldDefinitionDto} from '../definition/budget-field-definition-dto';
 
 export interface FieldValueDto {
+  id:number,
   dtoClass:string,
   owningCaseId:number,
   owningFieldDefinition:SimpleFieldDefinitionDto | SelectableFieldDefinitionDto | BudgetFieldDefinitionDto

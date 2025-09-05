@@ -25,15 +25,20 @@ public class FinancingRow {
     @JoinColumn(name="field_value_entity_id")
     BudgetFieldValue owningBudget;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="financing_type")
+    private FinancingType financingType;
+
     public FinancingRow(){
 
     }
 
-    public FinancingRow(BudgetFieldValue owningBudget, Organization organization, int financingAmount, int financingPercentage) {
+    public FinancingRow(BudgetFieldValue owningBudget, Organization organization, int financingAmount, int financingPercentage, FinancingType financingType) {
         this.organization = organization;
         this.financingAmount = financingAmount;
         this.financingPercentage = financingPercentage;
         this.owningBudget = owningBudget;
+        this.financingType = financingType;
     }
 
     public Long getId() {
@@ -74,5 +79,13 @@ public class FinancingRow {
 
     public void setOwningBudget(BudgetFieldValue owningBudget) {
         this.owningBudget = owningBudget;
+    }
+
+    public FinancingType getFinancingType() {
+        return financingType;
+    }
+
+    public void setFinancingType(FinancingType financingType) {
+        this.financingType = financingType;
     }
 }

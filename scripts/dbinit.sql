@@ -570,6 +570,7 @@ CREATE TABLE `financing_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                                `organization_id` INT NOT NULL,
                                `financing_amount` INT NOT NULL,
                                `financing_percentage` INT NOT NULL,
+                               `financing_type` VARCHAR(255),
                                 CONSTRAINT `FK1_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                                 CONSTRAINT `FK4_organization_id` FOREIGN KEY  (`organization_id`) REFERENCES  `organization` (`id`),
                                 PRIMARY KEY (`id`)
@@ -583,6 +584,7 @@ CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                             `estimated_cost` INT NOT NULL,
                             `cost_type` VARCHAR(255) NOT NULL,
                             `accrued_cost` INT NOT NULL,
+                            `description` VARCHAR(255),
                             CONSTRAINT `FK2_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 

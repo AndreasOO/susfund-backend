@@ -15,6 +15,7 @@ import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetRow;
 import org.andreasoo.susfund.entity.updated.field.value.budget.CostType;
 import org.andreasoo.susfund.entity.updated.field.value.budget.FinancingRow;
+import org.andreasoo.susfund.entity.updated.field.value.budget.FinancingType;
 import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionResultType;
 import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEvent2;
@@ -224,9 +225,9 @@ public class CasesServiceImpl implements CasesService {
         // BEHÖVDE LÄGGA TILL  cascade = CascadeType.ALL på budgetRows och financingRows i BudgetFieldValue för annars sparas inte dessa vid save(caseEntity)
         BudgetFieldValue budget = (BudgetFieldValue) caseEntity.getFieldValues().stream().filter(field -> field.getFieldDefinition().getFieldType() == FieldType.BUDGET).findFirst().orElseThrow(() -> new IllegalArgumentException("no budget field found"));
 
-        budget.getBudgetRows().add(new BudgetRow(budget, 1000, CostType.TYPE_4, 2000));
+        budget.getBudgetRows().add(new BudgetRow(budget, 1000, CostType.TYPE_4, 2000, "little description"));
         Organization org = organizationDao.getOrganizationByCaseId(1);
-        budget.getFinancingRows().add(new FinancingRow(budget, org, 500, 50));
+        budget.getFinancingRows().add(new FinancingRow(budget, org, 500, 50, FinancingType.CASH));
 
         HistoryLogFieldValue historyLog = (HistoryLogFieldValue) caseEntity.getFieldValues().stream().filter(field -> field.getFieldDefinition().getFieldType() == FieldType.HISTORY_LOG).findFirst().orElseThrow(() -> new IllegalArgumentException("no history field found"));
         historyLog.getHistoryEvents().add(new HistoryEvent2(historyLog, "Event details", LocalDate.now(), HistoryEventType.ASSESSMENT_CHANGE));

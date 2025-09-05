@@ -12,6 +12,7 @@ public class DateFieldValueMapper
     @Override
     public DateFieldValueDTO mapToDTO(DateFieldValue fieldValue) {
         return new DateFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getDateValue()

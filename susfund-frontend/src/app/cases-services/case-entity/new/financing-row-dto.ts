@@ -6,4 +6,5 @@ export interface FinancingRowDto {
   financingAmount:number,
   financingPercentage:number,
   dtoClass:string
+  financingType:string
 }

@@ -12,6 +12,7 @@ public class DecisionFieldValueMapper
     @Override
     public DecisionFieldValueDTO mapToDTO(DecisionFieldValue fieldValue) {
         return new DecisionFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createSelectableFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getDecisionResultType(),

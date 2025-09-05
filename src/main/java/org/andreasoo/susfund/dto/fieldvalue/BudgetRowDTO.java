@@ -10,17 +10,19 @@ public class BudgetRowDTO extends AbstractDTO {
     private CostType costType;
     private int accruedCost;
     private Long id;
+    private String description;
 
     public BudgetRowDTO(){
         super("budgetRowDTO");
     }
 
-    public BudgetRowDTO(Long id, int estimatedCost, CostType costType, int accruedCost) {
+    public BudgetRowDTO(Long id, int estimatedCost, CostType costType, int accruedCost, String description) {
         super("budgetRowDTO");
         this.id = id;
         this.estimatedCost = estimatedCost;
         this.costType = costType;
         this.accruedCost = accruedCost;
+        this.description = description;
     }
 
     public Long getId() {
@@ -53,5 +55,13 @@ public class BudgetRowDTO extends AbstractDTO {
 
     public void setAccruedCost(int accruedCost) {
         this.accruedCost = accruedCost;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -3,5 +3,6 @@ export interface BudgetRowDto {
   estimatedCost:number,
   costType:string,
   accruedCost:number,
-  dtoClass:string
+  dtoClass:string,
+  description:string
 }
