@@ -5,7 +5,7 @@ import org.andreasoo.susfund.entity.updated.CaseStatus2;
 
 public class SimpleCaseDTO extends AbstractDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private String companyName;
     private String caseManager;
@@ -18,7 +18,7 @@ public class SimpleCaseDTO extends AbstractDTO {
 
     }
 
-    public SimpleCaseDTO(int id, String name, String companyName,
+    public SimpleCaseDTO(Long id, String name, String companyName,
                          String caseManager, String caseController,
                          CaseStatus2 caseStatus, CaseDecisionType2 caseDecisionType) {
         super("simpleCase");
@@ -31,11 +31,11 @@ public class SimpleCaseDTO extends AbstractDTO {
         this.caseDecisionType = caseDecisionType;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

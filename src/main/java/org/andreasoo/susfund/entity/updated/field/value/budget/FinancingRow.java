@@ -8,7 +8,7 @@ import org.andreasoo.susfund.entity.old.Organization;
 public class FinancingRow {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -24,6 +24,22 @@ public class FinancingRow {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="field_value_entity_id")
     BudgetFieldValue owningBudget;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="financing_type")
+    private FinancingType financingType;
+
+    public FinancingRow(){
+
+    }
+
+    public FinancingRow(BudgetFieldValue owningBudget, Organization organization, int financingAmount, int financingPercentage, FinancingType financingType) {
+        this.organization = organization;
+        this.financingAmount = financingAmount;
+        this.financingPercentage = financingPercentage;
+        this.owningBudget = owningBudget;
+        this.financingType = financingType;
+    }
 
     public Long getId() {
         return id;
@@ -63,5 +79,13 @@ public class FinancingRow {
 
     public void setOwningBudget(BudgetFieldValue owningBudget) {
         this.owningBudget = owningBudget;
+    }
+
+    public FinancingType getFinancingType() {
+        return financingType;
+    }
+
+    public void setFinancingType(FinancingType financingType) {
+        this.financingType = financingType;
     }
 }

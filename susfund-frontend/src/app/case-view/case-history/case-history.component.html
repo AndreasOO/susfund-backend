@@ -6,13 +6,15 @@
     <thead>
     <tr>
       <th scope="col">Date</th>
+      <th scope="col">Event type</th>
       <th scope="col">Details</th>
     </tr>
     </thead>
-    <tbody>
-    <tr *ngFor="let historyEvent of historyEventList || []">
-      <td class="col-2">{{historyEvent.date}}</td>
-      <td class="col-10">{{historyEvent.details}}</td>
+    <tbody *ngFor="let historyLog of historyLogFields">
+    <tr *ngFor="let event of historyLog.historyEvents">
+      <td class="col-2">{{event.historyEventDate}}</td>
+      <td class="col-5">{{event.historyEventType}}</td>
+      <td class="col-5">{{event.historyEventDetails}}</td>
     </tr>
     </tbody>
   </table>

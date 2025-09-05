@@ -2,24 +2,28 @@ package org.andreasoo.susfund.dto.fieldvalue;
 
 import org.andreasoo.susfund.dto.AbstractDTO;
 import org.andreasoo.susfund.dto.OrganizationDTO;
+import org.andreasoo.susfund.entity.updated.field.value.budget.FinancingRow;
+import org.andreasoo.susfund.entity.updated.field.value.budget.FinancingType;
 
 public class FinancingRowDTO extends AbstractDTO {
 
+    private Long id;
     private OrganizationDTO organization;
     private int financingAmount;
     private int financingPercentage;
-    private Long id;
+    private FinancingType financingType;
 
     public FinancingRowDTO(){
         super("financingRowDTO");
     }
 
-    public FinancingRowDTO(Long id, OrganizationDTO organization, int financingAmount, int financingPercentage) {
+    public FinancingRowDTO(Long id, OrganizationDTO organization, int financingAmount, int financingPercentage, FinancingType financingType) {
         super("financingRowDTO");
         this.id = id;
         this.organization = organization;
         this.financingAmount = financingAmount;
         this.financingPercentage = financingPercentage;
+        this.financingType = financingType;
     }
 
     public Long getId() {
@@ -52,5 +56,13 @@ public class FinancingRowDTO extends AbstractDTO {
 
     public void setFinancingPercentage(int financingPercentage) {
         this.financingPercentage = financingPercentage;
+    }
+
+    public FinancingType getFinancingType() {
+        return financingType;
+    }
+
+    public void setFinancingType(FinancingType financingType) {
+        this.financingType = financingType;
     }
 }

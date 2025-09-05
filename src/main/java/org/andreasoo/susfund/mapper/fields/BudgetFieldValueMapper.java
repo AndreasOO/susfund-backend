@@ -15,6 +15,7 @@ public class BudgetFieldValueMapper
     @Override
     public BudgetFieldValueDTO mapToDTO(BudgetFieldValue fieldValue) {
         return new BudgetFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createBudgetFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getTotalFinancingRatio(),
@@ -25,14 +26,16 @@ public class BudgetFieldValueMapper
                                         row.getOrganization().getName(),
                                         row.getOrganization().getOrganizationType().getName()),
                                 row.getFinancingAmount(),
-                                row.getFinancingPercentage()))
+                                row.getFinancingPercentage(),
+                                row.getFinancingType()))
                         .toList(),
                 fieldValue.getBudgetRows().stream()
                         .map(row -> new BudgetRowDTO(
                                 row.getId(),
                                 row.getEstimatedCost(),
                                 row.getCostType(),
-                                row.getAccruedCost()))
+                                row.getAccruedCost(),
+                                row.getDescription()))
                         .toList()
         );
     }

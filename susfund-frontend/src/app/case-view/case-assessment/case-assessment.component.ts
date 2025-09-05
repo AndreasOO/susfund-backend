@@ -3,6 +3,7 @@ import {Router, ROUTER_OUTLET_DATA} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseAssessmentUtil} from '../../cases-services/case-util/case-assessment-util';
 import {AssessmentUpdateRequest} from '../../cases-services/case-util/assessment-update-request';
+import {AssessmentFieldValueDto} from '../../cases-services/case-entity/new/field/value/assessment-field-value-dto';
 
 @Component({
   selector: 'app-case-assessment',
@@ -12,32 +13,31 @@ import {AssessmentUpdateRequest} from '../../cases-services/case-util/assessment
 })
 export class CaseAssessmentComponent implements OnInit {
 
-  caseId:string | undefined
-  caseAssessmentUtil:CaseAssessmentUtil | undefined
+  assessmentFieldValues:AssessmentFieldValueDto[] = [];
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
 
   ngOnInit() {
-    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getCaseAssessmentUtilByCaseId(this.caseId).subscribe(caseAssessmentUtil => this.caseAssessmentUtil = caseAssessmentUtil!)
-  }
-
-  public saveUpdate(assessmentItemId:number, updatedJustification:string, updatedScore:number){
-    const update:AssessmentUpdateRequest ={
-      assessmentItemId:assessmentItemId,
-      score:updatedScore,
-      justification:updatedJustification
-    }
-
-    const response = this.fetcher.updateAssessmentItem(this.caseId!, update).subscribe(response =>{
-        console.log(response)
-      },
-      error => console.log(error)
-    );
+    this.fetcher.getAssessmentFields().subscribe(assessmentFields => {this.assessmentFieldValues = assessmentFields!;});
 
   }
+
+  // public saveUpdate(assessmentItemId:number, updatedJustification:string, updatedScore:number){
+  //   const update:AssessmentUpdateRequest ={
+  //     assessmentItemId:assessmentItemId,
+  //     score:updatedScore,
+  //     justification:updatedJustification
+  //   }
+  //
+  //   const response = this.fetcher.updateAssessmentItem(this.caseId!, update).subscribe(response =>{
+  //       console.log(response)
+  //     },
+  //     error => console.log(error)
+  //   );
+  //
+  // }
 
   public getSelectedScore(groupName:number){
 

@@ -12,6 +12,7 @@ public class AssessmentFieldValueMapper
     @Override
     public AssessmentFieldValueDTO mapToDTO(AssessmentFieldValue fieldValue) {
         return new AssessmentFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getAssessmentScore(),

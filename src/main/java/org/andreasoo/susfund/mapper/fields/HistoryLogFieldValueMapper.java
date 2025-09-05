@@ -15,6 +15,7 @@ public class HistoryLogFieldValueMapper
     @Override
     public HistoryLogFieldValueDTO mapToDTO(HistoryLogFieldValue fieldValue) {
         return new HistoryLogFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getHistoryEvents().stream()

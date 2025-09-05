@@ -26,6 +26,21 @@ public class HistoryEvent2 {
     @Enumerated(EnumType.STRING)
     private HistoryEventType historyEventType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "field_value_entity_id", nullable = false)
+    private HistoryLogFieldValue owningHistoryLog;
+
+    public HistoryEvent2(){
+
+    }
+
+    public HistoryEvent2(HistoryLogFieldValue owningHistoryLog, String historyEventDetails, LocalDate historyEventDate, HistoryEventType historyEventType) {
+        this.historyEventDetails = historyEventDetails;
+        this.historyEventDate = historyEventDate;
+        this.historyEventType = historyEventType;
+        this.owningHistoryLog = owningHistoryLog;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,5 +71,13 @@ public class HistoryEvent2 {
 
     public void setHistoryEventType(HistoryEventType historyEventType) {
         this.historyEventType = historyEventType;
+    }
+
+    public HistoryLogFieldValue getOwningHistoryLog() {
+        return owningHistoryLog;
+    }
+
+    public void setOwningHistoryLog(HistoryLogFieldValue owningHistoryLog) {
+        this.owningHistoryLog = owningHistoryLog;
     }
 }

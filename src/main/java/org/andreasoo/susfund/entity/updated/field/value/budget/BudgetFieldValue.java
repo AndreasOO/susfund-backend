@@ -20,10 +20,12 @@ public class BudgetFieldValue extends AbstractFieldValue<BudgetFieldDefinition> 
         super(owningCase);
     }
 
-    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<FinancingRow> financingRows = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owningBudget", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<BudgetRow> budgetRows = new ArrayList<>();
 
     @Column(name="total_financing_ratio")

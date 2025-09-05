@@ -554,6 +554,7 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `decision_date` DATE,
                                     `assessment_justification` VARCHAR(255),
                                     `assessment_score` VARCHAR(255),
+                                    `decision_motivation` VARCHAR(255),
                                     `decision_result_type` VARCHAR(255),
                                     `DISCRIMINATOR_FIELD_VALUE_TYPE` VARCHAR(255) NOT NULL,
                                     CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
@@ -569,6 +570,7 @@ CREATE TABLE `financing_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                                `organization_id` INT NOT NULL,
                                `financing_amount` INT NOT NULL,
                                `financing_percentage` INT NOT NULL,
+                               `financing_type` VARCHAR(255),
                                 CONSTRAINT `FK1_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                                 CONSTRAINT `FK4_organization_id` FOREIGN KEY  (`organization_id`) REFERENCES  `organization` (`id`),
                                 PRIMARY KEY (`id`)
@@ -582,6 +584,7 @@ CREATE TABLE `budget_row` ( `id` INT NOT NULL AUTO_INCREMENT,
                             `estimated_cost` INT NOT NULL,
                             `cost_type` VARCHAR(255) NOT NULL,
                             `accrued_cost` INT NOT NULL,
+                            `description` VARCHAR(255),
                             CONSTRAINT `FK2_field_value_entity_id` FOREIGN KEY  (`field_value_entity_id`) REFERENCES  `field_value_entity` (`id`),
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 
@@ -636,9 +639,9 @@ CREATE TABLE `history_event2` (`id` INT NOT NULL AUTO_INCREMENT,
 -- -------------------------------------------------------------------------------- END FIELD DEFINITION
 
 
-INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Approved");
-INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Rejected");
-INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "Partially Approved");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "APPROVED");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "REJECTED");
+INSERT INTO `selectable_value` (selectable_type, value) VALUES ("CASE_DECISION", "PARTIALLY APPROVED");
 
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-29");
 INSERT INTO `susfund_db`.`case_budget` (`date_last_changed`) VALUES ("2024-03-30");

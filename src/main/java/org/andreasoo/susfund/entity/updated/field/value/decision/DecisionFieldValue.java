@@ -10,6 +10,13 @@ import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 @DiscriminatorValue(value="DECISION")
 public class DecisionFieldValue extends AbstractFieldValue<SelectableFieldDefinition> {
 
+    @Column(name="decision_result_type")
+    @Enumerated(EnumType.STRING)
+    private DecisionResultType decisionResultType;
+
+    @Column(name="decision_motivation")
+    private String motivation;
+
     public DecisionFieldValue() {
         super();
     }
@@ -18,9 +25,11 @@ public class DecisionFieldValue extends AbstractFieldValue<SelectableFieldDefini
         super(owningCase);
     }
 
-    @Column(name="decision_result_type")
-    @Enumerated(EnumType.STRING)
-    private DecisionResultType decisionResultType;
+    public DecisionFieldValue(CaseEntity owningCase, DecisionResultType decisionResultType, String motivation) {
+        super(owningCase);
+        this.decisionResultType = decisionResultType;
+        this.motivation = motivation;
+    }
 
     @Override
     public String getValueAsString() {
@@ -33,5 +42,13 @@ public class DecisionFieldValue extends AbstractFieldValue<SelectableFieldDefini
 
     public void setDecisionResultType(DecisionResultType decisionResultType) {
         this.decisionResultType = decisionResultType;
+    }
+
+    public String getMotivation() {
+        return motivation;
+    }
+
+    public void setMotivation(String motivation) {
+        this.motivation = motivation;
     }
 }

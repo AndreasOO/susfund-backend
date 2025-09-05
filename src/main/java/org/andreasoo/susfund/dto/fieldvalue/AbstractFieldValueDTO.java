@@ -5,11 +5,13 @@ import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 
 public abstract class AbstractFieldValueDTO<T extends FieldDefinitionDTO> extends AbstractDTO {
 
+    public final Long id;
     public final Long owningCaseId;
     public final FieldDefinitionDTO owningFieldDefinition;
 
-    protected AbstractFieldValueDTO(Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, String dtoClassName) {
+    protected AbstractFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition, String dtoClassName) {
         super(dtoClassName);
+        this.id = id;
         this.owningCaseId = owningCaseId;
         this.owningFieldDefinition = owningFieldDefinition;
     }
@@ -20,5 +22,9 @@ public abstract class AbstractFieldValueDTO<T extends FieldDefinitionDTO> extend
 
     public FieldDefinitionDTO getOwningFieldDefinition() {
         return owningFieldDefinition;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -1,9 +1,10 @@
 import {OrganizationDto} from './organization-dto';
 import {CaseManagerDto} from './case-manager-dto';
 import {SupportTypeNodeDto} from './support-type-node-dto';
-import {FieldDefinitionDto} from './field/definition/field-definition-dto';
+import {SimpleFieldDefinitionDto} from './field/definition/simple-field-definition-dto';
+import {FieldValueDto} from './field/value/field-value-dto';
 
-export interface CaseDto {
+export interface CaseEntityDto {
   id:number,
   name:string,
   organization:OrganizationDto
@@ -13,5 +14,6 @@ export interface CaseDto {
   caseStatus:string,
   caseDecisionType:string,
   supportTypeNode:SupportTypeNodeDto,
-  fieldDefinitions:FieldDefinitionDto[]
+  fields:FieldValueDto[],
+  dtoClass:string
 }

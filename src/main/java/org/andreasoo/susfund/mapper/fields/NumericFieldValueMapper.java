@@ -12,6 +12,7 @@ public class NumericFieldValueMapper
     @Override
     public NumericFieldValueDTO mapToDTO(NumericFieldValue fieldValue) {
         return new NumericFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getNumericValue()

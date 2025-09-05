@@ -12,6 +12,7 @@ public class TextFieldValueMapper
     @Override
     public TextFieldValueDTO mapToDTO(TextFieldValue fieldValue) {
         return new TextFieldValueDTO(
+                fieldValue.getId(),
                 fieldValue.getOwningCase().getId(),
                 createFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getStringValue()

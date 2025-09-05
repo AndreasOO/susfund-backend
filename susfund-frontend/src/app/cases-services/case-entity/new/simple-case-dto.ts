@@ -5,5 +5,6 @@ export interface SimpleCaseDto {
   caseManager: string,
   caseController: string,
   caseStatus: string,
-  caseDecisionType: string
+  caseDecisionType: string,
+  dtoClass:string
 }

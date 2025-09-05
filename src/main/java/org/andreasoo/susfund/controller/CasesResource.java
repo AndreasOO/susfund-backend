@@ -11,10 +11,7 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.dto.CaseDTO;
-import org.andreasoo.susfund.dto.CaseManagerDTO;
-import org.andreasoo.susfund.dto.OrganizationDTO;
-import org.andreasoo.susfund.dto.SupportTypeNodeDTO;
+import org.andreasoo.susfund.dto.*;
 import org.andreasoo.susfund.dto.fielddefinition.BudgetFieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fielddefinition.SelectableFieldDefinitionDTO;
@@ -39,6 +36,7 @@ import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldV
 import org.andreasoo.susfund.entity.updated.field.value.numericfield.NumericFieldValue;
 import org.andreasoo.susfund.entity.updated.field.value.textfield.TextFieldValue;
 import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
+import org.andreasoo.susfund.mapper.fields.FieldDefinitionDTOFactory;
 import org.andreasoo.susfund.service.*;
 import org.andreasoo.susfund.util.*;
 
@@ -69,6 +67,10 @@ public class CasesResource {
 
     @Inject
     private GeneralMappingService generalMappingService;
+
+    @Inject
+    private FieldValueMappingService fieldValueMappingService;
+
 
     @GET
     @Produces("application/json")
@@ -259,187 +261,187 @@ public class CasesResource {
     public Response createCaseWithFieldValues() {
         CaseEntity caze = casesService.createCaseWithMockData();
 
-        CaseDTO caseDTO = new CaseDTO(
-                caze.getId(),
-                caze.getName(),
-                new OrganizationDTO(caze.getOrganization().getId(), caze.getOrganization().getName(), caze.getOrganization().getOrganizationType().getName()),
-                new CaseManagerDTO(caze.getCaseManager().getId(), caze.getCaseManager().getName()),
-                new CaseManagerDTO(caze.getCaseController().getId(), caze.getCaseController().getName()),
-                new CaseManagerDTO(caze.getHandledBy().getId(), caze.getHandledBy().getName()),
-                caze.getCaseStatus(),
-                caze.getCaseDecisionType(),
-                new SupportTypeNodeDTO(caze.getSupportTypeNode().getId(), caze.getSupportTypeNode().getTechName()),
-                caze.getFieldValues().stream().<AbstractFieldValueDTO<? extends FieldDefinitionDTO>>map(fve -> {
-                     switch (fve.getFieldDefinition().getFieldType()) {
-                        case TEXT_FIELD -> {
-                            TextFieldValue tFve = (TextFieldValue) fve;
-                            return new TextFieldValueDTO(
-                                    caze.getId(),
-                                    new FieldDefinitionDTO(
-                                            tFve.getFieldDefinition().getId(),
-                                            tFve.getFieldDefinition().getTitle(),
-                                            tFve.getFieldDefinition().getPreamble(),
-                                            tFve.getFieldDefinition().getAssistingText(),
-                                            tFve.getFieldDefinition().isHasComment(),
-                                            tFve.getFieldDefinition().getSection(),
-                                            tFve.getFieldDefinition().getSubSection(),
-                                            tFve.getFieldDefinition().getFieldType(),
-                                            tFve.getFieldDefinition().getFrontendLocation(),
-                                            tFve.getFieldDefinition().getRowIndex()),
-                                    tFve.getStringValue());
-                        }
-                        case NUMERIC_FIELD -> {
-                            NumericFieldValue nFve = (NumericFieldValue) fve;
-                            return new NumericFieldValueDTO(
-                                    caze.getId(),
-                                    new FieldDefinitionDTO(
-                                            nFve.getFieldDefinition().getId(),
-                                            nFve.getFieldDefinition().getTitle(),
-                                            nFve.getFieldDefinition().getPreamble(),
-                                            nFve.getFieldDefinition().getAssistingText(),
-                                            nFve.getFieldDefinition().isHasComment(),
-                                            nFve.getFieldDefinition().getSection(),
-                                            nFve.getFieldDefinition().getSubSection(),
-                                            nFve.getFieldDefinition().getFieldType(),
-                                            nFve.getFieldDefinition().getFrontendLocation(),
-                                            nFve.getFieldDefinition().getRowIndex()),
-                                    nFve.getNumericValue());
-                        }
-                        case DATE_FIELD -> {
-                            DateFieldValue dFve = (DateFieldValue) fve;
-                            return new DateFieldValueDTO(
-                                    caze.getId(),
-                                    new FieldDefinitionDTO(
-                                            dFve.getFieldDefinition().getId(),
-                                            dFve.getFieldDefinition().getTitle(),
-                                            dFve.getFieldDefinition().getPreamble(),
-                                            dFve.getFieldDefinition().getAssistingText(),
-                                            dFve.getFieldDefinition().isHasComment(),
-                                            dFve.getFieldDefinition().getSection(),
-                                            dFve.getFieldDefinition().getSubSection(),
-                                            dFve.getFieldDefinition().getFieldType(),
-                                            dFve.getFieldDefinition().getFrontendLocation(),
-                                            dFve.getFieldDefinition().getRowIndex()),
-                                    dFve.getDateValue());
-                        }
-                        case DECISION -> {
-                            DecisionFieldValue dFve = (DecisionFieldValue) fve;
-                            return new DecisionFieldValueDTO(
-                                    caze.getId(),
-                                    new SelectableFieldDefinitionDTO(
-                                            dFve.getFieldDefinition().getId(),
-                                            dFve.getFieldDefinition().getTitle(),
-                                            dFve.getFieldDefinition().getPreamble(),
-                                            dFve.getFieldDefinition().getAssistingText(),
-                                            dFve.getFieldDefinition().isHasComment(),
-                                            dFve.getFieldDefinition().getSection(),
-                                            dFve.getFieldDefinition().getSubSection(),
-                                            dFve.getFieldDefinition().getFieldType(),
-                                            dFve.getFieldDefinition().getFrontendLocation(),
-                                            dFve.getFieldDefinition().getRowIndex(),
-                                            dFve.getFieldDefinition().getSelectableValues().stream().map(
-                                                                                            slv -> new SelectableValueDTO(slv.getId(),
-                                                                                                         slv.getValue(),
-                                                                                                         slv.getSelectableType()))
-                                                                                            .collect(Collectors.toSet())),
-                                    dFve.getDecisionResultType());
-                        }
-                        case BUDGET -> {
-                            BudgetFieldValue bFve = (BudgetFieldValue) fve;
-                            return new BudgetFieldValueDTO(
-                                    caze.getId(),
-                                    new BudgetFieldDefinitionDTO(
-                                            bFve.getFieldDefinition().getId(),
-                                            bFve.getFieldDefinition().getTitle(),
-                                            bFve.getFieldDefinition().getPreamble(),
-                                            bFve.getFieldDefinition().getAssistingText(),
-                                            bFve.getFieldDefinition().isHasComment(),
-                                            bFve.getFieldDefinition().getSection(),
-                                            bFve.getFieldDefinition().getSubSection(),
-                                            bFve.getFieldDefinition().getFieldType(),
-                                            bFve.getFieldDefinition().getFrontendLocation(),
-                                            bFve.getFieldDefinition().getRowIndex(),
-                                            bFve.getFieldDefinition().getBudgetType()),
-                                            bFve.getTotalFinancingRatio(),
-                                            bFve.getFinancingRows().stream()
-                                                                   .map(row -> new FinancingRowDTO(
-                                                                                                row.getId(),
-                                                                                                new OrganizationDTO(row.getOrganization().getId(),
-                                                                                                                    row.getOrganization().getName(),
-                                                                                                                    row.getOrganization().getOrganizationType().getName()),
-                                                                                                row.getFinancingAmount(),
-                                                                                                row.getFinancingPercentage()))
-                                                                   .toList(),
-                                            bFve.getBudgetRows().stream()
-                                                                .map(row -> new BudgetRowDTO(
-                                                                        row.getId(),
-                                                                        row.getEstimatedCost(),
-                                                                        row.getCostType(),
-                                                                        row.getAccruedCost()))
-                                                               .toList()
-                                            );
-                        }
-                        case APPLICATION_QUESTION -> {
-                            TextFieldValue apqFve = (TextFieldValue) fve;
-                            return new TextFieldValueDTO(
-                                    caze.getId(),
-                                    new FieldDefinitionDTO(
-                                            apqFve.getFieldDefinition().getId(),
-                                            apqFve.getFieldDefinition().getTitle(),
-                                            apqFve.getFieldDefinition().getPreamble(),
-                                            apqFve.getFieldDefinition().getAssistingText(),
-                                            apqFve.getFieldDefinition().isHasComment(),
-                                            apqFve.getFieldDefinition().getSection(),
-                                            apqFve.getFieldDefinition().getSubSection(),
-                                            apqFve.getFieldDefinition().getFieldType(),
-                                            apqFve.getFieldDefinition().getFrontendLocation(),
-                                            apqFve.getFieldDefinition().getRowIndex()),
-                                    apqFve.getStringValue());
-                        }
-                        case ASSESSMENT_QUESTION -> {
-                            AssessmentFieldValue asqFve = (AssessmentFieldValue) fve;
-                            return new AssessmentFieldValueDTO(
-                                    caze.getId(),
-                                    new FieldDefinitionDTO(
-                                            asqFve.getFieldDefinition().getId(),
-                                            asqFve.getFieldDefinition().getTitle(),
-                                            asqFve.getFieldDefinition().getPreamble(),
-                                            asqFve.getFieldDefinition().getAssistingText(),
-                                            asqFve.getFieldDefinition().isHasComment(),
-                                            asqFve.getFieldDefinition().getSection(),
-                                            asqFve.getFieldDefinition().getSubSection(),
-                                            asqFve.getFieldDefinition().getFieldType(),
-                                            asqFve.getFieldDefinition().getFrontendLocation(),
-                                            asqFve.getFieldDefinition().getRowIndex()),
-                                    asqFve.getAssessmentScore(),
-                                    asqFve.getAssessmentJustification());
-                        }
-                        case HISTORY_LOG -> {
-                            HistoryLogFieldValue dFve = (HistoryLogFieldValue) fve;
-                            return new HistoryLogFieldValueDTO(
-                                    caze.getId(),
-                                    new FieldDefinitionDTO(
-                                            dFve.getFieldDefinition().getId(),
-                                            dFve.getFieldDefinition().getTitle(),
-                                            dFve.getFieldDefinition().getPreamble(),
-                                            dFve.getFieldDefinition().getAssistingText(),
-                                            dFve.getFieldDefinition().isHasComment(),
-                                            dFve.getFieldDefinition().getSection(),
-                                            dFve.getFieldDefinition().getSubSection(),
-                                            dFve.getFieldDefinition().getFieldType(),
-                                            dFve.getFieldDefinition().getFrontendLocation(),
-                                            dFve.getFieldDefinition().getRowIndex()),
-                                    dFve.getHistoryEvents().stream().map(he -> new HistoryEventDTO(
-                                                                                     he.getId(),
-                                                                                     he.getHistoryEventDetails(),
-                                                                                     he.getHistoryEventDate(),
-                                                                                     he.getHistoryEventType()))
-                                            .collect(Collectors.toSet()));
-                        }
-                        default -> throw new RuntimeException("oops");
-                    }
-                }).toList()
-        );
+//        CaseDTO caseDTO = new CaseDTO(
+//                caze.getId(),
+//                caze.getName(),
+//                new OrganizationDTO(caze.getOrganization().getId(), caze.getOrganization().getName(), caze.getOrganization().getOrganizationType().getName()),
+//                new CaseManagerDTO(caze.getCaseManager().getId(), caze.getCaseManager().getName()),
+//                new CaseManagerDTO(caze.getCaseController().getId(), caze.getCaseController().getName()),
+//                new CaseManagerDTO(caze.getHandledBy().getId(), caze.getHandledBy().getName()),
+//                caze.getCaseStatus(),
+//                caze.getCaseDecisionType(),
+//                new SupportTypeNodeDTO(caze.getSupportTypeNode().getId(), caze.getSupportTypeNode().getTechName()),
+//                caze.getFieldValues().stream().<AbstractFieldValueDTO<? extends FieldDefinitionDTO>>map(fve -> {
+//                     switch (fve.getFieldDefinition().getFieldType()) {
+//                        case TEXT_FIELD -> {
+//                            TextFieldValue tFve = (TextFieldValue) fve;
+//                            return new TextFieldValueDTO(
+//                                    caze.getId(),
+//                                    new FieldDefinitionDTO(
+//                                            tFve.getFieldDefinition().getId(),
+//                                            tFve.getFieldDefinition().getTitle(),
+//                                            tFve.getFieldDefinition().getPreamble(),
+//                                            tFve.getFieldDefinition().getAssistingText(),
+//                                            tFve.getFieldDefinition().isHasComment(),
+//                                            tFve.getFieldDefinition().getSection(),
+//                                            tFve.getFieldDefinition().getSubSection(),
+//                                            tFve.getFieldDefinition().getFieldType(),
+//                                            tFve.getFieldDefinition().getFrontendLocation(),
+//                                            tFve.getFieldDefinition().getRowIndex()),
+//                                    tFve.getStringValue());
+//                        }
+//                        case NUMERIC_FIELD -> {
+//                            NumericFieldValue nFve = (NumericFieldValue) fve;
+//                            return new NumericFieldValueDTO(
+//                                    caze.getId(),
+//                                    new FieldDefinitionDTO(
+//                                            nFve.getFieldDefinition().getId(),
+//                                            nFve.getFieldDefinition().getTitle(),
+//                                            nFve.getFieldDefinition().getPreamble(),
+//                                            nFve.getFieldDefinition().getAssistingText(),
+//                                            nFve.getFieldDefinition().isHasComment(),
+//                                            nFve.getFieldDefinition().getSection(),
+//                                            nFve.getFieldDefinition().getSubSection(),
+//                                            nFve.getFieldDefinition().getFieldType(),
+//                                            nFve.getFieldDefinition().getFrontendLocation(),
+//                                            nFve.getFieldDefinition().getRowIndex()),
+//                                    nFve.getNumericValue());
+//                        }
+//                        case DATE_FIELD -> {
+//                            DateFieldValue dFve = (DateFieldValue) fve;
+//                            return new DateFieldValueDTO(
+//                                    caze.getId(),
+//                                    new FieldDefinitionDTO(
+//                                            dFve.getFieldDefinition().getId(),
+//                                            dFve.getFieldDefinition().getTitle(),
+//                                            dFve.getFieldDefinition().getPreamble(),
+//                                            dFve.getFieldDefinition().getAssistingText(),
+//                                            dFve.getFieldDefinition().isHasComment(),
+//                                            dFve.getFieldDefinition().getSection(),
+//                                            dFve.getFieldDefinition().getSubSection(),
+//                                            dFve.getFieldDefinition().getFieldType(),
+//                                            dFve.getFieldDefinition().getFrontendLocation(),
+//                                            dFve.getFieldDefinition().getRowIndex()),
+//                                    dFve.getDateValue());
+//                        }
+//                        case DECISION -> {
+//                            DecisionFieldValue dFve = (DecisionFieldValue) fve;
+//                            return new DecisionFieldValueDTO(
+//                                    caze.getId(),
+//                                    new SelectableFieldDefinitionDTO(
+//                                            dFve.getFieldDefinition().getId(),
+//                                            dFve.getFieldDefinition().getTitle(),
+//                                            dFve.getFieldDefinition().getPreamble(),
+//                                            dFve.getFieldDefinition().getAssistingText(),
+//                                            dFve.getFieldDefinition().isHasComment(),
+//                                            dFve.getFieldDefinition().getSection(),
+//                                            dFve.getFieldDefinition().getSubSection(),
+//                                            dFve.getFieldDefinition().getFieldType(),
+//                                            dFve.getFieldDefinition().getFrontendLocation(),
+//                                            dFve.getFieldDefinition().getRowIndex(),
+//                                            dFve.getFieldDefinition().getSelectableValues().stream().map(
+//                                                                                            slv -> new SelectableValueDTO(slv.getId(),
+//                                                                                                         slv.getValue(),
+//                                                                                                         slv.getSelectableType()))
+//                                                                                            .collect(Collectors.toSet())),
+//                                    dFve.getDecisionResultType());
+//                        }
+//                        case BUDGET -> {
+//                            BudgetFieldValue bFve = (BudgetFieldValue) fve;
+//                            return new BudgetFieldValueDTO(
+//                                    caze.getId(),
+//                                    new BudgetFieldDefinitionDTO(
+//                                            bFve.getFieldDefinition().getId(),
+//                                            bFve.getFieldDefinition().getTitle(),
+//                                            bFve.getFieldDefinition().getPreamble(),
+//                                            bFve.getFieldDefinition().getAssistingText(),
+//                                            bFve.getFieldDefinition().isHasComment(),
+//                                            bFve.getFieldDefinition().getSection(),
+//                                            bFve.getFieldDefinition().getSubSection(),
+//                                            bFve.getFieldDefinition().getFieldType(),
+//                                            bFve.getFieldDefinition().getFrontendLocation(),
+//                                            bFve.getFieldDefinition().getRowIndex(),
+//                                            bFve.getFieldDefinition().getBudgetType()),
+//                                            bFve.getTotalFinancingRatio(),
+//                                            bFve.getFinancingRows().stream()
+//                                                                   .map(row -> new FinancingRowDTO(
+//                                                                                                row.getId(),
+//                                                                                                new OrganizationDTO(row.getOrganization().getId(),
+//                                                                                                                    row.getOrganization().getName(),
+//                                                                                                                    row.getOrganization().getOrganizationType().getName()),
+//                                                                                                row.getFinancingAmount(),
+//                                                                                                row.getFinancingPercentage()))
+//                                                                   .toList(),
+//                                            bFve.getBudgetRows().stream()
+//                                                                .map(row -> new BudgetRowDTO(
+//                                                                        row.getId(),
+//                                                                        row.getEstimatedCost(),
+//                                                                        row.getCostType(),
+//                                                                        row.getAccruedCost()))
+//                                                               .toList()
+//                                            );
+//                        }
+//                        case APPLICATION_QUESTION -> {
+//                            TextFieldValue apqFve = (TextFieldValue) fve;
+//                            return new TextFieldValueDTO(
+//                                    caze.getId(),
+//                                    new FieldDefinitionDTO(
+//                                            apqFve.getFieldDefinition().getId(),
+//                                            apqFve.getFieldDefinition().getTitle(),
+//                                            apqFve.getFieldDefinition().getPreamble(),
+//                                            apqFve.getFieldDefinition().getAssistingText(),
+//                                            apqFve.getFieldDefinition().isHasComment(),
+//                                            apqFve.getFieldDefinition().getSection(),
+//                                            apqFve.getFieldDefinition().getSubSection(),
+//                                            apqFve.getFieldDefinition().getFieldType(),
+//                                            apqFve.getFieldDefinition().getFrontendLocation(),
+//                                            apqFve.getFieldDefinition().getRowIndex()),
+//                                    apqFve.getStringValue());
+//                        }
+//                        case ASSESSMENT_QUESTION -> {
+//                            AssessmentFieldValue asqFve = (AssessmentFieldValue) fve;
+//                            return new AssessmentFieldValueDTO(
+//                                    caze.getId(),
+//                                    new FieldDefinitionDTO(
+//                                            asqFve.getFieldDefinition().getId(),
+//                                            asqFve.getFieldDefinition().getTitle(),
+//                                            asqFve.getFieldDefinition().getPreamble(),
+//                                            asqFve.getFieldDefinition().getAssistingText(),
+//                                            asqFve.getFieldDefinition().isHasComment(),
+//                                            asqFve.getFieldDefinition().getSection(),
+//                                            asqFve.getFieldDefinition().getSubSection(),
+//                                            asqFve.getFieldDefinition().getFieldType(),
+//                                            asqFve.getFieldDefinition().getFrontendLocation(),
+//                                            asqFve.getFieldDefinition().getRowIndex()),
+//                                    asqFve.getAssessmentScore(),
+//                                    asqFve.getAssessmentJustification());
+//                        }
+//                        case HISTORY_LOG -> {
+//                            HistoryLogFieldValue dFve = (HistoryLogFieldValue) fve;
+//                            return new HistoryLogFieldValueDTO(
+//                                    caze.getId(),
+//                                    new FieldDefinitionDTO(
+//                                            dFve.getFieldDefinition().getId(),
+//                                            dFve.getFieldDefinition().getTitle(),
+//                                            dFve.getFieldDefinition().getPreamble(),
+//                                            dFve.getFieldDefinition().getAssistingText(),
+//                                            dFve.getFieldDefinition().isHasComment(),
+//                                            dFve.getFieldDefinition().getSection(),
+//                                            dFve.getFieldDefinition().getSubSection(),
+//                                            dFve.getFieldDefinition().getFieldType(),
+//                                            dFve.getFieldDefinition().getFrontendLocation(),
+//                                            dFve.getFieldDefinition().getRowIndex()),
+//                                    dFve.getHistoryEvents().stream().map(he -> new HistoryEventDTO(
+//                                                                                     he.getId(),
+//                                                                                     he.getHistoryEventDetails(),
+//                                                                                     he.getHistoryEventDate(),
+//                                                                                     he.getHistoryEventType()))
+//                                            .collect(Collectors.toSet()));
+//                        }
+//                        default -> throw new RuntimeException("oops");
+//                    }
+//                }).toList()
+//        );
         return Response.ok(generalMappingService.mapToDTO(caze)).build();
 //        return Response.ok(generalMappingService.mapCaseToDTO(caze)).build();
 //        return Response.ok(caseDTO).build();
@@ -522,6 +524,15 @@ public class CasesResource {
         fdn6.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
 
+        FieldDefinition fdn7 = new FieldDefinition();
+        fdn7.setFieldType(FieldType.HISTORY_LOG);
+        fdn4.setSection(Section.HISTORY);
+        fdn4.setTitle("History Title");
+        fdn4.setHasComment(false);
+        fdn4.setRowIndex(1L);
+        fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
+
+
 
         FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
@@ -533,9 +544,92 @@ public class CasesResource {
         FieldDefinition numericFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn5);
         FieldDefinition dateFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn6);
 
+        FieldDefinition historyFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn7);
+
+
         savedSupportTypeNode.getFieldDefinitions().addAll(fieldDefinitionService.getAllFieldDefinitions());
         supportTypeNodeService.saveSupportTypeNode(savedSupportTypeNode);
 
         return Response.ok().build();
     }
+
+
+
+    @Path("/getsimplecase")
+    @GET()
+    @Produces("application/json")
+    public Response getSimpleCase() {
+        CaseEntity caze = casesService.getCaseEntityById(1L);
+        SimpleCaseDTO simpleCase = new SimpleCaseDTO(caze.getId(), caze.getName(), caze.getOrganization().getName(), caze.getCaseManager().getName(), caze.getCaseController().getName(), caze.getCaseStatus(), caze.getCaseDecisionType());
+        return Response.ok(simpleCase).build();
+    }
+
+    @Path("/get-case-entity")
+    @GET()
+    @Produces("application/json")
+    public Response getCaseEntity() {
+        CaseEntity caze = casesService.getCaseEntityById(1L);
+        return Response.ok(generalMappingService.mapToDTO(caze)).build();
+    }
+
+
+    @Path("/assessment-fields")
+    @GET()
+    @Produces("application/json")
+    public Response getAssessmentFields(){
+        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+        List<AbstractFieldValue<? extends FieldDefinition>> assessmentValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.ASSESSMENT_QUESTION).toList();
+        return Response.ok(assessmentValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+
+    @Path("/application-fields")
+    @GET()
+    @Produces("application/json")
+    public Response getApplicationFields(){
+        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+        List<AbstractFieldValue<? extends FieldDefinition>> applicationValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.APPLICATION_QUESTION).toList();
+        return Response.ok(applicationValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+    @Path("/organization")
+    @GET()
+    @Produces("application/json")
+    public Response getOrganization(){
+        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+        return Response.ok(generalMappingService.mapToDTO(caseEntity.getOrganization())).build();
+    }
+
+    @Path("/decision-field")
+    @GET()
+    @Produces("application/json")
+    public Response getDecisionFields(){
+        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+        List<AbstractFieldValue<? extends FieldDefinition>> decisionFieldValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.DECISION).toList();
+        return Response.ok(decisionFieldValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+    @Path("/budget-field")
+    @GET()
+    @Produces("application/json")
+    public Response getBudgetFields(){
+        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+        List<AbstractFieldValue<? extends FieldDefinition>> budgetFieldValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.BUDGET).toList();
+        return Response.ok(budgetFieldValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+    @Path("/history-field")
+    @GET()
+    @Produces("application/json")
+    public Response getHistoryFields(){
+        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+        List<AbstractFieldValue<? extends FieldDefinition>> historyFields = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.HISTORY_LOG).toList();
+        return Response.ok(historyFields.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
+    }
+
+
+
+
+
+
 }
