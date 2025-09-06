@@ -10,11 +10,26 @@ import org.andreasoo.susfund.entity.updated.field.definition.selectable.Selectab
 import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode
 import org.andreasoo.susfund.flyway.util.ScalaMigrationBase
 
-import java.sql.Connection
+import java.sql.{Connection, ResultSet}
 import java.util.stream.Collectors
 
 class V2__Test extends ScalaMigrationBase {
 
+  private def getLastInsertId(connection: Connection):Long = {
+    val result: ResultSet = connection.createStatement().executeQuery("SELECT LAST_INSERT_ID() as id")
+
+    val id = try {
+      if (result.next()) {
+        result.getLong("id")
+      } else {
+        throw new RuntimeException("Failed to get generated ID")
+      }
+    } finally {
+      result.getStatement.close()
+      result.close()
+    }
+    id
+  }
 
   override def migrate(connection: Connection): Unit = {
 
@@ -23,6 +38,12 @@ class V2__Test extends ScalaMigrationBase {
 
     execute(connection,
     "INSERT INTO support_type_node (tech_name) VALUES ('FTG/2022/REGIONAL_INVESTMENT/INFRASTRUCTURE')")
+
+    val supportTypeNodeId:Long = getLastInsertId(connection)
+
+    println(s"support type node: $supportTypeNodeId")
+
+
 
 
 
@@ -38,7 +59,11 @@ class V2__Test extends ScalaMigrationBase {
 //    fdn1.setSubSection(SubSection.SUSTAINABILITY)
 
     execute(connection,
-      "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, sub_section, DISCRIMINATOR_FIELD_TYPE) VALUES ('APPLICATION_QUESTION', 'APPLICATION', 'flyway title', 'flyway preamble', 'flyway assisting text', true, 1, 'MAIN_VIEW', 'SUSTAINABILITY', 'SIMPLE_FIELD_DEFINITION')")
+      "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, sub_section, DISCRIMINATOR_FIELD_TYPE) " +
+        "VALUES ('APPLICATION_QUESTION', 'APPLICATION', 'flyway title', 'flyway preamble', 'flyway assisting text', true, 1, 'MAIN_VIEW', 'SUSTAINABILITY', 'SIMPLE_FIELD_DEFINITION')")
+    val fieldDefId1:Long = getLastInsertId(connection)
+    execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId1, $supportTypeNodeId)")
+
 
 //
 //    val fdn2 = new FieldDefinition
@@ -51,9 +76,14 @@ class V2__Test extends ScalaMigrationBase {
 //    fdn2.setRowIndex(2L)
 //    fdn2.setFrontendLocation(FrontendLocation.MAIN_VIEW)
 //    fdn2.setSubSection(SubSection.FINANCING)
-//
-//
-//
+
+    execute(connection,
+      "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, sub_section, DISCRIMINATOR_FIELD_TYPE) " +
+        "VALUES ('ASSESSMENT_QUESTION', 'ASSESSMENT', 'flyway title2', 'flyway preamble2', 'flyway assisting text2', true, 2, 'MAIN_VIEW', 'FINANCING', 'SIMPLE_FIELD_DEFINITION')")
+    val fieldDefId2:Long = getLastInsertId(connection)
+    execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId2, $supportTypeNodeId)")
+
+    //
 //    val fdn3 = new BudgetFieldDefinition
 //    fdn3.setFieldType(FieldType.BUDGET)
 //    fdn3.setSection(Section.BUDGET)
@@ -64,9 +94,15 @@ class V2__Test extends ScalaMigrationBase {
 //    fdn3.setRowIndex(3L)
 //    fdn3.setBudgetType(BudgetType.NORMAL)
 //    fdn3.setFrontendLocation(FrontendLocation.MAIN_VIEW)
-//
-//
-//    val fdn4 = new SelectableFieldDefinition
+
+    execute(connection,
+      "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, DISCRIMINATOR_FIELD_TYPE, budget_type) " +
+        "VALUES ('BUDGET', 'BUDGET', 'flyway title3', 'flyway preamble3', 'flyway assisting text3', false, 3, 'MAIN_VIEW', 'SIMPLE_FIELD_DEFINITION', 'NORMAL')")
+    val fieldDefId3:Long = getLastInsertId(connection)
+    execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId3, $supportTypeNodeId)")
+
+
+    //    val fdn4 = new SelectableFieldDefinition
 //    fdn4.setFieldType(FieldType.DECISION)
 //    fdn4.setSection(Section.DECISION)
 //    fdn4.setTitle("Test Title4")
@@ -78,6 +114,31 @@ class V2__Test extends ScalaMigrationBase {
 //    fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW)
 //
 //
+    execute(connection,
+      "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, sub_section, DISCRIMINATOR_FIELD_TYPE) " +
+        "VALUES ('ASSESSMENT_QUESTION', 'ASSESSMENT', 'flyway title2', 'flyway preamble2', 'flyway assisting text2', true, 2, 'MAIN_VIEW', 'FINANCING', 'SIMPLE_FIELD_DEFINITION')")
+
+    val fieldDefId4:Long = getLastInsertId(connection)
+
+    execute(connection,
+    "INSERT INTO selectable_value (selectable_type, value) VALUES ('CASE_DECISION', 'APPROVED')")
+    val slv1:Long = getLastInsertId(connection)
+    execute(connection, s"INSERT INTO fdn_slv (field_definition_id, selectable_value_id) VALUES ($fieldDefId4, $slv1)")
+
+
+    execute(connection,
+      "INSERT INTO selectable_value (selectable_type, value) VALUES ('CASE_DECISION', 'REJECTED')")
+    val slv2:Long = getLastInsertId(connection)
+    execute(connection, s"INSERT INTO fdn_slv (field_definition_id, selectable_value_id) VALUES ($fieldDefId4, $slv2)")
+
+    execute(connection,
+      "INSERT INTO selectable_value (selectable_type, value) VALUES ('CASE_DECISION', 'PARTIALLY APPROVED')")
+    val slv3:Long = getLastInsertId(connection)
+    execute(connection, s"INSERT INTO fdn_slv (field_definition_id, selectable_value_id) VALUES ($fieldDefId4, $slv3)")
+    execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId4, $supportTypeNodeId)")
+
+
+
 //    val fdn5 = new FieldDefinition
 //    fdn5.setFieldType(FieldType.NUMERIC_FIELD)
 //    fdn5.setSection(Section.DECISION)
