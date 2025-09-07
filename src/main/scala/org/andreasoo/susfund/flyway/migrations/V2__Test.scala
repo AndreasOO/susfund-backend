@@ -114,7 +114,7 @@ class V2__Test extends ScalaMigrationBase {
     execute(connection, s"INSERT INTO fdn_slv (field_definition_id, selectable_value_id) VALUES ($fieldDefId4, $slv2)")
 
     execute(connection,
-      "INSERT INTO selectable_value (selectable_type, value) VALUES ('CASE_DECISION', 'PARTIALLY APPROVED')")
+      "INSERT INTO selectable_value (selectable_type, value) VALUES ('CASE_DECISION', 'PARTIALLY_APPROVED')")
     val slv3:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO fdn_slv (field_definition_id, selectable_value_id) VALUES ($fieldDefId4, $slv3)")
 
