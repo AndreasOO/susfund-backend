@@ -74,26 +74,26 @@ export class CasesFetcherService {
       })))
   }
 
-  public getCaseById(id:string | undefined):Observable<CaseDetails> {
-    return this.http.get<CaseDTO>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id)
-                    .pipe(map(caseDTO => {
-                      return {
-                        id:caseDTO.id,
-                        name:caseDTO.name,
-                        organization:caseDTO.organization,
-                        caseManager:caseDTO.caseManager,
-                        caseController:caseDTO.caseController,
-                        handledBy:caseDTO.handledBy,
-                        caseStatus:caseDTO.caseStatus,
-                        caseDecisionType:caseDTO.caseDecisionType,
-                        caseDecision:caseDTO.caseDecision,
-                        caseApplication:caseDTO.caseApplication,
-                        caseAssessment:caseDTO.caseAssessment,
-                        caseBudget:caseDTO.caseBudget,
-                        historyEventList:caseDTO.historyEventList
-                      }
-    }))
-  }
+  // public getCaseById(id:string | undefined):Observable<CaseDetails> {
+  //   return this.http.get<CaseDTO>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id)
+  //                   .pipe(map(caseDTO => {
+  //                     return {
+  //                       id:caseDTO.id,
+  //                       name:caseDTO.name,
+  //                       organization:caseDTO.organization,
+  //                       caseManager:caseDTO.caseManager,
+  //                       caseController:caseDTO.caseController,
+  //                       handledBy:caseDTO.handledBy,
+  //                       caseStatus:caseDTO.caseStatus,
+  //                       caseDecisionType:caseDTO.caseDecisionType,
+  //                       caseDecision:caseDTO.caseDecision,
+  //                       caseApplication:caseDTO.caseApplication,
+  //                       caseAssessment:caseDTO.caseAssessment,
+  //                       caseBudget:caseDTO.caseBudget,
+  //                       historyEventList:caseDTO.historyEventList
+  //                     }
+  //   }))
+  // }
 
   public getCaseAssessmentUtilByCaseId(id:string | undefined):Observable<CaseAssessmentUtil> {
     return this.http.get<CaseAssessmentUtil>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/assessment");
@@ -173,32 +173,32 @@ export class CasesFetcherService {
     return this.http.get<SimpleCaseDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/getsimplecase")
   }
 
-  public getAssessmentFields():Observable<AssessmentFieldValueDto[]> {
-    return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/assessment-fields")
+  public getAssessmentFields(caseId:string | undefined):Observable<AssessmentFieldValueDto[]> {
+    return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/assessment-fields")
   }
 
-  public getApplicationFields():Observable<TextFieldValueDto[]> {
-    return this.http.get<TextFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/application-fields")
+  public getApplicationFields(caseId:string | undefined):Observable<TextFieldValueDto[]> {
+    return this.http.get<TextFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/application-fields")
   }
 
   public getCaseEntity():Observable<CaseEntityDto> {
     return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/get-case-entity")
   }
 
-  public getOrganization():Observable<OrganizationDto> {
-    return this.http.get<OrganizationDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/organization")
+  public getOrganization(caseId:string |undefined):Observable<OrganizationDto> {
+    return this.http.get<OrganizationDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/organization")
   }
 
-  public getDecisionFieldValue():Observable<DecisionFieldValueDto[]> {
-    return this.http.get<DecisionFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/decision-field")
+  public getDecisionFieldValue(caseId:string | undefined):Observable<DecisionFieldValueDto[]> {
+    return this.http.get<DecisionFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/decision-field")
   }
 
-  public getBudgetFieldValue():Observable<BudgetFieldValueDto[]> {
-    return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/budget-field")
+  public getBudgetFieldValue(caseId:string | undefined):Observable<BudgetFieldValueDto[]> {
+    return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/budget-field")
   }
 
-  public getHistoryFieldValue():Observable<HistoryLogFieldValueDto[]> {
-    return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/history-field")
+  public getHistoryFieldValue(caseId:string | undefined):Observable<HistoryLogFieldValueDto[]> {
+    return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/history-field")
   }
 
   public getAllCaseEntities():Observable<CaseEntityDto[]> {
@@ -208,5 +208,10 @@ export class CasesFetcherService {
   // public getAllCasesSimple():Observable<SimpleCaseDto[]> {
   //   return this.http.get<SimpleCaseDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/all-cases-simple")
   // }
+
+
+  public getCaseById(id:string | undefined):Observable<CaseEntityDto> {
+    return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id)
+  }
 
 }

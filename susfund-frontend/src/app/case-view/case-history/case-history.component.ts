@@ -13,7 +13,7 @@ import {HistoryLogFieldValueDto} from '../../cases-services/case-entity/new/fiel
 export class CaseHistoryComponent implements OnInit {
 
   caseId: string | undefined
-  historyEventList: HistoryEvent[] | undefined
+  // historyEventList: HistoryEvent[] | undefined
 
   historyLogFields:HistoryLogFieldValueDto[] = []
 
@@ -22,8 +22,8 @@ export class CaseHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getHistoryEventByCaseId(this.caseId).subscribe(historyEventList => this.historyEventList = historyEventList!)
+    // this.fetcher.getHistoryEventByCaseId(this.caseId).subscribe(historyEventList => this.historyEventList = historyEventList!)
 
-    this.fetcher.getHistoryFieldValue().subscribe(historyFields => this.historyLogFields = historyFields!)
+    this.fetcher.getHistoryFieldValue(this.caseId).subscribe(historyFields => this.historyLogFields = historyFields!)
   }
 }

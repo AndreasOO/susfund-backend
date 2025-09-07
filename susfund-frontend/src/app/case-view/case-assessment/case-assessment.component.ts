@@ -13,6 +13,7 @@ import {AssessmentFieldValueDto} from '../../cases-services/case-entity/new/fiel
 })
 export class CaseAssessmentComponent implements OnInit {
 
+  caseId : string | undefined
   assessmentFieldValues:AssessmentFieldValueDto[] = [];
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
@@ -20,7 +21,8 @@ export class CaseAssessmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetcher.getAssessmentFields().subscribe(assessmentFields => {this.assessmentFieldValues = assessmentFields!;});
+    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    this.fetcher.getAssessmentFields(this.caseId).subscribe(assessmentFields => {this.assessmentFieldValues = assessmentFields!;});
 
   }
 

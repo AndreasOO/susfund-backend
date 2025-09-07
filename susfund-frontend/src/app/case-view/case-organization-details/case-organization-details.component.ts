@@ -15,7 +15,7 @@ import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dt
   styleUrl: './case-organization-details.component.css'
 })
 export class CaseOrganizationDetailsComponent implements OnInit{
-  // caseId: string | undefined
+  caseId: string | undefined
   // caseOrganization:Organization | undefined
   // casesRelatedToOrganization:CaseLazy[] | undefined
 
@@ -29,7 +29,8 @@ export class CaseOrganizationDetailsComponent implements OnInit{
     // this.fetcher.getOrganizationByCaseId(this.caseId).subscribe(caseOrganization => this.caseOrganization = caseOrganization!)
     // this.fetcher.getCasesLazyByCaseOrganization(this.caseId).subscribe(caseList => this.casesRelatedToOrganization = caseList!)
 
-    this.fetcher.getOrganization().subscribe(organization => this.organization = organization!)
+    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    this.fetcher.getOrganization(this.caseId).subscribe(organization => this.organization = organization!)
 
   }
 }
