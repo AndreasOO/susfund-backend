@@ -523,7 +523,6 @@ public class CasesResource {
         fdn6.setRowIndex(1L);
         fdn6.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
-
         FieldDefinition fdn7 = new FieldDefinition();
         fdn7.setFieldType(FieldType.HISTORY_LOG);
         fdn4.setSection(Section.HISTORY);
@@ -533,10 +532,8 @@ public class CasesResource {
         fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
 
-
         FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
-
 
         BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
         SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn4);
@@ -545,7 +542,6 @@ public class CasesResource {
         FieldDefinition dateFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn6);
 
         FieldDefinition historyFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn7);
-
 
         savedSupportTypeNode.getFieldDefinitions().addAll(fieldDefinitionService.getAllFieldDefinitions());
         supportTypeNodeService.saveSupportTypeNode(savedSupportTypeNode);
