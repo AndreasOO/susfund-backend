@@ -623,11 +623,11 @@ public class CasesResource {
         return Response.ok(historyFields.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 
-    @Path("/all-cases")
+    @Path("/simple")
     @GET()
     @Produces("application/json")
-    public Response getAllCaseEntities(){
-        return Response.ok(casesService.getAllCaseEntities().stream().map(caseEntity -> generalMappingService.mapToDTO(caseEntity)).toList()).build();
+    public Response getAllCaseEntitiesSimple(){
+        return Response.ok(casesService.getAllCaseEntities().stream().map(caseEntity -> generalMappingService.mapCaseToSimpleCaseDTO(caseEntity)).toList()).build();
     }
 
 //    @Path("/all-cases-simple")

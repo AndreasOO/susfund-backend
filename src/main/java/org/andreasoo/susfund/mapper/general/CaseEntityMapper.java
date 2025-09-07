@@ -3,6 +3,7 @@ package org.andreasoo.susfund.mapper.general;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.andreasoo.susfund.dto.CaseDTO;
+import org.andreasoo.susfund.dto.SimpleCaseDTO;
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
@@ -41,5 +42,16 @@ public class CaseEntityMapper implements EntityToDtoMapper<CaseEntity, CaseDTO> 
                 supportTypeNodeMapper.mapToDTO(entity.getSupportTypeNode()),
                 entity.getFieldValues().stream().<AbstractFieldValueDTO<? extends FieldDefinitionDTO>>map(fieldValueMappingService::mapFieldValueToDTO).toList()
         );
+    }
+
+    public SimpleCaseDTO mapToSimpleCaseDTO(CaseEntity entity){
+        if (entity == null) return null;
+        return new SimpleCaseDTO(entity.getId(),
+                entity.getName(),
+                entity.getOrganization().getName(),
+                entity.getCaseManager().getName(),
+                entity.getCaseController().getName(),
+                entity.getCaseStatus(),
+                entity.getCaseDecisionType());
     }
 }

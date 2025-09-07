@@ -201,14 +201,9 @@ export class CasesFetcherService {
     return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/history-field")
   }
 
-  public getAllCaseEntities():Observable<CaseEntityDto[]> {
-    return this.http.get<CaseEntityDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/all-cases")
+  public getAllCaseEntities():Observable<SimpleCaseDto[]> {
+    return this.http.get<SimpleCaseDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/simple")
   }
-
-  // public getAllCasesSimple():Observable<SimpleCaseDto[]> {
-  //   return this.http.get<SimpleCaseDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/all-cases-simple")
-  // }
-
 
   public getCaseById(id:string | undefined):Observable<CaseEntityDto> {
     return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id)

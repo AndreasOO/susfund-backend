@@ -12,25 +12,16 @@ import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dt
   styleUrl: './my-cases-list.component.css'
 })
 export class MyCasesListComponent implements OnInit {
-  // caseList:CaseLazy[] | undefined
 
-  simpleCase:SimpleCaseDto | undefined
-
-  caseList:CaseEntityDto[] = []
+  simpleCaseList:SimpleCaseDto[] = []
 
   constructor(private fetcher:CasesFetcherService) {
 
   }
 
-  // ngOnInit() {
-  //   this.fetcher.getAllCases().subscribe(caseList => this.caseList = caseList)
-  // }
-
-  // tillfällig
   ngOnInit() {
-    this.fetcher.getTheOneAndOnlyCase().subscribe(simpleCase => this.simpleCase = simpleCase)
 
-    this.fetcher.getAllCaseEntities().subscribe(caseList => this.caseList = caseList!)
+    this.fetcher.getAllCaseEntities().subscribe(simpleCaseList => this.simpleCaseList = simpleCaseList!)
   }
 
 }
