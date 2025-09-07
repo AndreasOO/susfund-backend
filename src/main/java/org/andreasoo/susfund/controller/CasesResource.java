@@ -624,6 +624,22 @@ public class CasesResource {
     }
 
 
+    @Path("/all-cases")
+    @GET()
+    @Produces("application/json")
+    public Response getAllCaseEntities(){
+        List<CaseEntity> cases = casesService.getAllCaseEntities();
+        return Response.ok(cases.stream().map(caseEntity -> generalMappingService.mapToDTO(caseEntity)).toList()).build();
+    }
+
+//    @Path("/all-cases-simple")
+//    @GET()
+//    @Produces("application/json")
+//    public Response getAllCasesSimple(){
+//        return Response.ok(casesService.getAllCaseEntities()).build();
+//    }
+
+
 
 
 

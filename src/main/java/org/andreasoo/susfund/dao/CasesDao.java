@@ -3,11 +3,14 @@ package org.andreasoo.susfund.dao;
 import org.andreasoo.susfund.entity.old.CaseDecisionResult;
 import org.andreasoo.susfund.entity.old.CaseManager;
 import org.andreasoo.susfund.entity.old.Cases;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 
 import java.util.List;
 
 
 public interface CasesDao {
+
+    List<CaseEntity> getAllCaseEntities();
 
     List<Cases> getAllCases();
 

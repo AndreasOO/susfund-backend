@@ -8,6 +8,7 @@ import org.andreasoo.susfund.dao.CasesDao;
 import org.andreasoo.susfund.entity.old.CaseDecisionResult;
 import org.andreasoo.susfund.entity.old.CaseManager;
 import org.andreasoo.susfund.entity.old.Cases;
+import org.andreasoo.susfund.entity.updated.CaseEntity;
 
 import java.util.List;
 
@@ -17,6 +18,11 @@ public class CasesDaoImpl implements CasesDao {
 
     @PersistenceContext()
     private EntityManager entityManager;
+
+    @Override
+    public List<CaseEntity> getAllCaseEntities() {
+        return entityManager.createNamedQuery("CaseEntity.findAll", CaseEntity.class).getResultList();
+    }
 
     @Override
     public List<Cases> getAllCases() {

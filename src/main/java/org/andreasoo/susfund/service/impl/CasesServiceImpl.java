@@ -4,6 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.*;
+import org.andreasoo.susfund.dto.CaseDTO;
+import org.andreasoo.susfund.dto.SimpleCaseDTO;
 import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.entity.updated.CaseDecisionType2;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
@@ -72,6 +74,18 @@ public class CasesServiceImpl implements CasesService {
     @Inject
     private SupportTypeNodeDao supportTypeNodeDao;
 
+
+
+    @Override
+    public List<CaseEntity> getAllCaseEntities() {
+        return casesDao.getAllCaseEntities();
+    }
+
+//    @Override
+//    public List<SimpleCaseDTO> getAllCasesSimple() {
+//        List<CaseEntity> cases = casesDao.getAllCaseEntities();
+//        return cases.stream().map(caseEntity -> (SimpleCaseDTO) generalMappingService.mapToDTO(caseEntity)).toList();
+//    }
 
     @Override
     public Cases getCaseById(int id) {

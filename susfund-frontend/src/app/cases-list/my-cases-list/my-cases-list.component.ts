@@ -3,6 +3,7 @@ import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseLazy} from '../../cases-services/case-entity/case-lazy';
 import {OnInit} from '@angular/core';
 import {SimpleCaseDto} from '../../cases-services/case-entity/new/simple-case-dto';
+import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
 
 @Component({
   selector: 'app-my-cases-list',
@@ -15,6 +16,8 @@ export class MyCasesListComponent implements OnInit {
 
   simpleCase:SimpleCaseDto | undefined
 
+  caseList:CaseEntityDto[] = []
+
   constructor(private fetcher:CasesFetcherService) {
 
   }
@@ -26,6 +29,8 @@ export class MyCasesListComponent implements OnInit {
   // tillfällig
   ngOnInit() {
     this.fetcher.getTheOneAndOnlyCase().subscribe(simpleCase => this.simpleCase = simpleCase)
+
+    this.fetcher.getAllCaseEntities().subscribe(caseList => this.caseList = caseList!)
   }
 
 }

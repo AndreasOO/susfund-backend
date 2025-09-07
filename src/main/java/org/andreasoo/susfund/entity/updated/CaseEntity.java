@@ -11,6 +11,12 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name="CaseEntity.findAll",
+                query="select c from CaseEntity c order by c.id"
+        )
+})
 @Table(name="case_entity")
 public class CaseEntity implements Serializable {
     @Id
