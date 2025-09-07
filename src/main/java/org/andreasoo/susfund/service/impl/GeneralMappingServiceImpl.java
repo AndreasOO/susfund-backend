@@ -59,7 +59,8 @@ public class GeneralMappingServiceImpl implements GeneralMappingService {
     @Override
     public SimpleCaseDTO mapCaseToSimpleCaseDTO(CaseEntity caseEntity){
         if (caseEntity == null) return null;
-        return new CaseEntityMapper().mapToSimpleCaseDTO(caseEntity);
+        CaseEntityMapper mapper = (CaseEntityMapper) mappers.get(caseEntity.getClass());
+        return mapper.mapToSimpleCaseDTO(caseEntity);
     }
 
 }
