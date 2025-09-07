@@ -215,11 +215,11 @@ class V2__Test extends ScalaMigrationBase {
 
     // history log values
     execute(connection,
-      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, event_details, last_updated, event_date, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId7, $case1Id, 'History log details in case 1', CURRENT_DATE, CURRENT_DATE, 'HISTORY_LOG')")
+      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId7, $case1Id, CURRENT_DATE, 'HISTORY_LOG')")
     val historyLogVal1Case1:Long = getLastInsertId(connection)
 
     execute(connection,
-      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, event_details, last_updated, event_date, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId7, $case2Id, 'History log details in case 2', CURRENT_DATE, CURRENT_DATE, 'HISTORY_LOG')")
+      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId7, $case2Id, CURRENT_DATE, 'HISTORY_LOG')")
     val historyLogVal1Case2:Long = getLastInsertId(connection)
 
 
