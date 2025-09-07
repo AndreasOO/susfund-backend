@@ -46,6 +46,7 @@ class V2__Test extends ScalaMigrationBase {
 
     // FIELD DEFINITIONS
 
+
     //application questions
     execute(connection,
       "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, sub_section, DISCRIMINATOR_FIELD_TYPE) " +
@@ -64,6 +65,7 @@ class V2__Test extends ScalaMigrationBase {
         "VALUES ('APPLICATION_QUESTION', 'APPLICATION', 'flyway title', 'flyway preamble', 'flyway assisting text', true, 3, 'MAIN_VIEW', 'REGIONAL_GROWTH', 'SIMPLE_FIELD_DEFINITION')")
     val fieldDefId12:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId12, $supportTypeNodeId)")
+
 
     //assessment questions
     execute(connection,
@@ -84,12 +86,14 @@ class V2__Test extends ScalaMigrationBase {
     val fieldDefId22:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId22, $supportTypeNodeId)")
 
+
     //budget
     execute(connection,
       "INSERT INTO field_definition_entity (field_type, section, title, preamble, assisting_text, has_comment, row_index, frontend_location, DISCRIMINATOR_FIELD_TYPE, budget_type) " +
         "VALUES ('BUDGET', 'BUDGET', 'flyway title3', 'flyway preamble3', 'flyway assisting text3', false, 3, 'MAIN_VIEW', 'BUDGET', 'NORMAL')")
     val fieldDefId3:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId3, $supportTypeNodeId)")
+
 
     //selectable/decision
     execute(connection,
@@ -114,7 +118,6 @@ class V2__Test extends ScalaMigrationBase {
     val slv3:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO fdn_slv (field_definition_id, selectable_value_id) VALUES ($fieldDefId4, $slv3)")
 
-    // josefins nya defs
 
     // numeric field
     execute(connection,
@@ -122,11 +125,13 @@ class V2__Test extends ScalaMigrationBase {
     val fieldDefId5:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId5, $supportTypeNodeId)")
 
+
     // date field
     execute(connection,
       "INSERT INTO field_definition_entity (field_type, section, has_comment, row_index, frontend_location, DISCRIMINATOR_FIELD_TYPE) VALUES ('DATE_FIELD', 'DECISION', false, 1, 'MAIN_VIEW', 'SIMPLE_FIELD_DEFINITION')")
     val fieldDefId6:Long = getLastInsertId(connection)
     execute(connection, s"INSERT INTO stn_fdn (field_definition_id, support_type_node_id) VALUES ($fieldDefId6, $supportTypeNodeId)")
+
 
     // history
     execute(connection,
@@ -177,6 +182,7 @@ class V2__Test extends ScalaMigrationBase {
       s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, assessment_justification, assessment_score, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId22, $case2Id, CURRENT_DATE, 'Assessment justification text', 2, 'ASSESSMENT_RESULT')")
     val assessmentFieldVal2Case2:Long = getLastInsertId(connection)
 
+
     // decisions
     execute(connection,
       s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, decision_date, decision_result_type, decision_motivation, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId4, $case1Id, CURRENT_DATE, CURRENT_DATE, 'REJECTED', 'This is the motivation', 'DECISION')")
@@ -186,6 +192,7 @@ class V2__Test extends ScalaMigrationBase {
       s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, decision_date, decision_result_type, decision_motivation, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId4, $case2Id, CURRENT_DATE, CURRENT_DATE, 'PARTIALLY_APPROVED', 'nice', 'DECISION')")
     val decisionFieldVal1Case2:Long = getLastInsertId(connection)
 
+
     // numeric values
     execute(connection,
       s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, numeric_value, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId5, $case1Id, CURRENT_DATE, 6, 'NUMERIC')")
@@ -194,6 +201,7 @@ class V2__Test extends ScalaMigrationBase {
     execute(connection,
       s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, numeric_value, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId5, $case2Id, CURRENT_DATE, 1, 'NUMERIC')")
     val numericFieldVal1Case2:Long = getLastInsertId(connection)
+
 
     //date values
     execute(connection,
@@ -214,6 +222,7 @@ class V2__Test extends ScalaMigrationBase {
       s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, event_details, last_updated, event_date, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId7, $case2Id, 'History log details in case 2', CURRENT_DATE, CURRENT_DATE, 'HISTORY_LOG')")
     val historyLogVal1Case2:Long = getLastInsertId(connection)
 
+
     //history events
     execute(connection,
       s"INSERT INTO history_event2 (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case1, 'ASSESSMENT_CHANGE', CURRENT_DATE, 'History event details in event 1 in case 1')")
@@ -230,6 +239,7 @@ class V2__Test extends ScalaMigrationBase {
     execute(connection,
       s"INSERT INTO history_event2 (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case2, 'AMENDMENT_REQUEST', CURRENT_DATE, 'History event details in event 2 in case 2')")
     val historyEvent2Case2:Long = getLastInsertId(connection)
+
 
     // budget field values
     execute(connection,
@@ -263,7 +273,7 @@ class V2__Test extends ScalaMigrationBase {
     val budgetRow2Case1:Long = getLastInsertId(connection)
 
     execute(connection,
-      s"INSERT INTO budget_row (field_value_entity_id, estimated_cost, cost_type, accrued_cost, description) VALUES ($budgetFieldVal1Case2, 400, 'TYPE_2', 8000, 'This is a budget row in case 2')")
+      s"INSERT INTO budget_row (field_value_entity_id, estimated_cost, cost_type, accrued_cost, description) VALUES ($budgetFieldVal1Case2, 8000, 'TYPE_2', 8000, 'This is a budget row in case 2')")
     val budgetRow1Case2:Long = getLastInsertId(connection)
 
   }
