@@ -18,6 +18,7 @@ import {BudgetFieldValueDto} from '../../cases-services/case-entity/new/field/va
 })
 export class CaseOverviewComponent implements OnInit{
 
+  caseId:string|undefined
   caseEntity:CaseEntityDto | undefined
   // dateField:DateFieldValueDto | undefined
 
@@ -26,7 +27,9 @@ export class CaseOverviewComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.fetcher.getCaseEntity().subscribe(caseEntity => this.caseEntity = caseEntity!)
+
+    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
 
     // const dateFields = this.caseEntity?.fields
     //   .filter(field => field.owningFieldDefinition.fieldType === "DATE_FIELD")

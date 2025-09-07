@@ -14,6 +14,7 @@ import {TextFieldValueDto} from '../../cases-services/case-entity/new/field/valu
 })
 export class CaseApplicationComponent implements OnInit {
 
+  caseId : string | undefined
   public textFieldValues:TextFieldValueDto[] = []
 
   constructor(public router:Router, public fetcher:CasesFetcherService) {
@@ -21,7 +22,8 @@ export class CaseApplicationComponent implements OnInit {
 
   ngOnInit() {
 
-    this.fetcher.getApplicationFields().subscribe(textFields => {this.textFieldValues = textFields!;});
+    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    this.fetcher.getApplicationFields(this.caseId).subscribe(textFields => {this.textFieldValues = textFields!;});
 
   }
 

@@ -3,6 +3,7 @@ import { Router} from '@angular/router';
 import {OnInit} from '@angular/core';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseDetails} from '../../cases-services/case-entity/case-details';
+import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
 
 
 @Component({
@@ -13,7 +14,7 @@ import {CaseDetails} from '../../cases-services/case-entity/case-details';
 })
 export class CaseMainViewComponent implements OnInit {
   caseId:string | undefined
-  caseDetails:CaseDetails | undefined
+  caseEntity:CaseEntityDto | undefined
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
@@ -21,7 +22,6 @@ export class CaseMainViewComponent implements OnInit {
 
     ngOnInit() {
       this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-      this.fetcher.getCaseById(this.caseId).subscribe(caseDetails => this.caseDetails = caseDetails!)
-      console.log(this.caseDetails)
+      this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
     }
 }

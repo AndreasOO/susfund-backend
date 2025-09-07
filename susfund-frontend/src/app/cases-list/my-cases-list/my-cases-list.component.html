@@ -46,12 +46,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngIf="simpleCase">
+      <tr *ngFor="let simpleCase of simpleCaseList">
         <th scope="row"><a [routerLink]="['/cases/' + simpleCase?.id]" class="text-light nav-link">{{simpleCase?.id}}</a></th>
         <td><a [routerLink]="['/cases/' + simpleCase?.id]" class="text-light nav-link">{{simpleCase?.name}}</a></td>
         <td><a [routerLink]="['/overview']"  class="text-light nav-link">{{simpleCase?.companyName}}</a></td>
-        <td><a [routerLink]="['/overview']"  class="text-light nav-link">{{simpleCase?.caseManager}}</a></td>
-        <td><a [routerLink]="['/overview']"  class="text-light nav-link">{{simpleCase?.caseController}}</a></td>
+        <td><a [routerLink]="['/overview']"  class="text-light nav-link">{{simpleCase.caseManager}}</a></td>
+        <td><a [routerLink]="['/overview']"  class="text-light nav-link">{{simpleCase.caseController}}</a></td>
         <td>{{simpleCase?.caseStatus}}</td>
         <td>{{simpleCase?.caseDecisionType}}</td>
       </tr>

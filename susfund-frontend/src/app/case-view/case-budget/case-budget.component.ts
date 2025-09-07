@@ -12,7 +12,7 @@ import {BudgetFieldValueDto} from '../../cases-services/case-entity/new/field/va
 })
 export class CaseBudgetComponent implements OnInit{
 
-  // caseId : string | undefined
+  caseId : string | undefined
   // caseBudget : CaseBudget | undefined
 
   budgetFields:BudgetFieldValueDto[] = []
@@ -21,11 +21,11 @@ export class CaseBudgetComponent implements OnInit{
   }
 
   ngOnInit() {
-    // this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
+    this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
     // this.fetcher.getBudgetByCaseId(this.caseId).subscribe(caseBudget => this.caseBudget = caseBudget!)
 
 
-    this.fetcher.getBudgetFieldValue().subscribe(fields => this.budgetFields = fields)
+    this.fetcher.getBudgetFieldValue(this.caseId).subscribe(fields => this.budgetFields = fields)
   }
 
   // getTotal(): number {

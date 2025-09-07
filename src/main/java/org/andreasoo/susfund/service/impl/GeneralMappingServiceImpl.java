@@ -2,10 +2,7 @@ package org.andreasoo.susfund.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.andreasoo.susfund.dto.CaseDTO;
-import org.andreasoo.susfund.dto.CaseManagerDTO;
-import org.andreasoo.susfund.dto.OrganizationDTO;
-import org.andreasoo.susfund.dto.SupportTypeNodeDTO;
+import org.andreasoo.susfund.dto.*;
 import org.andreasoo.susfund.entity.old.CaseManager;
 import org.andreasoo.susfund.entity.old.Organization;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
@@ -57,6 +54,13 @@ public class GeneralMappingServiceImpl implements GeneralMappingService {
         }
 
         return mapper.mapToDTO(entity);
+    }
+
+    @Override
+    public SimpleCaseDTO mapCaseToSimpleCaseDTO(CaseEntity caseEntity){
+        if (caseEntity == null) return null;
+        CaseEntityMapper mapper = (CaseEntityMapper) mappers.get(caseEntity.getClass());
+        return mapper.mapToSimpleCaseDTO(caseEntity);
     }
 
 }

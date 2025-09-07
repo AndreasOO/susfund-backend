@@ -81,9 +81,9 @@ public class CasesResource {
     @Path("/{id}")
     @GET()
     @Produces("application/json")
-    public Cases getCaseById(@PathParam("id") int id) {
-        System.out.println(budgetService.test(id));
-        return casesService.getCaseById(id);
+    public CaseDTO getCaseById(@PathParam("id") Long id) {
+//        System.out.println(budgetService.test(id));
+        return generalMappingService.mapToDTO(casesService.getCaseEntityById(id));
     }
 
     @Path("/{id}/assessment")
@@ -523,7 +523,6 @@ public class CasesResource {
         fdn6.setRowIndex(1L);
         fdn6.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
-
         FieldDefinition fdn7 = new FieldDefinition();
         fdn7.setFieldType(FieldType.HISTORY_LOG);
         fdn4.setSection(Section.HISTORY);
@@ -533,10 +532,8 @@ public class CasesResource {
         fdn4.setFrontendLocation(FrontendLocation.MAIN_VIEW);
 
 
-
         FieldDefinition fieldDefApplicationQuestion = fieldDefinitionService.createFieldDefinition(fdn1);
         FieldDefinition fieldDefAssessmentQuestion = fieldDefinitionService.createFieldDefinition(fdn2);
-
 
         BudgetFieldDefinition budgetFieldDefinition = (BudgetFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn3);
         SelectableFieldDefinition selectableFieldDefinition = (SelectableFieldDefinition) fieldDefinitionService.createFieldDefinition(fdn4);
@@ -545,7 +542,6 @@ public class CasesResource {
         FieldDefinition dateFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn6);
 
         FieldDefinition historyFieldDefinition = fieldDefinitionService.createFieldDefinition(fdn7);
-
 
         savedSupportTypeNode.getFieldDefinitions().addAll(fieldDefinitionService.getAllFieldDefinitions());
         supportTypeNodeService.saveSupportTypeNode(savedSupportTypeNode);
@@ -573,59 +569,73 @@ public class CasesResource {
     }
 
 
-    @Path("/assessment-fields")
+    @Path("/{id}/assessment-fields")
     @GET()
     @Produces("application/json")
-    public Response getAssessmentFields(){
-        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+    public Response getAssessmentFields(@PathParam("id") Long id){
+        CaseEntity caseEntity = casesService.getCaseEntityById(id);
         List<AbstractFieldValue<? extends FieldDefinition>> assessmentValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.ASSESSMENT_QUESTION).toList();
         return Response.ok(assessmentValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 
 
-    @Path("/application-fields")
+    @Path("/{id}/application-fields")
     @GET()
     @Produces("application/json")
-    public Response getApplicationFields(){
-        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+    public Response getApplicationFields(@PathParam("id") Long id){
+        CaseEntity caseEntity = casesService.getCaseEntityById(id);
         List<AbstractFieldValue<? extends FieldDefinition>> applicationValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.APPLICATION_QUESTION).toList();
         return Response.ok(applicationValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 
-    @Path("/organization")
+    @Path("/{id}/organization")
     @GET()
     @Produces("application/json")
-    public Response getOrganization(){
-        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+    public Response getOrganization(@PathParam("id") Long id){
+        CaseEntity caseEntity = casesService.getCaseEntityById(id);
         return Response.ok(generalMappingService.mapToDTO(caseEntity.getOrganization())).build();
     }
 
-    @Path("/decision-field")
+    @Path("/{id}/decision-field")
     @GET()
     @Produces("application/json")
-    public Response getDecisionFields(){
-        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+    public Response getDecisionFields(@PathParam("id") Long id){
+        CaseEntity caseEntity = casesService.getCaseEntityById(id);
         List<AbstractFieldValue<? extends FieldDefinition>> decisionFieldValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.DECISION).toList();
         return Response.ok(decisionFieldValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 
-    @Path("/budget-field")
+    @Path("/{id}/budget-field")
     @GET()
     @Produces("application/json")
-    public Response getBudgetFields(){
-        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+    public Response getBudgetFields(@PathParam("id") Long id){
+        CaseEntity caseEntity = casesService.getCaseEntityById(id);
         List<AbstractFieldValue<? extends FieldDefinition>> budgetFieldValues = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.BUDGET).toList();
         return Response.ok(budgetFieldValues.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
 
-    @Path("/history-field")
+    @Path("/{id}/history-field")
     @GET()
     @Produces("application/json")
-    public Response getHistoryFields(){
-        CaseEntity caseEntity = casesService.getCaseEntityById(1L);
+    public Response getHistoryFields(@PathParam("id") Long id){
+        CaseEntity caseEntity = casesService.getCaseEntityById(id);
         List<AbstractFieldValue<? extends FieldDefinition>> historyFields = caseEntity.getFieldValues().stream().filter(fieldValue -> fieldValue.getFieldDefinition().getFieldType() == FieldType.HISTORY_LOG).toList();
         return Response.ok(historyFields.stream().map(value -> fieldValueMappingService.mapFieldValueToDTO(value)).toList()).build();
     }
+
+    @Path("/simple")
+    @GET()
+    @Produces("application/json")
+    public Response getAllCaseEntitiesSimple(){
+        return Response.ok(casesService.getAllCaseEntities().stream().map(caseEntity -> generalMappingService.mapCaseToSimpleCaseDTO(caseEntity)).toList()).build();
+    }
+
+//    @Path("/all-cases-simple")
+//    @GET()
+//    @Produces("application/json")
+//    public Response getAllCasesSimple(){
+//        return Response.ok(casesService.getAllCaseEntities()).build();
+//    }
 
 
 

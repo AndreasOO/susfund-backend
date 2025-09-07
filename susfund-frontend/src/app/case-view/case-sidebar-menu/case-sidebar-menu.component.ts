@@ -15,10 +15,8 @@ import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dt
 
 
 export class CaseSidebarMenuComponent implements OnInit{
-  caseId:string | undefined
-  caseStatus:CaseStatus | undefined
-  caseDecisionType:CaseDecisionType | undefined
 
+  caseId:string | undefined
   caseEntity:CaseEntityDto|undefined
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
@@ -26,10 +24,7 @@ export class CaseSidebarMenuComponent implements OnInit{
 
   ngOnInit() {
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getCaseStatusByCaseId(this.caseId).subscribe(caseStatus => this.caseStatus = caseStatus!)
-    this.fetcher.getCaseDecisionTypeByCaseId(this.caseId).subscribe(caseDecisionType => this.caseDecisionType = caseDecisionType!)
-
-    this.fetcher.getCaseEntity().subscribe(caseEntity => this.caseEntity = caseEntity!)
+    this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
   }
 
 }

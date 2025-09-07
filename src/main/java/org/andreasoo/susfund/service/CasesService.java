@@ -1,6 +1,8 @@
 package org.andreasoo.susfund.service;
 
 import jakarta.transaction.Transactional;
+import org.andreasoo.susfund.dto.CaseDTO;
+import org.andreasoo.susfund.dto.SimpleCaseDTO;
 import org.andreasoo.susfund.entity.old.*;
 import org.andreasoo.susfund.entity.updated.CaseEntity;
 import org.andreasoo.susfund.util.*;
@@ -8,6 +10,10 @@ import org.andreasoo.susfund.util.*;
 import java.util.List;
 
 public interface CasesService {
+
+    List<CaseEntity> getAllCaseEntities();
+
+//    List<SimpleCaseDTO> getAllCasesSimple();
 
     Cases getCaseById(int id);
 
