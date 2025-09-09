@@ -1,33 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map,Observable} from 'rxjs';
-import {CaseDTO} from './case-entity/case-dto';
-import {CaseLazy} from './case-entity/case-lazy';
-import {CaseDetails} from './case-entity/case-details';
-import {Organization} from './case-entity/organization';
-import {CaseManager} from './case-entity/case-manager';
-import {CaseStatus} from './case-entity/case-status';
-import {CaseDecisionType} from './case-entity/case-decision-type';
-import {CaseBudget} from './case-entity/case-budget';
-import {CaseAssessmentUtil} from './case-util/case-assessment-util';
-import {CaseApplicationUtil} from './case-util/case-application-util';
-import {HistoryEvent} from './case-entity/history-event';
-import {CaseDecision} from './case-entity/case-decision';
-import {CaseDecisionResult} from './case-entity/case-decision-result';
-import {ApplicationUpdateRequest} from './case-util/application-update-request';
-import {CaseApplication} from './case-entity/case-application';
-import {AssessmentUpdateRequest} from './case-util/assessment-update-request';
 import {LoginRequest} from './case-util/login-request';
 import {TokenBearer} from './case-util/token-bearer';
-import {SimpleCaseDto} from './case-entity/new/simple-case-dto';
-import {AssessmentFieldValueDto} from './case-entity/new/field/value/assessment-field-value-dto';
-import {TextFieldValueDto} from './case-entity/new/field/value/text-field-value-dto';
-import {CaseEntityDto} from './case-entity/new/case-entity-dto';
-import {OrganizationDto} from './case-entity/new/organization-dto';
-import {DecisionFieldValueDto} from './case-entity/new/field/value/decision-field-value-dto';
-import {BudgetFieldValueDto} from './case-entity/new/field/value/budget-field-value-dto';
-import {HistoryLogFieldValueDto} from './case-entity/new/field/value/history-log-field-value-dto';
-import {CaseManagerDto} from './case-entity/new/case-manager-dto';
+import {SimpleCaseDto} from './case-entity/simple-case-dto';
+import {AssessmentFieldValueDto} from './case-entity/value/assessment-field-value-dto';
+import {TextFieldValueDto} from './case-entity/value/text-field-value-dto';
+import {CaseEntityDto} from './case-entity/case-entity-dto';
+import {OrganizationDto} from './case-entity/organization-dto';
+import {DecisionFieldValueDto} from './case-entity/value/decision-field-value-dto';
+import {BudgetFieldValueDto} from './case-entity/value/budget-field-value-dto';
+import {HistoryLogFieldValueDto} from './case-entity/value/history-log-field-value-dto';
+import {CaseManagerDto} from './case-entity/case-manager-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -39,138 +23,12 @@ export class CasesFetcherService {
     this.baseUri="http://localhost:8080";
   }
 
-  public getAllCases():Observable<CaseLazy[]> {
-    return this.http.get<CaseDTO[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases")
-                    .pipe(map(casesDTOs => casesDTOs.map(caseDTO => {
-                      return {
-                        id: caseDTO.id,
-                        name:caseDTO.name,
-                        companyName:caseDTO.organization.name,
-                        companyId:caseDTO.organization.id,
-                        caseManager:caseDTO.caseManager.name,
-                        caseController:caseDTO.caseController.name,
-                        handledBy:caseDTO.handledBy.name,
-                        controller:caseDTO.caseManager.name,
-                        caseStatus:caseDTO.caseStatus.name,
-                        caseDecisionType:caseDTO.caseDecisionType.name
-                      }
-    })))
-  }
-
-  public getCasesLazyByCaseOrganization(id:string | undefined):Observable<CaseLazy[]> {
-    return this.http.get<CaseDTO[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+id+"/casesrelatedtocaseorganization")
-      .pipe(map(casesDTOs => casesDTOs.map(caseDTO => {
-        return {
-          id: caseDTO.id,
-          name:caseDTO.name,
-          companyName:caseDTO.organization.name,
-          companyId:caseDTO.organization.id,
-          caseManager:caseDTO.caseManager.name,
-          caseController:caseDTO.caseController.name,
-          // controller:caseDTO.caseManager.name,
-          caseStatus:caseDTO.caseStatus.name,
-          caseDecisionType:caseDTO.caseDecisionType.name
-        }
-      })))
-  }
-
-  // public getCaseById(id:string | undefined):Observable<CaseDetails> {
-  //   return this.http.get<CaseDTO>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id)
-  //                   .pipe(map(caseDTO => {
-  //                     return {
-  //                       id:caseDTO.id,
-  //                       name:caseDTO.name,
-  //                       organization:caseDTO.organization,
-  //                       caseManager:caseDTO.caseManager,
-  //                       caseController:caseDTO.caseController,
-  //                       handledBy:caseDTO.handledBy,
-  //                       caseStatus:caseDTO.caseStatus,
-  //                       caseDecisionType:caseDTO.caseDecisionType,
-  //                       caseDecision:caseDTO.caseDecision,
-  //                       caseApplication:caseDTO.caseApplication,
-  //                       caseAssessment:caseDTO.caseAssessment,
-  //                       caseBudget:caseDTO.caseBudget,
-  //                       historyEventList:caseDTO.historyEventList
-  //                     }
-  //   }))
-  // }
-
-  public getCaseAssessmentUtilByCaseId(id:string | undefined):Observable<CaseAssessmentUtil> {
-    return this.http.get<CaseAssessmentUtil>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/assessment");
-  }
-
-  public getApplicationUtilByCaseId(id:string | undefined):Observable<CaseApplicationUtil> {
-    return this.http.get<CaseApplicationUtil>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/application");
-
-  }
-  public getBudgetByCaseId(id:string | undefined):Observable<CaseBudget>{
-    return this.http.get<CaseBudget>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/budget");
-  }
-
-  public getHistoryEventByCaseId(id:string | undefined):Observable<HistoryEvent[]> {
-    return this.http.get<HistoryEvent[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/history")
-  }
-
-  public getCaseManagerByCaseId(id:string | undefined):Observable<CaseManager> {
-    return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/casemanager")
-  }
-
-  public getCaseControllerByCaseId(id:string | undefined):Observable<CaseManager> {
-    return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/casecontroller")
-  }
-
-  public getHandledByByCaseId(id:string | undefined):Observable<CaseManager> {
-    return this.http.get<CaseManager>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/handledby")
-  }
-
   public getAllCaseManagers():Observable<CaseManagerDto[]> {
     return this.http.get<CaseManagerDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
   }
 
-  public getCaseDecisionByCaseId(id:string | undefined):Observable<CaseDecision> {
-    return this.http.get<CaseDecision>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/decision")
-  }
-
-  public getCaseDecisionTypeByCaseId(id:string | undefined):Observable<CaseDecisionType> {
-    return this.http.get<CaseDecisionType>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/decisiontype")
-  }
-
-  public getCaseStatusByCaseId(id:string | undefined):Observable<CaseStatus> {
-    return this.http.get<CaseStatus>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/status")
-  }
-
-
-  public getAllCaseDecisionResultOptions():Observable<CaseDecisionResult[]> {
-    return this.http.get<CaseDecisionResult[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casedecisionresults")
-  }
-
-  public updateApplicationQuestion(caseId:string, update:ApplicationUpdateRequest):Observable<any> {
-    return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/application", update)
-  }
-
-  public updateAssessmentItem(caseId:string, update:AssessmentUpdateRequest):Observable<any>{
-    return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/assessment", update)
-  }
-
-  public getOrganizationByCaseId(id:string | undefined):Observable<Organization> {
-    return this.http.get<Organization>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id + "/organization")
-  }
-
   public login(loginRequest:LoginRequest): Observable<TokenBearer>{
     return this.http.put<TokenBearer>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/auth/login", loginRequest)
-  }
-
-  public updateAssignedCaseManager(caseId:string, payload:any):Observable<any>{
-    return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casemanager", payload)
-  }
-
-  public updateCaseDecision(caseId:string, payload:any):Observable<any>{
-    return this.http.put(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/"+caseId+"/casedecision", payload)
-  }
-
-  // NYA FÖR TESTING
-  public getTheOneAndOnlyCase():Observable<SimpleCaseDto> {
-    return this.http.get<SimpleCaseDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/getsimplecase")
   }
 
   public getAssessmentFields(caseId:string | undefined):Observable<AssessmentFieldValueDto[]> {
@@ -179,10 +37,6 @@ export class CasesFetcherService {
 
   public getApplicationFields(caseId:string | undefined):Observable<TextFieldValueDto[]> {
     return this.http.get<TextFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/application-fields")
-  }
-
-  public getCaseEntity():Observable<CaseEntityDto> {
-    return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/get-case-entity")
   }
 
   public getOrganization(caseId:string |undefined):Observable<OrganizationDto> {

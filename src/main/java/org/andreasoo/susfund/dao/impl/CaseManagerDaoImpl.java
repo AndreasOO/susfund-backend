@@ -17,7 +17,7 @@ public class CaseManagerDaoImpl implements CaseManagerDao {
     @Override
     public CaseManager getCaseManagerByCaseId(int caseId) {
         return entityManager.createQuery(
-                "select cm from Cases c join c.caseManager cm where c.id=" + caseId, CaseManager.class).getSingleResult();
+                "select cm from CaseEntity c join c.caseManager cm where c.id=" + caseId, CaseManager.class).getSingleResult();
     }
 
     @Override

@@ -17,7 +17,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     @Override
     public Organization getOrganizationByCaseId(int caseId) {
         return entityManager.createQuery(
-                "select o from Cases c join c.organization o where c.id=" + caseId, Organization.class).getSingleResult();
+                "select o from CaseEntity c join c.organization o where c.id=" + caseId, Organization.class).getSingleResult();
     }
 
     @Override

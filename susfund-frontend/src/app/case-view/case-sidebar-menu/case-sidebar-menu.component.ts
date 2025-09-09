@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
-import {CaseStatus} from '../../cases-services/case-entity/case-status';
-import {CaseDecisionType} from '../../cases-services/case-entity/case-decision-type';
-import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
+import {CaseEntityDto} from '../../cases-services/case-entity/case-entity-dto';
 
 @Component({
   selector: 'app-case-sidebar-menu',
@@ -11,8 +9,6 @@ import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dt
   templateUrl: './case-sidebar-menu.component.html',
   styleUrl: './case-sidebar-menu.component.css'
 })
-
-
 
 export class CaseSidebarMenuComponent implements OnInit{
 

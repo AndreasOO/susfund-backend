@@ -1,7 +1,5 @@
 package org.andreasoo.susfund.util;
 
-import java.util.Date;
-
 public class TokenBearer {
     String token;
 

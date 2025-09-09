@@ -6,9 +6,6 @@ import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
 import java.util.List;
 
 public interface SupportTypeNodeDao {
-
     SupportTypeNode saveSupportTypeNode(SupportTypeNode stn);
-
     SupportTypeNode getSupportTypeNodeById(Long id);
-
 }

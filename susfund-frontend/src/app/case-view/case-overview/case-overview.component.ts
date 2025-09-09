@@ -1,14 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CaseDetails} from '../../cases-services/case-entity/case-details';
 import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
-import {CaseManager} from '../../cases-services/case-entity/case-manager';
-import {CaseBudget} from '../../cases-services/case-entity/case-budget';
-import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
-import {DateFieldValueDto} from '../../cases-services/case-entity/new/field/value/date-field-value-dto';
-import {BudgetFieldValueDto} from '../../cases-services/case-entity/new/field/value/budget-field-value-dto';
-
-
+import {CaseEntityDto} from '../../cases-services/case-entity/case-entity-dto';
 
 @Component({
   selector: 'app-case-overview',
@@ -20,60 +13,17 @@ export class CaseOverviewComponent implements OnInit{
 
   caseId:string|undefined
   caseEntity:CaseEntityDto | undefined
-  // dateField:DateFieldValueDto | undefined
 
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
 
   ngOnInit() {
-
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
     this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
-
-    // const dateFields = this.caseEntity?.fields
-    //   .filter(field => field.owningFieldDefinition.fieldType === "DATE_FIELD")
-    //   .map(field => field as DateFieldValueDto);
-    // this.dateField = dateFields?.[0];
-
-    // const budgetFields = this.caseEntity?.fields.filter(field => field.owningFieldDefinition.fieldType == "BUDGET").map(field => field as BudgetFieldValueDto)
-
-
   }
 
-  // getLatestAssessment(){
-  //   const dateFields = this.caseEntity?.fields.filter(field => field.owningFieldDefinition.fieldType === "DATE_FIELD").map(field => field as DateFieldValueDto);
-  //
-  //   this.dateField = dateFields?.[0];
-  // }
-
-  // getTotalBudget(): number {
-  //   return this.caseBudget?.budgetPosts.map(post => post.estimatedCost).reduce((a, b) => a + b, 0) ?? 0;
-  // }
-  //
-  // saveCaseManagerUpdate(){
-  //   const payload = {
-  //     caseManagerId: String(this.selectedCaseManagerId),
-  //     caseControllerId: String(this.selectedCaseControllerId),
-  //     handledById: String(this.selectedHandledById)
-  //   }
-  //
-  //   this.fetcher.updateAssignedCaseManager(this.caseId!, payload).subscribe({
-  //     next: response => {
-  //       this.successMessage = response.message;
-  //       this.errorMessage = null
-  //     },
-  //     error: err => {
-  //       if (err.status === 400){
-  //         this.errorMessage = err.error?.error;
-  //         this.successMessage = null
-  //       }
-  //     }
-  //   })
-  // }
 }
-
-
 
 
 // export class CaseOverviewComponent implements OnInit{
