@@ -8,20 +8,10 @@ CREATE SCHEMA IF NOT EXISTS `susfund_db`
 USE `susfund_db`;
 
 
-DROP TABLE IF EXISTS `organization_type`;
-CREATE TABLE `organization_type` ( `id` INT NOT NULL AUTO_INCREMENT,
-                                   `name` VARCHAR(255) NOT NULL,
-                                   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE `organization` ( `id` INT NOT NULL AUTO_INCREMENT,
                               `name` VARCHAR(255) NOT NULL,
-                              `organization_type_id` INT NOT NULL,
-                              CONSTRAINT `FK_organization_type_id` FOREIGN KEY (`organization_type_id`) REFERENCES `organization_type` (`id`),
+                              `organization_type` VARCHAR(255),
                               PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 
   CHARACTER SET utf8mb4
@@ -244,18 +234,10 @@ CREATE TABLE `history_event` (`id` INT NOT NULL AUTO_INCREMENT,
 
 -- -------------------------------------------------------------------------------- START INSERTS
 
-
-INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("SOLE_TRADER");
-INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("LIMITED_COMPANY");
-INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("BRANCH");
-INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("TRADING_PARTNERSHIP");
-INSERT INTO `susfund_db`.`organization_type` (`name`) VALUES ("LIMITED_PARTNERSHIP");
-
-
-INSERT INTO `susfund_db`.`organization` (`name`, `organization_type_id`) VALUES ("CompanyOne", 1);
-INSERT INTO `susfund_db`.`organization` (`name`, `organization_type_id`) VALUES ("CompanyTwo", 2);
-INSERT INTO `susfund_db`.`organization` (`name`, `organization_type_id`) VALUES ("CompanyThree", 3);
-INSERT INTO `susfund_db`.`organization` (`name`, `organization_type_id`) VALUES ("CompanyFour", 4);
+INSERT INTO `susfund_db`.`organization` (`name`, `organization_type`) VALUES ("CompanyOne", "SOLE_TRADER");
+INSERT INTO `susfund_db`.`organization` (`name`, `organization_type`) VALUES ("CompanyTwo", "LIMITED_COMPANY");
+INSERT INTO `susfund_db`.`organization` (`name`, `organization_type`) VALUES ("CompanyThree", "BRANCH");
+INSERT INTO `susfund_db`.`organization` (`name`, `organization_type`) VALUES ("CompanyFour", "LIMITED_PARTNERSHIP");
 
 
 INSERT INTO `susfund_db`.`case_manager` (`name`) VALUES ("UNASSIGNED");
