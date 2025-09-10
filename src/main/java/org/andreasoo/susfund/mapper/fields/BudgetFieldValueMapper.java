@@ -5,7 +5,7 @@ import org.andreasoo.susfund.dto.OrganizationDTO;
 import org.andreasoo.susfund.dto.fieldvalue.BudgetFieldValueDTO;
 import org.andreasoo.susfund.dto.fieldvalue.BudgetRowDTO;
 import org.andreasoo.susfund.dto.fieldvalue.FinancingRowDTO;
-import org.andreasoo.susfund.entity.updated.field.value.budget.BudgetFieldValue;
+import org.andreasoo.susfund.entity.field.value.budget.BudgetFieldValue;
 
 @ApplicationScoped
 public class BudgetFieldValueMapper

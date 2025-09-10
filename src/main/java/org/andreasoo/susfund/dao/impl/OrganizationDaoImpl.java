@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.OrganizationDao;
-import org.andreasoo.susfund.entity.old.Organization;
+import org.andreasoo.susfund.entity.organization.Organization;
 
 import java.util.List;
 

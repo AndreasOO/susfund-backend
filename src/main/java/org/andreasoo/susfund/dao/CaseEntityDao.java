@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.dao;
 
-import org.andreasoo.susfund.entity.updated.CaseEntity;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
 
 import java.util.List;
 

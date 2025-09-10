@@ -1,10 +1,7 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import org.andreasoo.susfund.dto.AbstractDTO;
-import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEventType;
+import org.andreasoo.susfund.entity.field.value.history.HistoryEventType;
 
 import java.time.LocalDate;
 

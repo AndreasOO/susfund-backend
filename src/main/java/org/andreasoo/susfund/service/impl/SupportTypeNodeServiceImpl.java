@@ -2,9 +2,8 @@ package org.andreasoo.susfund.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.andreasoo.susfund.dao.OrganizationDao;
 import org.andreasoo.susfund.dao.SupportTypeNodeDao;
-import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
+import org.andreasoo.susfund.entity.supporttype.SupportTypeNode;
 import org.andreasoo.susfund.service.SupportTypeNodeService;
 
 @ApplicationScoped

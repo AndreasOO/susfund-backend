@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.SupportTypeNodeDao;
-import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
+import org.andreasoo.susfund.entity.supporttype.SupportTypeNode;
 
 @ApplicationScoped
 public class SupportTypeNodeDaoImpl implements SupportTypeNodeDao {

@@ -3,7 +3,7 @@ package org.andreasoo.susfund.service.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.andreasoo.susfund.dao.OrganizationDao;
-import org.andreasoo.susfund.entity.old.Organization;
+import org.andreasoo.susfund.entity.organization.Organization;
 import org.andreasoo.susfund.service.OrganizationService;
 
 import java.util.List;

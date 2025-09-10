@@ -9,18 +9,17 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.andreasoo.susfund.dto.*;
-import org.andreasoo.susfund.entity.old.*;
-import org.andreasoo.susfund.entity.updated.CaseEntity;
-import org.andreasoo.susfund.entity.updated.field.definition.*;
-import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
-import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
+import org.andreasoo.susfund.entity.casemanager.CaseManager;
+import org.andreasoo.susfund.entity.organization.Organization;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
+import org.andreasoo.susfund.entity.field.definition.FieldDefinition;
+import org.andreasoo.susfund.entity.field.definition.fieldtype.FieldType;
+import org.andreasoo.susfund.entity.field.value.AbstractFieldValue;
 import org.andreasoo.susfund.service.*;
 
 
-import java.util.Collections;
 import java.util.List;
 
 

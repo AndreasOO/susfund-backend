@@ -5,7 +5,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.andreasoo.susfund.controller.config.KeyManager;
 import org.andreasoo.susfund.dao.UserCredentialsDao;
-import org.andreasoo.susfund.entity.old.UserCredentials;
+import org.andreasoo.susfund.entity.appuser.UserCredentials;
 import org.andreasoo.susfund.service.LoginService;
 import org.andreasoo.susfund.util.LoginRequest;
 import org.andreasoo.susfund.util.TokenBearer;

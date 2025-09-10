@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import org.andreasoo.susfund.entity.old.Organization;
+import org.andreasoo.susfund.entity.organization.Organization;
 import org.andreasoo.susfund.service.OrganizationService;
 
 import java.util.List;

@@ -2,10 +2,10 @@ package org.andreasoo.susfund.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import org.andreasoo.susfund.dao.*;
-import org.andreasoo.susfund.entity.old.*;
-import org.andreasoo.susfund.entity.updated.CaseEntity;
+import org.andreasoo.susfund.entity.casemanager.CaseManager;
+import org.andreasoo.susfund.entity.organization.Organization;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
 import org.andreasoo.susfund.service.CaseEntityService;
 
 import java.util.List;

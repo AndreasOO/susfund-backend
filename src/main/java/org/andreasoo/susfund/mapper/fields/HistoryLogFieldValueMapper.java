@@ -3,7 +3,7 @@ package org.andreasoo.susfund.mapper.fields;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.HistoryEventDTO;
 import org.andreasoo.susfund.dto.fieldvalue.HistoryLogFieldValueDTO;
-import org.andreasoo.susfund.entity.updated.field.value.history.HistoryLogFieldValue;
+import org.andreasoo.susfund.entity.field.value.history.HistoryLogFieldValue;
 
 import java.util.stream.Collectors;
 

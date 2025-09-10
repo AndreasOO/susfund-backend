@@ -1,13 +1,13 @@
 package org.andreasoo.susfund.flyway.migrations
 
 import jakarta.persistence.{EntityManager, Persistence}
-import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition
-import org.andreasoo.susfund.entity.updated.field.definition.budget.{BudgetFieldDefinition, BudgetType}
-import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType
-import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation
-import org.andreasoo.susfund.entity.updated.field.definition.section.{Section, SubSection}
-import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableFieldDefinition
-import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode
+import org.andreasoo.susfund.entity.field.definition.FieldDefinition
+import org.andreasoo.susfund.entity.field.definition.budget.{BudgetFieldDefinition, BudgetType}
+import org.andreasoo.susfund.entity.field.definition.fieldtype.FieldType
+import org.andreasoo.susfund.entity.field.definition.location.FrontendLocation
+import org.andreasoo.susfund.entity.field.definition.section.{Section, SubSection}
+import org.andreasoo.susfund.entity.field.definition.selectable.SelectableFieldDefinition
+import org.andreasoo.susfund.entity.supporttype.SupportTypeNode
 import org.andreasoo.susfund.flyway.util.ScalaMigrationBase
 
 import java.sql.{Connection, ResultSet}

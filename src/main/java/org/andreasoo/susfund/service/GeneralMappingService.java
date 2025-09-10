@@ -1,12 +1,7 @@
 package org.andreasoo.susfund.service;
 
 import org.andreasoo.susfund.dto.*;
-import org.andreasoo.susfund.entity.old.CaseManager;
-import org.andreasoo.susfund.entity.old.Organization;
-import org.andreasoo.susfund.entity.updated.CaseEntity;
-import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
-
-import java.util.List;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
 
 public interface GeneralMappingService {
     <E, D> D mapToDTO(E entity);

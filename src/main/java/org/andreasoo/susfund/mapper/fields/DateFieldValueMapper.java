@@ -2,7 +2,7 @@ package org.andreasoo.susfund.mapper.fields;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.DateFieldValueDTO;
-import org.andreasoo.susfund.entity.updated.field.value.datefield.DateFieldValue;
+import org.andreasoo.susfund.entity.field.value.datefield.DateFieldValue;
 
 @ApplicationScoped
 public class DateFieldValueMapper

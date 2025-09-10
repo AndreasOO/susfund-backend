@@ -2,7 +2,7 @@ package org.andreasoo.susfund.mapper.fields;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.AssessmentFieldValueDTO;
-import org.andreasoo.susfund.entity.updated.field.value.assessment.AssessmentFieldValue;
+import org.andreasoo.susfund.entity.field.value.assessment.AssessmentFieldValue;
 
 @ApplicationScoped
 public class AssessmentFieldValueMapper

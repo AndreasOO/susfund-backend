@@ -1,8 +1,8 @@
 package org.andreasoo.susfund.service;
 
-import jakarta.transaction.Transactional;
-import org.andreasoo.susfund.entity.old.*;
-import org.andreasoo.susfund.entity.updated.CaseEntity;
+import org.andreasoo.susfund.entity.casemanager.CaseManager;
+import org.andreasoo.susfund.entity.organization.Organization;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
 
 import java.util.List;
 
