@@ -2,7 +2,7 @@ package org.andreasoo.susfund.flyway.util
 
 import org.flywaydb.core.api.migration.{BaseJavaMigration, Context}
 
-import java.sql.{Connection, ResultSet}
+import java.sql.Connection
 
 abstract class ScalaMigrationBase extends BaseJavaMigration {
 

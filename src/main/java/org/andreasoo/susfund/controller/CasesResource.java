@@ -34,9 +34,6 @@ public class CasesResource {
     private CaseEntityService caseEntityService;
 
     @Inject
-    private BudgetService budgetService;
-
-    @Inject
     private FieldDefinitionService fieldDefinitionService;
 
     @Inject
@@ -59,7 +56,6 @@ public class CasesResource {
     @GET()
     @Produces("application/json")
     public CaseDTO getCaseById(@PathParam("id") Long id) {
-//        System.out.println(budgetService.test(id));
         return generalMappingService.mapToDTO(caseEntityService.getCaseEntityById(id));
     }
 
