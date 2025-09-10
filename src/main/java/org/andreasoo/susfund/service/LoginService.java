@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.service;
 
-import org.andreasoo.susfund.entity.old.UserCredentials;
+import org.andreasoo.susfund.entity.appuser.UserCredentials;
 import org.andreasoo.susfund.util.LoginRequest;
 import org.andreasoo.susfund.util.TokenBearer;
 

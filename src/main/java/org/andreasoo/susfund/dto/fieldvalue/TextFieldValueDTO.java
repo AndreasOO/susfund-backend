@@ -1,8 +1,6 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.value.AbstractFieldValue;
 
 public class TextFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO> {
 

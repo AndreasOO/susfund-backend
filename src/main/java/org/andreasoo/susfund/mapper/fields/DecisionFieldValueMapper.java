@@ -2,7 +2,7 @@ package org.andreasoo.susfund.mapper.fields;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.fieldvalue.DecisionFieldValueDTO;
-import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionFieldValue;
+import org.andreasoo.susfund.entity.field.value.decision.DecisionFieldValue;
 
 @ApplicationScoped
 public class DecisionFieldValueMapper

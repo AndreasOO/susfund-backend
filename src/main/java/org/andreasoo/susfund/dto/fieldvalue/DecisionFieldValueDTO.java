@@ -1,7 +1,7 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.entity.updated.field.value.decision.DecisionResultType;
+import org.andreasoo.susfund.entity.field.value.decision.DecisionResultType;
 
 public class DecisionFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO> {
 

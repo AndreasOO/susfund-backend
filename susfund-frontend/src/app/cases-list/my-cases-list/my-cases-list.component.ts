@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
-import {CaseLazy} from '../../cases-services/case-entity/case-lazy';
 import {OnInit} from '@angular/core';
-import {SimpleCaseDto} from '../../cases-services/case-entity/new/simple-case-dto';
-import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
+import {SimpleCaseDto} from '../../cases-services/case-entity/simple-case-dto';
 
 @Component({
   selector: 'app-my-cases-list',

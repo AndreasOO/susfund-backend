@@ -1,7 +1,7 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
 import org.andreasoo.susfund.dto.AbstractDTO;
-import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableType;
+import org.andreasoo.susfund.entity.field.definition.selectable.SelectableType;
 
 public class SelectableValueDTO extends AbstractDTO {
 

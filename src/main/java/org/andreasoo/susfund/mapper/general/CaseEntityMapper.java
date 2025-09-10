@@ -6,7 +6,7 @@ import org.andreasoo.susfund.dto.CaseDTO;
 import org.andreasoo.susfund.dto.SimpleCaseDTO;
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
-import org.andreasoo.susfund.entity.updated.CaseEntity;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
 import org.andreasoo.susfund.mapper.EntityToDtoMapper;
 import org.andreasoo.susfund.service.FieldValueMappingService;
 

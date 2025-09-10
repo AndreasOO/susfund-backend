@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.SelectableValueDao;
-import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableValue;
+import org.andreasoo.susfund.entity.field.definition.selectable.SelectableValue;
 
 import java.util.List;
 

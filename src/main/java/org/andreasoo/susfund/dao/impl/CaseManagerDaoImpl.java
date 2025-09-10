@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.CaseManagerDao;
-import org.andreasoo.susfund.entity.old.CaseManager;
+import org.andreasoo.susfund.entity.casemanager.CaseManager;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class CaseManagerDaoImpl implements CaseManagerDao {
     @Override
     public CaseManager getCaseManagerByCaseId(int caseId) {
         return entityManager.createQuery(
-                "select cm from Cases c join c.caseManager cm where c.id=" + caseId, CaseManager.class).getSingleResult();
+                "select cm from CaseEntity c join c.caseManager cm where c.id=" + caseId, CaseManager.class).getSingleResult();
     }
 
     @Override

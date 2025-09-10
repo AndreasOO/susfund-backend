@@ -1,7 +1,7 @@
 package org.andreasoo.susfund.dto;
 
-import org.andreasoo.susfund.entity.updated.CaseDecisionType2;
-import org.andreasoo.susfund.entity.updated.CaseStatus2;
+import org.andreasoo.susfund.entity.caseentity.CaseDecisionType2;
+import org.andreasoo.susfund.entity.caseentity.CaseStatus2;
 
 public class SimpleCaseDTO extends AbstractDTO {
 

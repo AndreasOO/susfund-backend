@@ -6,7 +6,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.andreasoo.susfund.dao.UserCredentialsDao;
-import org.andreasoo.susfund.entity.old.UserCredentials;
+import org.andreasoo.susfund.entity.appuser.UserCredentials;
 import org.andreasoo.susfund.util.LoginRequest;
 
 import java.util.Optional;

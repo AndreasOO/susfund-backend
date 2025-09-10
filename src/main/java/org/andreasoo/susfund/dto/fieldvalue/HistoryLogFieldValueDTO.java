@@ -1,8 +1,6 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.value.history.HistoryEvent2;
 
 import java.util.Set;
 

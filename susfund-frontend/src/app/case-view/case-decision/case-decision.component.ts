@@ -1,13 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {CaseManager} from '../../cases-services/case-entity/case-manager';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
-import {CaseDecision} from '../../cases-services/case-entity/case-decision';
-import {CaseDecisionResult} from '../../cases-services/case-entity/case-decision-result';
-import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
-import {DecisionFieldValueDto} from '../../cases-services/case-entity/new/field/value/decision-field-value-dto';
-import {AssessmentFieldValueDto} from '../../cases-services/case-entity/new/field/value/assessment-field-value-dto';
-import {CaseManagerDto} from '../../cases-services/case-entity/new/case-manager-dto';
+import {CaseEntityDto} from '../../cases-services/case-entity/case-entity-dto';
+import {DecisionFieldValueDto} from '../../cases-services/case-entity/value/decision-field-value-dto';
+import {CaseManagerDto} from '../../cases-services/case-entity/case-manager-dto';
 
 @Component({
   selector: 'app-case-decision',
@@ -30,7 +26,6 @@ export class CaseDecisionComponent implements OnInit{
   }
 
   ngOnInit() {
-
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
     this.fetcher.getAllCaseManagers().subscribe(caseManagerList => this.caseManagerList = caseManagerList!)
     this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)

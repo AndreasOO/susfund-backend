@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router} from '@angular/router';
 import {OnInit} from '@angular/core';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
-import {CaseDetails} from '../../cases-services/case-entity/case-details';
-import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dto';
+import {CaseEntityDto} from '../../cases-services/case-entity/case-entity-dto';
 
 
 @Component({
@@ -13,6 +12,7 @@ import {CaseEntityDto} from '../../cases-services/case-entity/new/case-entity-dt
   styleUrl: './case-main-view.component.css'
 })
 export class CaseMainViewComponent implements OnInit {
+
   caseId:string | undefined
   caseEntity:CaseEntityDto | undefined
 

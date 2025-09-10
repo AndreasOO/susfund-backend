@@ -1,10 +1,10 @@
 package org.andreasoo.susfund.dto.fielddefinition;
 
 import org.andreasoo.susfund.dto.fieldvalue.SelectableValueDTO;
-import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
-import org.andreasoo.susfund.entity.updated.field.definition.location.FrontendLocation;
-import org.andreasoo.susfund.entity.updated.field.definition.section.Section;
-import org.andreasoo.susfund.entity.updated.field.definition.section.SubSection;
+import org.andreasoo.susfund.entity.field.definition.fieldtype.FieldType;
+import org.andreasoo.susfund.entity.field.definition.location.FrontendLocation;
+import org.andreasoo.susfund.entity.field.definition.section.Section;
+import org.andreasoo.susfund.entity.field.definition.section.SubSection;
 
 import java.util.Set;
 

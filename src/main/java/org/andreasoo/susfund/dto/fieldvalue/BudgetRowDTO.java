@@ -1,8 +1,7 @@
 package org.andreasoo.susfund.dto.fieldvalue;
 
 import org.andreasoo.susfund.dto.AbstractDTO;
-import org.andreasoo.susfund.dto.OrganizationDTO;
-import org.andreasoo.susfund.entity.updated.field.value.budget.CostType;
+import org.andreasoo.susfund.entity.field.value.budget.CostType;
 
 public class BudgetRowDTO extends AbstractDTO {
 

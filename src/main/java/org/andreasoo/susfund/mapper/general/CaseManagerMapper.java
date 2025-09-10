@@ -2,7 +2,7 @@ package org.andreasoo.susfund.mapper.general;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andreasoo.susfund.dto.CaseManagerDTO;
-import org.andreasoo.susfund.entity.old.CaseManager;
+import org.andreasoo.susfund.entity.casemanager.CaseManager;
 import org.andreasoo.susfund.mapper.EntityToDtoMapper;
 
 @ApplicationScoped

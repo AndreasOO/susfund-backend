@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.andreasoo.susfund.dao.FieldDefinitionDao;
-import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
+import org.andreasoo.susfund.entity.field.definition.FieldDefinition;
 
 import java.util.List;
 

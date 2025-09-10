@@ -3,24 +3,18 @@ package org.andreasoo.susfund.service.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.andreasoo.susfund.dto.*;
-import org.andreasoo.susfund.entity.old.CaseManager;
-import org.andreasoo.susfund.entity.old.Organization;
-import org.andreasoo.susfund.entity.updated.CaseEntity;
-import org.andreasoo.susfund.entity.updated.field.definition.fieldtype.FieldType;
-import org.andreasoo.susfund.entity.updated.supporttype.SupportTypeNode;
+import org.andreasoo.susfund.entity.casemanager.CaseManager;
+import org.andreasoo.susfund.entity.organization.Organization;
+import org.andreasoo.susfund.entity.caseentity.CaseEntity;
+import org.andreasoo.susfund.entity.supporttype.SupportTypeNode;
 import org.andreasoo.susfund.mapper.EntityToDtoMapper;
 import org.andreasoo.susfund.mapper.general.CaseEntityMapper;
 import org.andreasoo.susfund.mapper.general.CaseManagerMapper;
 import org.andreasoo.susfund.mapper.general.OrganizationMapper;
 import org.andreasoo.susfund.mapper.general.SupportTypeNodeMapper;
-import org.andreasoo.susfund.service.FieldValueMappingService;
 import org.andreasoo.susfund.service.GeneralMappingService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class GeneralMappingServiceImpl implements GeneralMappingService {

@@ -4,9 +4,9 @@ import org.andreasoo.susfund.dto.fielddefinition.BudgetFieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fielddefinition.SelectableFieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fieldvalue.SelectableValueDTO;
-import org.andreasoo.susfund.entity.updated.field.definition.FieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.definition.budget.BudgetFieldDefinition;
-import org.andreasoo.susfund.entity.updated.field.definition.selectable.SelectableFieldDefinition;
+import org.andreasoo.susfund.entity.field.definition.FieldDefinition;
+import org.andreasoo.susfund.entity.field.definition.budget.BudgetFieldDefinition;
+import org.andreasoo.susfund.entity.field.definition.selectable.SelectableFieldDefinition;
 
 import java.util.stream.Collectors;
 
