@@ -15,7 +15,7 @@ public class HistoryLogFieldValue extends AbstractFieldValue<FieldDefinition> {
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name="history_log_value_id")
     @OneToMany(mappedBy = "owningHistoryLog", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<HistoryEvent2>  historyEvents = new HashSet<>();
+    private Set<HistoryEvent>  historyEvents = new HashSet<>();
 
     public HistoryLogFieldValue() {
         super();
@@ -25,11 +25,11 @@ public class HistoryLogFieldValue extends AbstractFieldValue<FieldDefinition> {
         super(owningCase);
     }
 
-    public Set<HistoryEvent2> getHistoryEvents() {
+    public Set<HistoryEvent> getHistoryEvents() {
         return historyEvents;
     }
 
-    public void setHistoryEvents(Set<HistoryEvent2> historyEvents) {
+    public void setHistoryEvents(Set<HistoryEvent> historyEvents) {
         this.historyEvents = historyEvents;
     }
 

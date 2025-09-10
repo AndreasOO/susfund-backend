@@ -2,8 +2,8 @@ package org.andreasoo.susfund.dto;
 
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
-import org.andreasoo.susfund.entity.caseentity.CaseDecisionType2;
-import org.andreasoo.susfund.entity.caseentity.CaseStatus2;
+import org.andreasoo.susfund.entity.caseentity.CaseDecisionType;
+import org.andreasoo.susfund.entity.caseentity.CaseStatus;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class CaseDTO extends AbstractDTO {
     private CaseManagerDTO caseManager;
     private CaseManagerDTO caseController;
     private CaseManagerDTO handledBy;
-    private CaseStatus2 caseStatus;
-    private CaseDecisionType2 caseDecisionType;
+    private CaseStatus caseStatus;
+    private CaseDecisionType caseDecisionType;
     private SupportTypeNodeDTO supportTypeNode;
     private List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields;
 
@@ -27,8 +27,8 @@ public class CaseDTO extends AbstractDTO {
 
     public CaseDTO(Long id, String name, OrganizationDTO organization,
                    CaseManagerDTO caseManager, CaseManagerDTO caseController,
-                   CaseManagerDTO handledBy, CaseStatus2 caseStatus,
-                   CaseDecisionType2 caseDecisionType, SupportTypeNodeDTO supportTypeNode,
+                   CaseManagerDTO handledBy, CaseStatus caseStatus,
+                   CaseDecisionType caseDecisionType, SupportTypeNodeDTO supportTypeNode,
                    List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields) {
         super("case");
         this.id = id;
@@ -91,19 +91,19 @@ public class CaseDTO extends AbstractDTO {
         this.handledBy = handledBy;
     }
 
-    public CaseStatus2 getCaseStatus() {
+    public CaseStatus getCaseStatus() {
         return caseStatus;
     }
 
-    public void setCaseStatus(CaseStatus2 caseStatus) {
+    public void setCaseStatus(CaseStatus caseStatus) {
         this.caseStatus = caseStatus;
     }
 
-    public CaseDecisionType2 getCaseDecisionType() {
+    public CaseDecisionType getCaseDecisionType() {
         return caseDecisionType;
     }
 
-    public void setCaseDecisionType(CaseDecisionType2 caseDecisionType) {
+    public void setCaseDecisionType(CaseDecisionType caseDecisionType) {
         this.caseDecisionType = caseDecisionType;
     }
 

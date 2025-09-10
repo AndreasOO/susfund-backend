@@ -5,23 +5,19 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="history_event2")
-public class HistoryEvent2 {
-
+@Table(name="history_event")
+public class HistoryEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //TODO make table
     @Column(name="history_event_details")
     private String historyEventDetails;
 
-    //TODO make table
     @Column(name="history_event_date")
     private LocalDate historyEventDate;
 
-    //TODO make table
     @Column(name="history_event_type")
     @Enumerated(EnumType.STRING)
     private HistoryEventType historyEventType;
@@ -30,11 +26,11 @@ public class HistoryEvent2 {
     @JoinColumn(name = "field_value_entity_id", nullable = false)
     private HistoryLogFieldValue owningHistoryLog;
 
-    public HistoryEvent2(){
+    public HistoryEvent(){
 
     }
 
-    public HistoryEvent2(HistoryLogFieldValue owningHistoryLog, String historyEventDetails, LocalDate historyEventDate, HistoryEventType historyEventType) {
+    public HistoryEvent(HistoryLogFieldValue owningHistoryLog, String historyEventDetails, LocalDate historyEventDate, HistoryEventType historyEventType) {
         this.historyEventDetails = historyEventDetails;
         this.historyEventDate = historyEventDate;
         this.historyEventType = historyEventType;
