@@ -43,11 +43,11 @@ public class CaseEntity implements Serializable {
 
     @Column(name="case_status")
     @Enumerated(EnumType.STRING)
-    private CaseStatus2 caseStatus;
+    private CaseStatus caseStatus;
 
     @Column(name="case_decision_type")
     @Enumerated(EnumType.STRING)
-    private CaseDecisionType2 caseDecisionType;
+    private CaseDecisionType caseDecisionType;
 
     @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
@@ -99,11 +99,11 @@ public class CaseEntity implements Serializable {
         this.caseManager = caseManager;
     }
 
-    public CaseStatus2 getCaseStatus() {
+    public CaseStatus getCaseStatus() {
         return caseStatus;
     }
 
-    public void setCaseStatus(CaseStatus2 caseStatus) {
+    public void setCaseStatus(CaseStatus caseStatus) {
         this.caseStatus = caseStatus;
     }
 
@@ -123,11 +123,11 @@ public class CaseEntity implements Serializable {
         this.handledBy = handledBy;
     }
 
-    public CaseDecisionType2 getCaseDecisionType() {
+    public CaseDecisionType getCaseDecisionType() {
         return caseDecisionType;
     }
 
-    public void setCaseDecisionType(CaseDecisionType2 caseDecisionType) {
+    public void setCaseDecisionType(CaseDecisionType caseDecisionType) {
         this.caseDecisionType = caseDecisionType;
     }
 

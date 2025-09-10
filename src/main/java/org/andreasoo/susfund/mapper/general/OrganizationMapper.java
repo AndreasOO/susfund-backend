@@ -14,7 +14,7 @@ public class OrganizationMapper implements EntityToDtoMapper<Organization, Organ
         return new OrganizationDTO(
                 entity.getId(),
                 entity.getName(),
-                entity.getOrganizationType().getName()
+                entity.getOrganizationType()
         );
     }
 }

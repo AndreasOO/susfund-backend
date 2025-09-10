@@ -1,6 +1,6 @@
 package org.andreasoo.susfund.entity.caseentity;
 
-public enum CaseDecisionType2 {
+public enum CaseDecisionType {
     PAYMENT_REQUEST,
     APPLICATION_APPROVAL,
     REPAYMENT,

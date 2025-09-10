@@ -1,17 +1,19 @@
 package org.andreasoo.susfund.dto;
 
+import org.andreasoo.susfund.entity.organization.OrganizationType;
+
 public class OrganizationDTO extends AbstractDTO {
 
     private int id;
     private String name;
-    private String organizationType;
+    private OrganizationType organizationType;
 
     public OrganizationDTO() {
         super("organization");
 
     }
 
-    public OrganizationDTO(int id, String name, String organizationType) {
+    public OrganizationDTO(int id, String name, OrganizationType organizationType) {
         super("organization");
         this.id = id;
         this.name = name;
@@ -34,11 +36,11 @@ public class OrganizationDTO extends AbstractDTO {
         this.name = name;
     }
 
-    public String getOrganizationType() {
+    public OrganizationType getOrganizationType() {
         return organizationType;
     }
 
-    public void setOrganizationType(String organizationType) {
+    public void setOrganizationType(OrganizationType organizationType) {
         this.organizationType = organizationType;
     }
 }

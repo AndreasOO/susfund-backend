@@ -13,20 +13,22 @@ import java.io.Serializable;
 })
 @Table(name="organization")
 public class Organization implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="organization_type_id")
+    @Column(name="organization_type")
+    @Enumerated(EnumType.STRING)
     private OrganizationType organizationType;
 
 
     public Organization() {
     }
 
-    public Organization(int id, String name, String organizationNumber, OrganizationType organizationType) {
+    public Organization(int id, String name, OrganizationType organizationType) {
         this.id = id;
         this.name = name;
         this.organizationType = organizationType;

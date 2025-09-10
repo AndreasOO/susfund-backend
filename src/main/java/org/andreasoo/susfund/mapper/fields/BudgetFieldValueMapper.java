@@ -24,7 +24,7 @@ public class BudgetFieldValueMapper
                                 row.getId(),
                                 new OrganizationDTO(row.getOrganization().getId(),
                                         row.getOrganization().getName(),
-                                        row.getOrganization().getOrganizationType().getName()),
+                                        row.getOrganization().getOrganizationType()),
                                 row.getFinancingAmount(),
                                 row.getFinancingPercentage(),
                                 row.getFinancingType()))

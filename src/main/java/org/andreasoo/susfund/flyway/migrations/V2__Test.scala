@@ -216,19 +216,19 @@ class V2__Test extends ScalaMigrationBase {
 
     //history events
     execute(connection,
-      s"INSERT INTO history_event2 (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case1, 'ASSESSMENT_CHANGE', CURRENT_DATE, 'History event details in event 1 in case 1')")
+      s"INSERT INTO history_event (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case1, 'ASSESSMENT_CHANGE', CURRENT_DATE, 'History event details in event 1 in case 1')")
     val historyEvent1Case1:Long = getLastInsertId(connection)
 
     execute(connection,
-      s"INSERT INTO history_event2 (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case1, 'BUDGET_CHANGE', CURRENT_DATE, 'History event details in event 2 in case 1')")
+      s"INSERT INTO history_event (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case1, 'BUDGET_CHANGE', CURRENT_DATE, 'History event details in event 2 in case 1')")
     val historyEvent2Case1:Long = getLastInsertId(connection)
 
     execute(connection,
-      s"INSERT INTO history_event2 (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case2, 'CASE_MANAGER_CHANGE', CURRENT_DATE, 'History event details in event 1 in case 2')")
+      s"INSERT INTO history_event (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case2, 'CASE_MANAGER_CHANGE', CURRENT_DATE, 'History event details in event 1 in case 2')")
     val historyEvent1Case2:Long = getLastInsertId(connection)
 
     execute(connection,
-      s"INSERT INTO history_event2 (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case2, 'AMENDMENT_REQUEST', CURRENT_DATE, 'History event details in event 2 in case 2')")
+      s"INSERT INTO history_event (field_value_entity_id, history_event_type, history_event_date, history_event_details) VALUES ($historyLogVal1Case2, 'AMENDMENT_REQUEST', CURRENT_DATE, 'History event details in event 2 in case 2')")
     val historyEvent2Case2:Long = getLastInsertId(connection)
 
 

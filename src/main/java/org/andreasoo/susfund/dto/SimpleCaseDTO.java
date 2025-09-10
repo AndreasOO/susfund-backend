@@ -1,7 +1,7 @@
 package org.andreasoo.susfund.dto;
 
-import org.andreasoo.susfund.entity.caseentity.CaseDecisionType2;
-import org.andreasoo.susfund.entity.caseentity.CaseStatus2;
+import org.andreasoo.susfund.entity.caseentity.CaseDecisionType;
+import org.andreasoo.susfund.entity.caseentity.CaseStatus;
 
 public class SimpleCaseDTO extends AbstractDTO {
 
@@ -10,8 +10,8 @@ public class SimpleCaseDTO extends AbstractDTO {
     private String companyName;
     private String caseManager;
     private String caseController;
-    private CaseStatus2 caseStatus;
-    private CaseDecisionType2 caseDecisionType;
+    private CaseStatus caseStatus;
+    private CaseDecisionType caseDecisionType;
 
     public SimpleCaseDTO() {
         super("simpleCase");
@@ -20,7 +20,7 @@ public class SimpleCaseDTO extends AbstractDTO {
 
     public SimpleCaseDTO(Long id, String name, String companyName,
                          String caseManager, String caseController,
-                         CaseStatus2 caseStatus, CaseDecisionType2 caseDecisionType) {
+                         CaseStatus caseStatus, CaseDecisionType caseDecisionType) {
         super("simpleCase");
         this.id = id;
         this.name = name;
@@ -71,19 +71,19 @@ public class SimpleCaseDTO extends AbstractDTO {
         this.caseController = caseController;
     }
 
-    public CaseStatus2 getCaseStatus() {
+    public CaseStatus getCaseStatus() {
         return caseStatus;
     }
 
-    public void setCaseStatus(CaseStatus2 caseStatus) {
+    public void setCaseStatus(CaseStatus caseStatus) {
         this.caseStatus = caseStatus;
     }
 
-    public CaseDecisionType2 getCaseDecisionType() {
+    public CaseDecisionType getCaseDecisionType() {
         return caseDecisionType;
     }
 
-    public void setCaseDecisionType(CaseDecisionType2 caseDecisionType) {
+    public void setCaseDecisionType(CaseDecisionType caseDecisionType) {
         this.caseDecisionType = caseDecisionType;
     }
 
