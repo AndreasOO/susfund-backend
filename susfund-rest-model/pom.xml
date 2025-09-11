@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.andreasoo</groupId>
+    <artifactId>SusFund</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>susfund-rest-model</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>susfund-rest-model</name>
+  <packaging>jar</packaging>
+
+
+  <properties>
+
+  </properties>
+
+
+  <dependencies>
+
+    <!-- ENTITY -->
+    <dependency>
+      <groupId>org.andreasoo</groupId>
+      <artifactId>susfund-repository</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+    </plugins>
+  </build>
+</project>
