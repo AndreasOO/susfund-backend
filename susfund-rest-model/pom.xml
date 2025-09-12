@@ -5,13 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.andreasoo</groupId>
-    <artifactId>SusFund</artifactId>
-    <version>1.0-SNAPSHOT</version>
+      <groupId>org.andjos</groupId>
+      <artifactId>susfund-root</artifactId>
+      <version>1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>susfund-rest-model</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>susfund-rest-model</name>
   <packaging>jar</packaging>
 
@@ -24,9 +23,8 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.andreasoo</groupId>
+      <groupId>org.andjos</groupId>
       <artifactId>susfund-repository</artifactId>
-      <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

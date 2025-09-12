@@ -5,13 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.andreasoo</groupId>
-        <artifactId>SusFund</artifactId>
+        <groupId>org.andjos</groupId>
+        <artifactId>susfund-root</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>susfund-rest</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <name>susfund-rest</name>
     <packaging>war</packaging>
 
@@ -23,23 +22,20 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.andreasoo</groupId>
+            <groupId>org.andjos</groupId>
             <artifactId>susfund-util</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.andreasoo</groupId>
+            <groupId>org.andjos</groupId>
             <artifactId>susfund-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.andreasoo</groupId>
+            <groupId>org.andjos</groupId>
             <artifactId>susfund-rest-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
@@ -153,19 +149,6 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway.version}</version>
-<!--                <configuration>-->
-<!--                    <url>jdbc:mysql://localhost:7777/susfund_db?useSSL=false&amp;serverTimezone=UTC</url>-->
-<!--                    <user>root</user>-->
-<!--                    <password>test1234</password>-->
-<!--                    <locations>-->
-<!--                        <location>classpath:db/migration</location>-->
-<!--                    </locations>-->
-<!--                    <baselineOnMigrate>true</baselineOnMigrate>-->
-<!--                    <validateOnMigrate>true</validateOnMigrate>-->
-<!--                    <outOfOrder>false</outOfOrder>-->
-<!--                    <validateMigrationNaming>true</validateMigrationNaming>-->
-<!--                    <mixed>true</mixed>-->
-<!--                </configuration>-->
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
