@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.andjos</groupId>
         <artifactId>susfund-root</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>susfund-rest</artifactId>
