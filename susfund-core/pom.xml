@@ -26,16 +26,16 @@
       <scope>compile</scope>
     </dependency>
 
-    <dependency>
+      <dependency>
+          <groupId>org.andjos</groupId>
+          <artifactId>susfund-common</artifactId>
+          <scope>compile</scope>
+      </dependency>
+
+      <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-api</artifactId>
       <version>0.11.5</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.andjos</groupId>
-      <artifactId>susfund-common</artifactId>
-      <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
 
