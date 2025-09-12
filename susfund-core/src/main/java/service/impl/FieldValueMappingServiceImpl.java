@@ -1,10 +1,10 @@
 package service.impl;
 
+import dto.fielddefinition.FieldDefinitionDTO;
+import dto.fieldvalue.AbstractFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import mapper.fields.*;
-import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import entity.field.value.AbstractFieldValue;
 import entity.field.value.assessment.AssessmentFieldValue;
 import entity.field.value.budget.BudgetFieldValue;

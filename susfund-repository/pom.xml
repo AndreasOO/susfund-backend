@@ -24,12 +24,6 @@
   <dependencies>
 
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.32</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
       <version>${flyway.version}</version>

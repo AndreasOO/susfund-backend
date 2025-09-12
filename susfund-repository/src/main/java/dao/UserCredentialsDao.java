@@ -1,7 +1,7 @@
 package dao;
 
 import entity.appuser.UserCredentials;
-import org.andreasoo.susfund.util.LoginRequest;
+import util.LoginRequest;
 
 import java.util.Optional;
 
