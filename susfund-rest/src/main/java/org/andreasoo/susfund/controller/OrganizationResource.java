@@ -6,7 +6,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import entity.organization.Organization;
-import org.andreasoo.susfund.service.OrganizationService;
+import service.OrganizationService;
 
 import java.util.List;
 

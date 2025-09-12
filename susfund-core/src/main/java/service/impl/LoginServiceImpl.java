@@ -7,8 +7,8 @@ import org.andreasoo.susfund.controller.config.KeyManager;
 import dao.UserCredentialsDao;
 import entity.appuser.UserCredentials;
 import service.LoginService;
-import org.andreasoo.susfund.util.LoginRequest;
-import org.andreasoo.susfund.util.TokenBearer;
+import util.LoginRequest;
+import util.TokenBearer;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;

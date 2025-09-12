@@ -1,5 +1,6 @@
 package service;
 
+import dto.SimpleCaseDTO;
 import entity.caseentity.CaseEntity;
 
 public interface GeneralMappingService {

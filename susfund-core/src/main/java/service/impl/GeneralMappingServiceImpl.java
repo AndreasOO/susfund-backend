@@ -1,16 +1,17 @@
 package service.impl;
 
+import dto.SimpleCaseDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import entity.casemanager.CaseManager;
 import entity.organization.Organization;
 import entity.caseentity.CaseEntity;
 import entity.supporttype.SupportTypeNode;
-import org.andreasoo.susfund.mapper.EntityToDtoMapper;
-import org.andreasoo.susfund.mapper.general.CaseEntityMapper;
-import org.andreasoo.susfund.mapper.general.CaseManagerMapper;
-import org.andreasoo.susfund.mapper.general.OrganizationMapper;
-import org.andreasoo.susfund.mapper.general.SupportTypeNodeMapper;
+import mapper.EntityToDtoMapper;
+import mapper.general.CaseEntityMapper;
+import mapper.general.CaseManagerMapper;
+import mapper.general.OrganizationMapper;
+import mapper.general.SupportTypeNodeMapper;
 import service.GeneralMappingService;
 
 import java.util.Map;

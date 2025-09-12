@@ -1,7 +1,7 @@
 package mapper.fields;
 
+import dto.fieldvalue.AssessmentFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.andreasoo.susfund.dto.fieldvalue.AssessmentFieldValueDTO;
 import entity.field.value.assessment.AssessmentFieldValue;
 
 @ApplicationScoped

@@ -1,7 +1,7 @@
 package mapper.fields;
 
+import dto.fieldvalue.NumericFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.andreasoo.susfund.dto.fieldvalue.NumericFieldValueDTO;
 import entity.field.value.numericfield.NumericFieldValue;
 
 @ApplicationScoped

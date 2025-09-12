@@ -4,12 +4,12 @@ import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import org.andreasoo.susfund.service.LoginService;
-import org.andreasoo.susfund.util.LoginRequest;
-import org.andreasoo.susfund.util.TokenBearer;
+import service.LoginService;
+import util.TokenBearer;
 
 
 import java.util.Optional;
+import util.LoginRequest;
 
 @Stateless
 @Path("/auth")

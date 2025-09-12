@@ -1,8 +1,8 @@
 package mapper.fields;
 
+import dto.fieldvalue.HistoryEventDTO;
+import dto.fieldvalue.HistoryLogFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.andreasoo.susfund.dto.fieldvalue.HistoryEventDTO;
-import org.andreasoo.susfund.dto.fieldvalue.HistoryLogFieldValueDTO;
 import entity.field.value.history.HistoryLogFieldValue;
 
 import java.util.stream.Collectors;

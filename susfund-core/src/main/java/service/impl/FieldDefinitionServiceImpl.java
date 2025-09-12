@@ -33,6 +33,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     public List<FieldDefinition> getAllFieldDefinitions() {
         return fieldDefinitionDao.getAllFieldDefinitions();
     }
+
     public List<SelectableValue> createSelectableValues(List<SelectableValue> selectableValues) {
         return selectableValueDao.saveSelectableValues(selectableValues);
     }

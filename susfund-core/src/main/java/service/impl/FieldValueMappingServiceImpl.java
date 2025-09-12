@@ -2,6 +2,7 @@ package service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import mapper.fields.*;
 import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import entity.field.value.AbstractFieldValue;
@@ -12,7 +13,6 @@ import entity.field.value.decision.DecisionFieldValue;
 import entity.field.value.history.HistoryLogFieldValue;
 import entity.field.value.numericfield.NumericFieldValue;
 import entity.field.value.textfield.TextFieldValue;
-import org.andreasoo.susfund.mapper.fields.FieldValueMapper;
 import service.FieldValueMappingService;
 
 import java.util.Map;

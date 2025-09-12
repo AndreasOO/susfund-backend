@@ -19,7 +19,6 @@
 
   <properties>
     <flyway.version>10.17.0</flyway.version>
-    <scala.version>2.13.12</scala.version>
   </properties>
 
   <dependencies>
@@ -28,13 +27,6 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.32</version>
-    </dependency>
-
-    <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.2.0</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -49,47 +41,11 @@
       <version>${flyway.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
-    </dependency>
-
   </dependencies>
 
   <build>
 
     <plugins>
-
-      <plugin>
-        <groupId>net.alchim31.maven</groupId>
-        <artifactId>scala-maven-plugin</artifactId>
-        <version>4.9.5</version>
-        <executions>
-          <execution>
-            <id>scala-compile-first</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>scala-test-compile</id>
-            <phase>process-test-resources</phase>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <scalaVersion>${scala.version}</scalaVersion>
-          <args>
-            <arg>-deprecation</arg>
-            <arg>-feature</arg>
-          </args>
-        </configuration>
-      </plugin>
 
       <plugin>
         <groupId>org.flywaydb</groupId>

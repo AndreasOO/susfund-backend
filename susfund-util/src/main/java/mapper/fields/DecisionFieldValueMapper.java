@@ -1,7 +1,7 @@
 package mapper.fields;
 
+import dto.fieldvalue.DecisionFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.andreasoo.susfund.dto.fieldvalue.DecisionFieldValueDTO;
 import entity.field.value.decision.DecisionFieldValue;
 
 @ApplicationScoped

@@ -1,11 +1,12 @@
 package mapper.fields;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import org.andreasoo.susfund.dto.OrganizationDTO;
-import org.andreasoo.susfund.dto.fieldvalue.BudgetFieldValueDTO;
-import org.andreasoo.susfund.dto.fieldvalue.BudgetRowDTO;
-import org.andreasoo.susfund.dto.fieldvalue.FinancingRowDTO;
+import dto.OrganizationDTO;
+import dto.fieldvalue.BudgetFieldValueDTO;
+import dto.fieldvalue.BudgetRowDTO;
+import dto.fieldvalue.FinancingRowDTO;
 import entity.field.value.budget.BudgetFieldValue;
+import jakarta.enterprise.context.ApplicationScoped;
+
 
 @ApplicationScoped
 public class BudgetFieldValueMapper

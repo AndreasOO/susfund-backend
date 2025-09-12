@@ -1,14 +1,14 @@
 package mapper.general;
 
+import dto.CaseDTO;
+import dto.SimpleCaseDTO;
+import dto.fielddefinition.FieldDefinitionDTO;
+import dto.fieldvalue.AbstractFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.andreasoo.susfund.dto.CaseDTO;
-import org.andreasoo.susfund.dto.SimpleCaseDTO;
-import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import entity.caseentity.CaseEntity;
 import mapper.EntityToDtoMapper;
-import org.andreasoo.susfund.service.FieldValueMappingService;
+import service.FieldValueMappingService;
 
 @ApplicationScoped
 public class CaseEntityMapper implements EntityToDtoMapper<CaseEntity, CaseDTO> {

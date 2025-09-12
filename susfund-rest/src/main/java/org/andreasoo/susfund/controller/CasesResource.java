@@ -1,6 +1,14 @@
 package org.andreasoo.susfund.controller;
 
 
+import dto.CaseDTO;
+import dto.SimpleCaseDTO;
+import entity.caseentity.CaseEntity;
+import entity.casemanager.CaseManager;
+import entity.field.definition.FieldDefinition;
+import entity.field.definition.fieldtype.FieldType;
+import entity.field.value.AbstractFieldValue;
+import entity.organization.Organization;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -10,12 +18,11 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
-import entity.casemanager.CaseManager;
-import entity.organization.Organization;
-import entity.caseentity.CaseEntity;
-import entity.field.definition.FieldDefinition;
-import entity.field.definition.fieldtype.FieldType;
-import entity.field.value.AbstractFieldValue;
+import service.FieldDefinitionService;
+import service.FieldValueMappingService;
+import service.GeneralMappingService;
+import service.SupportTypeNodeService;
+import service.CaseEntityService;
 
 
 import java.util.List;
@@ -87,14 +94,14 @@ public class CasesResource {
         return fieldDefinitionService.getAllFieldDefinitions();
     }
 
-    @Path("/getsimplecase")
-    @GET()
-    @Produces("application/json")
-    public Response getSimpleCase() {
-        CaseEntity caze = caseEntityService.getCaseEntityById(1L);
-        SimpleCaseDTO simpleCase = new SimpleCaseDTO(caze.getId(), caze.getName(), caze.getOrganization().getName(), caze.getCaseManager().getName(), caze.getCaseController().getName(), caze.getCaseStatus(), caze.getCaseDecisionType());
-        return Response.ok(simpleCase).build();
-    }
+//    @Path("/getsimplecase")
+//    @GET()
+//    @Produces("application/json")
+//    public Response getSimpleCase() {
+//        CaseEntity caze = caseEntityService.getCaseEntityById(1L);
+//        SimpleCaseDTO simpleCase = new SimpleCaseDTO(caze.getId(), caze.getName(), caze.getOrganization().getName(), caze.getCaseManager().getName(), caze.getCaseController().getName(), caze.getCaseStatus(), caze.getCaseDecisionType());
+//        return Response.ok(simpleCase).build();
+//    }
 
     @Path("/get-case-entity")
     @GET()

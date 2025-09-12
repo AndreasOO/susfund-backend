@@ -1,6 +1,6 @@
 package mapper.fields;
 
-import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
+import dto.fieldvalue.AbstractFieldValueDTO;
 import entity.field.value.AbstractFieldValue;
 import mapper.EntityToDtoMapper;
 

@@ -1,8 +1,8 @@
 package service;
 
 import entity.appuser.UserCredentials;
-import org.andreasoo.susfund.util.LoginRequest;
-import org.andreasoo.susfund.util.TokenBearer;
+import util.LoginRequest;
+import util.TokenBearer;
 
 import java.util.Optional;
 

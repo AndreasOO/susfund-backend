@@ -1,9 +1,9 @@
 package mapper.fields;
 
-import org.andreasoo.susfund.dto.fielddefinition.BudgetFieldDefinitionDTO;
-import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.dto.fielddefinition.SelectableFieldDefinitionDTO;
-import org.andreasoo.susfund.dto.fieldvalue.SelectableValueDTO;
+import dto.fielddefinition.BudgetFieldDefinitionDTO;
+import dto.fielddefinition.FieldDefinitionDTO;
+import dto.fielddefinition.SelectableFieldDefinitionDTO;
+import dto.fieldvalue.SelectableValueDTO;
 import entity.field.definition.FieldDefinition;
 import entity.field.definition.budget.BudgetFieldDefinition;
 import entity.field.definition.selectable.SelectableFieldDefinition;

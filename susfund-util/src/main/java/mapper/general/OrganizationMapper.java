@@ -1,7 +1,7 @@
 package mapper.general;
 
+import dto.OrganizationDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.andreasoo.susfund.dto.OrganizationDTO;
 import entity.organization.Organization;
 import mapper.EntityToDtoMapper;
 

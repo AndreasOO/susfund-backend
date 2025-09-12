@@ -1,7 +1,7 @@
 package service;
 
-import org.andreasoo.susfund.dto.fielddefinition.FieldDefinitionDTO;
-import org.andreasoo.susfund.dto.fieldvalue.AbstractFieldValueDTO;
+import dto.fielddefinition.FieldDefinitionDTO;
+import dto.fieldvalue.AbstractFieldValueDTO;
 import entity.field.value.AbstractFieldValue;
 
 public interface FieldValueMappingService {
