@@ -1,7 +1,7 @@
 package org.andjos.susfund.dao;
 
 import org.andjos.susfund.entity.appuser.UserCredentials;
-import common.util.LoginRequest;
+import org.andjos.susfund.util.LoginRequest;
 
 import java.util.Optional;
 

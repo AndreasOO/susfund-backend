@@ -1,7 +1,7 @@
 package org.andjos.susfund.service;
 
-import common.util.LoginRequest;
-import common.util.TokenBearer;
+import org.andjos.susfund.util.LoginRequest;
+import org.andjos.susfund.util.TokenBearer;
 import org.andjos.susfund.entity.appuser.UserCredentials;
 import java.util.Optional;
 

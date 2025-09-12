@@ -7,7 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.andjos.susfund.dao.UserCredentialsDao;
 import org.andjos.susfund.entity.appuser.UserCredentials;
-import common.util.LoginRequest;
+import org.andjos.susfund.util.LoginRequest;
 
 import java.util.Optional;
 

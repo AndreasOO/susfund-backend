@@ -7,14 +7,14 @@ import jakarta.inject.Inject;
 import org.andjos.susfund.dao.UserCredentialsDao;
 import org.andjos.susfund.entity.appuser.UserCredentials;
 import org.andjos.susfund.service.LoginService;
-import common.util.TokenBearer;
-import common.util.LoginRequest;
+import org.andjos.susfund.util.TokenBearer;
+import org.andjos.susfund.util.LoginRequest;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Optional;
-import common.util.KeyManager;
+import org.andjos.susfund.util.KeyManager;
 
 @ApplicationScoped
 public class LoginServiceImpl implements LoginService {
