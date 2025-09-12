@@ -2,7 +2,7 @@ package mapper.general;
 
 import dto.SupportTypeNodeDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import entity.supporttype.SupportTypeNode;
+import org.andjos.susfund.entity.supporttype.SupportTypeNode;
 import mapper.EntityToDtoMapper;
 
 @ApplicationScoped

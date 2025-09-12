@@ -4,7 +4,7 @@ import dto.OrganizationDTO;
 import dto.fieldvalue.BudgetFieldValueDTO;
 import dto.fieldvalue.BudgetRowDTO;
 import dto.fieldvalue.FinancingRowDTO;
-import entity.field.value.budget.BudgetFieldValue;
+import org.andjos.susfund.entity.field.value.budget.BudgetFieldValue;
 import jakarta.enterprise.context.ApplicationScoped;
 
 

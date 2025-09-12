@@ -16,6 +16,6 @@ RUN /opt/jboss/wildfly/bin/add-user.sh admin test1234
 
 WORKDIR /opt/jboss/wildfly/standalone/deployments
 
-COPY ./susfund-rest/target/SusFund-1.0-SNAPSHOT.war ./SusFund-1.0-SNAPSHOT.war
+COPY ./susfund-rest/target/susfund-rest-1.0-SNAPSHOT.war ./SusFund-1.0-SNAPSHOT.war
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "--debug"]

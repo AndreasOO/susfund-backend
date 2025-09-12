@@ -1,7 +1,7 @@
 package dto.fieldvalue;
 
 import dto.fielddefinition.FieldDefinitionDTO;
-import entity.field.value.decision.DecisionResultType;
+import org.andjos.susfund.entity.field.value.decision.DecisionResultType;
 
 public class DecisionFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO> {
 

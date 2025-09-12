@@ -4,9 +4,9 @@ import dto.fielddefinition.BudgetFieldDefinitionDTO;
 import dto.fielddefinition.FieldDefinitionDTO;
 import dto.fielddefinition.SelectableFieldDefinitionDTO;
 import dto.fieldvalue.SelectableValueDTO;
-import entity.field.definition.FieldDefinition;
-import entity.field.definition.budget.BudgetFieldDefinition;
-import entity.field.definition.selectable.SelectableFieldDefinition;
+import org.andjos.susfund.entity.field.definition.FieldDefinition;
+import org.andjos.susfund.entity.field.definition.budget.BudgetFieldDefinition;
+import org.andjos.susfund.entity.field.definition.selectable.SelectableFieldDefinition;
 
 import java.util.stream.Collectors;
 

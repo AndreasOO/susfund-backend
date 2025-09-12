@@ -29,23 +29,15 @@
     </dependency>
 
     <dependency>
-      <groupId>org.andreasoo</groupId>
-      <artifactId>susfund-rest-model</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-
-<!--    <dependency>-->
-<!--      <groupId>org.andreasoo</groupId>-->
-<!--      <artifactId>susfund-util</artifactId>-->
-<!--      <version>1.0-SNAPSHOT</version>-->
-<!--      <scope>compile</scope>-->
-<!--    </dependency>-->
-
-    <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-api</artifactId>
       <version>0.11.5</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.andreasoo</groupId>
+      <artifactId>susfund-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
 

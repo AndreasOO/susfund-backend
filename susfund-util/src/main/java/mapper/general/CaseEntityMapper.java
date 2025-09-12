@@ -6,9 +6,9 @@ import dto.fielddefinition.FieldDefinitionDTO;
 import dto.fieldvalue.AbstractFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import entity.caseentity.CaseEntity;
+import org.andjos.susfund.entity.caseentity.CaseEntity;
 import mapper.EntityToDtoMapper;
-import service.FieldValueMappingService;
+import mapperservice.FieldValueMappingService;
 
 @ApplicationScoped
 public class CaseEntityMapper implements EntityToDtoMapper<CaseEntity, CaseDTO> {

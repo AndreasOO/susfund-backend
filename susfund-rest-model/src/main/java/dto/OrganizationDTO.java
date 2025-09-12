@@ -1,6 +1,6 @@
 package dto;
 
-import entity.organization.OrganizationType;
+import org.andjos.susfund.entity.organization.OrganizationType;
 
 public class OrganizationDTO extends AbstractDTO {
 

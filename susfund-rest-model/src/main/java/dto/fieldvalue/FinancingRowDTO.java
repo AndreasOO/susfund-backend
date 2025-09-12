@@ -2,7 +2,7 @@ package dto.fieldvalue;
 
 import dto.AbstractDTO;
 import dto.OrganizationDTO;
-import entity.field.value.budget.FinancingType;
+import org.andjos.susfund.entity.field.value.budget.FinancingType;
 
 public class FinancingRowDTO extends AbstractDTO {
 

@@ -1,7 +1,7 @@
 package dto.fieldvalue;
 
 import dto.AbstractDTO;
-import entity.field.value.budget.CostType;
+import org.andjos.susfund.entity.field.value.budget.CostType;
 
 public class BudgetRowDTO extends AbstractDTO {
 

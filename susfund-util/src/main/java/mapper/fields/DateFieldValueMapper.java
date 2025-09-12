@@ -2,7 +2,7 @@ package mapper.fields;
 
 import dto.fieldvalue.DateFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import entity.field.value.datefield.DateFieldValue;
+import org.andjos.susfund.entity.field.value.datefield.DateFieldValue;
 
 @ApplicationScoped
 public class DateFieldValueMapper

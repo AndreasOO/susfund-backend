@@ -2,7 +2,7 @@ package mapper.general;
 
 import dto.CaseManagerDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import entity.casemanager.CaseManager;
+import org.andjos.susfund.entity.casemanager.CaseManager;
 import mapper.EntityToDtoMapper;
 
 @ApplicationScoped

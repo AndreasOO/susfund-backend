@@ -1,7 +1,7 @@
 package dto.fieldvalue;
 
 import dto.AbstractDTO;
-import entity.field.definition.selectable.SelectableType;
+import org.andjos.susfund.entity.field.definition.selectable.SelectableType;
 
 public class SelectableValueDTO extends AbstractDTO {
 

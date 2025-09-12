@@ -2,8 +2,8 @@ package dto;
 
 import dto.fielddefinition.FieldDefinitionDTO;
 import dto.fieldvalue.AbstractFieldValueDTO;
-import entity.caseentity.CaseDecisionType;
-import entity.caseentity.CaseStatus;
+import org.andjos.susfund.entity.caseentity.CaseDecisionType;
+import org.andjos.susfund.entity.caseentity.CaseStatus;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
 package dto.fielddefinition;
 
 
-import entity.field.definition.budget.BudgetType;
-import entity.field.definition.fieldtype.FieldType;
-import entity.field.definition.location.FrontendLocation;
-import entity.field.definition.section.Section;
-import entity.field.definition.section.SubSection;
+import org.andjos.susfund.entity.field.definition.budget.BudgetType;
+import org.andjos.susfund.entity.field.definition.fieldtype.FieldType;
+import org.andjos.susfund.entity.field.definition.location.FrontendLocation;
+import org.andjos.susfund.entity.field.definition.section.Section;
+import org.andjos.susfund.entity.field.definition.section.SubSection;
 
 public class BudgetFieldDefinitionDTO extends FieldDefinitionDTO {
 

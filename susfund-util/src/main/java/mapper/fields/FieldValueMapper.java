@@ -1,7 +1,7 @@
 package mapper.fields;
 
 import dto.fieldvalue.AbstractFieldValueDTO;
-import entity.field.value.AbstractFieldValue;
+import org.andjos.susfund.entity.field.value.AbstractFieldValue;
 import mapper.EntityToDtoMapper;
 
 public interface FieldValueMapper<T extends AbstractFieldValue<?>, D extends AbstractFieldValueDTO<?>>

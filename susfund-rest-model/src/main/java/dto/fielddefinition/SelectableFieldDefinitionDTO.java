@@ -1,10 +1,10 @@
 package dto.fielddefinition;
 
 import dto.fieldvalue.SelectableValueDTO;
-import entity.field.definition.fieldtype.FieldType;
-import entity.field.definition.location.FrontendLocation;
-import entity.field.definition.section.Section;
-import entity.field.definition.section.SubSection;
+import org.andjos.susfund.entity.field.definition.fieldtype.FieldType;
+import org.andjos.susfund.entity.field.definition.location.FrontendLocation;
+import org.andjos.susfund.entity.field.definition.section.Section;
+import org.andjos.susfund.entity.field.definition.section.SubSection;
 
 import java.util.Set;
 

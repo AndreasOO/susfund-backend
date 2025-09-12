@@ -2,7 +2,7 @@ package mapper.fields;
 
 import dto.fieldvalue.NumericFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import entity.field.value.numericfield.NumericFieldValue;
+import org.andjos.susfund.entity.field.value.numericfield.NumericFieldValue;
 
 @ApplicationScoped
 public class NumericFieldValueMapper

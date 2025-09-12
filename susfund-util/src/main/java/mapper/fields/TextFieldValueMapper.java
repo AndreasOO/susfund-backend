@@ -2,7 +2,7 @@ package mapper.fields;
 
 import dto.fieldvalue.TextFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import entity.field.value.textfield.TextFieldValue;
+import org.andjos.susfund.entity.field.value.textfield.TextFieldValue;
 
 @ApplicationScoped
 public class TextFieldValueMapper

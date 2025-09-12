@@ -1,7 +1,7 @@
 package dto;
 
-import entity.caseentity.CaseDecisionType;
-import entity.caseentity.CaseStatus;
+import org.andjos.susfund.entity.caseentity.CaseDecisionType;
+import org.andjos.susfund.entity.caseentity.CaseStatus;
 
 public class SimpleCaseDTO extends AbstractDTO {
 

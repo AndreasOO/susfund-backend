@@ -3,7 +3,7 @@ package mapper.fields;
 import dto.fieldvalue.HistoryEventDTO;
 import dto.fieldvalue.HistoryLogFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
-import entity.field.value.history.HistoryLogFieldValue;
+import org.andjos.susfund.entity.field.value.history.HistoryLogFieldValue;
 
 import java.util.stream.Collectors;
 
