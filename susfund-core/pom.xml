@@ -23,20 +23,16 @@
     <dependency>
       <groupId>org.andjos</groupId>
       <artifactId>susfund-repository</artifactId>
-      <scope>compile</scope>
     </dependency>
 
-      <dependency>
-          <groupId>org.andjos</groupId>
-          <artifactId>susfund-common</artifactId>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+        <groupId>org.andjos</groupId>
+        <artifactId>susfund-common</artifactId>
+    </dependency>
 
-      <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-api</artifactId>
-      <version>0.11.5</version>
-      <scope>compile</scope>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
     </dependency>
 
   </dependencies>

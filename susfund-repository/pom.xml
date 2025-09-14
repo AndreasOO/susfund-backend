@@ -16,36 +16,31 @@
   <packaging>jar</packaging>
 
 
-  <properties>
-    <flyway.version>10.17.0</flyway.version>
-  </properties>
-
   <dependencies>
+
+    <dependency>
+        <groupId>org.andjos</groupId>
+        <artifactId>susfund-common</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-      <version>${flyway.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-mysql</artifactId>
-      <version>${flyway.version}</version>
     </dependency>
 
     <dependency>
       <groupId>jakarta.ejb</groupId>
       <artifactId>jakarta.ejb-api</artifactId>
-      <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.andjos</groupId>
-      <artifactId>susfund-common</artifactId>
-      <scope>compile</scope>
-    </dependency>
+
+
 
   </dependencies>
 
@@ -58,11 +53,12 @@
         <artifactId>flyway-maven-plugin</artifactId>
         <version>${flyway.version}</version>
         <dependencies>
-          <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.32</version>
-          </dependency>
+<!--            Keep this for containerization of flyway-->
+            <!--      <dependency>-->
+            <!--          <groupId>mysql</groupId>-->
+            <!--          <artifactId>mysql-connector-java</artifactId>-->
+            <!--          <version>8.0.32</version>-->
+            <!--      </dependency>-->
         </dependencies>
       </plugin>
 
