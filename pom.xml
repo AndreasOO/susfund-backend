@@ -7,7 +7,7 @@
     <groupId>org.andjos</groupId>
     <artifactId>susfund-root</artifactId>
     <version>${revision}</version>
-    <name>susfund</name>
+    <name>susfund-root</name>
     <packaging>pom</packaging>
 
     <modules>
