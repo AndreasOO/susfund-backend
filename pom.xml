@@ -26,7 +26,6 @@
         <maven.compiler.source>21</maven.compiler.source>
         <junit.version>5.11.0</junit.version>
         <scala.version>2.13.12</scala.version>
-        <susfund.version>1.0</susfund.version>
         <ejb.version>4.0.1</ejb.version>
         <jwt.version>0.11.5</jwt.version>
         <mysql.connector.version>8.0.32</mysql.connector.version>
