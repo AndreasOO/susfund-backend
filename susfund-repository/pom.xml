@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+      <groupId>org.andjos</groupId>
+      <artifactId>susfund-root</artifactId>
+      <version>${revision}</version>
+  </parent>
+
+
+  <artifactId>susfund-repository</artifactId>
+  <name>susfund-repository</name>
+  <packaging>jar</packaging>
+
+
+  <dependencies>
+
+    <dependency>
+        <groupId>org.andjos</groupId>
+        <artifactId>susfund-common</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-mysql</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.ejb</groupId>
+      <artifactId>jakarta.ejb-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+
+
+
+  </dependencies>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>${flyway.version}</version>
+        <dependencies>
+<!--            Keep this for containerization of flyway-->
+            <!--      <dependency>-->
+            <!--          <groupId>mysql</groupId>-->
+            <!--          <artifactId>mysql-connector-java</artifactId>-->
+            <!--          <version>8.0.32</version>-->
+            <!--      </dependency>-->
+        </dependencies>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>

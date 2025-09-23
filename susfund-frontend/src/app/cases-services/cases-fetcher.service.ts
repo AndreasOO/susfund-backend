@@ -24,43 +24,43 @@ export class CasesFetcherService {
   }
 
   public getAllCaseManagers():Observable<CaseManagerDto[]> {
-    return this.http.get<CaseManagerDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/casemanagers")
+    return this.http.get<CaseManagerDto[]>(this.baseUri+"/susfund/api/cases/casemanagers")
   }
 
   public login(loginRequest:LoginRequest): Observable<TokenBearer>{
-    return this.http.put<TokenBearer>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/auth/login", loginRequest)
+    return this.http.put<TokenBearer>(this.baseUri+"/susfund/api/auth/login", loginRequest)
   }
 
   public getAssessmentFields(caseId:string | undefined):Observable<AssessmentFieldValueDto[]> {
-    return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/assessment-fields")
+    return this.http.get<AssessmentFieldValueDto[]>(this.baseUri+"/susfund/api/cases/" + caseId + "/assessment-fields")
   }
 
   public getApplicationFields(caseId:string | undefined):Observable<TextFieldValueDto[]> {
-    return this.http.get<TextFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/application-fields")
+    return this.http.get<TextFieldValueDto[]>(this.baseUri+"/susfund/api/cases/" + caseId + "/application-fields")
   }
 
   public getOrganization(caseId:string |undefined):Observable<OrganizationDto> {
-    return this.http.get<OrganizationDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/organization")
+    return this.http.get<OrganizationDto>(this.baseUri+"/susfund/api/cases/" + caseId + "/organization")
   }
 
   public getDecisionFieldValue(caseId:string | undefined):Observable<DecisionFieldValueDto[]> {
-    return this.http.get<DecisionFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/decision-field")
+    return this.http.get<DecisionFieldValueDto[]>(this.baseUri+"/susfund/api/cases/" + caseId + "/decision-field")
   }
 
   public getBudgetFieldValue(caseId:string | undefined):Observable<BudgetFieldValueDto[]> {
-    return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/budget-field")
+    return this.http.get<BudgetFieldValueDto[]>(this.baseUri+"/susfund/api/cases/" + caseId + "/budget-field")
   }
 
   public getHistoryFieldValue(caseId:string | undefined):Observable<HistoryLogFieldValueDto[]> {
-    return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + caseId + "/history-field")
+    return this.http.get<HistoryLogFieldValueDto[]>(this.baseUri+"/susfund/api/cases/" + caseId + "/history-field")
   }
 
   public getAllCaseEntities():Observable<SimpleCaseDto[]> {
-    return this.http.get<SimpleCaseDto[]>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/simple")
+    return this.http.get<SimpleCaseDto[]>(this.baseUri+"/susfund/api/cases/simple")
   }
 
   public getCaseById(id:string | undefined):Observable<CaseEntityDto> {
-    return this.http.get<CaseEntityDto>(this.baseUri+"/SusFund-1.0-SNAPSHOT/api/cases/" + id)
+    return this.http.get<CaseEntityDto>(this.baseUri+"/susfund/api/cases/" + id)
   }
 
 }
