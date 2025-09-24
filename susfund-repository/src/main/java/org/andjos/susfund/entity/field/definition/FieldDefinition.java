@@ -79,7 +79,6 @@ public class FieldDefinition {
         return fieldValue;
     }
 
-
     public Long getId() {
         return id;
     }

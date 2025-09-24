@@ -24,9 +24,6 @@ public class FlywayMigratorMain {
             String dbUsername = System.getenv("DB_USERNAME");
             String dbPassword = System.getenv("DB_PASSWORD");
 
-//            String dbUsername = "${DB_USERNAME}";
-//            String dbPassword = "${DB_PASSWORD}";
-
             String dbHost = System.getenv("DB_HOST");
             String dbPort = System.getenv("DB_PORT");
             String dbName = System.getenv("DB_NAME");
@@ -36,6 +33,7 @@ public class FlywayMigratorMain {
 
             logger.info("Connecting to database: {}", jdbcUrl);
 
+            waitForDatabase(jdbcUrl, dbUsername, dbPassword);
 
             // Configure Flyway
             Flyway flyway = Flyway.configure()
@@ -89,6 +87,36 @@ public class FlywayMigratorMain {
         }
 
         System.exit(exitCode);
+    }
+
+    private static void waitForDatabase(String jdbcUrl, String username, String password) {
+        int maxRetries = 60; // Wait up to 60 seconds
+        int retryCount = 0;
+
+        logger.info("Waiting for database to be ready...");
+
+        while (retryCount < maxRetries) {
+            try {
+                var connection = DriverManager.getConnection(jdbcUrl, username, password);
+                connection.close();
+                logger.info("Database connection successful");
+                return;
+            } catch (SQLException e) {
+                retryCount++;
+                if (retryCount % 10 == 0) { // Log every 10 seconds
+                    logger.warn("Database not ready yet, retrying... ({}/{}) - {}",
+                            retryCount, maxRetries, e.getMessage());
+                }
+                try {
+                    Thread.sleep(1000); // Wait 1 second
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException("Interrupted while waiting for database", ie);
+                }
+            }
+        }
+
+        throw new RuntimeException("Database did not become ready within " + maxRetries + " seconds");
     }
 
 }

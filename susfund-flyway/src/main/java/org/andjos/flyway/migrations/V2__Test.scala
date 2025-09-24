@@ -1,7 +1,7 @@
-package org.andjos.susfund.flyway.migrations
+package org.andjos.flyway.migrations
 
+import org.andjos.flyway.base.ScalaMigrationBase
 import org.andjos.susfund.entity.supporttype.SupportTypeNode
-import org.andjos.susfund.flyway.util.ScalaMigrationBase
 
 import java.sql.{Connection, ResultSet}
 

@@ -11,6 +11,9 @@ COPY susfund-flyway/target/susfund-flyway-*.jar /app/app.jar
 # Copy all dependencies
 COPY susfund-flyway/target/lib/*.jar /app/lib/
 
+# Debug: List contents of the JAR to verify persistence.xml is included
+RUN jar tf /app/app.jar | grep -E "(persistence.xml|META-INF)" || echo "No persistence.xml found in JAR"
+
 ## Change ownership
 #RUN chown -R flyway:flyway /app
 #

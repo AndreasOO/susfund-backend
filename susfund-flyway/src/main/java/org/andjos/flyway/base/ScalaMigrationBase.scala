@@ -1,4 +1,4 @@
-package org.andjos.susfund.flyway.util
+package org.andjos.flyway.base
 
 import org.flywaydb.core.api.migration.{BaseJavaMigration, Context}
 
