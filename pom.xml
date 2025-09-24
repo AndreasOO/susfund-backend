@@ -31,6 +31,7 @@
         <jwt.version>0.11.5</jwt.version>
         <mysql.connector.version>8.0.32</mysql.connector.version>
         <flyway.version>10.17.0</flyway.version>
+        <hibernate.version>6.4.0.Final</hibernate.version>
     </properties>
 
     <dependencyManagement>
@@ -63,6 +64,11 @@
             <dependency>
                 <groupId>org.andjos</groupId>
                 <artifactId>susfund-util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.andjos</groupId>
+                <artifactId>susfund-flyway</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -105,6 +111,12 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-mysql</artifactId>
                 <version>${flyway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
             </dependency>
 
         </dependencies>
