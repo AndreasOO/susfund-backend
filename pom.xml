@@ -17,6 +17,7 @@
         <module>susfund-rest</module>
         <module>susfund-rest-model</module>
         <module>susfund-util</module>
+        <module>susfund-flyway</module>
     </modules>
 
     <properties>
