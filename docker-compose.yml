@@ -33,6 +33,24 @@ services:
       timeout: 5s
       retries: 100
 
+  flyway:
+    container_name: susfund-flyway
+    build:
+      context: .
+      dockerfile: Dockerfile.flyway
+    networks:
+      - susfund
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=susfund_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=test1234
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
   wildfly:
     container_name: susfund-wildfly
     build:
@@ -56,6 +74,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
 
 networks:
   susfund:

@@ -1,0 +1,21 @@
+FROM eclipse-temurin:21-jre-alpine
+
+# Create app directory and user
+#WORKDIR /app
+#RUN addgroup -g 1001 -S flyway && \
+#    adduser -S -D -H -u 1001 -h /app -s /sbin/nologin -G flyway -g flyway flyway
+
+# Copy the thin JAR
+COPY susfund-flyway/target/susfund-flyway-*.jar /app/app.jar
+
+# Copy all dependencies
+COPY susfund-flyway/target/lib/*.jar /app/lib/
+
+## Change ownership
+#RUN chown -R flyway:flyway /app
+#
+## Switch to non-root user
+#USER flyway
+
+# Set the classpath and run
+ENTRYPOINT ["java", "-cp", "/app/app.jar:/app/lib/*", "org.andjos.flyway.FlywayMigratorMain"]

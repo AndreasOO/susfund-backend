@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>susfund-flyway</artifactId>
+    <name>susfund-flyway</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -50,10 +51,6 @@
         </dependency>
 
         <!-- JPA and Hibernate for EntityManager -->
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.hibernate.orm</groupId>
@@ -100,7 +97,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.andjos.susfund.flyway.FlywayMigratorMain</mainClass>
+                            <mainClass>org.andjos.flyway.FlywayMigratorMain</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
