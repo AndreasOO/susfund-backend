@@ -7,10 +7,6 @@
 
     <persistence-unit name="flyway-migration-pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-<!--        <class>org.andjos.susfund.entity.field.definition.FieldDefinition</class>-->
-<!--        <class>org.andjos.susfund.entity.field.definition.budget.BudgetFieldDefinition</class>-->
-<!--        <class>org.andjos.susfund.entity.supporttype.SupportTypeNode</class>-->
-        <!-- Enable automatic entity discovery -->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
