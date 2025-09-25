@@ -19,10 +19,11 @@ import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="DISCRIMINATOR_FIELD_TYPE")
-@DiscriminatorValue(value="SIMPLE_FIELD_DEFINITION")
+@DiscriminatorColumn(name="DISCRIMINATOR_FIELD_TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value= "SIMPLE_FIELD_DEFINITION")
 @Table(name="field_definition_entity")
 public class FieldDefinition {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +64,8 @@ public class FieldDefinition {
     private Long rowIndex;
 
 
+
+
     public AbstractFieldValue<? extends FieldDefinition> createFieldValue(CaseEntity caseEntity) {
         AbstractFieldValue<? extends FieldDefinition> fieldValue=  switch (fieldType) {
             case TEXT_FIELD -> new TextFieldValue(caseEntity);
@@ -78,7 +81,6 @@ public class FieldDefinition {
         fieldValue.setOwningFieldDefinition(this);
         return fieldValue;
     }
-
 
     public Long getId() {
         return id;

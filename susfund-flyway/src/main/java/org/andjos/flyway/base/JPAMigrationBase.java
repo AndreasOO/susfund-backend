@@ -1,0 +1,87 @@
+package org.andjos.flyway.base;
+
+import org.flywaydb.core.api.migration.BaseJavaMigration;
+import org.flywaydb.core.api.migration.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class JPAMigrationBase extends BaseJavaMigration {
+
+    private static final Logger logger = LoggerFactory.getLogger(JPAMigrationBase.class);
+    private static EntityManagerFactory emf;
+
+    @Override
+    public final void migrate(Context context) throws Exception {
+        EntityManager em = null;
+        EntityTransaction transaction = null;
+
+        try {
+            if (emf == null) {
+                emf = createEntityManagerFactory(context);
+            }
+
+            em = emf.createEntityManager();
+            transaction = em.getTransaction();
+            transaction.begin();
+
+            logger.info("Starting JPA migration: {}", this.getClass().getSimpleName());
+
+            migrate(em);
+
+            transaction.commit();
+            logger.info("Successfully completed JPA migration: {}", this.getClass().getSimpleName());
+
+        } catch (Exception e) {
+            logger.error("Error during JPA migration: {}", this.getClass().getSimpleName(), e);
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+
+    protected abstract void migrate(EntityManager entityManager) throws Exception;
+
+
+    private EntityManagerFactory createEntityManagerFactory(Context context) throws SQLException {
+        Map<String, String> properties = new HashMap<>();
+
+        String jdbcUrl = context.getConfiguration().getDataSource().getConnection().getMetaData().getURL();
+        String dbUsername = System.getenv("DB_USERNAME");
+        String dbPassword = System.getenv("DB_PASSWORD");
+
+
+        properties.put("jakarta.persistence.jdbc.url", jdbcUrl);
+        properties.put("jakarta.persistence.jdbc.user", dbUsername);
+        properties.put("jakarta.persistence.jdbc.password", dbPassword);
+        properties.put("jakarta.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
+
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.put("hibernate.hbm2ddl.auto", "none");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.connection.autocommit", "false");
+
+        return Persistence.createEntityManagerFactory("flyway-migration-pu", properties);
+    }
+
+    public static void cleanup() {
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+            emf = null;
+        }
+    }
+}

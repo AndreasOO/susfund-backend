@@ -1,0 +1,14 @@
+FROM eclipse-temurin:21-jre-alpine
+
+# Create a working directory
+WORKDIR /app
+
+# Copy the fat JAR into the container
+COPY susfund-flyway/target/susfund-flyway-*.jar app.jar
+
+# Optional: run as non-root user (commented out, safe to enable if you want)
+# RUN adduser -D -u 1001 flyway && chown -R flyway /app
+# USER flyway
+
+# Run the application using the fat JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]

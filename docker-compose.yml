@@ -29,9 +29,27 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ptest1234" ]
-      interval: 5s
+      interval: 2s
       timeout: 5s
       retries: 100
+
+  flyway:
+    container_name: susfund-flyway
+    build:
+      context: .
+      dockerfile: Dockerfile.flyway
+    networks:
+      - susfund
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=susfund_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=test1234
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
 
   wildfly:
     container_name: susfund-wildfly
@@ -56,6 +74,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
 
 networks:
   susfund:

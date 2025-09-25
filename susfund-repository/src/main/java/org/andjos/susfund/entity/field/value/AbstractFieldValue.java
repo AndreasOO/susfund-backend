@@ -10,7 +10,7 @@ import org.andjos.susfund.entity.field.definition.FieldDefinition;
 @Entity
 @Table(name="field_value_entity")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="DISCRIMINATOR_FIELD_VALUE_TYPE")
+@DiscriminatorColumn(name="DISCRIMINATOR_FIELD_VALUE_TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class AbstractFieldValue <T extends FieldDefinition> {
 
     public AbstractFieldValue() {
