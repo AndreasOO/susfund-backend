@@ -35,7 +35,6 @@ public class FlywayMigratorMain {
 
             waitForDatabase(jdbcUrl, dbUsername, dbPassword);
 
-            // Configure Flyway
             Flyway flyway = Flyway.configure()
                     .dataSource(jdbcUrl, dbUsername, dbPassword)
                     .locations("classpath:org/andjos/flyway/migrations")
@@ -82,7 +81,6 @@ public class FlywayMigratorMain {
             logger.error("Migration error: {}", e.getMessage(), e);
             exitCode = 1;
         } finally {
-            // Cleanup JPA resources
             JPAMigrationBase.cleanup();
         }
 
@@ -90,7 +88,7 @@ public class FlywayMigratorMain {
     }
 
     private static void waitForDatabase(String jdbcUrl, String username, String password) {
-        int maxRetries = 60; // Wait up to 60 seconds
+        int maxRetries = 60;
         int retryCount = 0;
 
         logger.info("Waiting for database to be ready...");

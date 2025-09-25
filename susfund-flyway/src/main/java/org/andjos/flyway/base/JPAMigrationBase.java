@@ -13,11 +13,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Base class for JPA-based Flyway migrations.
- * Provides EntityManager functionality for migrations that need to work with JPA entities
- * instead of raw SQL statements.
- */
 public abstract class JPAMigrationBase extends BaseJavaMigration {
 
     private static final Logger logger = LoggerFactory.getLogger(JPAMigrationBase.class);
@@ -29,7 +24,6 @@ public abstract class JPAMigrationBase extends BaseJavaMigration {
         EntityTransaction transaction = null;
 
         try {
-            // Get or create EntityManagerFactory
             if (emf == null) {
                 emf = createEntityManagerFactory(context);
             }
@@ -83,7 +77,7 @@ public abstract class JPAMigrationBase extends BaseJavaMigration {
 
         // Hibernate-specific properties
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        properties.put("hibernate.hbm2ddl.auto", "none"); // Don't auto-create schema
+        properties.put("hibernate.hbm2ddl.auto", "none");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.connection.autocommit", "false");
