@@ -1,24 +1,14 @@
 FROM eclipse-temurin:21-jre-alpine
 
-# Create app directory and user
-#WORKDIR /app
-#RUN addgroup -g 1001 -S flyway && \
-#    adduser -S -D -H -u 1001 -h /app -s /sbin/nologin -G flyway -g flyway flyway
+# Create a working directory
+WORKDIR /app
 
-# Copy the thin JAR
-COPY susfund-flyway/target/susfund-flyway-*.jar /app/app.jar
+# Copy the fat JAR into the container
+COPY susfund-flyway/target/susfund-flyway-*.jar app.jar
 
-# Copy all dependencies
-COPY susfund-flyway/target/lib/*.jar /app/lib/
+# Optional: run as non-root user (commented out, safe to enable if you want)
+# RUN adduser -D -u 1001 flyway && chown -R flyway /app
+# USER flyway
 
-# Debug: List contents of the JAR to verify persistence.xml is included
-RUN jar tf /app/app.jar | grep -E "(persistence.xml|META-INF)" || echo "No persistence.xml found in JAR"
-
-## Change ownership
-#RUN chown -R flyway:flyway /app
-#
-## Switch to non-root user
-#USER flyway
-
-# Set the classpath and run
-ENTRYPOINT ["java", "-cp", "/app/app.jar:/app/lib/*", "org.andjos.flyway.FlywayMigratorMain"]
+# Run the application using the fat JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]

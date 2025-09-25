@@ -87,9 +87,10 @@ public abstract class JPAMigrationBase extends BaseJavaMigration {
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.connection.autocommit", "false");
+//        properties.put("hibernate.archive.autodetection", "class, hbm");
 
         // Create EntityManagerFactory
-        return Persistence.createEntityManagerFactory("susfund-flyway-pu", properties);
+        return Persistence.createEntityManagerFactory("flyway-migration-pu", properties);
     }
 
     public static void cleanup() {

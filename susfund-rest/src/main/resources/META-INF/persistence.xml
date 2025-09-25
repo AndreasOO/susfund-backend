@@ -6,6 +6,7 @@
 
     <persistence-unit name="myUnit" transaction-type="JTA">
         <jta-data-source>jdbc/MySQLDataSource</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
