@@ -101,12 +101,12 @@ public class FlywayMigratorMain {
                 return;
             } catch (SQLException e) {
                 retryCount++;
-                if (retryCount % 10 == 0) { // Log every 10 seconds
+                if (retryCount % 10 == 0) {
                     logger.warn("Database not ready yet, retrying... ({}/{}) - {}",
                             retryCount, maxRetries, e.getMessage());
                 }
                 try {
-                    Thread.sleep(1000); // Wait 1 second
+                    Thread.sleep(1000);
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException("Interrupted while waiting for database", ie);
