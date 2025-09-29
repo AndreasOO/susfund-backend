@@ -20,7 +20,7 @@ public class TextFieldValue extends AbstractFieldValue<FieldDefinition> {
     }
 
     @Column(name="string_value")
-    String stringValue;
+    private String stringValue="";
 
 
     @Override
