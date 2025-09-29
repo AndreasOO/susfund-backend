@@ -59,7 +59,7 @@ public class FieldValueMappingServiceImpl implements FieldValueMappingService {
     }
 
     @Override
-    public AbstractFieldValue<? extends FieldDefinition> mapDTOToFieldValue(AbstractFieldValueDTO<?> fieldValueDTO) {
+    public AbstractFieldValue<? extends FieldDefinition> mapDTOToFieldValue(AbstractFieldValueDTO<? extends FieldDefinitionDTO> fieldValueDTO) {
         return getMapper(fieldValueDTO.getClass())
                 .mapToEntity(fieldValueDTO);
     }

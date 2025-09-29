@@ -11,6 +11,7 @@ import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import org.andjos.susfund.entity.field.definition.FieldDefinition;
 import org.andjos.susfund.entity.field.definition.selectable.SelectableValue;
 import org.andjos.susfund.entity.field.value.AbstractFieldValue;
+import org.andjos.susfund.mapperservice.FieldValueMappingService;
 import org.andjos.susfund.mapperservice.GeneralMappingService;
 import org.andjos.susfund.service.FieldDefinitionService;
 
@@ -24,13 +25,18 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     GeneralMappingService generalMappingService;
 
     @Inject
+    FieldValueMappingService fieldValueMappingService;
+
+    @Inject
     FieldDefinitionDao fieldDefinitionDao;
+
+    @Inject
+    FieldValueDao fieldValueDao;
 
     @Inject
     SelectableValueDao selectableValueDao;
 
-    @Inject
-    FieldValueDao fieldValueDao;
+
 
 
     public FieldDefinition createFieldDefinition(FieldDefinition fieldDefinition) {
@@ -55,9 +61,8 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     }
 
     public List<AbstractFieldValue<? extends FieldDefinition>> saveFields(List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValues) {
-        return fieldValues.stream().map( dto -> {
-
-        })
+        List<AbstractFieldValue<? extends FieldDefinition>> values = fieldValues.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueMappingService::mapDTOToFieldValue).toList();
+        return values.stream().map(entity -> fieldValueDao.save(entity)).toList();
     }
 
 }
