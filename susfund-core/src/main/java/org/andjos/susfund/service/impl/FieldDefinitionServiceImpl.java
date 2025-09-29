@@ -62,7 +62,7 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
 
     public List<AbstractFieldValue<? extends FieldDefinition>> saveFields(List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValues) {
         List<AbstractFieldValue<? extends FieldDefinition>> values = fieldValues.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueMappingService::mapDTOToFieldValue).toList();
-        return values.stream().map(entity -> fieldValueDao.save(entity)).toList();
+        return values.stream().<AbstractFieldValue<? extends FieldDefinition>>map(entity -> fieldValueDao.save(entity)).toList();
     }
 
 }

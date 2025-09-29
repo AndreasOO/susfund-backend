@@ -26,10 +26,10 @@ public class SupportTypeUtil {
         Map<DecisionRoundState, Map<Trigger, Transition>> stateMap = new HashMap<>();
         //TODO add transitions to statemap
 
-
+    return null;
     }
 
     protected StateMachine createStateMachine(CaseEntity caseEntity, Map<DecisionRoundState, Map<Trigger, Transition>> stateMap) {
-
+return null;
     }
 }
