@@ -18,8 +18,8 @@ trait Transition {
   }
   def execute(caseEntity:CaseEntity, trigger:Trigger, paramType:ParameterType, param:util.List[Object]):Unit
 
-  def getNextDecisionRoundState(caseEntity: CaseEntity): DecisionRoundState = {
-
-  }
+//  def getNextDecisionRoundState(caseEntity: CaseEntity): DecisionRoundState = {
+//    caseEntity.
+//  }
 
 }

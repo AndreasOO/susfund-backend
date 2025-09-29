@@ -16,12 +16,10 @@ object StateMachine {
       new StateMachine(caseEntity, stateMap)
   }
 }
-
-private class StateMachine(val caseEntity: CaseEntity,
-                           val stateMap:util.Map[DecisionRoundState, util.Map[Trigger, Transition]])
+ class StateMachine(
+                            val caseEntity: CaseEntity,
+                            val stateMap:util.Map[DecisionRoundState, util.Map[Trigger, Transition]])
   extends DefaultStateMachine {
-
-
 
 
 }
