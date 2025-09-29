@@ -3,6 +3,8 @@ package org.andjos.susfund.service.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.andjos.susfund.dao.*;
+import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO;
+import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.organization.Organization;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
@@ -53,4 +55,10 @@ public class CaseEntityServiceImpl implements CaseEntityService {
     public CaseEntity getCaseEntityById(Long id){
         return caseEntityDao.getById(id);
     }
+
+    @Override
+    public void saveFields(Long caseId, List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValues){
+
+    }
+
 }
