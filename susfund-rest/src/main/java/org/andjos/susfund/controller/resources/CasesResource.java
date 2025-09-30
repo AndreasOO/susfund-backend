@@ -1,7 +1,10 @@
 package org.andjos.susfund.controller.resources;
 
 
+import jakarta.ws.rs.*;
 import org.andjos.susfund.dto.CaseDTO;
+import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO;
+import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
 import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.field.definition.FieldDefinition;
@@ -10,10 +13,6 @@ import org.andjos.susfund.entity.field.value.AbstractFieldValue;
 import org.andjos.susfund.entity.organization.Organization;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
@@ -171,5 +170,33 @@ public class CasesResource {
     public Response getAllCaseEntitiesSimple(){
         return Response.ok(caseEntityService.getAllCaseEntities().stream().map(caseEntity -> generalMappingService.mapCaseToSimpleCaseDTO(caseEntity)).toList()).build();
     }
+
+    @Path("/{id}/savefields")
+    @POST()
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response saveFields(@PathParam("id") Long id, List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> dtos) {
+        try {
+            System.out.println("hit savefields endpoint endpoint");
+            caseEntityService.saveFields(id, dtos);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+//    @Path("/{id}/savefields")
+//    @POST()
+//    @Consumes("application/json")
+//    @Produces("application/json")
+//    public Response saveFields(@PathParam("id") Long id) {
+//        try {
+//            System.out.println("hit savefields endpoint endpoint with id: " + id);
+////            caseEntityService.saveFields(id, dtos);
+//            return Response.ok().build();
+//        } catch (Exception e) {
+//            return Response.serverError().build();
+//        }
+//    }
 
 }

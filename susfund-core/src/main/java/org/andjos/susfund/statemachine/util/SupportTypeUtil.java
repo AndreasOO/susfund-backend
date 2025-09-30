@@ -1,9 +1,13 @@
 package org.andjos.susfund.statemachine.util;
 
+import org.andjos.susfund.entity.caseentity.CaseDecisionType;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
+import org.andjos.susfund.entity.caseentity.CaseStatus;
 import org.andjos.susfund.entity.supporttype.SupportTypeNode;
+import org.andjos.susfund.statemachine.DefaultStateMachine;
 import org.andjos.susfund.statemachine.StateMachine;
 import org.andjos.susfund.statemachine.state.DecisionRoundState;
+import org.andjos.susfund.statemachine.transition.SaveFieldsTransition;
 import org.andjos.susfund.statemachine.transition.Transition;
 import org.andjos.susfund.statemachine.trigger.Trigger;
 
@@ -19,17 +23,25 @@ public class SupportTypeUtil {
 
     protected Map<DecisionRoundState, Map<Trigger, Transition>> getStateMapForSupportType(SupportTypeNode supportTypeNode) {
 
-        Map<Trigger, Transition> transitions = new HashMap<>();
-        //TODO add transition objects to triggers
+        Map<DecisionRoundState, Map<Trigger, Transition>> stateMap =
+                Map.of(
+                        new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_SUPPORT_DECISION),
+                        Map.of(Trigger.SAVE_FIELDS, new SaveFieldsTransition(),
+                               Trigger.SUGGEST_DECISION, new SaveFieldsTransition()),
 
 
-        Map<DecisionRoundState, Map<Trigger, Transition>> stateMap = new HashMap<>();
-        //TODO add transitions to statemap
 
-    return null;
+                        new DecisionRoundState(CaseDecisionType.PAYMENT_REQUEST, CaseStatus.UNDER_PAYMENT_DECISION),
+                        Map.of(Trigger.SAVE_FIELDS, new SaveFieldsTransition()));
+
+        return stateMap;
     }
 
     protected StateMachine createStateMachine(CaseEntity caseEntity, Map<DecisionRoundState, Map<Trigger, Transition>> stateMap) {
-return null;
+//        //TODO if techName== XXX return new DefaultStateMachine ... etc
+//        SupportTypeNode supportTypeNode = caseEntity.getSupportTypeNode();
+//        String techName = caseEntity.getSupportTypeNode().getTechName();
+
+        return new DefaultStateMachine(caseEntity, stateMap);
     }
 }

@@ -60,9 +60,10 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
         return selectableValueDao.getAllSelectableValues();
     }
 
-    public List<AbstractFieldValue<? extends FieldDefinition>> saveFields(List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValues) {
-        List<AbstractFieldValue<? extends FieldDefinition>> values = fieldValues.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueMappingService::mapDTOToFieldValue).toList();
-        return values.stream().<AbstractFieldValue<? extends FieldDefinition>>map(entity -> fieldValueDao.save(entity)).toList();
+    public List<AbstractFieldValue<? extends FieldDefinition>> saveFields(List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValuesDTO) {
+        List<AbstractFieldValue<? extends FieldDefinition>> entityValues = fieldValuesDTO.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueMappingService::mapDTOToFieldValue)
+                                                                                         .toList();
+        return entityValues.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueDao::save).toList();
     }
 
 }

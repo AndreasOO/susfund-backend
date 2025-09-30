@@ -22,11 +22,13 @@ class SaveFieldsTransition extends Transition {
 
   override def execute(caseEntity: CaseEntity, trigger: Trigger, paramType: ParameterType, param: util.List[Object]): Unit = {
        // In real application: create case version and save
-       val fieldValues = param.stream()
-         .map[AbstractFieldValueDTO[_ <: FieldDefinitionDTO]](obj => obj.asInstanceOf[AbstractFieldValueDTO[_ <: FieldDefinitionDTO]])
-         .collect(Collectors.toList())
 
-    updateFields(fieldValues)
+
+        val fieldValues = param.stream()
+          .map[AbstractFieldValueDTO[_ <: FieldDefinitionDTO]](obj => obj.asInstanceOf[AbstractFieldValueDTO[_ <: FieldDefinitionDTO]])
+          .collect(Collectors.toList())
+
+        updateFields(fieldValues)
 
   }
 

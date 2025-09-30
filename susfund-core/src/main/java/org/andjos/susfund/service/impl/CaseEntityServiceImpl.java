@@ -9,6 +9,10 @@ import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.organization.Organization;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
 import org.andjos.susfund.service.CaseEntityService;
+import org.andjos.susfund.statemachine.StateMachine;
+import org.andjos.susfund.statemachine.paremeter.ParameterType;
+import org.andjos.susfund.statemachine.trigger.Trigger;
+import org.andjos.susfund.statemachine.util.SupportTypeUtil;
 
 import java.util.List;
 
@@ -58,6 +62,11 @@ public class CaseEntityServiceImpl implements CaseEntityService {
 
     @Override
     public void saveFields(Long caseId, List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValues){
+
+        SupportTypeUtil supportTypeUtil = new SupportTypeUtil();
+        StateMachine stateMachine = supportTypeUtil.getCaseStateMachine(caseEntityDao.getById(caseId));
+
+        stateMachine.handleTrigger(Trigger.SAVE_FIELDS, ParameterType.FIELDS, fieldValues);
 
     }
 

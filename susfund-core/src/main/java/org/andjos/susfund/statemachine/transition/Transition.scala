@@ -13,7 +13,6 @@ trait Transition {
     println("validating")
   }
   def performAction(caseEntity:CaseEntity, trigger:Trigger, paramType:ParameterType, param:util.List[Object]): Unit = {
-    validate(caseEntity,trigger,paramType,param)
     execute(caseEntity,trigger,paramType,param)
   }
   def execute(caseEntity:CaseEntity, trigger:Trigger, paramType:ParameterType, param:util.List[Object]):Unit
