@@ -10,8 +10,11 @@
             <h4>{{ textFieldValue.owningFieldDefinition.title }}</h4>
             <h5>{{ textFieldValue.owningFieldDefinition.preamble }}</h5>
             <h6>{{ textFieldValue.owningFieldDefinition.assistingText }}</h6>
-            <textarea class="form-control" rows="3" [value]="textFieldValue.stringValue" #answerInput></textarea>
-            <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
+
+            <textarea class="form-control" rows="3"
+                      [(ngModel)]="textFieldValue.stringValue"></textarea>
+
+            <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="save(textFieldValue)">Save</a>
           </div>
         </div>
 

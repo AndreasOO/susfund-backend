@@ -24,4 +24,11 @@ export class CaseApplicationComponent implements OnInit {
     this.fetcher.getApplicationFields(this.caseId).subscribe(textFields => {this.textFieldValues = textFields!;});
 
   }
+
+  public save(textFieldValue: any){
+    this.fetcher.updateFields(this.caseId, [textFieldValue]).subscribe({
+      next: () => console.log("saved stuff"),
+      error: err => console.error("saved nothing because: ", err)
+    });
+  }
 }
