@@ -3,10 +3,11 @@ package org.andjos.susfund.mapper.general;
 import org.andjos.susfund.dto.CaseManagerDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.andjos.susfund.entity.casemanager.CaseManager;
+import org.andjos.susfund.mapper.DtoToEntityMapper;
 import org.andjos.susfund.mapper.EntityToDtoMapper;
 
 @ApplicationScoped
-public class CaseManagerMapper implements EntityToDtoMapper<CaseManager, CaseManagerDTO> {
+public class CaseManagerMapper implements GeneralMapper<CaseManager, CaseManagerDTO> {
 
     @Override
     public CaseManagerDTO mapToDTO(CaseManager entity) {
@@ -14,6 +15,15 @@ public class CaseManagerMapper implements EntityToDtoMapper<CaseManager, CaseMan
         return new CaseManagerDTO(
                 entity.getId(),
                 entity.getName()
+        );
+    }
+
+    @Override
+    public CaseManager mapToEntity(CaseManagerDTO dto) {
+        if (dto == null) return null;
+        return new CaseManager(
+                dto.getId(),
+                dto.getName()
         );
     }
 }
