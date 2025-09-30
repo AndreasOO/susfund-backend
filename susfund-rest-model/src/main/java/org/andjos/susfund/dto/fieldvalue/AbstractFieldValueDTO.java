@@ -25,6 +25,8 @@ public abstract class AbstractFieldValueDTO<T extends FieldDefinitionDTO> {
     public FieldDefinitionDTO owningFieldDefinition;
 
 
+    public AbstractFieldValueDTO() {
+    }
 
 //    public AbstractFieldValueDTO() {
 //        super();
