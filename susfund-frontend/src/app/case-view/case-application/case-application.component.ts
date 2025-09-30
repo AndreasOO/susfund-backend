@@ -25,8 +25,8 @@ export class CaseApplicationComponent implements OnInit {
 
   }
 
-  public save(textFieldValue: any){
-    this.fetcher.updateFields(this.caseId, [textFieldValue]).subscribe({
+  public save(fieldValue: any){
+    this.fetcher.updateFields(this.caseId, [fieldValue]).subscribe({
       next: () => console.log("saved stuff"),
       error: err => console.error("saved nothing because: ", err)
     });

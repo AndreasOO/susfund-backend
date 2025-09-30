@@ -12,6 +12,7 @@ import {DecisionFieldValueDto} from './case-entity/value/decision-field-value-dt
 import {BudgetFieldValueDto} from './case-entity/value/budget-field-value-dto';
 import {HistoryLogFieldValueDto} from './case-entity/value/history-log-field-value-dto';
 import {CaseManagerDto} from './case-entity/case-manager-dto';
+import {FieldValueDto} from './case-entity/value/field-value-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,7 @@ export class CasesFetcherService {
     return this.http.get<CaseEntityDto>(this.baseUri+"/susfund/api/cases/" + id)
   }
 
-  public updateFields(id:string | undefined, fields : TextFieldValueDto[]) {
+  public updateFields(id:string | undefined, fields : FieldValueDto[]) {
     return this.http.post(this.baseUri+"/susfund/api/cases/" + id + "/savefields", fields)
   }
 

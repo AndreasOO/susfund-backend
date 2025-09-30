@@ -24,18 +24,12 @@ export class CaseAssessmentComponent implements OnInit {
 
   }
 
-  public getSelectedScore(groupName:number){
-
-    const radioButton = document.querySelector(`input[name="${groupName}"]:checked`) as HTMLInputElement;
-
-    switch(radioButton.value){
-      case "option1": return 1
-      case "option2": return 2
-      case "option3": return 3
-      case "option4": return 4
-      case "option5": return 5
-      default: return 0
-    }
+  public save(fieldValue:any){
+    this.fetcher.updateFields(this.caseId, [fieldValue]).subscribe({
+      next: () => console.log("saved stuff"),
+      error: err => console.error("saved nothing because: ", err)
+    });
   }
+
 
 }
