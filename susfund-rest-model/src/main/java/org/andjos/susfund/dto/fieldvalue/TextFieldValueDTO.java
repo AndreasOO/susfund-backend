@@ -6,6 +6,10 @@ public class TextFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO>
 
     private String stringValue;
 
+    public TextFieldValueDTO() {
+        super();
+    }
+
     protected TextFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
         super(id, owningCaseId, owningFieldDefinition, "textFieldValue");
     }

@@ -1,17 +1,25 @@
 package org.andjos.susfund.mapper.fields;
 
+import jakarta.inject.Inject;
+import org.andjos.susfund.dao.FieldValueDao;
 import org.andjos.susfund.dto.OrganizationDTO;
 import org.andjos.susfund.dto.fieldvalue.BudgetFieldValueDTO;
 import org.andjos.susfund.dto.fieldvalue.BudgetRowDTO;
 import org.andjos.susfund.dto.fieldvalue.FinancingRowDTO;
 import org.andjos.susfund.entity.field.value.budget.BudgetFieldValue;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.andjos.susfund.entity.field.value.budget.BudgetRow;
+import org.andjos.susfund.entity.field.value.budget.FinancingRow;
+import org.andjos.susfund.entity.organization.Organization;
 
 
 @ApplicationScoped
 public class BudgetFieldValueMapper
         implements FieldValueMapper<BudgetFieldValue, BudgetFieldValueDTO>,
                    FieldDefinitionDTOFactory {
+
+    @Inject
+    private FieldValueDao fieldValueDao;
 
     @Override
     public BudgetFieldValueDTO mapToDTO(BudgetFieldValue fieldValue) {
@@ -39,5 +47,34 @@ public class BudgetFieldValueMapper
                                 row.getDescription()))
                         .toList()
         );
+    }
+
+
+    @Override
+    public BudgetFieldValue mapToEntity(BudgetFieldValueDTO dto) {
+        BudgetFieldValue budgetFieldValue = (BudgetFieldValue) fieldValueDao.findById(dto.getId());
+
+        budgetFieldValue.setTotalFinancingRatio(dto.getTotalFinancingRatio());
+        budgetFieldValue.setBudgetRows(dto.getBudgetRows().stream()
+                                                          .map(row -> new BudgetRow(
+                                                                                                 budgetFieldValue,
+                                                                                                 row.getEstimatedCost(),
+                                                                                                 row.getCostType(),
+                                                                                                 row.getAccruedCost(),
+                                                                                                 row.getDescription()))
+                                                                   .toList());
+
+        budgetFieldValue.setFinancingRows(dto.getFinancingRows().stream()
+                                                                .map(row -> new FinancingRow(
+                                                                        budgetFieldValue,
+                                                                        new Organization(row.getOrganization().getId(),
+                                                                                         row.getOrganization().getName(),
+                                                                                         row.getOrganization().getOrganizationType()),
+                                                                        row.getFinancingAmount(),
+                                                                        row.getFinancingPercentage(),
+                                                                        row.getFinancingType()))
+                                                                .toList());
+
+        return budgetFieldValue;
     }
 }

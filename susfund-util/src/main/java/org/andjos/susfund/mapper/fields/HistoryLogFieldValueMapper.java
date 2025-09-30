@@ -1,8 +1,11 @@
 package org.andjos.susfund.mapper.fields;
 
+import jakarta.inject.Inject;
+import org.andjos.susfund.dao.FieldValueDao;
 import org.andjos.susfund.dto.fieldvalue.HistoryEventDTO;
 import org.andjos.susfund.dto.fieldvalue.HistoryLogFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.andjos.susfund.entity.field.value.history.HistoryEvent;
 import org.andjos.susfund.entity.field.value.history.HistoryLogFieldValue;
 
 import java.util.stream.Collectors;
@@ -11,6 +14,8 @@ import java.util.stream.Collectors;
 public class HistoryLogFieldValueMapper
         implements FieldValueMapper<HistoryLogFieldValue, HistoryLogFieldValueDTO>,
                    FieldDefinitionDTOFactory {
+    @Inject
+    private FieldValueDao fieldValueDao;
 
     @Override
     public HistoryLogFieldValueDTO mapToDTO(HistoryLogFieldValue fieldValue) {
@@ -26,5 +31,19 @@ public class HistoryLogFieldValueMapper
                                 he.getHistoryEventType()))
                         .collect(Collectors.toSet())
         );
+    }
+
+
+    @Override
+    public HistoryLogFieldValue mapToEntity(HistoryLogFieldValueDTO dto) {
+        HistoryLogFieldValue historyLogFieldValue = (HistoryLogFieldValue) fieldValueDao.findById(dto.getId());
+        historyLogFieldValue.setHistoryEvents(dto.getHistoryEvents().stream()
+                                                                    .map(eventDTO -> new HistoryEvent(
+                                                                                                        historyLogFieldValue,
+                                                                                                        eventDTO.getHistoryEventDetails(),
+                                                                                                        eventDTO.getHistoryEventDate(),
+                                                                                                        eventDTO.getHistoryEventType()))
+                                                                    .collect(Collectors.toSet()));
+        return historyLogFieldValue;
     }
 }
