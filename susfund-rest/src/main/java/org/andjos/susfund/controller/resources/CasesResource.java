@@ -181,6 +181,7 @@ public class CasesResource {
             caseEntityService.saveFields(id, dtos);
             return Response.ok().build();
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }
