@@ -1,5 +1,6 @@
 package org.andjos.susfund.statemachine.transition
 
+import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO
 import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO
@@ -15,6 +16,7 @@ import java.util.List
 import java.util.stream.Collectors
 import scala.jdk.CollectionConverters.{CollectionHasAsScala, IterableHasAsJava}
 
+@ApplicationScoped
 class SaveFieldsTransition extends Transition {
 
   @Inject

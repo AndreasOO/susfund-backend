@@ -1,5 +1,7 @@
 package org.andjos.susfund.statemachine.util;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.andjos.susfund.entity.caseentity.CaseDecisionType;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
 import org.andjos.susfund.entity.caseentity.CaseStatus;
@@ -14,7 +16,11 @@ import org.andjos.susfund.statemachine.trigger.Trigger;
 import java.util.HashMap;
 import java.util.Map;
 
+@ApplicationScoped
 public class SupportTypeUtil {
+
+    @Inject
+    private SaveFieldsTransition saveFieldsTransition;
 
     public StateMachine getCaseStateMachine(CaseEntity caseEntity) {
         Map<DecisionRoundState, Map<Trigger, Transition>> stateMap = getStateMapForSupportType( caseEntity.getSupportTypeNode());
@@ -26,13 +32,15 @@ public class SupportTypeUtil {
         Map<DecisionRoundState, Map<Trigger, Transition>> stateMap =
                 Map.of(
                         new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_SUPPORT_DECISION),
-                        Map.of(Trigger.SAVE_FIELDS, new SaveFieldsTransition(),
-                               Trigger.SUGGEST_DECISION, new SaveFieldsTransition()),
+                        Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition,
+                               Trigger.SUGGEST_DECISION, saveFieldsTransition),
 
-
+                        new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNHANDLED),
+                        Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition,
+                                Trigger.SUGGEST_DECISION, saveFieldsTransition),
 
                         new DecisionRoundState(CaseDecisionType.PAYMENT_REQUEST, CaseStatus.UNDER_PAYMENT_DECISION),
-                        Map.of(Trigger.SAVE_FIELDS, new SaveFieldsTransition()));
+                        Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition));
 
         return stateMap;
     }

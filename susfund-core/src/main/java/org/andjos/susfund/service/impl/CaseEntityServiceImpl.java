@@ -34,6 +34,9 @@ public class CaseEntityServiceImpl implements CaseEntityService {
     @Inject
     private SupportTypeNodeDao supportTypeNodeDao;
 
+    @Inject
+    private SupportTypeUtil supportTypeUtil;
+
 
     @Override
     public List<CaseEntity> getAllCaseEntities() {
@@ -63,7 +66,6 @@ public class CaseEntityServiceImpl implements CaseEntityService {
     @Override
     public void saveFields(Long caseId, List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValues){
 
-        SupportTypeUtil supportTypeUtil = new SupportTypeUtil();
         StateMachine stateMachine = supportTypeUtil.getCaseStateMachine(caseEntityDao.getById(caseId));
 
         stateMachine.handleTrigger(Trigger.SAVE_FIELDS, ParameterType.FIELDS, fieldValues);
