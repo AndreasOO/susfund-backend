@@ -33,22 +33,21 @@ public class FieldValueMappingServiceImpl implements FieldValueMappingService {
             AssessmentFieldValueMapper assessmentMapper,
             HistoryLogFieldValueMapper historyLogMapper) {
 
-        this.mappers = Map.of(
-                TextFieldValue.class, textMapper,
-                NumericFieldValue.class, numericMapper,
-                DateFieldValue.class, dateMapper,
-                DecisionFieldValue.class, decisionMapper,
-                BudgetFieldValue.class, budgetMapper,
-                AssessmentFieldValue.class, assessmentMapper,
-                HistoryLogFieldValue.class, historyLogMapper,
-                TextFieldValueDTO.class, textMapper,
-                NumericFieldValueDTO.class, numericMapper,
-                DateFieldValueDTO.class, dateMapper
-                //TODO figure our why these don't work
-//                DecisionFieldValueDTO.class, decisionMapper
-//                BudgetFieldValueDTO.class, budgetMapper,
-//                AssessmentFieldValueDTO.class, assessmentMapper,
-//                HistoryLogFieldValueDTO.class, historyLogMapper
+        this.mappers = Map.ofEntries(
+                Map.entry(TextFieldValue.class, textMapper),
+                Map.entry(NumericFieldValue.class, numericMapper),
+                Map.entry(DateFieldValue.class, dateMapper),
+                Map.entry(DecisionFieldValue.class, decisionMapper),
+                Map.entry(BudgetFieldValue.class, budgetMapper),
+                Map.entry(AssessmentFieldValue.class, assessmentMapper),
+                Map.entry(HistoryLogFieldValue.class, historyLogMapper),
+                Map.entry(TextFieldValueDTO.class, textMapper),
+                Map.entry(NumericFieldValueDTO.class, numericMapper),
+                Map.entry(DateFieldValueDTO.class, dateMapper),
+                Map.entry(DecisionFieldValueDTO.class, decisionMapper),
+                Map.entry(BudgetFieldValueDTO.class, budgetMapper),
+                Map.entry(AssessmentFieldValueDTO.class, assessmentMapper),
+                Map.entry(HistoryLogFieldValueDTO.class, historyLogMapper)
         );
     }
 
