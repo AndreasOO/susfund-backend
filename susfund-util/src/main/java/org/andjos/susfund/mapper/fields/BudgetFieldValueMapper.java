@@ -12,6 +12,8 @@ import org.andjos.susfund.entity.field.value.budget.BudgetRow;
 import org.andjos.susfund.entity.field.value.budget.FinancingRow;
 import org.andjos.susfund.entity.organization.Organization;
 
+import java.util.stream.Collectors;
+
 
 @ApplicationScoped
 public class BudgetFieldValueMapper
@@ -57,15 +59,17 @@ public class BudgetFieldValueMapper
         budgetFieldValue.setTotalFinancingRatio(dto.getTotalFinancingRatio());
         budgetFieldValue.setBudgetRows(dto.getBudgetRows().stream()
                                                           .map(row -> new BudgetRow(
+                                                                                                 row.getId(),
                                                                                                  budgetFieldValue,
                                                                                                  row.getEstimatedCost(),
                                                                                                  row.getCostType(),
                                                                                                  row.getAccruedCost(),
                                                                                                  row.getDescription()))
-                                                                   .toList());
+                                                                   .collect(Collectors.toList()));
 
         budgetFieldValue.setFinancingRows(dto.getFinancingRows().stream()
                                                                 .map(row -> new FinancingRow(
+                                                                        row.getId(),
                                                                         budgetFieldValue,
                                                                         new Organization(row.getOrganization().getId(),
                                                                                          row.getOrganization().getName(),
@@ -73,7 +77,7 @@ public class BudgetFieldValueMapper
                                                                         row.getFinancingAmount(),
                                                                         row.getFinancingPercentage(),
                                                                         row.getFinancingType()))
-                                                                .toList());
+                                                                .collect(Collectors.toList()));
 
         return budgetFieldValue;
     }

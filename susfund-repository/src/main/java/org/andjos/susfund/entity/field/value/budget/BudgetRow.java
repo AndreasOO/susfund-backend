@@ -38,6 +38,15 @@ public class BudgetRow {
         this.description = description;
     }
 
+    public BudgetRow(Long id, BudgetFieldValue owningBudget, int estimatedCost, CostType costType, int accruedCost, String description) {
+        this.id = id;
+        this.estimatedCost = estimatedCost;
+        this.costType = costType;
+        this.owningBudget = owningBudget;
+        this.accruedCost = accruedCost;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }

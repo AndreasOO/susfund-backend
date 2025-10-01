@@ -10,6 +10,10 @@ public class BudgetFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDT
     private List<FinancingRowDTO> financingRows;
     private List<BudgetRowDTO> budgetRows;
 
+    public BudgetFieldValueDTO() {
+        super();
+    }
+
     protected BudgetFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
         super(id, owningCaseId, owningFieldDefinition, "budgetFieldValue");
     }

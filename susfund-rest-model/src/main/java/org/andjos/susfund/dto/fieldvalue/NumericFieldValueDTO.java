@@ -4,6 +4,10 @@ import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO;
 
 public class NumericFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO> {
 
+    public NumericFieldValueDTO() {
+        super();
+    }
+
     private Integer numericValue;
 
     protected NumericFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {

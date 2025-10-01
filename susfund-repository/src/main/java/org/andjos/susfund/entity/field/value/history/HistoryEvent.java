@@ -37,6 +37,14 @@ public class HistoryEvent {
         this.owningHistoryLog = owningHistoryLog;
     }
 
+    public HistoryEvent(Long id, HistoryLogFieldValue owningHistoryLog, String historyEventDetails, LocalDate historyEventDate, HistoryEventType historyEventType) {
+        this.id = id;
+        this.historyEventDetails = historyEventDetails;
+        this.historyEventDate = historyEventDate;
+        this.historyEventType = historyEventType;
+        this.owningHistoryLog = owningHistoryLog;
+    }
+
     public Long getId() {
         return id;
     }

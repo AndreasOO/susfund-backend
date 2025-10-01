@@ -22,8 +22,17 @@
           </tr>
           </tbody>
         </table>
+
         <div class="row justify-content-between">
-          <button class="btn btn-light col-3 m-4">Save</button>
+<!--          <div *ngIf="fieldStatus[budgetFields.id]"-->
+<!--               class="alert my-2"-->
+<!--               [ngClass]="fieldStatus[budgetFields.id]?.success ? 'alert-success' : 'alert-danger'">-->
+<!--            {{ fieldStatus[budgetFields.id]?.message }}-->
+<!--          </div>-->
+
+          <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="save(budgetFields)">Save</a>
+
+<!--          <button class="btn btn-light col-3 m-4">Save</button>-->
           <h4 class="col-3 m-4">Total: {{ "TOTAL" }} </h4>
         </div>
 
