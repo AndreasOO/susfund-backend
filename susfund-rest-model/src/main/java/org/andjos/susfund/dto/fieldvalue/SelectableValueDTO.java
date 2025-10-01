@@ -3,18 +3,18 @@ package org.andjos.susfund.dto.fieldvalue;
 import org.andjos.susfund.dto.AbstractDTO;
 import org.andjos.susfund.entity.field.definition.selectable.SelectableType;
 
-public class SelectableValueDTO extends AbstractDTO {
+public class SelectableValueDTO {
 
     Long id;
     String value;
     SelectableType selectableType;
 
     public SelectableValueDTO() {
-        super("selectableValue");
+
     }
 
     public SelectableValueDTO(Long id, String value, SelectableType selectableType) {
-        super("selectableValue");
+
         this.id = id;
         this.value = value;
         this.selectableType = selectableType;

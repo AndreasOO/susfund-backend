@@ -2,8 +2,6 @@ package org.andjos.susfund.dto.fielddefinition;
 
 import jakarta.json.bind.annotation.JsonbSubtype;
 import jakarta.json.bind.annotation.JsonbTypeInfo;
-import org.andjos.susfund.dto.AbstractDTO;
-import org.andjos.susfund.dto.fieldvalue.*;
 import org.andjos.susfund.entity.field.definition.fieldtype.FieldType;
 import org.andjos.susfund.entity.field.definition.location.FrontendLocation;
 import org.andjos.susfund.entity.field.definition.section.Section;
@@ -36,7 +34,6 @@ public class FieldDefinitionDTO {
     public FieldDefinitionDTO(Long id, String title, String preamble, String assistingText,
                               Boolean hasComment, Section section, SubSection subSection,
                               FieldType fieldType, FrontendLocation frontendLocation, Long rowIndex) {
-//        super("simpleFieldDefinition");
         this.id = id;
         this.title = title;
         this.preamble = preamble;

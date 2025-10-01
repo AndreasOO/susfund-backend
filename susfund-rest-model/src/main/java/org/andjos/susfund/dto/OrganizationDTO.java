@@ -2,19 +2,18 @@ package org.andjos.susfund.dto;
 
 import org.andjos.susfund.entity.organization.OrganizationType;
 
-public class OrganizationDTO extends AbstractDTO {
+public class OrganizationDTO{
 
     private int id;
     private String name;
     private OrganizationType organizationType;
 
     public OrganizationDTO() {
-        super("organization");
+
 
     }
 
     public OrganizationDTO(int id, String name, OrganizationType organizationType) {
-        super("organization");
         this.id = id;
         this.name = name;
         this.organizationType = organizationType;

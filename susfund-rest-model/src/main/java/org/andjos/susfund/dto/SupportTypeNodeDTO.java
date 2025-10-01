@@ -1,17 +1,16 @@
 package org.andjos.susfund.dto;
 
-public class SupportTypeNodeDTO extends AbstractDTO {
+public class SupportTypeNodeDTO  {
 
     private Long id;
     private String techName;
 
     public SupportTypeNodeDTO() {
-        super("supportTypeNode");
+
 
     }
 
     public SupportTypeNodeDTO(Long id, String techName) {
-        super("supportTypeNode");
         this.id = id;
         this.techName = techName;
     }

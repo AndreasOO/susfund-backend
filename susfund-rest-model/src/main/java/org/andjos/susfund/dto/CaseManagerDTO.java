@@ -1,16 +1,16 @@
 package org.andjos.susfund.dto;
 
-public class CaseManagerDTO extends AbstractDTO {
+public class CaseManagerDTO {
 
     private int id;
     private String name;
 
     public CaseManagerDTO() {
-        super("caseManager");
+
     }
 
     public CaseManagerDTO(int id, String name) {
-        super("caseManager");
+
         this.id = id;
         this.name = name;
     }

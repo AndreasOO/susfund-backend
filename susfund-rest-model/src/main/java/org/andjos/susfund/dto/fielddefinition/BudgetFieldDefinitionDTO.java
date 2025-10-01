@@ -13,13 +13,8 @@ public class BudgetFieldDefinitionDTO extends FieldDefinitionDTO {
 
     public BudgetFieldDefinitionDTO(){}
 
-    public BudgetFieldDefinitionDTO(BudgetType budgetType) {
-        this.budgetType = budgetType;
-    }
-
     public BudgetFieldDefinitionDTO(Long id, String title, String preamble, String assistingText, Boolean hasComment, Section section, SubSection subSection, FieldType fieldType, FrontendLocation frontendLocation, Long rowIndex, BudgetType budgetType) {
         super(id, title, preamble, assistingText, hasComment, section, subSection, fieldType, frontendLocation, rowIndex);
-//        this.setDtoClass("budgetFieldDefinition");
         this.budgetType = budgetType;
     }
 

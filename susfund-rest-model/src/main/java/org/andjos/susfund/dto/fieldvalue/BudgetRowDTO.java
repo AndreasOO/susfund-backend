@@ -3,7 +3,7 @@ package org.andjos.susfund.dto.fieldvalue;
 import org.andjos.susfund.dto.AbstractDTO;
 import org.andjos.susfund.entity.field.value.budget.CostType;
 
-public class BudgetRowDTO extends AbstractDTO {
+public class BudgetRowDTO {
 
     private int estimatedCost;
     private CostType costType;
@@ -12,11 +12,10 @@ public class BudgetRowDTO extends AbstractDTO {
     private String description;
 
     public BudgetRowDTO(){
-        super("budgetRowDTO");
+
     }
 
     public BudgetRowDTO(Long id, int estimatedCost, CostType costType, int accruedCost, String description) {
-        super("budgetRowDTO");
         this.id = id;
         this.estimatedCost = estimatedCost;
         this.costType = costType;

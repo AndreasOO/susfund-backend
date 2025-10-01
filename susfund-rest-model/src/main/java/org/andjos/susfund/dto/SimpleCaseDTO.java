@@ -3,7 +3,7 @@ package org.andjos.susfund.dto;
 import org.andjos.susfund.entity.caseentity.CaseDecisionType;
 import org.andjos.susfund.entity.caseentity.CaseStatus;
 
-public class SimpleCaseDTO extends AbstractDTO {
+public class SimpleCaseDTO {
 
     private Long id;
     private String name;
@@ -14,14 +14,14 @@ public class SimpleCaseDTO extends AbstractDTO {
     private CaseDecisionType caseDecisionType;
 
     public SimpleCaseDTO() {
-        super("simpleCase");
+
 
     }
 
     public SimpleCaseDTO(Long id, String name, String companyName,
                          String caseManager, String caseController,
                          CaseStatus caseStatus, CaseDecisionType caseDecisionType) {
-        super("simpleCase");
+
         this.id = id;
         this.name = name;
         this.companyName = companyName;
