@@ -39,6 +39,4 @@ export class CaseApplicationComponent implements OnInit {
       }
     });
   }
-
-  protected readonly status = status;
 }
