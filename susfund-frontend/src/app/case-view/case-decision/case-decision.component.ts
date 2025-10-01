@@ -14,7 +14,6 @@ import {CaseManagerDto} from '../../cases-services/case-entity/case-manager-dto'
 export class CaseDecisionComponent implements OnInit{
   caseId: string | undefined
   caseManagerList:CaseManagerDto[] | undefined
-  caseEntity:CaseEntityDto|undefined
   decisionFields:DecisionFieldValueDto[] = []
 
   fieldStatus: { [id: string]: { message: string, success: boolean } } = {};
@@ -25,8 +24,12 @@ export class CaseDecisionComponent implements OnInit{
   ngOnInit() {
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
     this.fetcher.getAllCaseManagers().subscribe(caseManagerList => this.caseManagerList = caseManagerList!)
-    this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
     this.fetcher.getDecisionFieldValue(this.caseId).subscribe(decisionFields => this.decisionFields = decisionFields!)
+
+  }
+
+  compareCaseManager(caseManagerOption: CaseManagerDto, chosenCaseManager: CaseManagerDto): boolean {
+    return caseManagerOption && chosenCaseManager ? caseManagerOption.id === chosenCaseManager.id : caseManagerOption === chosenCaseManager;
   }
 
 
