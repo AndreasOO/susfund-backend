@@ -13,6 +13,8 @@ export class CaseBudgetComponent implements OnInit{
 
   caseId : string | undefined
   budgetFields:BudgetFieldValueDto[] = []
+  fieldStatus:  {message: string, success: boolean}  | undefined ;
+
 
   constructor(public router:Router, public fetcher:CasesFetcherService) {
   }
@@ -20,5 +22,18 @@ export class CaseBudgetComponent implements OnInit{
   ngOnInit() {
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
     this.fetcher.getBudgetFieldValue(this.caseId).subscribe(fields => this.budgetFields = fields)
+  }
+
+  public save(fieldValue:any){
+    this.fetcher.updateFields(this.caseId, [fieldValue]).subscribe({
+      next: (response: Response) => {
+        this.fieldStatus = { message: "Update successfully saved", success: true };
+        console.log("saved stuff")
+      },
+      error: err => {
+        this.fieldStatus = { message: "Something went wrong", success: false };
+        console.error("saved nothing because: ", err)
+      }
+    });
   }
 }

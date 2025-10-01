@@ -16,6 +16,7 @@ import org.andjos.susfund.mapperservice.GeneralMappingService;
 import org.andjos.susfund.service.FieldDefinitionService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FieldDefinitionServiceImpl implements FieldDefinitionService {
@@ -61,9 +62,15 @@ public class FieldDefinitionServiceImpl implements FieldDefinitionService {
     }
 
     public List<AbstractFieldValue<? extends FieldDefinition>> saveFields(List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fieldValuesDTO) {
+        System.out.println("Converting DTOs to Entity:  ");
+        fieldValuesDTO.forEach(e -> System.out.println(e.getClass().getSimpleName()));
+
         List<AbstractFieldValue<? extends FieldDefinition>> entityValues = fieldValuesDTO.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueMappingService::mapDTOToFieldValue)
-                                                                                         .toList();
-        return entityValues.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueDao::save).toList();
+                .collect(Collectors.toList());
+        System.out.println("Merging Entity:  ");
+        entityValues.forEach(e -> System.out.println(e.getClass().getSimpleName()));
+
+        return entityValues.stream().<AbstractFieldValue<? extends FieldDefinition>>map(fieldValueDao::save).collect(Collectors.toList());
     }
 
 }

@@ -8,6 +8,10 @@ public class DateFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO>
 
     private LocalDate dateValue;
 
+    public DateFieldValueDTO() {
+        super();
+    }
+
     protected DateFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
         super(id, owningCaseId, owningFieldDefinition, "dateFieldValue");
     }

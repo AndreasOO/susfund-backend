@@ -17,22 +17,19 @@
           <tbody>
           <tr *ngFor="let row of budgetField.budgetRows">
             <td class="col-4">{{row.costType}}</td>
-            <td class="col-4"> <input type="text" value="{{row.description}}" class="form-control"></td>
-            <td class="col-4"> <input type="number" value="{{row.estimatedCost}}" class="text-end form-control"> </td>
+            <td class="col-4"> <input type="text" [(ngModel)]="row.description" class="form-control"></td>
+            <td class="col-4"> <input type="number" [(ngModel)]="row.estimatedCost" class="text-end form-control"> </td>
           </tr>
           </tbody>
         </table>
+
         <div class="row justify-content-between">
-          <button class="btn btn-light col-3 m-4">Save</button>
           <h4 class="col-3 m-4">Total: {{ "TOTAL" }} </h4>
         </div>
 
       </div>
     </div>
   </div>
-</div>
-
-<div class="container bg-dark-subtle  text-dark mt-5 mb-5 rounded-1">
   <h2 class="p-2">Financing</h2>
   <div *ngIf="budgetFields">
     <div *ngFor="let budgetField of budgetFields">
@@ -75,9 +72,15 @@
     </div>
   </div>
 
-  <div class="row justify-content-between">
-    <button class="btn btn-light col-3 m-4">Save</button>
+  <div *ngIf="fieldStatus"
+       class="alert m-2"
+       [ngClass]="fieldStatus.success ? 'alert-success' : 'alert-danger'">
+    {{ fieldStatus.message }}
   </div>
+  <div class="row justify-content-between">
+    <button class="btn btn-light col-3 m-4" (click)="save(budgetFields)">Save</button>
+  </div>
+
 </div>
 
 

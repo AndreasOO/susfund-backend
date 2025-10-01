@@ -6,6 +6,10 @@ import java.util.Set;
 
 public class HistoryLogFieldValueDTO extends AbstractFieldValueDTO<FieldDefinitionDTO> {
 
+    public HistoryLogFieldValueDTO() {
+        super();
+    }
+
     private Set<HistoryEventDTO> historyEvents;
 
     protected HistoryLogFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {

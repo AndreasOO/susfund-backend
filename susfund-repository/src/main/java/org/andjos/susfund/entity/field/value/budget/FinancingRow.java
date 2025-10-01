@@ -33,6 +33,15 @@ public class FinancingRow {
 
     }
 
+    public FinancingRow(Long id, BudgetFieldValue owningBudget, Organization organization, int financingAmount, int financingPercentage, FinancingType financingType) {
+        this.id = id;
+        this.organization = organization;
+        this.financingAmount = financingAmount;
+        this.financingPercentage = financingPercentage;
+        this.owningBudget = owningBudget;
+        this.financingType = financingType;
+    }
+
     public FinancingRow(BudgetFieldValue owningBudget, Organization organization, int financingAmount, int financingPercentage, FinancingType financingType) {
         this.organization = organization;
         this.financingAmount = financingAmount;
