@@ -1,6 +1,5 @@
 package org.andjos.susfund.dto.fieldvalue;
 
-import org.andjos.susfund.dto.AbstractDTO;
 import org.andjos.susfund.entity.field.definition.selectable.SelectableType;
 
 public class SelectableValueDTO {

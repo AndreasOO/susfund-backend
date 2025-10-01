@@ -1,6 +1,5 @@
 package org.andjos.susfund.dto.fieldvalue;
 
-import org.andjos.susfund.dto.AbstractDTO;
 import org.andjos.susfund.entity.field.value.history.HistoryEventType;
 
 import java.time.LocalDate;
