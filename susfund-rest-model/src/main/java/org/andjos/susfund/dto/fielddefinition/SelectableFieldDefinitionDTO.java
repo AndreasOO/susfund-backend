@@ -14,13 +14,9 @@ public class SelectableFieldDefinitionDTO extends FieldDefinitionDTO {
 
     public SelectableFieldDefinitionDTO(){}
 
-    public SelectableFieldDefinitionDTO(Set<SelectableValueDTO> selectableValues) {
-        this.selectableValues = selectableValues;
-    }
-
     public SelectableFieldDefinitionDTO(Long id, String title, String preamble, String assistingText, Boolean hasComment, Section section, SubSection subSection, FieldType fieldType, FrontendLocation frontendLocation, Long rowIndex, Set<SelectableValueDTO> selectableValues) {
         super(id, title, preamble, assistingText, hasComment, section, subSection, fieldType, frontendLocation, rowIndex);
-        this.setDtoClass("selectableFieldDefinition");
+//        this.setDtoClass("selectableFieldDefinition");
         this.selectableValues = selectableValues;
     }
 

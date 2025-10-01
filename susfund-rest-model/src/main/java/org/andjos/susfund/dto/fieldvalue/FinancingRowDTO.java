@@ -1,10 +1,9 @@
 package org.andjos.susfund.dto.fieldvalue;
 
-import org.andjos.susfund.dto.AbstractDTO;
 import org.andjos.susfund.dto.OrganizationDTO;
 import org.andjos.susfund.entity.field.value.budget.FinancingType;
 
-public class FinancingRowDTO extends AbstractDTO {
+public class FinancingRowDTO {
 
     private Long id;
     private OrganizationDTO organization;
@@ -13,11 +12,11 @@ public class FinancingRowDTO extends AbstractDTO {
     private FinancingType financingType;
 
     public FinancingRowDTO(){
-        super("financingRowDTO");
+
     }
 
     public FinancingRowDTO(Long id, OrganizationDTO organization, int financingAmount, int financingPercentage, FinancingType financingType) {
-        super("financingRowDTO");
+
         this.id = id;
         this.organization = organization;
         this.financingAmount = financingAmount;

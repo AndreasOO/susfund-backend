@@ -7,7 +7,7 @@ import org.andjos.susfund.entity.caseentity.CaseStatus;
 
 import java.util.List;
 
-public class CaseDTO extends AbstractDTO {
+public class CaseDTO {
 
     private Long id;
     private String name;
@@ -21,7 +21,6 @@ public class CaseDTO extends AbstractDTO {
     private List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields;
 
     public CaseDTO() {
-        super("case");
 
     }
 
@@ -30,7 +29,6 @@ public class CaseDTO extends AbstractDTO {
                    CaseManagerDTO handledBy, CaseStatus caseStatus,
                    CaseDecisionType caseDecisionType, SupportTypeNodeDTO supportTypeNode,
                    List<AbstractFieldValueDTO<? extends FieldDefinitionDTO>> fields) {
-        super("case");
         this.id = id;
         this.name = name;
         this.organization = organization;

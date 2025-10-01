@@ -1,12 +1,20 @@
 package org.andjos.susfund.dto.fielddefinition;
 
-import org.andjos.susfund.dto.AbstractDTO;
+import jakarta.json.bind.annotation.JsonbSubtype;
+import jakarta.json.bind.annotation.JsonbTypeInfo;
 import org.andjos.susfund.entity.field.definition.fieldtype.FieldType;
 import org.andjos.susfund.entity.field.definition.location.FrontendLocation;
 import org.andjos.susfund.entity.field.definition.section.Section;
 import org.andjos.susfund.entity.field.definition.section.SubSection;
-
-public class FieldDefinitionDTO extends AbstractDTO {
+@JsonbTypeInfo(
+        key = "dtoClass",
+        value = {
+                @JsonbSubtype(alias = "simpleFieldDefinition", type = FieldDefinitionDTO.class),
+                @JsonbSubtype(alias = "budgetFieldDefinition", type = BudgetFieldDefinitionDTO.class),
+                @JsonbSubtype(alias = "selectableFieldDefinition", type = SelectableFieldDefinitionDTO.class),
+        }
+)
+public class FieldDefinitionDTO {
 
     private Long id;
     private String title;
@@ -20,13 +28,12 @@ public class FieldDefinitionDTO extends AbstractDTO {
     private Long rowIndex;
 
     public FieldDefinitionDTO() {
-        super("simpleFieldDefinition");
+
     }
 
     public FieldDefinitionDTO(Long id, String title, String preamble, String assistingText,
                               Boolean hasComment, Section section, SubSection subSection,
                               FieldType fieldType, FrontendLocation frontendLocation, Long rowIndex) {
-        super("simpleFieldDefinition");
         this.id = id;
         this.title = title;
         this.preamble = preamble;
