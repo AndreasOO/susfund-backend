@@ -7,6 +7,7 @@ public abstract class AbstractDTO {
     @JsonbProperty("dtoClass")
     private String dtoClass;
 
+
     public AbstractDTO(String dtoClass){
         this.dtoClass = dtoClass;
     }
