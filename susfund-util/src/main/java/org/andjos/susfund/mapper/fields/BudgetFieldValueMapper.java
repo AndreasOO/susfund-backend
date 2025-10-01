@@ -57,27 +57,55 @@ public class BudgetFieldValueMapper
         BudgetFieldValue budgetFieldValue = (BudgetFieldValue) fieldValueDao.findById(dto.getId());
 
         budgetFieldValue.setTotalFinancingRatio(dto.getTotalFinancingRatio());
-        budgetFieldValue.setBudgetRows(dto.getBudgetRows().stream()
-                                                          .map(row -> new BudgetRow(
-                                                                                                 row.getId(),
-                                                                                                 budgetFieldValue,
-                                                                                                 row.getEstimatedCost(),
-                                                                                                 row.getCostType(),
-                                                                                                 row.getAccruedCost(),
-                                                                                                 row.getDescription()))
-                                                                   .collect(Collectors.toList()));
 
-        budgetFieldValue.setFinancingRows(dto.getFinancingRows().stream()
-                                                                .map(row -> new FinancingRow(
-                                                                        row.getId(),
-                                                                        budgetFieldValue,
-                                                                        new Organization(row.getOrganization().getId(),
-                                                                                         row.getOrganization().getName(),
-                                                                                         row.getOrganization().getOrganizationType()),
-                                                                        row.getFinancingAmount(),
-                                                                        row.getFinancingPercentage(),
-                                                                        row.getFinancingType()))
-                                                                .collect(Collectors.toList()));
+//        budgetFieldValue.setBudgetRows(dto.getBudgetRows().stream()
+//                                                          .map(row -> new BudgetRow(
+//                                                                                                 row.getId(),
+//                                                                                                 budgetFieldValue,
+//                                                                                                 row.getEstimatedCost(),
+//                                                                                                 row.getCostType(),
+//                                                                                                 row.getAccruedCost(),
+//                                                                                                 row.getDescription()))
+//                                                                   .collect(Collectors.toList()));
+        budgetFieldValue.getBudgetRows().clear();
+        budgetFieldValue.getBudgetRows().addAll(
+                dto.getBudgetRows().stream()
+                        .map(row -> new BudgetRow(
+                                row.getId(),
+                                budgetFieldValue,
+                                row.getEstimatedCost(),
+                                row.getCostType(),
+                                row.getAccruedCost(),
+                                row.getDescription()))
+                        .collect(Collectors.toList())
+        );
+
+//        budgetFieldValue.setFinancingRows(dto.getFinancingRows().stream()
+//                                                                .map(row -> new FinancingRow(
+//                                                                        row.getId(),
+//                                                                        budgetFieldValue,
+//                                                                        new Organization(row.getOrganization().getId(),
+//                                                                                         row.getOrganization().getName(),
+//                                                                                         row.getOrganization().getOrganizationType()),
+//                                                                        row.getFinancingAmount(),
+//                                                                        row.getFinancingPercentage(),
+//                                                                        row.getFinancingType()))
+//                                                                .collect(Collectors.toList()));
+        budgetFieldValue.getFinancingRows().clear();
+        budgetFieldValue.getFinancingRows().addAll(
+                dto.getFinancingRows().stream()
+                        .map(row -> new FinancingRow(
+                                row.getId(),
+                                budgetFieldValue,
+                                new Organization(
+                                        row.getOrganization().getId(),
+                                        row.getOrganization().getName(),
+                                        row.getOrganization().getOrganizationType()),
+                                row.getFinancingAmount(),
+                                row.getFinancingPercentage(),
+                                row.getFinancingType()))
+                        .collect(Collectors.toList())
+        );
 
         return budgetFieldValue;
     }
