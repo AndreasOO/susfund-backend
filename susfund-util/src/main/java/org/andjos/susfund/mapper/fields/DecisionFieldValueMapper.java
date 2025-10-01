@@ -1,10 +1,13 @@
 package org.andjos.susfund.mapper.fields;
 
 import jakarta.inject.Inject;
+import org.andjos.susfund.dao.CaseManagerDao;
 import org.andjos.susfund.dao.FieldValueDao;
 import org.andjos.susfund.dto.fieldvalue.DecisionFieldValueDTO;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.field.value.decision.DecisionFieldValue;
+import org.andjos.susfund.mapper.general.CaseManagerMapper;
 
 @ApplicationScoped
 public class DecisionFieldValueMapper
@@ -14,6 +17,12 @@ public class DecisionFieldValueMapper
     @Inject
     private FieldValueDao fieldValueDao;
 
+    @Inject
+    private CaseManagerDao caseManagerDao;
+
+    @Inject
+    private CaseManagerMapper caseManagerMapper;
+
     @Override
     public DecisionFieldValueDTO mapToDTO(DecisionFieldValue fieldValue) {
         return new DecisionFieldValueDTO(
@@ -21,7 +30,8 @@ public class DecisionFieldValueMapper
                 fieldValue.getOwningCase().getId(),
                 createSelectableFieldDefinitionDTO(fieldValue.getFieldDefinition()),
                 fieldValue.getDecisionResultType(),
-                fieldValue.getMotivation()
+                fieldValue.getMotivation(),
+                caseManagerMapper.mapToDTO(fieldValue.getDecisionController())
         );
     }
 
@@ -29,8 +39,11 @@ public class DecisionFieldValueMapper
     @Override
     public DecisionFieldValue mapToEntity(DecisionFieldValueDTO dto) {
         DecisionFieldValue decisionFieldValue = (DecisionFieldValue) fieldValueDao.findById(dto.id);
+        CaseManager caseManager = caseManagerDao.getCaseManagerById(dto.getDecisionController().getId());
+
         decisionFieldValue.setDecisionResultType(dto.getDecisionResultType());
         decisionFieldValue.setMotivation(dto.getMotivation());
+        decisionFieldValue.setDecisionController(caseManager);
         return decisionFieldValue;
     }
 }
