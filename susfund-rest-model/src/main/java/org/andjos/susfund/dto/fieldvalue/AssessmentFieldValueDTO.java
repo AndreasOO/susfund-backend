@@ -7,6 +7,10 @@ public class AssessmentFieldValueDTO extends AbstractFieldValueDTO<FieldDefiniti
     private Integer assessmentScore;
     private String assessmentJustification;
 
+    protected AssessmentFieldValueDTO() {
+        super();
+    }
+
     protected AssessmentFieldValueDTO(Long id, Long owningCaseId, FieldDefinitionDTO owningFieldDefinition) {
         super(id, owningCaseId, owningFieldDefinition, "assessmentFieldValue");
     }

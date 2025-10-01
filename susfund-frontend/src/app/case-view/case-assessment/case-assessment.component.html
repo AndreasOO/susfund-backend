@@ -10,22 +10,29 @@
             <h4>{{ assessmentFieldValue.owningFieldDefinition.title }}</h4>
             <h5>{{ assessmentFieldValue.owningFieldDefinition.preamble }}</h5>
             <h6>{{ assessmentFieldValue.owningFieldDefinition.assistingText }}</h6>
-            <textarea class="form-control" rows="3" [value]="assessmentFieldValue.assessmentJustification" #justificationInput></textarea>
+            <textarea class="form-control" rows="3" [(ngModel)]="assessmentFieldValue.assessmentJustification"></textarea>
             <div class="pt-2">
               <span class="px-3">Poor</span>
               <div class="form-check form-check-inline" *ngFor="let score of [1,2,3,4,5]">
                 <input
                   class="form-check-input"
                   type="radio"
-                  [id]="'radio' + score"
-                  [name]="assessmentFieldValue.owningFieldDefinition.id.toString()"
+                  name="score-{{assessmentFieldValue.owningFieldDefinition.id}}"
+                  [id]="'radio-' + score"
                   [value]="score"
                   [(ngModel)]="assessmentFieldValue.assessmentScore">
-                <label class="form-check-label" [for]="'radio' + score">{{score}}</label>
+                <label class="form-check-label" [for]="'radio-' + score">{{score}}</label>
               </div>
               <span class="px-2">Excellent</span>
             </div>
-            <a class="btn btn-secondary m-2 col-2 ms-auto">Save</a>
+
+            <div *ngIf="fieldStatus[assessmentFieldValue.id]"
+                 class="alert my-2"
+                 [ngClass]="fieldStatus[assessmentFieldValue.id]?.success ? 'alert-success' : 'alert-danger'">
+              {{ fieldStatus[assessmentFieldValue.id]?.message }}
+            </div>
+
+            <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="save(assessmentFieldValue)">Save</a>
           </div>
         </div>
       </div>

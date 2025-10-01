@@ -14,6 +14,8 @@ export class CaseAssessmentComponent implements OnInit {
   caseId : string | undefined
   assessmentFieldValues:AssessmentFieldValueDto[] = [];
 
+  fieldStatus: { [id: string]: { message: string, success: boolean } } = {};
+
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
@@ -24,18 +26,18 @@ export class CaseAssessmentComponent implements OnInit {
 
   }
 
-  public getSelectedScore(groupName:number){
-
-    const radioButton = document.querySelector(`input[name="${groupName}"]:checked`) as HTMLInputElement;
-
-    switch(radioButton.value){
-      case "option1": return 1
-      case "option2": return 2
-      case "option3": return 3
-      case "option4": return 4
-      case "option5": return 5
-      default: return 0
-    }
+  public save(fieldValue:any){
+    this.fetcher.updateFields(this.caseId, [fieldValue]).subscribe({
+      next: (response: Response) => {
+        this.fieldStatus[fieldValue.id] = { message: "Update successfully saved", success: true };
+        console.log("saved stuff")
+      },
+      error: err => {
+        this.fieldStatus[fieldValue.id] = { message: "Something went wrong", success: false };
+        console.error("saved nothing because: ", err)
+      }
+    });
   }
+
 
 }
