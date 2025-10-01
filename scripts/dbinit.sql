@@ -147,9 +147,11 @@ CREATE TABLE `field_value_entity` ( `id` INT NOT NULL AUTO_INCREMENT,
                                     `assessment_score` VARCHAR(255),
                                     `decision_motivation` VARCHAR(255),
                                     `decision_result_type` VARCHAR(255),
+                                    `decision_controller` INT,
                                     `DISCRIMINATOR_FIELD_VALUE_TYPE` VARCHAR(255) NOT NULL,
                                     CONSTRAINT `FK1_field_definition_entity_id` FOREIGN KEY  (`field_definition_entity_id`) REFERENCES  `field_definition_entity` (`id`),
                                     CONSTRAINT `FK9_case_id` FOREIGN KEY  (`owning_case`) REFERENCES  `case_entity` (`id`),
+                                    CONSTRAINT `FK4_case_manager_id` FOREIGN KEY (`decision_controller`) REFERENCES `case_manager` (`id`),
                                     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 
   CHARACTER SET utf8mb4

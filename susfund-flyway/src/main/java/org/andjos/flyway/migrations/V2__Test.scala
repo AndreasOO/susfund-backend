@@ -176,11 +176,11 @@ class V2__Test extends ScalaMigrationBase {
 
     // decisions
     execute(connection,
-      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, decision_date, decision_result_type, decision_motivation, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId4, $case1Id, CURRENT_DATE, CURRENT_DATE, 'REJECTED', 'This is the motivation', 'DECISION')")
+      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, decision_date, decision_result_type, decision_motivation, decision_controller, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId4, $case1Id, CURRENT_DATE, CURRENT_DATE, 'REJECTED', 'This is the motivation', 3, 'DECISION')")
     val decisionFieldVal1Case1:Long = getLastInsertId(connection)
 
     execute(connection,
-      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, decision_date, decision_result_type, decision_motivation, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId4, $case2Id, CURRENT_DATE, CURRENT_DATE, 'PARTIALLY_APPROVED', 'nice', 'DECISION')")
+      s"INSERT INTO field_value_entity (field_definition_entity_id, owning_case, last_updated, decision_date, decision_result_type, decision_motivation, decision_controller, DISCRIMINATOR_FIELD_VALUE_TYPE) VALUES ($fieldDefId4, $case2Id, CURRENT_DATE, CURRENT_DATE, 'PARTIALLY_APPROVED', 'nice', 4, 'DECISION')")
     val decisionFieldVal1Case2:Long = getLastInsertId(connection)
 
 
