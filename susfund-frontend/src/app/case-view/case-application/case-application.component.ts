@@ -13,7 +13,9 @@ import {TextFieldValueDto} from '../../cases-services/case-entity/value/text-fie
 export class CaseApplicationComponent implements OnInit {
 
   caseId : string | undefined
-  public textFieldValues:TextFieldValueDto[] = []
+  textFieldValues:TextFieldValueDto[] = []
+
+  fieldStatus: { [id: string]: { message: string, success: boolean } } = {};
 
   constructor(public router:Router, public fetcher:CasesFetcherService) {
   }
@@ -27,8 +29,16 @@ export class CaseApplicationComponent implements OnInit {
 
   public save(fieldValue: any){
     this.fetcher.updateFields(this.caseId, [fieldValue]).subscribe({
-      next: () => console.log("saved stuff"),
-      error: err => console.error("saved nothing because: ", err)
+      next: (response: Response) => {
+        this.fieldStatus[fieldValue.id] = { message: "Update successfully saved", success: true };
+        console.log("saved stuff")
+      },
+      error: err => {
+        this.fieldStatus[fieldValue.id] = { message: "Something went wrong", success: false };
+        console.error("saved nothing because: ", err)
+      }
     });
   }
+
+  protected readonly status = status;
 }

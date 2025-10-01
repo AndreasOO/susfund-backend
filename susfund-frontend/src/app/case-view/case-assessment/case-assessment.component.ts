@@ -14,6 +14,8 @@ export class CaseAssessmentComponent implements OnInit {
   caseId : string | undefined
   assessmentFieldValues:AssessmentFieldValueDto[] = [];
 
+  fieldStatus: { [id: string]: { message: string, success: boolean } } = {};
+
   constructor(public router:Router, private fetcher:CasesFetcherService) {
 
   }
@@ -26,8 +28,14 @@ export class CaseAssessmentComponent implements OnInit {
 
   public save(fieldValue:any){
     this.fetcher.updateFields(this.caseId, [fieldValue]).subscribe({
-      next: () => console.log("saved stuff"),
-      error: err => console.error("saved nothing because: ", err)
+      next: (response: Response) => {
+        this.fieldStatus[fieldValue.id] = { message: "Update successfully saved", success: true };
+        console.log("saved stuff")
+      },
+      error: err => {
+        this.fieldStatus[fieldValue.id] = { message: "Something went wrong", success: false };
+        console.error("saved nothing because: ", err)
+      }
     });
   }
 

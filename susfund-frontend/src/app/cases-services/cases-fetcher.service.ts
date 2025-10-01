@@ -64,8 +64,8 @@ export class CasesFetcherService {
     return this.http.get<CaseEntityDto>(this.baseUri+"/susfund/api/cases/" + id)
   }
 
-  public updateFields(id:string | undefined, fields : FieldValueDto[]) {
-    return this.http.post(this.baseUri+"/susfund/api/cases/" + id + "/savefields", fields)
+  public updateFields(id:string | undefined, fields : FieldValueDto[]): Observable<Response> {
+    return this.http.post<Response>(this.baseUri+"/susfund/api/cases/" + id + "/savefields", fields);
   }
 
 }

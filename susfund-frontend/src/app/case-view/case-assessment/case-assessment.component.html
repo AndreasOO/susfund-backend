@@ -25,6 +25,13 @@
               </div>
               <span class="px-2">Excellent</span>
             </div>
+
+            <div *ngIf="fieldStatus[assessmentFieldValue.id]"
+                 class="alert my-2"
+                 [ngClass]="fieldStatus[assessmentFieldValue.id]?.success ? 'alert-success' : 'alert-danger'">
+              {{ fieldStatus[assessmentFieldValue.id]?.message }}
+            </div>
+
             <a class="btn btn-secondary m-2 col-2 ms-auto" (click)="save(assessmentFieldValue)">Save</a>
           </div>
         </div>
