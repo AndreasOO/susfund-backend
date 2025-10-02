@@ -28,7 +28,6 @@ object DefaultStateMachine {
 
      val decisionRoundState:DecisionRoundState = new DecisionRoundState(caseEntity.getCaseDecisionType, caseEntity.getCaseStatus)
 
-     // utifrån trigger som sätts in, hämtas possible transitions
      val possibleTransitions:util.Map[Trigger, Transition] = stateMap.get(decisionRoundState)
 
      if (possibleTransitions == null) {

@@ -194,9 +194,7 @@ public class CasesResource {
         try{
             System.out.println("hit decision round state transition endpoint");
             caseEntityService.updateCaseDecisionRoundState(id);
-            CaseEntity updatedCase = caseEntityService.getCaseEntityById(id);
-            DecisionRoundState newDecisionRoundState = new DecisionRoundState(updatedCase.getCaseDecisionType(), updatedCase.getCaseStatus());
-            return Response.ok(newDecisionRoundState).build();
+            return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

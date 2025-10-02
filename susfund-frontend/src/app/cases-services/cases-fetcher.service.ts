@@ -13,7 +13,6 @@ import {BudgetFieldValueDto} from './case-entity/value/budget-field-value-dto';
 import {HistoryLogFieldValueDto} from './case-entity/value/history-log-field-value-dto';
 import {CaseManagerDto} from './case-entity/case-manager-dto';
 import {FieldValueDto} from './case-entity/value/field-value-dto';
-import {DecisionRoundState} from './case-entity/decision-round-state';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +68,8 @@ export class CasesFetcherService {
     return this.http.post<Response>(this.baseUri+"/susfund/api/cases/" + id + "/savefields", fields);
   }
 
-  public updateDecisionRoundState(id:string|undefined):Observable<DecisionRoundState> {
-    return this.http.get<DecisionRoundState>(this.baseUri+"/susfund/api/cases/" + id + "/decisionroundstatetransition");
+  public updateDecisionRoundState(id:string|undefined):Observable<Response> {
+    return this.http.get<Response>(this.baseUri+"/susfund/api/cases/" + id + "/decisionroundstatetransition");
   }
 
 }
