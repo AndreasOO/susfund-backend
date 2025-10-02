@@ -2,7 +2,7 @@ package org.andjos.flyway.migrations
 
 import jakarta.persistence.EntityManager
 import org.andjos.flyway.base.JPAMigrationBase
-import org.andjos.susfund.entity.caseentity.CaseEntity
+import org.andjos.susfund.entity.caseentity.{CaseDecisionType, CaseEntity, CaseStatus}
 import org.andjos.susfund.entity.field.definition.FieldDefinition
 import org.andjos.susfund.entity.field.definition.fieldtype.FieldType
 import org.andjos.susfund.entity.field.definition.section.{Section, SubSection}
@@ -42,6 +42,9 @@ class V3__TestJPA extends JPAMigrationBase {
 
     val fve = fdn1Saved.createFieldValue(caze)
     caze.getFieldValues.add(fve)
+
+    caze.setCaseStatus(CaseStatus.UNDER_PREPARATION)
+    caze.setCaseDecisionType(CaseDecisionType.APPLICATION_APPROVAL)
 
     em.persist(fve)
 

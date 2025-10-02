@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {CaseEntityDto} from '../../cases-services/case-entity/case-entity-dto';
+import {DecisionRoundState} from '../../cases-services/case-entity/decision-round-state';
 
 @Component({
   selector: 'app-case-sidebar-menu',
@@ -15,6 +16,8 @@ export class CaseSidebarMenuComponent implements OnInit{
   caseId:string | undefined
   caseEntity:CaseEntityDto|undefined
 
+  errorMessage:string|undefined
+
   constructor(public router:Router, private fetcher:CasesFetcherService) {
   }
 
@@ -23,4 +26,19 @@ export class CaseSidebarMenuComponent implements OnInit{
     this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
   }
 
+
+  save(){
+
+    this.fetcher.updateDecisionRoundState(this.caseId).subscribe({
+      next: (drs: DecisionRoundState) => {
+        this.errorMessage = "";
+        console.log("new status: ", drs.caseStatus + " new decisiontype: " + drs.caseDecisionType)
+        window.location.reload();
+      },
+      error: err => {
+        this.errorMessage = "Transition not possible"
+        console.error("saved nothing because: ", err)
+      }
+    });
+  }
 }

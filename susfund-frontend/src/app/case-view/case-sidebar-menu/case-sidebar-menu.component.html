@@ -20,6 +20,10 @@
       <div>
         <p>Status: {{caseEntity?.caseStatus}}</p>
         <p>Decision Type: {{caseEntity?.caseDecisionType}}</p>
+
+        <div *ngIf="errorMessage" class="alert alert-danger my-2"> {{errorMessage}}</div>
+
+        <button (click)="save()">MOVE ON</button>
       </div>
     </section>
   </div>

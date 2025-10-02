@@ -21,6 +21,7 @@ import org.andjos.susfund.mapperservice.FieldValueMappingService;
 import org.andjos.susfund.mapperservice.GeneralMappingService;
 import org.andjos.susfund.service.SupportTypeNodeService;
 import org.andjos.susfund.service.CaseEntityService;
+import org.andjos.susfund.statemachine.state.DecisionRoundState;
 
 
 import java.util.List;
@@ -186,18 +187,20 @@ public class CasesResource {
         }
     }
 
-//    @Path("/{id}/savefields")
-//    @POST()
-//    @Consumes("application/json")
-//    @Produces("application/json")
-//    public Response saveFields(@PathParam("id") Long id) {
-//        try {
-//            System.out.println("hit savefields endpoint endpoint with id: " + id);
-////            caseEntityService.saveFields(id, dtos);
-//            return Response.ok().build();
-//        } catch (Exception e) {
-//            return Response.serverError().build();
-//        }
-//    }
+    @Path("/{id}/decisionroundstatetransition")
+    @GET()
+    @Produces("application/json")
+    public Response decisionRoundStateTransition(@PathParam("id") Long id){
+        try{
+            System.out.println("hit decision round state transition endpoint");
+            caseEntityService.updateCaseDecisionRoundState(id);
+            CaseEntity updatedCase = caseEntityService.getCaseEntityById(id);
+            DecisionRoundState newDecisionRoundState = new DecisionRoundState(updatedCase.getCaseDecisionType(), updatedCase.getCaseStatus());
+            return Response.ok(newDecisionRoundState).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
 
 }
