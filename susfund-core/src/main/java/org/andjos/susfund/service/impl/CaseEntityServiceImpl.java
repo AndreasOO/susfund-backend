@@ -83,7 +83,7 @@ public class CaseEntityServiceImpl implements CaseEntityService {
 
     @Override
     public NextDecisionRoundState getNextDecisionRoundState(Long id) {
-        CaseEntity caseEntity = getCaseEntityById(id);
+        CaseEntity caseEntity = caseEntityDao.getById(id);
 
         return switch(caseEntity.getCaseStatus()){
             case UNHANDLED -> new NextDecisionRoundState("Handle");
