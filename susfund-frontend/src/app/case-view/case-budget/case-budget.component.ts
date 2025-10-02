@@ -81,18 +81,6 @@ export class CaseBudgetComponent implements OnInit{
     this.budgetFields[budgetFieldIndex].budgetRows.push(newRow);
     this.total = this.sumBudgetRowEstimatedCosts(this.budgetFields)
     this.updateFinancingRows(budgetFieldIndex)
-    // this.budgetFields[budgetFieldIndex].financingRows = this.budgetFields[budgetFieldIndex].financingRows.map(v => v = {
-    //   dtoClass:"",
-    //   organization: {
-    //     dtoClass:"",
-    //     id: v.organization.id,
-    //     name: v.organization.name,
-    //     organizationType: v.organization.organizationType // change later
-    //   },
-    //   financingType: v.financingType,
-    //   financingPercentage: v.financingPercentage,
-    //   financingAmount: this.total!*(v.financingPercentage/100.0)
-    // })
 
     // Reset the form
     this.newBudgetRow = {
