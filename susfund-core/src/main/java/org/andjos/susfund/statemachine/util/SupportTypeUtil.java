@@ -37,7 +37,8 @@ public class SupportTypeUtil {
                 Map.of(
                         new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DECISION),
                         Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition,
-                               Trigger.SUGGEST_DECISION, saveFieldsTransition),
+                               Trigger.SUGGEST_DECISION, saveFieldsTransition,
+                                Trigger.NEXT_DECISION_ROUND_STATE, decisionRoundStateTransition),
 
                         new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNHANDLED),
                         Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition,
@@ -48,9 +49,6 @@ public class SupportTypeUtil {
 
                         new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_PREPARATION),
                         Map.of(Trigger.NEXT_DECISION_ROUND_STATE, decisionRoundStateTransition),
-
-//                        new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DECISION),
-//                        Map.of(Trigger.NEXT_DECISION_ROUND_STATE, decisionRoundStateTransition),
 
                         new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DISPATCH),
                         Map.of(Trigger.NEXT_DECISION_ROUND_STATE, decisionRoundStateTransition));
