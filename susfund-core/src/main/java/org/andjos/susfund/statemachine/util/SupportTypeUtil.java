@@ -31,7 +31,7 @@ public class SupportTypeUtil {
 
         Map<DecisionRoundState, Map<Trigger, Transition>> stateMap =
                 Map.of(
-                        new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_SUPPORT_DECISION),
+                        new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DECISION),
                         Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition,
                                Trigger.SUGGEST_DECISION, saveFieldsTransition),
 
@@ -39,10 +39,24 @@ public class SupportTypeUtil {
                         Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition,
                                 Trigger.SUGGEST_DECISION, saveFieldsTransition),
 
-                        new DecisionRoundState(CaseDecisionType.PAYMENT_REQUEST, CaseStatus.UNDER_PAYMENT_DECISION),
+                        new DecisionRoundState(CaseDecisionType.PAYMENT_REQUEST, CaseStatus.UNDER_DECISION),
                         Map.of(Trigger.SAVE_FIELDS, saveFieldsTransition));
 
         return stateMap;
+    }
+
+    public Map<DecisionRoundState, DecisionRoundState> getNextDecisionRoundStateMap() {
+        return Map.of(
+                new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_PREPARATION),
+                new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DECISION),
+
+                new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DECISION),
+                new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DISPATCH),
+
+                new DecisionRoundState(CaseDecisionType.APPLICATION_APPROVAL, CaseStatus.UNDER_DISPATCH),
+                new DecisionRoundState(CaseDecisionType.NONE, CaseStatus.IN_WAITING));
+
+
     }
 
     protected StateMachine createStateMachine(CaseEntity caseEntity, Map<DecisionRoundState, Map<Trigger, Transition>> stateMap) {
