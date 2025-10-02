@@ -31,11 +31,15 @@ export class CaseBudgetComponent implements OnInit{
       .subscribe(fields => this.budgetFields = fields)
 
     this.fetcher.getBudgetFieldValue(this.caseId)
-      .subscribe(fields => {
-        this.total = fields.flatMap(field => field.budgetRows)
-                           .reduce((sum, row) => sum + row.estimatedCost, 0);
+      .subscribe(fields => {  this.total = this.sumBudgetRowEstimatedCosts(fields)
       });
   }
+
+  private sumBudgetRowEstimatedCosts(budgetFields:BudgetFieldValueDto[]):number  {
+    return budgetFields.flatMap(budgetFields => budgetFields.budgetRows)
+        .reduce((sum, row) => sum + row.estimatedCost, 0);
+    }
+
 
   // Temporary objects for new rows
   newBudgetRow = {
@@ -51,6 +55,20 @@ export class CaseBudgetComponent implements OnInit{
     financingPercentage: 0
   };
 
+  updateFinancingRows(budgetFieldIndex:number):void {
+    this.budgetFields[budgetFieldIndex].financingRows = this.budgetFields[budgetFieldIndex].financingRows.map(v => v = {
+      dtoClass:"",
+      organization: {
+        dtoClass:"",
+        id: v.organization.id,
+        name: v.organization.name,
+        organizationType: v.organization.organizationType // change later
+      },
+      financingType: v.financingType,
+      financingPercentage: v.financingPercentage,
+      financingAmount: this.total!*(v.financingPercentage/100.0)
+    })
+  }
   addBudgetRow(budgetFieldIndex: number) {
     const newRow:BudgetRowDto = {
       dtoClass:"",
@@ -61,6 +79,20 @@ export class CaseBudgetComponent implements OnInit{
     };
 
     this.budgetFields[budgetFieldIndex].budgetRows.push(newRow);
+    this.total = this.sumBudgetRowEstimatedCosts(this.budgetFields)
+    this.updateFinancingRows(budgetFieldIndex)
+    // this.budgetFields[budgetFieldIndex].financingRows = this.budgetFields[budgetFieldIndex].financingRows.map(v => v = {
+    //   dtoClass:"",
+    //   organization: {
+    //     dtoClass:"",
+    //     id: v.organization.id,
+    //     name: v.organization.name,
+    //     organizationType: v.organization.organizationType // change later
+    //   },
+    //   financingType: v.financingType,
+    //   financingPercentage: v.financingPercentage,
+    //   financingAmount: this.total!*(v.financingPercentage/100.0)
+    // })
 
     // Reset the form
     this.newBudgetRow = {
@@ -81,7 +113,7 @@ export class CaseBudgetComponent implements OnInit{
       },
       financingType: this.newFinancingRow.financingType,
       financingPercentage: this.newFinancingRow.financingPercentage,
-      financingAmount: 0 // Calculate this based on budget total
+      financingAmount: this.total!*(this.newFinancingRow.financingPercentage/100.0)
     };
 
     this.budgetFields[budgetFieldIndex].financingRows.push(newRow);
@@ -100,6 +132,8 @@ export class CaseBudgetComponent implements OnInit{
       next: (response: Response) => {
         this.fieldStatus = { message: "Update successfully saved", success: true };
         console.log("saved stuff")
+        this.total = this.sumBudgetRowEstimatedCosts(this.budgetFields)
+        this.updateFinancingRows(0)
       },
       error: err => {
         this.fieldStatus = { message: "Something went wrong", success: false };
