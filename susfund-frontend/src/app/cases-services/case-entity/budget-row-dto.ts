@@ -1,5 +1,5 @@
 export interface BudgetRowDto {
-  id:number,
+  id?:number,
   estimatedCost:number,
   costType:string,
   accruedCost:number,

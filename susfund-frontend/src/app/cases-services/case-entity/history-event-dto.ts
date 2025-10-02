@@ -1,5 +1,5 @@
 export interface HistoryEventDto {
-  id: number,
+  id?: number,
   historyEventDetails:string,
   historyEventDate:Date,
   historyEventType:string,
