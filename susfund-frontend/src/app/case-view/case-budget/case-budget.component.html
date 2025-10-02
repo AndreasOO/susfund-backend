@@ -1,9 +1,8 @@
-
-<div class="container bg-dark-subtle  text-dark mt-5 rounded-1">
+<div class="container bg-dark-subtle text-dark mt-5 rounded-1">
   <h2 class="p-2">Budget</h2>
   <hr>
   <div *ngIf="budgetFields">
-    <div *ngFor="let budgetField of budgetFields">
+    <div *ngFor="let budgetField of budgetFields; let i = index">
       <div *ngIf="budgetField.owningFieldDefinition">
 
         <table class="table">
@@ -23,6 +22,43 @@
           </tbody>
         </table>
 
+        <button class="btn btn-secondary mb-3" data-bs-toggle="modal" [attr.data-bs-target]="'#addBudgetRowModal' + i">
+          Add Budget Row
+        </button>
+
+        <!-- Modal for adding budget row -->
+        <div class="modal fade" [id]="'addBudgetRowModal' + i" tabindex="-1" [attr.aria-labelledby]="'addBudgetRowModalLabel' + i" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark-subtle">
+              <div class="modal-header">
+                <h5 class="modal-title" [id]="'addBudgetRowModalLabel' + i">Add Budget Row</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="costType" class="form-label">Cost Type</label>
+                  <select class="form-select" id="costType" [(ngModel)]="newBudgetRow.costType">
+                    <option value="">Select cost type...</option>
+                    <option *ngFor="let type of costTypes" [value]="type">{{type}}</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <input type="text" class="form-control" id="description" [(ngModel)]="newBudgetRow.description">
+                </div>
+                <div class="mb-3">
+                  <label for="estimatedCost" class="form-label">Estimated Cost</label>
+                  <input type="number" class="form-control text-end" id="estimatedCost" [(ngModel)]="newBudgetRow.estimatedCost">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" (click)="addBudgetRow(i)" data-bs-dismiss="modal">Add Row</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row justify-content-between">
           <h4 class="col-3 m-4">Total: {{ "TOTAL" }} </h4>
         </div>
@@ -30,9 +66,10 @@
       </div>
     </div>
   </div>
+
   <h2 class="p-2">Financing</h2>
   <div *ngIf="budgetFields">
-    <div *ngFor="let budgetField of budgetFields">
+    <div *ngFor="let budgetField of budgetFields; let i = index">
       <div *ngIf="budgetField.owningFieldDefinition">
         <table class="table">
           <thead>
@@ -67,8 +104,53 @@
           </tbody>
         </table>
 
-      </div>
+        <button class="btn btn-secondary mb-3" data-bs-toggle="modal" [attr.data-bs-target]="'#addFinancingRowModal' + i">
+          Add Financing Row
+        </button>
 
+        <!-- Modal for adding financing row -->
+        <div class="modal fade" [id]="'addFinancingRowModal' + i" tabindex="-1" [attr.aria-labelledby]="'addFinancingRowModalLabel' + i" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark-subtle">
+              <div class="modal-header">
+                <h5 class="modal-title" [id]="'addFinancingRowModalLabel' + i">Add Financing Row</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="orgId" class="form-label">Organization Id</label>
+                  <input type="number" class="form-control" id="orgId" [(ngModel)]="newFinancingRow.organizationId">
+                </div>
+                <div class="mb-3">
+                  <label for="orgName" class="form-label">Organization Name</label>
+                  <input type="text" class="form-control" id="orgName" [(ngModel)]="newFinancingRow.organizationName">
+                </div>
+                <div class="mb-3">
+                  <label for="financingType" class="form-label">Financing Type</label>
+                  <select class="form-select" id="financingType" [(ngModel)]="newFinancingRow.financingType">
+                    <option value="">Select financing type...</option>
+                    <option *ngFor="let type of financingTypes" [value]="type">{{type}}</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="financingPercentage" class="form-label">Estimated Financing %</label>
+                  <div class="input-group">
+                    <input type="number" class="form-control text-end" id="financingPercentage" min="0" max="100" [(ngModel)]="newFinancingRow.financingPercentage">
+                    <div class="input-group-append">
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" (click)="addFinancingRow(i)" data-bs-dismiss="modal">Add Row</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -77,69 +159,9 @@
        [ngClass]="fieldStatus.success ? 'alert-success' : 'alert-danger'">
     {{ fieldStatus.message }}
   </div>
+
   <div class="row justify-content-between">
     <button class="btn btn-light col-3 m-4" (click)="save(budgetFields)">Save</button>
   </div>
 
 </div>
-
-
-
-
-
-
-<!--<div class="container bg-dark-subtle  text-dark mt-5 rounded-1">-->
-<!--  <h2 class="p-2">Budget</h2>-->
-<!--  <hr>-->
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">Cost Type</th>-->
-<!--      <th scope="col">Description</th>-->
-<!--      <th scope="col">Estimated Cost</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let post of caseBudget?.budgetPosts">-->
-<!--      <td class="col-4">{{post.budgetPostType.name}}</td>-->
-<!--      <td class="col-4"> <input type="text" class="form-control"></td>-->
-<!--      <td class="col-4"> <input type="number" value="{{post.estimatedCost}}" class="text-end form-control"> </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--  <div class="row justify-content-between">-->
-<!--    <button class="btn btn-light col-3 m-4">Save</button>-->
-<!--    <h4 class="col-3 m-4">Total: {{ getTotal() }} </h4>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="container bg-dark-subtle  text-dark mt-5 mb-5 rounded-1">-->
-<!--  <h2 class="p-2">Financing Organizations</h2>-->
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">Organization Id</th>-->
-<!--      <th scope="col">Name</th>-->
-<!--      <th scope="col">Estimated Financing</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let organization of caseBudget?.financingOrganizations">-->
-<!--      <td class="col-4">{{organization.id}}</td>-->
-<!--      <td class="col-4">{{organization.name}}</td>-->
-<!--      <td class="col-4">-->
-<!--        <div class="input-group">-->
-<!--          <input type="number" value="0" class="text-end form-control">-->
-<!--          <div class="input-group-append">-->
-<!--            <span class="input-group-text">%</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--  <div class="row justify-content-between">-->
-<!--    <button class="btn btn-light col-3 m-4">Save</button>-->
-
-<!--  </div>-->
-<!--</div>-->

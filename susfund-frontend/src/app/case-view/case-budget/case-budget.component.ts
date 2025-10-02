@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CasesFetcherService} from '../../cases-services/cases-fetcher.service';
 import {BudgetFieldValueDto} from '../../cases-services/case-entity/value/budget-field-value-dto';
+import {FinancingRowDto} from '../../cases-services/case-entity/financing-row-dto';
+import {BudgetRowDto} from '../../cases-services/case-entity/budget-row-dto';
 
 @Component({
   selector: 'app-case-budget',
@@ -14,6 +16,10 @@ export class CaseBudgetComponent implements OnInit{
   caseId : string | undefined
   budgetFields:BudgetFieldValueDto[] = []
   fieldStatus:  {message: string, success: boolean}  | undefined ;
+  // TODO get these from selectable Field def??
+  costTypes: string[] = ['TYPE_1', 'TYPE_2', 'TYPE_3', 'TYPE_4'];
+  financingTypes: string[] = ['CASH', 'NOT_CASH'];
+  total:number | undefined
 
 
   constructor(public router:Router, public fetcher:CasesFetcherService) {
@@ -21,7 +27,72 @@ export class CaseBudgetComponent implements OnInit{
 
   ngOnInit() {
     this.caseId = this.router.url.split("/")[this.router.url.split("/").indexOf("cases")+1];
-    this.fetcher.getBudgetFieldValue(this.caseId).subscribe(fields => this.budgetFields = fields)
+    this.fetcher.getBudgetFieldValue(this.caseId)
+      .subscribe(fields => this.budgetFields = fields)
+
+    this.fetcher.getBudgetFieldValue(this.caseId)
+      .subscribe(fields => {
+        this.total = fields.flatMap(field => field.budgetRows)
+                           .reduce((sum, row) => sum + row.estimatedCost, 0);
+      });
+  }
+
+  // Temporary objects for new rows
+  newBudgetRow = {
+    costType: '',
+    description: '',
+    estimatedCost: 0
+  };
+
+  newFinancingRow = {
+    organizationId: 0,
+    organizationName: '',
+    financingType: '',
+    financingPercentage: 0
+  };
+
+  addBudgetRow(budgetFieldIndex: number) {
+    const newRow:BudgetRowDto = {
+      dtoClass:"",
+      costType: this.newBudgetRow.costType,
+      description: this.newBudgetRow.description,
+      estimatedCost: this.newBudgetRow.estimatedCost,
+      accruedCost: 0
+    };
+
+    this.budgetFields[budgetFieldIndex].budgetRows.push(newRow);
+
+    // Reset the form
+    this.newBudgetRow = {
+      costType: '',
+      description: '',
+      estimatedCost: 0
+    };
+  }
+
+  addFinancingRow(budgetFieldIndex: number) {
+    const newRow:FinancingRowDto = {
+      dtoClass:"",
+      organization: {
+        dtoClass:"",
+        id: this.newFinancingRow.organizationId,
+        name: this.newFinancingRow.organizationName,
+        organizationType: 'SOLE_TRADER' // change later
+      },
+      financingType: this.newFinancingRow.financingType,
+      financingPercentage: this.newFinancingRow.financingPercentage,
+      financingAmount: 0 // Calculate this based on budget total
+    };
+
+    this.budgetFields[budgetFieldIndex].financingRows.push(newRow);
+
+    // Reset the form
+    this.newFinancingRow = {
+      organizationId: 0,
+      organizationName: '',
+      financingType: '',
+      financingPercentage: 0
+    };
   }
 
   public save(fieldValue:any){
