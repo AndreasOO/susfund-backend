@@ -22,6 +22,7 @@ import org.andjos.susfund.mapperservice.GeneralMappingService;
 import org.andjos.susfund.service.SupportTypeNodeService;
 import org.andjos.susfund.service.CaseEntityService;
 import org.andjos.susfund.statemachine.state.DecisionRoundState;
+import org.andjos.susfund.statemachine.state.NextDecisionRoundState;
 
 
 import java.util.List;
@@ -195,6 +196,20 @@ public class CasesResource {
             System.out.println("hit decision round state transition endpoint");
             caseEntityService.updateCaseDecisionRoundState(id);
             return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Path("/{id}/nextdecisionroundstate")
+    @GET()
+    @Produces("application/json")
+    public Response getNextDecisionRoundState(@PathParam("id") Long id){
+        try{
+            NextDecisionRoundState decisionRoundState = caseEntityService.getNextDecisionRoundState(id);
+            System.out.println("Name to send: " + decisionRoundState.getDisplayName());
+            return Response.ok(decisionRoundState).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

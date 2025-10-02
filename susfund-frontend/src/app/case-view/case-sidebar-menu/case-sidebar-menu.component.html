@@ -23,7 +23,7 @@
 
         <div *ngIf="errorMessage" class="alert alert-danger my-2"> {{errorMessage}}</div>
 
-        <button (click)="save()">MOVE ON</button>
+        <button [disabled]="caseLocked" (click)="save()">{{ buttonName }}</button>
       </div>
     </section>
   </div>

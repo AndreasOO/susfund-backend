@@ -1,5 +1,6 @@
 package org.andjos.susfund.statemachine.transition
 import jakarta.inject.Inject
+import org.andjos.susfund.dao.CaseEntityDao
 import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO
 import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO
 import org.andjos.susfund.entity.caseentity.CaseEntity
@@ -15,10 +16,10 @@ import java.util.Map
 class DecisionRoundStateTransition extends Transition {
 
   @Inject
-  private var caseService:CaseEntityService = _
+  private var supportTypeUtil:SupportTypeUtil = _
 
   @Inject
-  private var supportTypeUtil:SupportTypeUtil = _
+  private var caseDao:CaseEntityDao = _
 
   override def execute(caseEntity: CaseEntity, trigger: Trigger, paramType: ParameterType, param: util.List[Object]): Unit = {
 
@@ -27,11 +28,12 @@ class DecisionRoundStateTransition extends Transition {
     val currentDecisionRoundState:DecisionRoundState =  new DecisionRoundState(caseEntity.getCaseDecisionType, caseEntity.getCaseStatus)
     val nextDecisionRoundState:DecisionRoundState = decisionRoundStateMap.get(currentDecisionRoundState)
 
-    updateDecisionRoundState(caseEntity.getId, nextDecisionRoundState)
+    updateDecisionRoundState(caseEntity, nextDecisionRoundState)
   }
 
-
-  protected def updateDecisionRoundState(caseId: Long, nextDecisionRoundState: DecisionRoundState): Unit = {
-    caseService.executeDecisionRoundStateTransition(caseId, nextDecisionRoundState);
+  protected def updateDecisionRoundState(caseEntity:CaseEntity, nextDecisionRoundState: DecisionRoundState): Unit = {
+    caseEntity.setCaseStatus(nextDecisionRoundState.getCaseStatus)
+    caseEntity.setCaseDecisionType(nextDecisionRoundState.getCaseDecisionType)
+    caseDao.save(caseEntity)
   }
 }

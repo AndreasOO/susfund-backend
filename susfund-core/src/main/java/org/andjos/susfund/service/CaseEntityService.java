@@ -6,6 +6,7 @@ import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.organization.Organization;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
 import org.andjos.susfund.statemachine.state.DecisionRoundState;
+import org.andjos.susfund.statemachine.state.NextDecisionRoundState;
 
 import java.util.List;
 
@@ -25,5 +26,5 @@ public interface CaseEntityService {
 
     void updateCaseDecisionRoundState(Long id);
 
-    void executeDecisionRoundStateTransition(Long id, DecisionRoundState decisionRoundState);
+    NextDecisionRoundState getNextDecisionRoundState(Long id);
 }

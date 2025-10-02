@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import org.andjos.susfund.dao.*;
 import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO;
+import org.andjos.susfund.entity.caseentity.CaseStatus;
 import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.organization.Organization;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
@@ -12,6 +13,7 @@ import org.andjos.susfund.service.CaseEntityService;
 import org.andjos.susfund.statemachine.StateMachine;
 import org.andjos.susfund.statemachine.paremeter.ParameterType;
 import org.andjos.susfund.statemachine.state.DecisionRoundState;
+import org.andjos.susfund.statemachine.state.NextDecisionRoundState;
 import org.andjos.susfund.statemachine.trigger.Trigger;
 import org.andjos.susfund.statemachine.util.SupportTypeUtil;
 
@@ -80,10 +82,21 @@ public class CaseEntityServiceImpl implements CaseEntityService {
     }
 
     @Override
-    public void executeDecisionRoundStateTransition(Long id, DecisionRoundState decisionRoundState){
-        CaseEntity caseEntity = caseEntityDao.getById(id);
-        caseEntity.setCaseStatus(decisionRoundState.getCaseStatus());
-        caseEntity.setCaseDecisionType(decisionRoundState.getCaseDecisionType());
-        caseEntityDao.save(caseEntity);
+    public NextDecisionRoundState getNextDecisionRoundState(Long id) {
+        CaseEntity caseEntity = getCaseEntityById(id);
+        DecisionRoundState nextDecisionRoundState = supportTypeUtil
+                .getNextDecisionRoundStateMap()
+                .get(new DecisionRoundState(caseEntity.getCaseDecisionType(), caseEntity.getCaseStatus()));
+
+        return switch(nextDecisionRoundState.getCaseStatus()){
+            case UNHANDLED -> new NextDecisionRoundState("Handle");
+            case UNDER_PREPARATION -> new NextDecisionRoundState("Make proposition");
+            case UNDER_DECISION -> new NextDecisionRoundState("Dispatch");
+            case UNDER_DISPATCH -> new NextDecisionRoundState("Execute");
+            case IN_WAITING -> new NextDecisionRoundState("Go forth");
+            case REJECTED -> new NextDecisionRoundState("Try again");
+            case CLOSED -> new NextDecisionRoundState("Open again");
+        };
     }
+
 }
