@@ -66,7 +66,7 @@ export class CaseBudgetComponent implements OnInit{
       },
       financingType: v.financingType,
       financingPercentage: v.financingPercentage,
-      financingAmount: this.total!*(v.financingPercentage/100.0)
+      financingAmount: Math.round(this.total!*(v.financingPercentage/100.0))
     })
   }
   addBudgetRow(budgetFieldIndex: number) {
@@ -101,7 +101,7 @@ export class CaseBudgetComponent implements OnInit{
       },
       financingType: this.newFinancingRow.financingType,
       financingPercentage: this.newFinancingRow.financingPercentage,
-      financingAmount: this.total!*(this.newFinancingRow.financingPercentage/100.0)
+      financingAmount: Math.round(this.total!*(this.newFinancingRow.financingPercentage/100.0))
     };
 
     this.budgetFields[budgetFieldIndex].financingRows.push(newRow);
