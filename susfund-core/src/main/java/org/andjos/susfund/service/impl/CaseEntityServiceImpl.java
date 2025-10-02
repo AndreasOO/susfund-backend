@@ -84,15 +84,15 @@ public class CaseEntityServiceImpl implements CaseEntityService {
     @Override
     public NextDecisionRoundState getNextDecisionRoundState(Long id) {
         CaseEntity caseEntity = getCaseEntityById(id);
-        DecisionRoundState nextDecisionRoundState = supportTypeUtil
-                .getNextDecisionRoundStateMap()
-                .get(new DecisionRoundState(caseEntity.getCaseDecisionType(), caseEntity.getCaseStatus()));
+//        DecisionRoundState nextDecisionRoundState = supportTypeUtil
+//                .getNextDecisionRoundStateMap()
+//                .get(new DecisionRoundState(caseEntity.getCaseDecisionType(), caseEntity.getCaseStatus()));
 
-        return switch(nextDecisionRoundState.getCaseStatus()){
+        return switch(caseEntity.getCaseStatus()){
             case UNHANDLED -> new NextDecisionRoundState("Handle");
             case UNDER_PREPARATION -> new NextDecisionRoundState("Make proposition");
             case UNDER_DECISION -> new NextDecisionRoundState("Dispatch");
-            case UNDER_DISPATCH -> new NextDecisionRoundState("Execute");
+            case UNDER_DISPATCH -> new NextDecisionRoundState("Go next");
             case IN_WAITING -> new NextDecisionRoundState("Go forth");
             case REJECTED -> new NextDecisionRoundState("Try again");
             case CLOSED -> new NextDecisionRoundState("Open again");

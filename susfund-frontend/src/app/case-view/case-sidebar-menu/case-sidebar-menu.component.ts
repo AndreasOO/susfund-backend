@@ -52,6 +52,8 @@ export class CaseSidebarMenuComponent implements OnInit{
       },
       error: err => {
         this.errorMessage = "Transition not possible"
+        this.caseLocked = true;
+        this.buttonName = "Case locked"
         console.error("saved nothing because: ", err)
       }
     });
