@@ -12,8 +12,6 @@ import org.andjos.susfund.entity.caseentity.CaseEntity;
 import org.andjos.susfund.service.CaseEntityService;
 import org.andjos.susfund.statemachine.StateMachine;
 import org.andjos.susfund.statemachine.paremeter.ParameterType;
-import org.andjos.susfund.statemachine.state.DecisionRoundState;
-import org.andjos.susfund.statemachine.state.NextDecisionRoundState;
 import org.andjos.susfund.statemachine.trigger.Trigger;
 import org.andjos.susfund.statemachine.util.SupportTypeUtil;
 
@@ -79,21 +77,6 @@ public class CaseEntityServiceImpl implements CaseEntityService {
     public void updateCaseDecisionRoundState(Long id) {
         StateMachine stateMachine = supportTypeUtil.getCaseStateMachine(caseEntityDao.getById(id));
         stateMachine.handleTrigger(Trigger.NEXT_DECISION_ROUND_STATE, ParameterType.NONE, List.of());
-    }
-
-    @Override
-    public NextDecisionRoundState getNextDecisionRoundState(Long id) {
-        CaseEntity caseEntity = caseEntityDao.getById(id);
-
-        return switch(caseEntity.getCaseStatus()){
-            case UNHANDLED -> new NextDecisionRoundState("Handle");
-            case UNDER_PREPARATION -> new NextDecisionRoundState("Make proposition");
-            case UNDER_DECISION -> new NextDecisionRoundState("Dispatch");
-            case UNDER_DISPATCH -> new NextDecisionRoundState("Go next");
-            case IN_WAITING -> new NextDecisionRoundState("Go forth");
-            case REJECTED -> new NextDecisionRoundState("Try again");
-            case CLOSED -> new NextDecisionRoundState("Open again");
-        };
     }
 
 }
