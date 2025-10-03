@@ -244,7 +244,7 @@ class V2__Test extends ScalaMigrationBase {
 
     // budget and financing rows
     execute(connection,
-      s"INSERT INTO financing_row (field_value_entity_id, organization_id, financing_amount, financing_percentage, financing_type) VALUES ($budgetFieldVal1Case1, 1, 500, 50, 'CASH')")
+      s"INSERT INTO financing_row (field_value_entity_id, organization_id, financing_amount, financing_percentage, financing_type) VALUES ($budgetFieldVal1Case1, 1, 700, 50, 'CASH')")
     val financingRow1Case1:Long = getLastInsertId(connection)
 
     execute(connection,
