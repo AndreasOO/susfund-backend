@@ -15,6 +15,8 @@ export class CaseSidebarMenuComponent implements OnInit{
   caseId:string | undefined
   caseEntity:CaseEntityDto|undefined
 
+  errorMessage:string|undefined
+
   constructor(public router:Router, private fetcher:CasesFetcherService) {
   }
 
@@ -23,4 +25,18 @@ export class CaseSidebarMenuComponent implements OnInit{
     this.fetcher.getCaseById(this.caseId).subscribe(caseEntity => this.caseEntity = caseEntity!)
   }
 
+
+  save(){
+    this.fetcher.updateDecisionRoundState(this.caseId).subscribe({
+      next: (response: Response) => {
+        this.errorMessage = "";
+        console.log("success")
+        window.location.reload();
+      },
+      error: err => {
+        this.errorMessage = "Transition not possible"
+        console.error("saved nothing because: ", err)
+      }
+    });
+  }
 }

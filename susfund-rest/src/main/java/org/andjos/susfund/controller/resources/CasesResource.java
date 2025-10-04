@@ -186,16 +186,30 @@ public class CasesResource {
         }
     }
 
-//    @Path("/{id}/savefields")
-//    @POST()
-//    @Consumes("application/json")
+    @Path("/{id}/decisionroundstatetransition")
+    @GET()
+    @Produces("application/json")
+    public Response decisionRoundStateTransition(@PathParam("id") Long id){
+        try{
+            System.out.println("hit decision round state transition endpoint");
+            caseEntityService.updateCaseDecisionRoundState(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+//    @Path("/{id}/nextdecisionroundstate")
+//    @GET()
 //    @Produces("application/json")
-//    public Response saveFields(@PathParam("id") Long id) {
-//        try {
-//            System.out.println("hit savefields endpoint endpoint with id: " + id);
-////            caseEntityService.saveFields(id, dtos);
-//            return Response.ok().build();
+//    public Response getNextDecisionRoundState(@PathParam("id") Long id){
+//        try{
+//            NextDecisionRoundState decisionRoundState = caseEntityService.getNextDecisionRoundState(id);
+//            System.out.println("Name to send: " + decisionRoundState.getDisplayName());
+//            return Response.ok(decisionRoundState).build();
 //        } catch (Exception e) {
+//            e.printStackTrace();
 //            return Response.serverError().build();
 //        }
 //    }

@@ -20,6 +20,13 @@
       <div>
         <p>Status: {{caseEntity?.caseStatus}}</p>
         <p>Decision Type: {{caseEntity?.caseDecisionType}}</p>
+
+        <div *ngIf="errorMessage" class="alert alert-danger my-2"> {{errorMessage}}</div>
+
+        <button type="button" class="btn btn-secondary" *ngIf="caseEntity?.caseStatus === 'UNDER_PREPARATION'" (click)="save()">Suggest decision</button>
+        <button type="button" class="btn btn-secondary" *ngIf="caseEntity?.caseStatus === 'UNDER_DECISION'" (click)="save()">Make decision</button>
+        <button type="button" class="btn btn-secondary" *ngIf="caseEntity?.caseStatus === 'UNDER_DISPATCH'" (click)="save()">Dispatch</button>
+
       </div>
     </section>
   </div>

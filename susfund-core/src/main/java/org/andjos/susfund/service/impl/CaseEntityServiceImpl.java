@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import org.andjos.susfund.dao.*;
 import org.andjos.susfund.dto.fielddefinition.FieldDefinitionDTO;
 import org.andjos.susfund.dto.fieldvalue.AbstractFieldValueDTO;
+import org.andjos.susfund.entity.caseentity.CaseStatus;
 import org.andjos.susfund.entity.casemanager.CaseManager;
 import org.andjos.susfund.entity.organization.Organization;
 import org.andjos.susfund.entity.caseentity.CaseEntity;
@@ -70,6 +71,12 @@ public class CaseEntityServiceImpl implements CaseEntityService {
 
         stateMachine.handleTrigger(Trigger.SAVE_FIELDS, ParameterType.FIELDS, fieldValues);
 
+    }
+
+    @Override
+    public void updateCaseDecisionRoundState(Long id) {
+        StateMachine stateMachine = supportTypeUtil.getCaseStateMachine(caseEntityDao.getById(id));
+        stateMachine.handleTrigger(Trigger.NEXT_DECISION_ROUND_STATE, ParameterType.NONE, List.of());
     }
 
 }

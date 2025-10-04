@@ -6,6 +6,8 @@ import org.andjos.susfund.statemachine.trigger.Trigger
 import java.util
 
 trait StateMachine {
+
+  // denna metod anropas i service
   def handleTrigger(trigger:Trigger, param:ParameterType, objects:util.List[_]): Unit = {
     doTransition(trigger,param,objects.asInstanceOf[util.List[Object]])
   }

@@ -15,6 +15,14 @@ public class DecisionRoundState {
         this.caseStatus = caseStatus;
     }
 
+    public CaseDecisionType getCaseDecisionType() {
+        return caseDecisionType;
+    }
+
+    public CaseStatus getCaseStatus() {
+        return caseStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof DecisionRoundState that)) return false;

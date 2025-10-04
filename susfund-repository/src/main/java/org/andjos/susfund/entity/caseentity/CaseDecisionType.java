@@ -4,5 +4,6 @@ public enum CaseDecisionType {
     PAYMENT_REQUEST,
     APPLICATION_APPROVAL,
     REPAYMENT,
-    CLOSING
+    CLOSING,
+    NONE
 }

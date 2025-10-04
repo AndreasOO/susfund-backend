@@ -68,4 +68,8 @@ export class CasesFetcherService {
     return this.http.post<Response>(this.baseUri+"/susfund/api/cases/" + id + "/savefields", fields);
   }
 
+  public updateDecisionRoundState(id:string|undefined):Observable<Response> {
+    return this.http.get<Response>(this.baseUri+"/susfund/api/cases/" + id + "/decisionroundstatetransition");
+  }
+
 }
