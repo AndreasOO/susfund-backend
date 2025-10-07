@@ -8,6 +8,7 @@ import org.andjos.susfund.entity.field.value.AbstractFieldValue;
 import org.andjos.susfund.entity.supporttype.SupportTypeNode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -50,7 +51,7 @@ public class CaseEntity implements Serializable {
     private CaseDecisionType caseDecisionType;
 
     @OneToMany(mappedBy = "owningCase", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues;
+    private List <AbstractFieldValue<? extends FieldDefinition>> fieldValues = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="support_type_node_id")
